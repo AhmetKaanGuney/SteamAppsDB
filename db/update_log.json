@@ -1,4 +1,8 @@
 {
-    "last_updated": "",
-    "steam_latest_request_date": ""
+  "date_of_last_request_to_steam": "",
+  "date_of_last_fetch_for_applist": "",
+  "steam_request_count": 1,
+  "updated_apps": 0,
+  "applist_index": -1,
+  "rejected_apps": []
 }
