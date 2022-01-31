@@ -1,4 +1,4 @@
-"""Manages db_log"""
+"""Manages update_log"""
 import json
 
 class UpdateLogger:

@@ -20,7 +20,7 @@ class RequestFailedError(Error):
     """Request failed with unknown error"""
     def __init__(self, status_code: str, log={}):
         Error.log(log)
-        super().__init__(api)
+        super().__init__(status_code)
 
 
 class UnauthorizedError(Error):

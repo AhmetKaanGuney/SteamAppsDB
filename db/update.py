@@ -1,114 +1,168 @@
+import time
+import datetime
 import json
 import sqlite3
-import time
+import logging
+import smtplib, ssl
 
 import requests
+from dotenv import dotenv_values
 from errors import (
-    Error,
-    RequestTimeoutError, RequestFailedError,
-    UnauthorizedError, ForbiddenError,
-    NotFoundError, ServerError,
-    SteamResponseError
-    )
+    Error, RequestTimeoutError, RequestFailedError,
+    UnauthorizedError, ForbiddenError, NotFoundError,
+    ServerError, SteamResponseError
+)
 from update_logger import UpdateLogger
 
-# Init Logger
-ulogger = UpdateLogger("./update_log.json")
+# Config
+config = dotenv_values("../.env")
+
+# TODO finish email
+# E-mail
+context = ssl.create_default_context()
+message = """\
+Subject: Test for SMTP
+
+This is a message from Python."""
+
+with smtplib.SMTP_SSL(
+    config["SMTP_SERVER"], config["PORT"], context=context) as server:
+    server.login(config["SENDER_EMAIL"], config["PASSWORD"])
+    server.sendmail(config["SENDER_EMAIL"], config["RECEIVER_EMAIL"], message)
+
+exit(0)
+
+
+# Init Loggers
+logging.basicConfig(level=logging.DEBUG)
+u_logger = UpdateLogger("./update_log.json")
+update_log = u_logger.log
 
 FAIL_API = "https://store.steampowered.com/api/appdetails/?appids=360032"
 
+# Max owner limit, if an app's owner count breaks the limit
+# that app will be ignored
+# MAX_OWNERS = 1_000_000
+MAX_OWNERS = 1_000_000
 
 # Time to wait in between request in ms
 STEAM_WAIT_DURATION = 1
 STEAMSPY_WAIT_DURATION = 1
-STEAM_REQUEST_LIMIT = 100_000
+# STEAM_REQUEST_LIMIT = 100_000
+STEAM_REQUEST_LIMIT = 3
 
 # File paths
 APPLIST_FILE = "./applist.json"
 APPLIST_FILTERED_FILE = "./applist_filtered.json"
 
 # API's
+# Append appid to app details API to get app details
 APPLIST_API = "https://api.steampowered.com/ISteamApps/GetAppList/v2/"
-# Just append appid to these strings to make a request
 STEAM_APP_DETAILS_API_BASE = "https://store.steampowered.com/api/appdetails/?appids="
 STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails&appid="
 
 
 # TODO record latest request date
+# TODO email weekly report and errors
 
 def main():
+    logging.info("===             DB UPDATE            ===")
+    logging.info(f"=== Date: {datetime.datetime.utcnow()} ===")
+
     applist_fetched = True
 
-    # Get App List from Steam and Save It
+    # ========================= #
+    #  Get App List from Steam  #
+    # ========================= #
     if not applist_fetched:
+        logging.debug(f"Fetching applist from: {APPLIST_API}")
+
         applist = fetch_applist(APPLIST_API, APPLIST_FILE)
-        ulogger.log["steam_request_count"] += 1
+        update_log["steam_request_count"] += 1
 
         # Save to File
         write_to_json(applist, APPLIST_FILE)
 
-    # Open App List File
     with open(APPLIST_FILE, "r") as f:
         applist = json.load(f)["applist"]
 
-    # Get App details For each App
     limited_applist = applist[:10]
+    applist_index = update_log["applist_index"]
 
-    # DB
+    logging.info(f"Length of Limited Applist: {len(limited_applist):,}")
+    logging.debug(f"Applist Index: {applist_index}")
+
     apps_data = {}
 
-    reached_steam_request_limit = False
+    if applist_index == -1:
+        skip = False
+    else:
+        skip = True
 
+    # =============================== #
+    #  Get App Details for each App   #
+    # =============================== #
+    logging.debug("Iterating over LIMITED APPLIST...")
     for app in limited_applist:
         appid = app["appid"]
-        applist_index = ulogger.log["applist_index"]
 
-        # TODO POTENTIAL BUG HERE
-        # Skip to the lastest app that was last updated
-        if  applist_index != -1 and appid != applist_index:
-            continue
+        if skip:
+            # skip to where the last iteration ended
+            if applist_index != appid:
+                continue
+            else:
+                skip = False
 
         # API's
         steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(appid)
         steam_api = STEAM_APP_DETAILS_API_BASE + str(appid)
 
-        # Remove appid from field of the app becuse it'll be used as an index in the DB
+        # Remove redundant appid from field of the app
+        # becuse it'll be used as an index in the DB
         app.pop("appid")
 
-        # FETCH FORM STEAMSPY
+        # ====================== #
+        #  FETCH FROM STEAMSPY   #
+        # ====================== #
         steamspy_data = fetch(steamspy_api)
 
         # Check minimum owner count to eliminate games over a million owners
         min_owner_count = get_min_owner_count(steamspy_data)
 
-        if min_owner_count > 1_000_000:
+        if min_owner_count > MAX_OWNERS:
+            logging.debug(f"App: '{appid}' has {min_owner_count:,} owners which is over {MAX_OWNERS=:,}. Skipping...")
+            logging.debug("Skipping...")
             continue
 
-        # update app info
+        # Update app info
         steamspy_keys = ["owners", "price", "positive", "negative", "tags"]
         app_details_from_steamspy = {k:v for k, v in steamspy_data.items() if k in steamspy_keys}
         app.update(app_details_from_steamspy)
 
-        # Check for request limit
-        if ulogger.log["steam_request_count"] > STEAM_REQUEST_LIMIT:
-            reached_steam_request_limit = True
 
-        if reached_steam_request_limit:
-            print("Request limit reached!")
+        # =================== #
+        #  FETCH FROM STEAM   #
+        # =================== #
+        # Check for request limit
+        if update_log["steam_request_count"] >= STEAM_REQUEST_LIMIT:
+            update_log["steam_request_limit_reached"] = True
+            logging.info(
+                f"Request limit reached! "
+                f"Request count: {update_log['steam_request_count']} | "
+                f"Request Limit: {STEAM_REQUEST_LIMIT}"
+                )
             break
 
-        # FETCH FROM STEAM
-        # Steam Response Example
-        # {"000000": {"success": true, "data": {...}}}
-
+        # Response Example : {"000000": {"success": true, "data": {...}}}
         steam_response = fetch(steam_api)[str(appid)]
-        ulogger.log["steam_request_count"] += 1
+        update_log["last_request_to_steam"] = str(datetime.datetime.utcnow())
+        update_log["steam_request_count"] += 1
 
         if steam_response["success"]:
             steam_data = steam_response["data"]
             # Check if app is a game
             if steam_data["type"] != "game":
-                print("App is not a game. AppID: ", appid)
+                logging.debug(f"App '{appid}' is not a game. Skipping...")
                 continue
             else:
                 steam_keys = ["release_date", "developers", "publishers", "header_image",
@@ -117,22 +171,25 @@ def main():
                         "supported_languages", "website"]
                 app_details_from_steam = {k:v for k, v in steam_data.items() if k in steam_keys}
 
-                # Update the app oinfo
+                # Update the app info
                 app.update(app_details_from_steam)
+                update_log["updated_apps"] += 1
                 # Record to apps_data
                 apps_data[appid] = app
         else:
-            print("ERROR! Steam responded with 'success: False'. API: ", steam_api)
-            ulogger.log["rejected_apps"].append(appid)
+            logging.debug(f"Steam responded with {steam_response}. AppID: {appid}")
+            update_log["rejected_apps"].append(appid)
             continue
 
-    # If the last app in the app list is updated without breaking the
-    # steam request limit reset applist index
-    if reached_steam_request_limit:
-        ulogger.log["applist_index"] = appid
-        ulogger.log["steam_request_count"] = 0
+    if update_log["steam_request_limit_reached"]:
+        update_log["applist_index"] = appid
+        update_log["steam_request_count"] = 0
+        update_log["steam_request_limit_reached"] = False
     else:
-        ulogger.log["applist_index"] = -1
+        # If the last item in the app list is updated
+        # without breaking the steam's request limit
+        # reset applist index to -1
+        update_log["applist_index"] = -1
 
     write_to_json(apps_data, "./app_details.json", indent=2)
 
@@ -144,22 +201,21 @@ def fetch(api: str) -> dict:
     if response.status_code == 200:
         return response.json()
     elif response.status_code == 500:   # server error
-        raise ServerError(api, ulogger.log)
+        raise ServerError(api, update_log)
     elif response.status_code == 401:
-        raise UnauthorizedError(api, ulogger.log)
+        raise UnauthorizedError(api, update_log)
     elif response.status_code == 403:
-        raise ForbiddenError(api, ulogger.log)
+        raise ForbiddenError(api, update_log)
     elif response.status_code == 404:
-        raise NotFoundError(api, ulogger.log)
+        raise NotFoundError(api, update_log)
     else:
-        raise RequestFailedError(response.status_code, ulogger.log)
+        raise RequestFailedError(response.status_code, update_log)
 
 
 def fetch_applist(api: str):
     """Steam's return format: {'applist': [{appid: int, name: str}]}"""
-    # TODO record fetch date
-    print("fetch_applist()")
 
+    update_log["last_request_to_steam"] = str(datetime.datetime.utcnow())
     response_json = fetch(api)
 
     applist = {"applist": []}
@@ -173,7 +229,6 @@ def fetch_applist(api: str):
                 }
             )
 
-    print("TODO: Record that applist is fecthed! So it doesn't always fecthes from steam")
     return applist
 
 
@@ -190,7 +245,7 @@ def request_from(api: str, timeout=1):
             time.sleep(10)
             attempt += 1
 
-    raise RequestTimeoutError(api, ulogger.log)
+    raise RequestTimeoutError(api, update_log)
 
 
 def get_min_owner_count(app_details: dict) -> int:
@@ -209,22 +264,10 @@ def write_to_json(data: any, file_path: str, indent=0):
         json.dump(data, f, indent=indent)
 
 
-def clear_file_content(file_path: str):
-    with open(file_path, "w") as f:
-        f.write("")
-
-
-def get_app_count():
-    with open(APPLIST_FILE, "r") as f:
-        applist = json.load(f)["applist"]
-
-    return len(applist)
-
-
 if __name__ == "__main__":
     try:
         main()
     except Error as e:
         raise e
     finally:
-        ulogger.save()
+        u_logger.save()

@@ -1,7 +1,7 @@
 {
-  "date_of_last_request_to_steam": "",
-  "date_of_last_fetch_for_applist": "",
-  "steam_request_count": 1,
+  "last_request_to_steam": "2022-01-31 12:46:37.697774",
+  "steam_request_count": 2,
+  "steam_request_limit_reached": false,
   "updated_apps": 0,
   "applist_index": -1,
   "rejected_apps": []
