@@ -1,5 +1,6 @@
 import os
 import time
+import math
 import datetime
 import traceback
 import json
@@ -9,12 +10,14 @@ import smtplib, ssl
 
 import requests
 from dotenv import dotenv_values
+
 from errors import (
     Error, RequestTimeoutError, RequestFailedError,
     UnauthorizedError, ForbiddenError, NotFoundError,
     ServerError, SteamResponseError
 )
 from update_logger import UpdateLogger
+from appdata import AppData
 
 # Dirs
 current_dir = os.path.dirname(__file__)
@@ -24,7 +27,7 @@ parent_dir = os.path.dirname(current_dir)
 config = dotenv_values(os.path.join(parent_dir, ".env"))
 
 # Init Loggers
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.INFO)
 
 u_logger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
 update_log = u_logger.log
@@ -40,8 +43,7 @@ MAX_OWNERS = 1_000_000
 # Time to wait in between request in ms
 STEAM_WAIT_DURATION = 1
 STEAMSPY_WAIT_DURATION = 1
-# STEAM_REQUEST_LIMIT = 100_000
-STEAM_REQUEST_LIMIT = 3
+STEAM_REQUEST_LIMIT = 100_000
 
 # File paths
 APPLIST_FILE = os.path.join(current_dir, "applist.json")
@@ -77,7 +79,7 @@ def main():
     with open(APPLIST_FILE, "r") as f:
         applist = json.load(f)["applist"]
 
-    limited_applist = applist[:10]
+    limited_applist = applist[:30]
     applist_index = update_log["applist_index"]
 
     logging.info(f"Length of Limited Applist: {len(limited_applist):,}")
@@ -85,7 +87,7 @@ def main():
 
     update_log["applist_length"] = len(applist)
 
-    apps_data = {}
+    apps_data: list[AppData] = []
 
     # =============================== #
     #  Get App Details for each App   #
@@ -95,15 +97,13 @@ def main():
 
 
     for i, app in enumerate(limited_applist[applist_index:]):
-        appid = app["appid"]
-
-        # Remove redundant appid from field of the app
-        # becuse it'll be used as an index in the DB
-        app.pop("appid")
+        app_id = app["appid"]
+        app_data = AppData()
+        app_data.update({"name": app["name"], "app_id": app["appid"]})
 
         # API's
-        steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(appid)
-        steam_api = STEAM_APP_DETAILS_API_BASE + str(appid)
+        steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(app_id)
+        steam_api = STEAM_APP_DETAILS_API_BASE + str(app_id)
 
         # ====================== #
         #  FETCH FROM STEAMSPY   #
@@ -115,16 +115,14 @@ def main():
 
         if min_owner_count > MAX_OWNERS:
             logging.debug(
-                f"App: '{appid}' has {min_owner_count:,} owners. "
+                f"App: '{app_id}' has {min_owner_count:,} owners. "
                 f"Which is over {MAX_OWNERS=:,}. Skipping..."
                 )
             continue
 
         # Update app info
-        steamspy_keys = ["owners", "price", "positive", "negative", "tags"]
-        app_details_from_steamspy = {k:v for k, v in steamspy_data.items() if k in steamspy_keys}
-        app.update(app_details_from_steamspy)
-
+        app_details_from_steamspy = map_steamspy_data(steamspy_data)
+        app_data.update(app_details_from_steamspy)
 
         # =================== #
         #  FETCH FROM STEAM   #
@@ -140,7 +138,8 @@ def main():
             break
 
         # Response Example : {"000000": {"success": true, "data": {...}}}
-        steam_response = fetch(steam_api)[str(appid)]
+        steam_response = fetch(steam_api)[str(app_id)]
+
         update_log["last_request_to_steam"] = str(datetime.datetime.utcnow())
         update_log["steam_request_count"] += 1
 
@@ -148,24 +147,22 @@ def main():
             steam_data = steam_response["data"]
             # Check if app is a game
             if steam_data["type"] != "game":
-                logging.debug(f"App '{appid}' is not a game. Skipping...")
+                logging.debug(f"App '{app_id}' is not a game. Skipping...")
+                update_log["non_game_apps"] += 1
                 continue
             else:
-                steam_keys = ["release_date", "developers", "publishers", "header_image",
-                        "screenshots", "categories", "genres", "short_description",
-                        "about_the_game", "detailed_description", "platforms",
-                        "supported_languages", "website"]
-                app_details_from_steam = {k:v for k, v in steam_data.items() if k in steam_keys}
+                app_details_from_steam = map_steam_data(steam_data)
 
                 # Update the app info
-                app.update(app_details_from_steam)
+                app_data.update(app_details_from_steam)
                 update_log["updated_apps"] += 1
 
                 # Record to apps_data
-                apps_data[appid] = app
+                apps_data.append(app_data.serialize())
+
         else:
-            logging.debug(f"Steam responded with {steam_response}. AppID: {appid}")
-            update_log["rejected_apps"].append(appid)
+            logging.debug(f"Steam responded with {steam_response}. AppID: {app_id}")
+            update_log["rejected_apps"].append(app_id)
             continue
 
     if update_log["steam_request_limit_reached"]:
@@ -232,6 +229,118 @@ def request_from(api: str, timeout=1):
     raise RequestTimeoutError(api, update_log)
 
 
+def map_steam_data(steam_data: dict) -> dict:
+    """Parses Steam data and returns it in a better format
+    returns: {
+        'developers': list[str],
+        'publishers': list[str],
+        'release_date': str,
+        'coming_soon': bool,
+        'genres': list[dict],
+        'categories': list[dict],
+        'about_the_game': str,
+        'short_description': str,
+        'detailed_description': str,
+        'header_image': str,
+        'screenshots': list[dict],
+        'website': str,
+        'languages': str,
+        'windows': bool,
+        'mac': bool,
+        'linux': bool
+    }"""
+    fields = [
+        "developers", "publishers", "categories", "genres",
+        "about_the_game", "short_description", "detailed_description",
+        "header_image", "screenshots", "website"
+        ]
+    app_details = {k:v for k, v in steam_data.items() if k in fields}
+
+    # Serialize date and languages for DB
+    try:
+        release_date = format_date(steam_data["release_date"]["date"])
+    except (IndexError, KeyError):
+        release_date = steam_data["release_date"]["date"]
+
+    try:
+        languages = steam_data["supported_languages"]
+    except KeyError:
+        languages = None
+
+    # TODO parse supported languages
+    coming_soon = steam_data["release_date"]["coming_soon"]
+    platforms = steam_data["platforms"]
+
+    app_details.update({
+        "release_date": release_date,
+        "coming_soon": coming_soon,
+        "languages": languages,
+        "windows": platforms["windows"],
+        "mac": platforms["mac"],
+        "linux": platforms["linux"]
+    })
+    return app_details
+
+
+def map_steamspy_data(steamspy_data: dict) -> dict:
+    """Parses SteamSpy data and returns it in a better format
+    returns: {
+        'price': [int, None],
+        'owner_count: int',
+        'positive_reviews: int',
+        'negative_reviews': int
+        'tags': list,
+    }"""
+    app_details = {
+        "price": steamspy_data["price"],
+        "owner_count": get_average(steamspy_data["owners"]),
+        "positive_reviews": steamspy_data["positive"],
+        "negative_reviews": steamspy_data["negative"],
+        "tags": steamspy_data["tags"]
+    }
+
+    return app_details
+
+
+def format_date(date: str) -> str:
+    """Returns formatted date: YYYY-MM-DD"""
+    date = date.replace(",", "")
+    date = date.split(" ")
+    months = {
+    "Jan": "01",
+    "Feb": "02",
+    "Mar": "03",
+    "Apr": "04",
+    "May": "05",
+    "Jun": "06",
+    "Jul": "07",
+    "Aug": "08",
+    "Sep": "09",
+    "Oct": "10",
+    "Nov": "11",
+    "Dec": "12",
+    }
+    formatted_date = date[2] + "-" + months[date[1]] + "-" + date[0]
+    return formatted_date
+
+
+def get_average(owner_count: str):
+    owner_count_list = owner_count.split("..")
+    owner_count_list = [i.strip() for i in owner_count_list]
+    min_owners_list = owner_count_list[0]
+    max_owners_list = owner_count_list[1]
+    min_owners = ""
+    max_owners = ""
+    for i in min_owners_list.split(","):
+        min_owners += i
+
+    for i in max_owners_list.split(","):
+        max_owners += i
+
+    average = (int(min_owners) + int(max_owners)) / 2
+    return math.floor(average)
+
+
 def get_min_owner_count(app_details: dict) -> int:
     """Returns minimum owner count"""
     # owners example: "10,000 .. 20,000"
@@ -261,10 +370,12 @@ if __name__ == "__main__":
     try:
         main()
         msg = f"""\
-Subject: DB Update Success
+Subject: Update Successful
 
 Updated Apps: {update_log["updated_apps"]:,} / {update_log["applist_length"]:,}
 Rejected Apps: {len(update_log["rejected_apps"])}
+Non-Game Apps: {update_log["non_game_apps"]}
+Steam Request Count: {update_log["steam_request_count"]}
 """
         print("EMAIL: \n")
         print(msg)
@@ -272,7 +383,7 @@ Rejected Apps: {len(update_log["rejected_apps"])}
 
     except Exception as e:
         msg = f"""\
-Subject: DB Update Failed
+Subject: Update Failed
 
 Update failed due to an error:
 {traceback.format_exc()}"""

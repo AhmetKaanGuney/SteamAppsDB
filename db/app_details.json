@@ -1,1 +1,2548 @@
-{}
+[
+  {
+    "about_the_game": "FEATURES:<br />\r\n<br />\r\n- 300 levels and 50 challenges<br />\r\n- Unique gameplay<br />\r\n- Mind games<br />\r\n- Motion logic<br />\r\n- Adaptive hint system<br />\r\n- More than 25 languages",
+    "app_id": {
+      "name": "Pirates of the Maverta",
+      "app_id": 1848280
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 22,
+        "description": "Steam Achievements"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "FEATURES:<br />\r\n<br />\r\n- 300 levels and 50 challenges<br />\r\n- Unique gameplay<br />\r\n- Mind games<br />\r\n- Motion logic<br />\r\n- Adaptive hint system<br />\r\n- More than 25 languages",
+    "developers": [
+      "My Label Game Studio"
+    ],
+    "genres": [
+      {
+        "id": "4",
+        "description": "Casual"
+      },
+      {
+        "id": "23",
+        "description": "Indie"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/header.jpg?t=1643462230",
+    "languages": "English<strong>*</strong>, French<strong>*</strong>, Italian<strong>*</strong>, German<strong>*</strong>, Spanish - Spain<strong>*</strong>, Arabic<strong>*</strong>, Bulgarian<strong>*</strong>, Portuguese - Brazil<strong>*</strong>, Hungarian<strong>*</strong>, Vietnamese<strong>*</strong>, Greek<strong>*</strong>, Danish<strong>*</strong>, Spanish - Latin America<strong>*</strong>, Traditional Chinese<strong>*</strong>, Simplified Chinese<strong>*</strong>, Korean<strong>*</strong>, Dutch<strong>*</strong>, Norwegian<strong>*</strong>, Polish<strong>*</strong>, Portuguese<strong>*</strong>, Romanian<strong>*</strong>, Russian<strong>*</strong>, Thai<strong>*</strong>, Turkish<strong>*</strong>, Ukrainian<strong>*</strong>, Finnish<strong>*</strong>, Czech<strong>*</strong>, Swedish<strong>*</strong>, Japanese<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": true,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 1,
+    "price": "119",
+    "publishers": [
+      "My Label Game Studio"
+    ],
+    "release_date": "2022-01-29",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_4abf6b62ff488be1524d242e28f9fa42a52c697d.600x338.jpg?t=1643462230",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_4abf6b62ff488be1524d242e28f9fa42a52c697d.1920x1080.jpg?t=1643462230"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_be4cd5f4864abf6c2d62c448915990fd8ddc8296.600x338.jpg?t=1643462230",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_be4cd5f4864abf6c2d62c448915990fd8ddc8296.1920x1080.jpg?t=1643462230"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_ddffcc45be187799ff6d77180e6981cdbe49163e.600x338.jpg?t=1643462230",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_ddffcc45be187799ff6d77180e6981cdbe49163e.1920x1080.jpg?t=1643462230"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_10f7f8967f88ae15675925997c36906108c13d57.600x338.jpg?t=1643462230",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_10f7f8967f88ae15675925997c36906108c13d57.1920x1080.jpg?t=1643462230"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_c4f088f14a1f8cf2d72f7074ad24e7e4e120a6ec.600x338.jpg?t=1643462230",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_c4f088f14a1f8cf2d72f7074ad24e7e4e120a6ec.1920x1080.jpg?t=1643462230"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_3c46179fce34d2faf07818a126976b73b1ef39f0.600x338.jpg?t=1643462230",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/ss_3c46179fce34d2faf07818a126976b73b1ef39f0.1920x1080.jpg?t=1643462230"
+      }
+    ],
+    "short_description": "Maverta Island - minimalist, relaxing, motion logic, mind game. The player's goal is to survive the labyrinth and find treasure.",
+    "tags": {
+      "Casual": 63,
+      "Puzzle": 38,
+      "Side Scroller": 34,
+      "3D": 31,
+      "Isometric": 29,
+      "Singleplayer": 22,
+      "Indie": 21
+    },
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "FEATURES:<br />\r\n<br />\r\n- 300 levels and 50 challenges<br />\r\n- Unique gameplay<br />\r\n- Mind games<br />\r\n- Motion logic<br />\r\n- Adaptive hint system<br />\r\n- More than 25 languages",
+    "app_id": {
+      "name": "Maverta Island",
+      "app_id": 1848290
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 22,
+        "description": "Steam Achievements"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "FEATURES:<br />\r\n<br />\r\n- 300 levels and 50 challenges<br />\r\n- Unique gameplay<br />\r\n- Mind games<br />\r\n- Motion logic<br />\r\n- Adaptive hint system<br />\r\n- More than 25 languages",
+    "developers": [
+      "My Label Game Studio"
+    ],
+    "genres": [
+      {
+        "id": "23",
+        "description": "Indie"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/header.jpg?t=1642545156",
+    "languages": "English<strong>*</strong>, French<strong>*</strong>, Italian<strong>*</strong>, German<strong>*</strong>, Spanish - Spain<strong>*</strong>, Arabic<strong>*</strong>, Bulgarian<strong>*</strong>, Portuguese - Brazil<strong>*</strong>, Hungarian<strong>*</strong>, Vietnamese<strong>*</strong>, Greek<strong>*</strong>, Danish<strong>*</strong>, Spanish - Latin America<strong>*</strong>, Traditional Chinese<strong>*</strong>, Simplified Chinese<strong>*</strong>, Korean<strong>*</strong>, Dutch<strong>*</strong>, Norwegian<strong>*</strong>, Polish<strong>*</strong>, Portuguese<strong>*</strong>, Romanian<strong>*</strong>, Russian<strong>*</strong>, Thai<strong>*</strong>, Turkish<strong>*</strong>, Ukrainian<strong>*</strong>, Finnish<strong>*</strong>, Czech<strong>*</strong>, Swedish<strong>*</strong>, Japanese<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": true,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": "199",
+    "publishers": [
+      "My Label Game Studio"
+    ],
+    "release_date": "2022-01-18",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/ss_bff8d5325416118be3ab238b4942d04a6856992c.600x338.jpg?t=1642545156",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/ss_bff8d5325416118be3ab238b4942d04a6856992c.1920x1080.jpg?t=1642545156"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/ss_d97359277bad2de66a103708d55d7f664e92b001.600x338.jpg?t=1642545156",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/ss_d97359277bad2de66a103708d55d7f664e92b001.1920x1080.jpg?t=1642545156"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/ss_d787ed6d425d097c1d14e1dcd4d273413484a5d1.600x338.jpg?t=1642545156",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/ss_d787ed6d425d097c1d14e1dcd4d273413484a5d1.1920x1080.jpg?t=1642545156"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/ss_25b1d009bb7f91d46dec3be06fcc045ae8f94ec2.600x338.jpg?t=1642545156",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/ss_25b1d009bb7f91d46dec3be06fcc045ae8f94ec2.1920x1080.jpg?t=1642545156"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/ss_1fd2ad13333d4d1811e695792c943ef9ba3cee59.600x338.jpg?t=1642545156",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/ss_1fd2ad13333d4d1811e695792c943ef9ba3cee59.1920x1080.jpg?t=1642545156"
+      }
+    ],
+    "short_description": "Maverta Island - minimalist, relaxing, motion logic, mind game. The player's goal is to survive the labyrinth and save the mates.",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "The House Of Closed Doors is a game in which you are locked in a mysterious house.<br>Immerse yourself in the atmosphere of a dark old mansion.<br>Explore mysterious rooms, collect various items, try to find a way out and stay alive. <br><br><ul class=\"bb_ul\"><li>Nice graphics </li></ul><ul class=\"bb_ul\"><li>Search items</li></ul><ul class=\"bb_ul\"><li>Interesting gameplay</li></ul>",
+    "app_id": {
+      "name": "The Home Of Closed Doors",
+      "app_id": 1848300
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "The House Of Closed Doors is a game in which you are locked in a mysterious house.<br>Immerse yourself in the atmosphere of a dark old mansion.<br>Explore mysterious rooms, collect various items, try to find a way out and stay alive. <br><br><ul class=\"bb_ul\"><li>Nice graphics </li></ul><ul class=\"bb_ul\"><li>Search items</li></ul><ul class=\"bb_ul\"><li>Interesting gameplay</li></ul>",
+    "developers": [
+      "Mar3ow@gmail.com"
+    ],
+    "genres": [
+      {
+        "id": "23",
+        "description": "Indie"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/header.jpg?t=1641898583",
+    "languages": "English, Russian",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 2,
+    "owner_count": 10000,
+    "positive_reviews": 2,
+    "price": "99",
+    "publishers": [
+      "Mar3ow@gmail.com"
+    ],
+    "release_date": "2022-01-1",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_d7c2eb979fc881d2e28b630a44b127295e3cc847.600x338.jpg?t=1641898583",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_d7c2eb979fc881d2e28b630a44b127295e3cc847.1920x1080.jpg?t=1641898583"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_216f1cf619c7db5cfadaf693b3f46d11ace5f8dd.600x338.jpg?t=1641898583",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_216f1cf619c7db5cfadaf693b3f46d11ace5f8dd.1920x1080.jpg?t=1641898583"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_90843c09fcc5e04fc66820e4b8db5fe1c78f5873.600x338.jpg?t=1641898583",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_90843c09fcc5e04fc66820e4b8db5fe1c78f5873.1920x1080.jpg?t=1641898583"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_60842acb56cf34bebf86a9ed5654c33318b83960.600x338.jpg?t=1641898583",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_60842acb56cf34bebf86a9ed5654c33318b83960.1920x1080.jpg?t=1641898583"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_125c02fda04ae6c0ea3324adb1074ec4e8752952.600x338.jpg?t=1641898583",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_125c02fda04ae6c0ea3324adb1074ec4e8752952.1920x1080.jpg?t=1641898583"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_11fa324f672cae9af377b7a4993ff0c82ce11747.600x338.jpg?t=1641898583",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/ss_11fa324f672cae9af377b7a4993ff0c82ce11747.1920x1080.jpg?t=1641898583"
+      }
+    ],
+    "short_description": "The House Of Closed Doors is a game in which you are locked in a mysterious house. Immerse yourself in the atmosphere of a dark old mansion. Explore mysterious rooms, collect various items, try to find a way out and stay alive.",
+    "tags": {
+      "Exploration": 81,
+      "Hidden Object": 73,
+      "Funny": 71,
+      "Atmospheric": 68,
+      "Adventure": 65,
+      "Singleplayer": 55,
+      "Indie": 48
+    },
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "<i>A lewd cooking game where you mix potions to make the best slimes!</i><br><br>You open your sexy shop and sell your slimes to an infinite queue of customers.<br>Take a moment to enjoy their lewd performances or customize your place!<br><br><strong>Features</strong><br><ul class=\"bb_ul\"><li>    Play an endless cooking game<br></li><li>    Create slimes combining potions<br></li><li>    Unlock sex positions<br></li><li>    Watch them having fun<br></li><li>    Many furry characters will visit your place.<br></li><li>    Clean, customize, decorate your place with the store</li></ul>",
+    "app_id": {
+      "name": "Just in Slime",
+      "app_id": 1848310
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      }
+    ],
+    "coming_soon": true,
+    "detailed_description": "<i>A lewd cooking game where you mix potions to make the best slimes!</i><br><br>You open your sexy shop and sell your slimes to an infinite queue of customers.<br>Take a moment to enjoy their lewd performances or customize your place!<br><br><strong>Features</strong><br><ul class=\"bb_ul\"><li>    Play an endless cooking game<br></li><li>    Create slimes combining potions<br></li><li>    Unlock sex positions<br></li><li>    Watch them having fun<br></li><li>    Many furry characters will visit your place.<br></li><li>    Clean, customize, decorate your place with the store</li></ul>",
+    "developers": [
+      "Malerouille"
+    ],
+    "genres": [
+      {
+        "id": "23",
+        "description": "Indie"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/header.jpg?t=1641422284",
+    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "Malerouille"
+    ],
+    "release_date": "Feb 2022",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_24d491df59efade8d4932689792996020aa67a56.600x338.jpg?t=1641422284",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_24d491df59efade8d4932689792996020aa67a56.1920x1080.jpg?t=1641422284"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_d354155b247e5ec2c812300f9e0523783d3c4fd7.600x338.jpg?t=1641422284",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_d354155b247e5ec2c812300f9e0523783d3c4fd7.1920x1080.jpg?t=1641422284"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_b1b2db4503fa76b3fd85e6c3f62146b7183c90bf.600x338.jpg?t=1641422284",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_b1b2db4503fa76b3fd85e6c3f62146b7183c90bf.1920x1080.jpg?t=1641422284"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_7d76ad43bb52b9a61c3bf0aafc7fc3d60c9b4e50.600x338.jpg?t=1641422284",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_7d76ad43bb52b9a61c3bf0aafc7fc3d60c9b4e50.1920x1080.jpg?t=1641422284"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_bf7f4000ad4e8318346f1b23480a42ac8bf5aa4c.600x338.jpg?t=1641422284",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_bf7f4000ad4e8318346f1b23480a42ac8bf5aa4c.1920x1080.jpg?t=1641422284"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_96ef040dd5f5ea1154a66c2ff63408f1228b2e09.600x338.jpg?t=1641422284",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_96ef040dd5f5ea1154a66c2ff63408f1228b2e09.1920x1080.jpg?t=1641422284"
+      },
+      {
+        "id": 6,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_c438864528a899540df01cb997109f0bcbb0fd96.600x338.jpg?t=1641422284",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_c438864528a899540df01cb997109f0bcbb0fd96.1920x1080.jpg?t=1641422284"
+      },
+      {
+        "id": 7,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_94983dd3b8ccb3de369d984c68976186eee52349.600x338.jpg?t=1641422284",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/ss_94983dd3b8ccb3de369d984c68976186eee52349.1920x1080.jpg?t=1641422284"
+      }
+    ],
+    "short_description": "A lewd cooking game where you mix potions to make the best slimes!",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "<h2 class=\"bb_tag\">A novel with great RPG turn-based battles. A great entry point for newcomers!</h2><br><strong>Warning! There is no exploration at all! This is the complete true remake of Crimson Sword Saga: The Peloran Wars!</strong><h2 class=\"bb_tag\">Features</h2><br><ul class=\"bb_ul\"><li> Adjustable difficulty (4 Difficulties) and a lot of options;<br></li><li> A detailed tutorial;<br></li><li> 14 playable characters;<br></li><li> 21 chapters;<br></li><li> Fast and deep strategic RPG turn-based battles;<br></li><li> Great soundtrack reminiscent of old JRPG classic;<br></li><li> Great pixel graphics reminiscent of old JRPG classic.</li></ul>",
+    "app_id": {
+      "name": "Clarent Saga: Chronicles",
+      "app_id": 1848330
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "<h2 class=\"bb_tag\">A novel with great RPG turn-based battles. A great entry point for newcomers!</h2><br><strong>Warning! There is no exploration at all! This is the complete true remake of Crimson Sword Saga: The Peloran Wars!</strong><h2 class=\"bb_tag\">Features</h2><br><ul class=\"bb_ul\"><li> Adjustable difficulty (4 Difficulties) and a lot of options;<br></li><li> A detailed tutorial;<br></li><li> 14 playable characters;<br></li><li> 21 chapters;<br></li><li> Fast and deep strategic RPG turn-based battles;<br></li><li> Great soundtrack reminiscent of old JRPG classic;<br></li><li> Great pixel graphics reminiscent of old JRPG classic.</li></ul>",
+    "developers": [
+      "David Nguyen"
+    ],
+    "genres": [
+      {
+        "id": "23",
+        "description": "Indie"
+      },
+      {
+        "id": "3",
+        "description": "RPG"
+      },
+      {
+        "id": "2",
+        "description": "Strategy"
+      },
+      {
+        "id": "70",
+        "description": "Early Access"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/header.jpg?t=1641155516",
+    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 3,
+    "owner_count": 10000,
+    "positive_reviews": 16,
+    "price": "999",
+    "publishers": [
+      "David Nguyen"
+    ],
+    "release_date": "2022-01-2",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_cf6da1358b25eef59c7ba6ab41c942bbfcda27fb.600x338.jpg?t=1641155516",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_cf6da1358b25eef59c7ba6ab41c942bbfcda27fb.1920x1080.jpg?t=1641155516"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_bd44a45822389508e2e161e92b9e9abd6594c06c.600x338.jpg?t=1641155516",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_bd44a45822389508e2e161e92b9e9abd6594c06c.1920x1080.jpg?t=1641155516"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_fa4e42c577f587fb1d11e2fe955821b5885b8579.600x338.jpg?t=1641155516",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_fa4e42c577f587fb1d11e2fe955821b5885b8579.1920x1080.jpg?t=1641155516"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_68f14d8368266992c07dba4197cb6f4687b82c2d.600x338.jpg?t=1641155516",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_68f14d8368266992c07dba4197cb6f4687b82c2d.1920x1080.jpg?t=1641155516"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_1ce12d2bd01bc17d9d59f34e57e48dc1bbf479eb.600x338.jpg?t=1641155516",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_1ce12d2bd01bc17d9d59f34e57e48dc1bbf479eb.1920x1080.jpg?t=1641155516"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_d2d3a303c623c16992257fc6c96fe9cef6623323.600x338.jpg?t=1641155516",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_d2d3a303c623c16992257fc6c96fe9cef6623323.1920x1080.jpg?t=1641155516"
+      },
+      {
+        "id": 6,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_587280f542fdfbe482e037473aeff74467050408.600x338.jpg?t=1641155516",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/ss_587280f542fdfbe482e037473aeff74467050408.1920x1080.jpg?t=1641155516"
+      }
+    ],
+    "short_description": "A novel with great RPG turn based battles. A great entry point for newcomers!",
+    "tags": {
+      "RPG": 61,
+      "RPGMaker": 48,
+      "Strategy": 40,
+      "JRPG": 39,
+      "Turn-Based Combat": 35,
+      "Pixel Graphics": 32,
+      "1990's": 25,
+      "Story Rich": 24,
+      "Singleplayer": 22,
+      "Indie": 21,
+      "Early Access": 21,
+      "Linear": 18
+    },
+    "website": "https://www.facebook.com/pages/category/Video-Game/Clarent-Saga-Tactics-105817707555645/",
+    "windows": true
+  },
+  {
+    "about_the_game": "<strong> <i> FEAR: Call of the village </i> </strong> is a first-person horror game made in realistic 3D graphics that immerses you in an atmosphere of horror and fears you. The gameplay consists in collecting notes, solving riddles and escaping from ghosts, as well as in other mechanics inherent in any horror in order to survive and escape.<br><br>In it you have to get into a mysterious village and solve various riddles, the solution of which will be hindered by various inexplicable phenomena by science. Also, to complete the game, you will have to collect the necessary items that may come in handy in the passage or even be necessary. Meet the new protagonist, screamers and storyline!<h2 class=\"bb_tag\"> Brief background: </h2>The main character, an ordinary unremarkable guy, found himself in a rather strange abandoned village. At first glance, this place does not repulse at all, but even &quot;pleases&quot; the eye, however, as he progresses, the main character encounters many ghosts and other otherworldly creatures and phenomena. Therefore, more and more cute village ceases to be like a cozy place, and every next minute spent in it convinces you that you need to quickly get out of this God-forsaken place!<br><br><img src=\"https://media.st.dl.pinyuncloud.com/steam/apps/1848410/extras/HK-WBS-TNsM.jpg?t=1643714394\" crossorigin=\"anonymous\"/><br><br>You have to overcome your fear, going through gloomy locations for the main character, solving various puzzles along the way and trying to understand what is going on in general, how you got here, and most importantly, how to get out of this enchanted village.<br><br>By purchasing the game you will get the best emotions that you have never received!",
+    "app_id": {
+      "name": "FEAR: Call of the village",
+      "app_id": 1848410
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 22,
+        "description": "Steam Achievements"
+      },
+      {
+        "id": 23,
+        "description": "Steam Cloud"
+      }
+    ],
+    "coming_soon": true,
+    "detailed_description": "<strong> <i> FEAR: Call of the village </i> </strong> is a first-person horror game made in realistic 3D graphics that immerses you in an atmosphere of horror and fears you. The gameplay consists in collecting notes, solving riddles and escaping from ghosts, as well as in other mechanics inherent in any horror in order to survive and escape.<br><br>In it you have to get into a mysterious village and solve various riddles, the solution of which will be hindered by various inexplicable phenomena by science. Also, to complete the game, you will have to collect the necessary items that may come in handy in the passage or even be necessary. Meet the new protagonist, screamers and storyline!<h2 class=\"bb_tag\"> Brief background: </h2>The main character, an ordinary unremarkable guy, found himself in a rather strange abandoned village. At first glance, this place does not repulse at all, but even &quot;pleases&quot; the eye, however, as he progresses, the main character encounters many ghosts and other otherworldly creatures and phenomena. Therefore, more and more cute village ceases to be like a cozy place, and every next minute spent in it convinces you that you need to quickly get out of this God-forsaken place!<br><br><img src=\"https://media.st.dl.pinyuncloud.com/steam/apps/1848410/extras/HK-WBS-TNsM.jpg?t=1643714394\" crossorigin=\"anonymous\"/><br><br>You have to overcome your fear, going through gloomy locations for the main character, solving various puzzles along the way and trying to understand what is going on in general, how you got here, and most importantly, how to get out of this enchanted village.<br><br>By purchasing the game you will get the best emotions that you have never received!",
+    "developers": [
+      "5K Gamers"
+    ],
+    "genres": [
+      {
+        "id": "1",
+        "description": "Action"
+      },
+      {
+        "id": "25",
+        "description": "Adventure"
+      },
+      {
+        "id": "23",
+        "description": "Indie"
+      },
+      {
+        "id": "28",
+        "description": "Simulation"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/header.jpg?t=1643714394",
+    "languages": "English, Russian<strong>*</strong>, French, Italian, German, Spanish - Spain, Arabic, Bulgarian, Portuguese - Brazil, Hungarian, Vietnamese, Greek, Danish, Traditional Chinese, Korean, Dutch, Norwegian, Polish, Portuguese, Romanian, Thai, Turkish, Finnish, Czech, Swedish, Japanese<br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "Piece Of Voxel",
+      "5K Gamers"
+    ],
+    "release_date": "2022",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_98a2d16cc53436f2dd14130e9278fcad92bb9520.600x338.jpg?t=1643714394",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_98a2d16cc53436f2dd14130e9278fcad92bb9520.1920x1080.jpg?t=1643714394"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_b581d4e973675fb50d1f128a2dbb2348c05e1898.600x338.jpg?t=1643714394",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_b581d4e973675fb50d1f128a2dbb2348c05e1898.1920x1080.jpg?t=1643714394"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_6eb9846755c8405107894e808672679838928253.600x338.jpg?t=1643714394",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_6eb9846755c8405107894e808672679838928253.1920x1080.jpg?t=1643714394"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_b81ccf767eca3ff82b8851cc5e2223aff491cbc7.600x338.jpg?t=1643714394",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_b81ccf767eca3ff82b8851cc5e2223aff491cbc7.1920x1080.jpg?t=1643714394"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_a5b0e595a24e293be1fd615f93c6d93bc3d535d1.600x338.jpg?t=1643714394",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_a5b0e595a24e293be1fd615f93c6d93bc3d535d1.1920x1080.jpg?t=1643714394"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_0953c9a7e0d068cd8e4c99faab49c1dbf48e4fed.600x338.jpg?t=1643714394",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/ss_0953c9a7e0d068cd8e4c99faab49c1dbf48e4fed.1920x1080.jpg?t=1643714394"
+      }
+    ],
+    "short_description": "FEAR: Call of the village is a first-person horror game made in realistic 3D graphics and fearsome. In it you have to get into a mysterious village and solve various riddles, the solution of which will be hindered by various inexplicable phenomena by science.",
+    "tags": [],
+    "website": "http://5kgamers.tilda.ws/",
+    "windows": true
+  },
+  {
+    "about_the_game": "<i>DEVIL'S ROCK<br>An island off the coast of Louisiana <br>1932</i><br><br>\u201cEver since I heard of the treasure inside Bellemore Manor I've been obsessed by it. People said the house was still haunted by the ghosts of the wedding that disappeared there decades ago, but if the ghosts knew where the treasure was hidden, I just had to ask them.<br><br>But there's more to the treasure than I could have ever expected, and now I've awakened a household of spirits who don't mind that they're dead, and an evil phantom determined to find the treasure before I do.<br><br>Fixing the situation won't just mean getting to the treasure first, but also figuring out what happened on the island all those years ago. But I have a feeling that in order to do that, I'll have to die too.\u201d<br><br><i>- The Diary of Murphy McCallan</i><br><br><ul class=\"bb_ul\"><li>Classic adventure game puzzles, with over 100 useable items, and a built-in hint system<br></li><li>Over 65 gorgeous hand-drawn locations at full HD resolution, plus dozens more full-screen paintings, documents, and other details to investigate.<br></li><li>More than 30 fully voiced characters to interact with, and two hours of original music</li></ul>",
+    "app_id": {
+      "name": "Foolish Mortals",
+      "app_id": 1848440
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      }
+    ],
+    "coming_soon": true,
+    "detailed_description": "<i>DEVIL'S ROCK<br>An island off the coast of Louisiana <br>1932</i><br><br>\u201cEver since I heard of the treasure inside Bellemore Manor I've been obsessed by it. People said the house was still haunted by the ghosts of the wedding that disappeared there decades ago, but if the ghosts knew where the treasure was hidden, I just had to ask them.<br><br>But there's more to the treasure than I could have ever expected, and now I've awakened a household of spirits who don't mind that they're dead, and an evil phantom determined to find the treasure before I do.<br><br>Fixing the situation won't just mean getting to the treasure first, but also figuring out what happened on the island all those years ago. But I have a feeling that in order to do that, I'll have to die too.\u201d<br><br><i>- The Diary of Murphy McCallan</i><br><br><ul class=\"bb_ul\"><li>Classic adventure game puzzles, with over 100 useable items, and a built-in hint system<br></li><li>Over 65 gorgeous hand-drawn locations at full HD resolution, plus dozens more full-screen paintings, documents, and other details to investigate.<br></li><li>More than 30 fully voiced characters to interact with, and two hours of original music</li></ul>",
+    "developers": [
+      "Inklingwood Studios"
+    ],
+    "genres": [
+      {
+        "id": "25",
+        "description": "Adventure"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/header.jpg?t=1642158982",
+    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "Inklingwood Studios"
+    ],
+    "release_date": "Coming 2022",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/ss_9ec955401956ea1d740375adccef57cd504bc85f.600x338.jpg?t=1642158982",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/ss_9ec955401956ea1d740375adccef57cd504bc85f.1920x1080.jpg?t=1642158982"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/ss_2779c169d7b2b2eb43ad905b6a2f1048a45a69ea.600x338.jpg?t=1642158982",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/ss_2779c169d7b2b2eb43ad905b6a2f1048a45a69ea.1920x1080.jpg?t=1642158982"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/ss_ca774b58c91aca50ae574f27a4d8b1ce56d663e6.600x338.jpg?t=1642158982",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/ss_ca774b58c91aca50ae574f27a4d8b1ce56d663e6.1920x1080.jpg?t=1642158982"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/ss_3e63d0f766d9fdb8991c2ecbe0583d63bebd7f63.600x338.jpg?t=1642158982",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/ss_3e63d0f766d9fdb8991c2ecbe0583d63bebd7f63.1920x1080.jpg?t=1642158982"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/ss_33cbac8bd3150149ecd4838a50f050e7bd0c0de3.600x338.jpg?t=1642158982",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/ss_33cbac8bd3150149ecd4838a50f050e7bd0c0de3.1920x1080.jpg?t=1642158982"
+      }
+    ],
+    "short_description": "Obsessed with finding the lost treasure of Bellemore Manor, Murphy McCallan encounters ghosts, voodoo, and an evil Phantom who wants the treasure as their own! Eccentric characters and exciting puzzles populate the mysterious island of Devil\u2019s Rock in this classic style point &amp; click adventure.",
+    "tags": [],
+    "website": "http://www.FoolishMortalsGame.com",
+    "windows": true
+  },
+  {
+    "about_the_game": "Your name is Cyborg 17,<br />\r\n<br />\r\nUpon Escaping The Facility Where you we\u2019re manufactured your internal program was Triggered setting your system into Critical self destruct mode. With just 24 hours left to live until self destruction In a Race against Time You must stay alive In a constant fight for survival to escape the evil forces that created you. It is time to embark on a journey to find a way to restore your system back to normal before it\u2019s too late\u2026",
+    "app_id": {
+      "name": "System Critical: The Race Against Time",
+      "app_id": 1848470
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      }
+    ],
+    "coming_soon": true,
+    "detailed_description": "Your name is Cyborg 17,<br />\r\n<br />\r\nUpon Escaping The Facility Where you we\u2019re manufactured your internal program was Triggered setting your system into Critical self destruct mode. With just 24 hours left to live until self destruction In a Race against Time You must stay alive In a constant fight for survival to escape the evil forces that created you. It is time to embark on a journey to find a way to restore your system back to normal before it\u2019s too late\u2026",
+    "developers": [
+      "Old Formulas"
+    ],
+    "genres": [
+      {
+        "id": "1",
+        "description": "Action"
+      },
+      {
+        "id": "25",
+        "description": "Adventure"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/header.jpg?t=1642660710",
+    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "Old Formulas"
+    ],
+    "release_date": "Summer 2022",
+    "screenshots": [
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_e13b0ba0e981513b380c5c0e251a60df2f2b9922.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_e13b0ba0e981513b380c5c0e251a60df2f2b9922.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_e42e706709140fe6eba9c064db957eeacca71960.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_e42e706709140fe6eba9c064db957eeacca71960.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_ffcb51c7a573e58e393896a414462ed9d85c22ba.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_ffcb51c7a573e58e393896a414462ed9d85c22ba.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_3d5a6952a170af767095641f388ba0e32f74a0d6.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_3d5a6952a170af767095641f388ba0e32f74a0d6.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_a8d353b4a75fcfea8a5a0dd01873bdb05de7efc4.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_a8d353b4a75fcfea8a5a0dd01873bdb05de7efc4.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 6,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_06f6261d42784c3e7e343a967e23c47693aa256a.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_06f6261d42784c3e7e343a967e23c47693aa256a.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 7,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_7db173cc5d55f12529e4f16bc99e12f5400fdac6.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_7db173cc5d55f12529e4f16bc99e12f5400fdac6.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 8,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b0ef08bda326d393714b9f0c1ffa0d90e637f758.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b0ef08bda326d393714b9f0c1ffa0d90e637f758.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 9,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_ced62a00f5c94b7ced3540a05fc4c29f5af4f4fd.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_ced62a00f5c94b7ced3540a05fc4c29f5af4f4fd.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 10,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_42ddc8138102be51ce217e93002372ce383bf48a.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_42ddc8138102be51ce217e93002372ce383bf48a.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 11,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_fd19ac9d086154e7134df6dfc8d8f37354180cf4.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_fd19ac9d086154e7134df6dfc8d8f37354180cf4.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 12,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_7f241513be012a32e86d5b1d266abb74388b3b70.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_7f241513be012a32e86d5b1d266abb74388b3b70.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 13,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b1428bf3c9f0233a19701b5e80dd18236503db51.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b1428bf3c9f0233a19701b5e80dd18236503db51.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 14,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0f6c6ae767d2a6eb576b514cfe4071e4822c7916.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0f6c6ae767d2a6eb576b514cfe4071e4822c7916.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 15,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_2836057236880b30f82c5fb5506556333e172612.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_2836057236880b30f82c5fb5506556333e172612.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 16,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_737cb0ba2eb45704683055576efe4ae961536747.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_737cb0ba2eb45704683055576efe4ae961536747.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 17,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b9b6fdaa9544946d32659907d3ded0e500ae724b.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b9b6fdaa9544946d32659907d3ded0e500ae724b.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 18,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_f22e39e33f6414620d86bb6dcde00992939acc07.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_f22e39e33f6414620d86bb6dcde00992939acc07.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 19,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b3a4b81a78510d50f4143cb5655dc6adc1ae1fd3.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b3a4b81a78510d50f4143cb5655dc6adc1ae1fd3.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 20,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_8d9ec0883f0fc0a3118fb683e030909bf847b12e.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_8d9ec0883f0fc0a3118fb683e030909bf847b12e.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 21,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_bb7345530beeca62b03c44c46fb4f0e08d06fa5c.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_bb7345530beeca62b03c44c46fb4f0e08d06fa5c.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 22,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_d5f393a0c7316a77d431800d60ee00a593130040.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_d5f393a0c7316a77d431800d60ee00a593130040.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 23,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_44d8540dee2359c6597df01bffd1cbfc1d25fea9.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_44d8540dee2359c6597df01bffd1cbfc1d25fea9.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 24,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_bc8d1b7e42710d00496004b4da8aabd1c807e5b5.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_bc8d1b7e42710d00496004b4da8aabd1c807e5b5.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 25,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_72b266e6f5dd3f060e8d40383c9435abe0b846e9.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_72b266e6f5dd3f060e8d40383c9435abe0b846e9.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 26,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_d697f0a1d6fd7af07d996132bd468ac724a585d4.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_d697f0a1d6fd7af07d996132bd468ac724a585d4.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 27,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_88a377e414a1b84c1e8159a6997329d934368c54.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_88a377e414a1b84c1e8159a6997329d934368c54.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 28,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_a2a824cdb9b1bb848889c89c21942123658c56f9.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_a2a824cdb9b1bb848889c89c21942123658c56f9.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 29,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_925c66309fae03f013575dbaa80cda3867ebda29.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_925c66309fae03f013575dbaa80cda3867ebda29.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 30,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_dca44d8379c1031efa62b9e52f580be2c3ad9a36.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_dca44d8379c1031efa62b9e52f580be2c3ad9a36.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 31,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_94cb415ac8103502e5fbf5986093f1a4ac1ae5bf.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_94cb415ac8103502e5fbf5986093f1a4ac1ae5bf.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 32,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_aaf1a1023d2095fa3d99295e2bde4f718d05b692.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_aaf1a1023d2095fa3d99295e2bde4f718d05b692.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 33,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_e3aac1f49a078812c9ed933d8eed7fa70735d7b1.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_e3aac1f49a078812c9ed933d8eed7fa70735d7b1.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 34,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_630da19ea0081364633dd3d3838aa2976841e09d.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_630da19ea0081364633dd3d3838aa2976841e09d.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 35,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_322504f36dae96f3bb5e3f583c86a83320b61ef9.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_322504f36dae96f3bb5e3f583c86a83320b61ef9.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 36,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_9c39656a8bb549eec26d18f22c1480817aac980d.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_9c39656a8bb549eec26d18f22c1480817aac980d.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 37,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_fe2c56d2da0a69307ab4dca77f4cfe3ebeb09913.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_fe2c56d2da0a69307ab4dca77f4cfe3ebeb09913.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 38,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_4e3962e00e02e5fbae8b01a838544bb25c014e3a.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_4e3962e00e02e5fbae8b01a838544bb25c014e3a.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 39,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_bb744f03ab4b47045d9d6fe64c7d5a53652bc2a1.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_bb744f03ab4b47045d9d6fe64c7d5a53652bc2a1.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 40,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_05fd765ce21add9629ec5b8fe6e0132d4a6a62d3.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_05fd765ce21add9629ec5b8fe6e0132d4a6a62d3.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 41,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_19a0ff6d2179a2ceb6ce317c50d418a399bf1000.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_19a0ff6d2179a2ceb6ce317c50d418a399bf1000.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 42,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_1dc3ae7036017bb097b9409a86d6e831c23850c5.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_1dc3ae7036017bb097b9409a86d6e831c23850c5.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 43,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_f4cce900342053b0a695b9d008094339183e4d95.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_f4cce900342053b0a695b9d008094339183e4d95.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 44,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_07b9e3c6446d25c62eb6104fb12b7d3655a92657.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_07b9e3c6446d25c62eb6104fb12b7d3655a92657.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 45,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0970260ad20757717619451eebb2fbe0b5dc4b1f.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0970260ad20757717619451eebb2fbe0b5dc4b1f.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 46,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_f00da6ed64af3698a7cc25d6cdf16c6208c63875.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_f00da6ed64af3698a7cc25d6cdf16c6208c63875.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 47,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b41e612887772757d1670b1806458ccc9ec33291.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b41e612887772757d1670b1806458ccc9ec33291.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 48,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_3331e5284b00709b6c9a383a70db49b17b9e87cc.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_3331e5284b00709b6c9a383a70db49b17b9e87cc.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 49,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0ec8ca8e308ec7ad4e34df3b054473813a776d03.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0ec8ca8e308ec7ad4e34df3b054473813a776d03.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 50,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_1dfefff77a34f37be155ee4bbd37f9d67faa6ca2.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_1dfefff77a34f37be155ee4bbd37f9d67faa6ca2.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 51,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0616fa63fae9690c8890d15fb42771c389126ce4.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0616fa63fae9690c8890d15fb42771c389126ce4.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 52,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b13d2dbe2a327a6338a878b5ecf74fdf4a31bcce.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b13d2dbe2a327a6338a878b5ecf74fdf4a31bcce.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 53,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_640364e03914799fc175a48e99d7081007a7c4b5.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_640364e03914799fc175a48e99d7081007a7c4b5.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 54,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_6025c83419e751f18404b7a5057c290a29a2845f.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_6025c83419e751f18404b7a5057c290a29a2845f.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 55,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_7ea6f97b5f9101eb7d3c47bb73e104c21588f26b.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_7ea6f97b5f9101eb7d3c47bb73e104c21588f26b.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 56,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_7ff75263f643190f41d0624052f536ae2da8df40.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_7ff75263f643190f41d0624052f536ae2da8df40.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 57,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_e4f12c271bd7556270a3260143765dd14e45fd52.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_e4f12c271bd7556270a3260143765dd14e45fd52.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 58,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_972b852a6b8f7fd33b7bda06b8f9140cc475324d.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_972b852a6b8f7fd33b7bda06b8f9140cc475324d.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 59,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0eba7fa544a96cfc8f7cd1ae620d01494813d80a.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0eba7fa544a96cfc8f7cd1ae620d01494813d80a.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 60,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_93dfb4b2d4e44d5d50307a146fbf4274afb9d1db.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_93dfb4b2d4e44d5d50307a146fbf4274afb9d1db.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 61,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_1114e40eb753d8b03890d982063dfdbdb7d2520d.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_1114e40eb753d8b03890d982063dfdbdb7d2520d.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 62,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_8a9703051bbbbb58e11c5bc21a82fb8d9cc85864.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_8a9703051bbbbb58e11c5bc21a82fb8d9cc85864.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 63,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_81bebbd737c00df4d008b46c64376823c1030adf.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_81bebbd737c00df4d008b46c64376823c1030adf.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 64,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_483dd5df3b4d220efcdc6dcc2b1bdb4d89c58ebf.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_483dd5df3b4d220efcdc6dcc2b1bdb4d89c58ebf.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 65,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_4acc33578052f873515e14d5ae375160d32d85b3.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_4acc33578052f873515e14d5ae375160d32d85b3.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 66,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_e4072bc185c16c61f4babf4e1d7ccf96a5a17523.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_e4072bc185c16c61f4babf4e1d7ccf96a5a17523.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 67,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_1363d85b0e22f9469f23761351167b151942b319.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_1363d85b0e22f9469f23761351167b151942b319.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 68,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_187a8e68de470f55e23b72758b4b7839dbf82dd9.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_187a8e68de470f55e23b72758b4b7839dbf82dd9.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 69,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_387e1656a0a5c3af3dad5abc944f1ccb3f161e64.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_387e1656a0a5c3af3dad5abc944f1ccb3f161e64.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 70,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_f4243509da962fbf4bf163aa69eb85c8f489471c.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_f4243509da962fbf4bf163aa69eb85c8f489471c.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 71,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_bd862f2d4149da82e237ede6ecc3e9fdd2925610.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_bd862f2d4149da82e237ede6ecc3e9fdd2925610.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 72,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_4030998d72303ae10902afce62ab33b2fbdcd303.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_4030998d72303ae10902afce62ab33b2fbdcd303.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 73,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b9758f9fba93995285e5203d9ef6c2820872388c.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b9758f9fba93995285e5203d9ef6c2820872388c.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 74,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_4f00ffd8f6846b607d8f829a02bd8e1636e81bf1.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_4f00ffd8f6846b607d8f829a02bd8e1636e81bf1.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 75,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_15ad31e20e8ee16ddfe0fd23b81c38107313b602.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_15ad31e20e8ee16ddfe0fd23b81c38107313b602.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 76,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_110531ba47e564cb0079c8df2715973a6bb2a46d.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_110531ba47e564cb0079c8df2715973a6bb2a46d.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 77,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0b56fad211eeb92eddbf111920c45083456ffdf6.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0b56fad211eeb92eddbf111920c45083456ffdf6.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 78,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_083d16b08de818b00ab322be2629530d54bc7d53.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_083d16b08de818b00ab322be2629530d54bc7d53.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 79,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_257e50aa542070eeef57faa3ad58ff56e03b90e8.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_257e50aa542070eeef57faa3ad58ff56e03b90e8.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 80,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_2333d752a2ee3be160efa0cbd275f0e60f455df3.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_2333d752a2ee3be160efa0cbd275f0e60f455df3.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 81,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_4e73f4b6d85a76996a8dbc660e6c28ffa6164ec4.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_4e73f4b6d85a76996a8dbc660e6c28ffa6164ec4.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 82,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_c06186ccb5b77bb4dac33ddbcaa39bd50d43a4ac.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_c06186ccb5b77bb4dac33ddbcaa39bd50d43a4ac.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 83,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_05bea4d9b58838c6175ac60ec4de19a5eab26343.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_05bea4d9b58838c6175ac60ec4de19a5eab26343.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 84,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_827a55b3b852a947a13f55039939d73db5adb248.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_827a55b3b852a947a13f55039939d73db5adb248.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 85,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b3a3312fdc35143a5189148cf7696ab0859c8746.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_b3a3312fdc35143a5189148cf7696ab0859c8746.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 86,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_5d15f249899f814ca5526c566a9b40d7afd3c9d5.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_5d15f249899f814ca5526c566a9b40d7afd3c9d5.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 87,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_abae3d06af77f06b717a91169459a098010d6d8a.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_abae3d06af77f06b717a91169459a098010d6d8a.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 88,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_d9c2f32ad99b2a0218f1e602d336f6b86c84f21a.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_d9c2f32ad99b2a0218f1e602d336f6b86c84f21a.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 89,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0a44581b14fd9280fd11d5794abe6b9a843de10f.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_0a44581b14fd9280fd11d5794abe6b9a843de10f.1920x1080.jpg?t=1642660710"
+      },
+      {
+        "id": 90,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_88354f32a64713097a4d7f209562d76c4f78a3d0.600x338.jpg?t=1642660710",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/ss_88354f32a64713097a4d7f209562d76c4f78a3d0.1920x1080.jpg?t=1642660710"
+      }
+    ],
+    "short_description": "Fun Run and Gun Platformer VR Shooter. Blast your arm cannon,use Grenades and melee weapons, Run, Jump, and Double Jump to dodge Projectiles and make your way through the carefully crafted levels. Discover secret areas and destroy objects while Navigating obstacles and defeat bosses to progress",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/20220104_193743.gif?t=1641952055\" /><br><br><i>Busted free from The Lab's control, he's on the run... Bionic Tadpole!</i> <br>Every bullet has Bionic Tadpole's name on it as he escapes R-Man City in the stolen bionic suit!<br><br>\u2022 Run-N-Gun, beat the timer, and don't let your gun overheat.<br>\u2022 Elements of fun platforming, bullet-hell and twin stick-controlled action!<br>\u2022 Original music by <strong>MaximusCXI</strong>, created for each Stage.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/nirab_idle.gif?t=1641952055\" />",
+    "app_id": {
+      "name": "Bionic Tadpole",
+      "app_id": 1848540
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 28,
+        "description": "Full controller support"
+      }
+    ],
+    "coming_soon": true,
+    "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/20220104_193743.gif?t=1641952055\" /><br><br><i>Busted free from The Lab's control, he's on the run... Bionic Tadpole!</i> <br>Every bullet has Bionic Tadpole's name on it as he escapes R-Man City in the stolen bionic suit!<br><br>\u2022 Run-N-Gun, beat the timer, and don't let your gun overheat.<br>\u2022 Elements of fun platforming, bullet-hell and twin stick-controlled action!<br>\u2022 Original music by <strong>MaximusCXI</strong>, created for each Stage.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/nirab_idle.gif?t=1641952055\" />",
+    "developers": [
+      "SaGa76"
+    ],
+    "genres": [
+      {
+        "id": "1",
+        "description": "Action"
+      },
+      {
+        "id": "23",
+        "description": "Indie"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/header.jpg?t=1641952055",
+    "languages": "English",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "SaGa76"
+    ],
+    "release_date": "TBA",
+    "screenshots": [
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_65636c59b2e4446bdd2ccba2f42f9ec4672d08ef.600x338.jpg?t=1641952055",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_65636c59b2e4446bdd2ccba2f42f9ec4672d08ef.1920x1080.jpg?t=1641952055"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_90c13c41f3ec38c005b5d7d21f950954516f383d.600x338.jpg?t=1641952055",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_90c13c41f3ec38c005b5d7d21f950954516f383d.1920x1080.jpg?t=1641952055"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_80fd7edb49906b8dbe83829ce61ce8cd31731262.600x338.jpg?t=1641952055",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_80fd7edb49906b8dbe83829ce61ce8cd31731262.1920x1080.jpg?t=1641952055"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_36ce875bb825f5d8409547d88419d1db0c4a0b12.600x338.jpg?t=1641952055",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_36ce875bb825f5d8409547d88419d1db0c4a0b12.1920x1080.jpg?t=1641952055"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_4f3adc323d5a4ace436dbd18afbdba3ebaed15c4.600x338.jpg?t=1641952055",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_4f3adc323d5a4ace436dbd18afbdba3ebaed15c4.1920x1080.jpg?t=1641952055"
+      },
+      {
+        "id": 6,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_e6e0782ee6f98f79f2227a86b3754b28e9bda87c.600x338.jpg?t=1641952055",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_e6e0782ee6f98f79f2227a86b3754b28e9bda87c.1920x1080.jpg?t=1641952055"
+      },
+      {
+        "id": 7,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_2a0aba749d9afdd75b04fba5333865aa980b45cf.600x338.jpg?t=1641952055",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_2a0aba749d9afdd75b04fba5333865aa980b45cf.1920x1080.jpg?t=1641952055"
+      },
+      {
+        "id": 8,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_f524217dc5948a8273499381e73ac3b6520f1e1b.600x338.jpg?t=1641952055",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/ss_f524217dc5948a8273499381e73ac3b6520f1e1b.1920x1080.jpg?t=1641952055"
+      }
+    ],
+    "short_description": "A run-n-gun, non-stop action platformer! Your main objective is to beat the timer, pick up weapons, and to not let your gun overheat; while you evade bullet-hell madness!",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "The Space-Time Gravity Travelers have been compromised. They have been sent to a Skelton Zone and it has become your duty to ensure they escape to safety before the enemy forces descend upon them. They are helpless in the gravity suits and with an inability to remove them amid travel only you can carry them to their freedom.<br />\r\n<br />\r\nFight your way through the Skelton Zone utilizing weaponry. Discover the resources for your survival. Most of all deliver the travelers to the escape portal to ensure they survive. Fight, run and hide when the task becomes impossible. <br />\r\n<br />\r\nPrepare to save the last remaining chemically unaltered. Discover the secrets.<br />\r\n<br />\r\nREMEMBER:<br />\r\nFind the travelers as they emerge.<br />\r\nFight to defend the defenseless travelers. They will be incapable of movement or defense due to their suit technology.<br />\r\nTake the travelers to the portal as to deliver them to their destination.<br />\r\n<br />\r\nSkelton is an FPS Horror game about surviving the numerous enemies encountered and fighting back with found weaponry. Also you must begin Searching for the travelers, collecting their teleport devices and bringing them to the escape destination.",
+    "app_id": {
+      "name": "Skelton",
+      "app_id": 1848570
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "The Space-Time Gravity Travelers have been compromised. They have been sent to a Skelton Zone and it has become your duty to ensure they escape to safety before the enemy forces descend upon them. They are helpless in the gravity suits and with an inability to remove them amid travel only you can carry them to their freedom.<br />\r\n<br />\r\nFight your way through the Skelton Zone utilizing weaponry. Discover the resources for your survival. Most of all deliver the travelers to the escape portal to ensure they survive. Fight, run and hide when the task becomes impossible. <br />\r\n<br />\r\nPrepare to save the last remaining chemically unaltered. Discover the secrets.<br />\r\n<br />\r\nREMEMBER:<br />\r\nFind the travelers as they emerge.<br />\r\nFight to defend the defenseless travelers. They will be incapable of movement or defense due to their suit technology.<br />\r\nTake the travelers to the portal as to deliver them to their destination.<br />\r\n<br />\r\nSkelton is an FPS Horror game about surviving the numerous enemies encountered and fighting back with found weaponry. Also you must begin Searching for the travelers, collecting their teleport devices and bringing them to the escape destination.",
+    "developers": [
+      "Bry Guy"
+    ],
+    "genres": [
+      {
+        "id": "1",
+        "description": "Action"
+      },
+      {
+        "id": "25",
+        "description": "Adventure"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/header.jpg?t=1643599879",
+    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "Bry Guy"
+    ],
+    "release_date": "2022-01-30",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_265c0a46823c796e2fd3ba267df8f2024a75ae53.600x338.jpg?t=1643599879",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_265c0a46823c796e2fd3ba267df8f2024a75ae53.1920x1080.jpg?t=1643599879"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_c5fd81fde978822d38d181e412877803b493835d.600x338.jpg?t=1643599879",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_c5fd81fde978822d38d181e412877803b493835d.1920x1080.jpg?t=1643599879"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_0cfb4cb7584b773b66576ddaa5dd41e35fc15ead.600x338.jpg?t=1643599879",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_0cfb4cb7584b773b66576ddaa5dd41e35fc15ead.1920x1080.jpg?t=1643599879"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_50d420524bfd5204ca070d9dc8b317313cdbc8f8.600x338.jpg?t=1643599879",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_50d420524bfd5204ca070d9dc8b317313cdbc8f8.1920x1080.jpg?t=1643599879"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_58d1db0c4192134e40e84b68b5be162920873f65.600x338.jpg?t=1643599879",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_58d1db0c4192134e40e84b68b5be162920873f65.1920x1080.jpg?t=1643599879"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_333585b4f665773b9d3e37015abf27efa4be06b1.600x338.jpg?t=1643599879",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_333585b4f665773b9d3e37015abf27efa4be06b1.1920x1080.jpg?t=1643599879"
+      },
+      {
+        "id": 6,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_c936f3d34f0efe597b06f63187bda12a9d48a74e.600x338.jpg?t=1643599879",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_c936f3d34f0efe597b06f63187bda12a9d48a74e.1920x1080.jpg?t=1643599879"
+      },
+      {
+        "id": 7,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_65b11c0f03659e90ae3e1e8389c6129c8d77bc03.600x338.jpg?t=1643599879",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_65b11c0f03659e90ae3e1e8389c6129c8d77bc03.1920x1080.jpg?t=1643599879"
+      }
+    ],
+    "short_description": "Help the travelers escape the horrors of the Skelton Zone.",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
+    "app_id": {
+      "name": "Sang: The Desert Blade",
+      "app_id": 1848600
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 22,
+        "description": "Steam Achievements"
+      },
+      {
+        "id": 28,
+        "description": "Full controller support"
+      }
+    ],
+    "coming_soon": true,
+    "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
+    "developers": [
+      "Fiskyfisko"
+    ],
+    "genres": [
+      {
+        "id": "1",
+        "description": "Action"
+      },
+      {
+        "id": "25",
+        "description": "Adventure"
+      },
+      {
+        "id": "23",
+        "description": "Indie"
+      },
+      {
+        "id": "3",
+        "description": "RPG"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/header.jpg?t=1640901562",
+    "languages": "English",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "Top Hat Studios, Inc."
+    ],
+    "release_date": "TBD",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_cb41ed4968a28209c96cb03be95225b7afbd0151.600x338.jpg?t=1640901562",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_cb41ed4968a28209c96cb03be95225b7afbd0151.1920x1080.jpg?t=1640901562"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_453379af41698eac908c9e5d18f8693bf463c36a.600x338.jpg?t=1640901562",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_453379af41698eac908c9e5d18f8693bf463c36a.1920x1080.jpg?t=1640901562"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_fb2394b6829291f0fe563b245c4a950d705fb352.600x338.jpg?t=1640901562",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_fb2394b6829291f0fe563b245c4a950d705fb352.1920x1080.jpg?t=1640901562"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_055f5e8b7d98a781fa5c87fdc133feea01636777.600x338.jpg?t=1640901562",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_055f5e8b7d98a781fa5c87fdc133feea01636777.1920x1080.jpg?t=1640901562"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_df46339f23e31e10b41642d7a8d8ced593f62326.600x338.jpg?t=1640901562",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_df46339f23e31e10b41642d7a8d8ced593f62326.1920x1080.jpg?t=1640901562"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_52db8604ff71b88c5b9f4357b26ebdf53de2f7d9.600x338.jpg?t=1640901562",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_52db8604ff71b88c5b9f4357b26ebdf53de2f7d9.1920x1080.jpg?t=1640901562"
+      },
+      {
+        "id": 6,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_b2d193ccaebcaef13b55b4432b5577bb306efdb3.600x338.jpg?t=1640901562",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/ss_b2d193ccaebcaef13b55b4432b5577bb306efdb3.1920x1080.jpg?t=1640901562"
+      }
+    ],
+    "short_description": "Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. Follow the story of Sang as she looks for her long lost kin.",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "<strong>VR Async Balls</strong> will immerse you into the virtual world of the cosmopark, where you can play on a slot machine. You have to hold two balls at one and  the same time on different moving tracks. Firstly, only one level is available for you, after passing it, the next will be opened. There are 20 levels in the game, each of them is more difficult than the previous one. The tracks curiously bend into space and after pressing the Start button, they begin to move at a constant speed. You need to prevent two balls from falling off these tracks with your hands and bring them to the end.<br>Trained people, like pianists, can easily move their hands in different directions independently of each other. This simulator will allow you to check how asynchronous your brain works, how accurately and consciously you can move your hands, how much you can concentrate and control the movements of two balls at once. <br>This little game will bring you a lot of fun and joy from its passage. Good luck!",
+    "app_id": {
+      "name": "VR Async Balls",
+      "app_id": 1848640
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "<strong>VR Async Balls</strong> will immerse you into the virtual world of the cosmopark, where you can play on a slot machine. You have to hold two balls at one and  the same time on different moving tracks. Firstly, only one level is available for you, after passing it, the next will be opened. There are 20 levels in the game, each of them is more difficult than the previous one. The tracks curiously bend into space and after pressing the Start button, they begin to move at a constant speed. You need to prevent two balls from falling off these tracks with your hands and bring them to the end.<br>Trained people, like pianists, can easily move their hands in different directions independently of each other. This simulator will allow you to check how asynchronous your brain works, how accurately and consciously you can move your hands, how much you can concentrate and control the movements of two balls at once. <br>This little game will bring you a lot of fun and joy from its passage. Good luck!",
+    "developers": [
+      "Aviahel"
+    ],
+    "genres": [
+      {
+        "id": "23",
+        "description": "Indie"
+      },
+      {
+        "id": "28",
+        "description": "Simulation"
+      },
+      {
+        "id": "18",
+        "description": "Sports"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/header.jpg?t=1641815348",
+    "languages": "English, Russian",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 1,
+    "price": "299",
+    "publishers": [
+      "Aviahel"
+    ],
+    "release_date": "2022-01-10",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_00cfc031f67e5103aeea5d5529daac662ace64f0.600x338.jpg?t=1641815348",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_00cfc031f67e5103aeea5d5529daac662ace64f0.1920x1080.jpg?t=1641815348"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_fa710304559b2d50fb89b4e3e72010075ffc81e2.600x338.jpg?t=1641815348",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_fa710304559b2d50fb89b4e3e72010075ffc81e2.1920x1080.jpg?t=1641815348"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_709eb58ac44f7c255e9dcc8b4b1621766bef23ad.600x338.jpg?t=1641815348",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_709eb58ac44f7c255e9dcc8b4b1621766bef23ad.1920x1080.jpg?t=1641815348"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_01cad8db7f7f4ec9f6bcfe81f123fee6950dbd57.600x338.jpg?t=1641815348",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_01cad8db7f7f4ec9f6bcfe81f123fee6950dbd57.1920x1080.jpg?t=1641815348"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_eb4558ca209e49455fa67dc02f2026184a90c149.600x338.jpg?t=1641815348",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_eb4558ca209e49455fa67dc02f2026184a90c149.1920x1080.jpg?t=1641815348"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_1386a597385fb89e779bf8ca9338226ce1b2fda0.600x338.jpg?t=1641815348",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_1386a597385fb89e779bf8ca9338226ce1b2fda0.1920x1080.jpg?t=1641815348"
+      },
+      {
+        "id": 6,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_edc60852eedd4a623b1eda36196dcf9f2dd3f71e.600x338.jpg?t=1641815348",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_edc60852eedd4a623b1eda36196dcf9f2dd3f71e.1920x1080.jpg?t=1641815348"
+      },
+      {
+        "id": 7,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_de9b8c757d47987e738b2c20379d6a95399c6b5d.600x338.jpg?t=1641815348",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/ss_de9b8c757d47987e738b2c20379d6a95399c6b5d.1920x1080.jpg?t=1641815348"
+      }
+    ],
+    "short_description": "It's a simulator of a slot machine. Swipe two balls simultaneously on different moving tracks. Do not try to push two balls at the same time moving your hands asynchronous, not everyone can do it. Check if you can do it! 20 levels in the game, each of them is more difficult than the previous one.",
+    "tags": {
+      "Simulation": 64,
+      "Sports": 55,
+      "VR": 52,
+      "Singleplayer": 41,
+      "Asymmetric VR": 36,
+      "Physics": 30,
+      "Realistic": 27,
+      "Atmospheric": 25,
+      "Tabletop": 23,
+      "Indie": 21,
+      "Linear": 21,
+      "Gambling": 19,
+      "Turn-Based Tactics": 17,
+      "First-Person": 15
+    },
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "Artist Alya wakes up on the banks of a river with no memories and only a journal, painting supplies, and a ticket for a train that leaves in 5 days. You have until then to recover her memories. <br><br>And with every choice changing what you remember...<br><br>Good luck!<br><br><strong>Features</strong><br><ul class=\"bb_ul\"><li>Pixel-style aesthetics keeps focus on story </li><li>Simple controls, but not a simple plot </li><li>Story-centric RPG where every choice you make changes how the game plays out </li><li>Each playthrough takes around 2 hours to complete, but multiple playthroughs are necessary if you want to uncover the whole story </li><li>No combat, but plenty to do... you play as an artist after all </li></ul><br><strong>Warning</strong><br>There are some passing mentions of disturbing elements (such as death). However, nothing gruesome or in-depth is shown or talked about.",
+    "app_id": {
+      "name": "Remembrance",
+      "app_id": 1848660
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "Artist Alya wakes up on the banks of a river with no memories and only a journal, painting supplies, and a ticket for a train that leaves in 5 days. You have until then to recover her memories. <br><br>And with every choice changing what you remember...<br><br>Good luck!<br><br><strong>Features</strong><br><ul class=\"bb_ul\"><li>Pixel-style aesthetics keeps focus on story </li><li>Simple controls, but not a simple plot </li><li>Story-centric RPG where every choice you make changes how the game plays out </li><li>Each playthrough takes around 2 hours to complete, but multiple playthroughs are necessary if you want to uncover the whole story </li><li>No combat, but plenty to do... you play as an artist after all </li></ul><br><strong>Warning</strong><br>There are some passing mentions of disturbing elements (such as death). However, nothing gruesome or in-depth is shown or talked about.",
+    "developers": [
+      "Kizmet Rose"
+    ],
+    "genres": [
+      {
+        "id": "23",
+        "description": "Indie"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/header.jpg?t=1642295069",
+    "languages": "English",
+    "linux": true,
+    "mac": true,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 1,
+    "price": "999",
+    "publishers": [
+      "Kizmet Rose"
+    ],
+    "release_date": "2022-01-15",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/ss_b7843671f5b3d22a9c7c9983f85876b421b59f95.600x338.jpg?t=1642295069",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/ss_b7843671f5b3d22a9c7c9983f85876b421b59f95.1920x1080.jpg?t=1642295069"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/ss_b933962f0bdf4ce7be2216c749b7330b85d64a43.600x338.jpg?t=1642295069",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/ss_b933962f0bdf4ce7be2216c749b7330b85d64a43.1920x1080.jpg?t=1642295069"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/ss_f71422031d7b3ba1eaea7a42550a3013c8d600ca.600x338.jpg?t=1642295069",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/ss_f71422031d7b3ba1eaea7a42550a3013c8d600ca.1920x1080.jpg?t=1642295069"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/ss_141adb564c65c3de9f3d1f448635c2ab8bed2829.600x338.jpg?t=1642295069",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/ss_141adb564c65c3de9f3d1f448635c2ab8bed2829.1920x1080.jpg?t=1642295069"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/ss_edd4033367d5eb3ea6fd7ffd7abb8b5a21018f3f.600x338.jpg?t=1642295069",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/ss_edd4033367d5eb3ea6fd7ffd7abb8b5a21018f3f.1920x1080.jpg?t=1642295069"
+      }
+    ],
+    "short_description": "A story-driven experience about a painter who lost her memory and wants to get it back... or at least, she thinks she does.",
+    "tags": {
+      "RPG": 46,
+      "Story Rich": 39,
+      "Choices Matter": 37,
+      "Exploration": 34,
+      "Pixel Graphics": 31,
+      "Emotional": 25,
+      "Female Protagonist": 23,
+      "Indie": 21,
+      "Action RPG": 20,
+      "Singleplayer": 19,
+      "RPGMaker": 6
+    },
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "",
+    "app_id": {
+      "name": "RocketBallZ Playtest",
+      "app_id": 1848670
+    },
+    "categories": [],
+    "coming_soon": false,
+    "detailed_description": "",
+    "developers": [],
+    "genres": [],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/header.jpg?t=1639765740",
+    "languages": null,
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      ""
+    ],
+    "release_date": "2021-12-17",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_16120b1dcaebe771608f166b52c1e40b1985159b.600x338.jpg?t=1639765740",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_16120b1dcaebe771608f166b52c1e40b1985159b.1920x1080.jpg?t=1639765740"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_6932230a3dcee6da47297dec0bcb046a24ed2549.600x338.jpg?t=1639765740",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_6932230a3dcee6da47297dec0bcb046a24ed2549.1920x1080.jpg?t=1639765740"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_c686ff2416dbd79679e62b9dcb6f2c221edd1e6b.600x338.jpg?t=1639765740",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_c686ff2416dbd79679e62b9dcb6f2c221edd1e6b.1920x1080.jpg?t=1639765740"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_1f02a64e68c49340e5473814480716d0682bec08.600x338.jpg?t=1639765740",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_1f02a64e68c49340e5473814480716d0682bec08.1920x1080.jpg?t=1639765740"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_221d1f7010e0d0b594f2b5a6bb77b32d8f872506.600x338.jpg?t=1639765740",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_221d1f7010e0d0b594f2b5a6bb77b32d8f872506.1920x1080.jpg?t=1639765740"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_c8b019e6243e6480bd67e5cb19d7e5635aaffd24.600x338.jpg?t=1639765740",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_c8b019e6243e6480bd67e5cb19d7e5635aaffd24.1920x1080.jpg?t=1639765740"
+      },
+      {
+        "id": 6,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_10d2860741d9558fa138cd963b786c34f62a6753.600x338.jpg?t=1639765740",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_10d2860741d9558fa138cd963b786c34f62a6753.1920x1080.jpg?t=1639765740"
+      },
+      {
+        "id": 7,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_bb9be925326a1794111719d1f4673b6e341a6f4f.600x338.jpg?t=1639765740",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_bb9be925326a1794111719d1f4673b6e341a6f4f.1920x1080.jpg?t=1639765740"
+      },
+      {
+        "id": 8,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_8638b884715ec27a58b2d3156615114a5ebd1e2b.600x338.jpg?t=1639765740",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_8638b884715ec27a58b2d3156615114a5ebd1e2b.1920x1080.jpg?t=1639765740"
+      },
+      {
+        "id": 9,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_d7fbcfbeffb13962775d4b7db5469624e7aac748.600x338.jpg?t=1639765740",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/ss_d7fbcfbeffb13962775d4b7db5469624e7aac748.1920x1080.jpg?t=1639765740"
+      }
+    ],
+    "short_description": "",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "A 2D single-player strategy game about a rescue mission that takes place in space, and it is up to the rescue team to venture out and find the missing astronauts, to rescue them from the dangers of space. The player must rotate the rings and align the astronauts on top, for them to enter the ship safely, and escape.",
+    "app_id": {
+      "name": "Operation S",
+      "app_id": 1848680
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "A 2D single-player strategy game about a rescue mission that takes place in space, and it is up to the rescue team to venture out and find the missing astronauts, to rescue them from the dangers of space. The player must rotate the rings and align the astronauts on top, for them to enter the ship safely, and escape.",
+    "developers": [
+      "Game Changers"
+    ],
+    "genres": [
+      {
+        "id": "4",
+        "description": "Casual"
+      },
+      {
+        "id": "2",
+        "description": "Strategy"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/header.jpg?t=1641886760",
+    "languages": "English",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "AQE"
+    ],
+    "release_date": "2022-01-10",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_e2a135dfe49fa9df61c040a1fc5cff83f1991874.600x338.jpg?t=1641886760",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_e2a135dfe49fa9df61c040a1fc5cff83f1991874.1920x1080.jpg?t=1641886760"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_b73317b172c8538f6be9c89c672cfa8c850ad5b8.600x338.jpg?t=1641886760",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_b73317b172c8538f6be9c89c672cfa8c850ad5b8.1920x1080.jpg?t=1641886760"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_59e2a6ad08868d72eff17e777fadc76470c51b7d.600x338.jpg?t=1641886760",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_59e2a6ad08868d72eff17e777fadc76470c51b7d.1920x1080.jpg?t=1641886760"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_eead963fb72edb68455f249b109177a00d993ecf.600x338.jpg?t=1641886760",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_eead963fb72edb68455f249b109177a00d993ecf.1920x1080.jpg?t=1641886760"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_02fa52f67efe3fb515bba306cc0c687355d97cc6.600x338.jpg?t=1641886760",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_02fa52f67efe3fb515bba306cc0c687355d97cc6.1920x1080.jpg?t=1641886760"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_fa05f74e703f2002d41a21bfe5eaca9453f4b7cc.600x338.jpg?t=1641886760",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/ss_fa05f74e703f2002d41a21bfe5eaca9453f4b7cc.1920x1080.jpg?t=1641886760"
+      }
+    ],
+    "short_description": "Puzzle strategy game,where the player has to rotate the rings to save astronauts",
+    "tags": [],
+    "website": "https://gamechangers.sa/",
+    "windows": true
+  },
+  {
+    "about_the_game": "<h2 class=\"bb_tag\">Features</h2><strong><ul class=\"bb_ul\"><li>Roguelite ACT</li></ul></strong>Challenge again and again in the never repeated level. In each life, you will encounter different enemies and treasures<br><br><strong><ul class=\"bb_ul\"><li>Powerful Treasure System</li></ul></strong>ninjasoul has rich treasure skills and powerful property system. Each skill can be matched with other skills, and entry can even directly change the scope and form of skills! You can experience the charm of ARPG games in this roguelite act game<br><br><strong><ul class=\"bb_ul\"><li>A Combat System Then Suitable For Everyone</li></ul></strong>in the game, players can choose to focus on the speed duel between the blades, or focus on building their own BD (treasure matching) and use Katana skill and Ninjutsu to kill the enemy<br><br><strong><ul class=\"bb_ul\"><li>Explore a World Full of Unknowns</li></ul></strong>hidden treasure boxes are set in different corners of each level. Exploring levels in battle may get unknown gains!<br><br><strong><ul class=\"bb_ul\"><li>Unique Customs Clearance Reward</li></ul></strong>After a game of customs clearance, players can choose one of equip for permanent fusion! Players can get the ability to this equip and use it in the next game!<br>Of course, after each customs clearance, the enemy will become more cruel. If you want to get more fusion opportunities, you must face these enemies who become more cruel<br><br><strong><ul class=\"bb_ul\"><li>Shuriken and Iisen</li></ul></strong>at the moment when the enemy makes an attack, the Ninja can throw Kunai to seal the enemy's action and use &quot;Iisen&quot; to pursue<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/IISEN.gif?t=1642247222\" /><br><br><strong><ul class=\"bb_ul\"><li>Katana Skill and Ninjutsu</li></ul></strong>In the game, Katana and scroll have active skills<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/ZONE_slash.gif?t=1642247222\" /><br>Players can use these powerful active skills to destroy all enemies in one fell swoop<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/BIG_BOOM.gif?t=1642247222\" />",
+    "app_id": {
+      "name": "\u5996\u5200\u9000\u9b54\u5fcd",
+      "app_id": 1848710
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 28,
+        "description": "Full controller support"
+      },
+      {
+        "id": 23,
+        "description": "Steam Cloud"
+      }
+    ],
+    "coming_soon": true,
+    "detailed_description": "<h2 class=\"bb_tag\">Features</h2><strong><ul class=\"bb_ul\"><li>Roguelite ACT</li></ul></strong>Challenge again and again in the never repeated level. In each life, you will encounter different enemies and treasures<br><br><strong><ul class=\"bb_ul\"><li>Powerful Treasure System</li></ul></strong>ninjasoul has rich treasure skills and powerful property system. Each skill can be matched with other skills, and entry can even directly change the scope and form of skills! You can experience the charm of ARPG games in this roguelite act game<br><br><strong><ul class=\"bb_ul\"><li>A Combat System Then Suitable For Everyone</li></ul></strong>in the game, players can choose to focus on the speed duel between the blades, or focus on building their own BD (treasure matching) and use Katana skill and Ninjutsu to kill the enemy<br><br><strong><ul class=\"bb_ul\"><li>Explore a World Full of Unknowns</li></ul></strong>hidden treasure boxes are set in different corners of each level. Exploring levels in battle may get unknown gains!<br><br><strong><ul class=\"bb_ul\"><li>Unique Customs Clearance Reward</li></ul></strong>After a game of customs clearance, players can choose one of equip for permanent fusion! Players can get the ability to this equip and use it in the next game!<br>Of course, after each customs clearance, the enemy will become more cruel. If you want to get more fusion opportunities, you must face these enemies who become more cruel<br><br><strong><ul class=\"bb_ul\"><li>Shuriken and Iisen</li></ul></strong>at the moment when the enemy makes an attack, the Ninja can throw Kunai to seal the enemy's action and use &quot;Iisen&quot; to pursue<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/IISEN.gif?t=1642247222\" /><br><br><strong><ul class=\"bb_ul\"><li>Katana Skill and Ninjutsu</li></ul></strong>In the game, Katana and scroll have active skills<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/ZONE_slash.gif?t=1642247222\" /><br>Players can use these powerful active skills to destroy all enemies in one fell swoop<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/BIG_BOOM.gif?t=1642247222\" />",
+    "developers": [
+      "Ash Game Studio"
+    ],
+    "genres": [
+      {
+        "id": "1",
+        "description": "Action"
+      },
+      {
+        "id": "25",
+        "description": "Adventure"
+      },
+      {
+        "id": "23",
+        "description": "Indie"
+      },
+      {
+        "id": "70",
+        "description": "Early Access"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/header.jpg?t=1642247222",
+    "languages": "English, Simplified Chinese",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "Ash Game Studio"
+    ],
+    "release_date": "Mar 2022",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/ss_4ad749af5e7ff785336a5e1f35579fff23d049a7.600x338.jpg?t=1642247222",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/ss_4ad749af5e7ff785336a5e1f35579fff23d049a7.1920x1080.jpg?t=1642247222"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/ss_2a2c985e284107e6fcc485a537b90f712ea6cf1b.600x338.jpg?t=1642247222",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/ss_2a2c985e284107e6fcc485a537b90f712ea6cf1b.1920x1080.jpg?t=1642247222"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/ss_63845767dd495590e90f9952072da4d05305fc00.600x338.jpg?t=1642247222",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/ss_63845767dd495590e90f9952072da4d05305fc00.1920x1080.jpg?t=1642247222"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/ss_d387a6d1d6b4bb725956828f52756b19971fd0e7.600x338.jpg?t=1642247222",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/ss_d387a6d1d6b4bb725956828f52756b19971fd0e7.1920x1080.jpg?t=1642247222"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/ss_d46b4de6689afbf74fee9871c729ad45fbdccc27.600x338.jpg?t=1642247222",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/ss_d46b4de6689afbf74fee9871c729ad45fbdccc27.1920x1080.jpg?t=1642247222"
+      }
+    ],
+    "short_description": "Ninjasoul is a platform action game that combines roguelite with Galaxy warrior demon city. Kunoichi, Tachibana Yachiyo unexpectedly awakened the ability of &quot;death backtracking&quot;. She will find the truth in the land that used to be her hometown in the fight and death again and again.",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "<h2 class=\"bb_tag\">Experience of 193% exhilaration like never before </h2>Use the <strong> completely invincible </strong> fever system to shoot down the oncoming enemies!!<h2 class=\"bb_tag\"> Operation method </h2>Compatible with gamepads and keyboards.<br><br><ul class=\"bb_ul\"><li> Shot: An attack that can be shot without restrictions.<br>Pad: A button / Keyboard: Z key<br></li><li> Spell: An attack that consumes and shoots a spell gauge.<br>Pad: X button / Keyboard: X key<br></li><li> Fever: Fever will be invincible as long as the remaining time allows and the shot will be strengthened.<br>Pad: R1 button / Keyboard: L-Shift key<br></li><li> Pose: Pause the game.<br>Pad: Start button / Keyboard: ESC key</li></ul><br>* Key assignment can be changed with the key config.<h2 class=\"bb_tag\"> Shot </h2>It's a low-powered attack instead of shooting without limits.<br><ul class=\"bb_ul\"><li> Straight shot<br>Simple shot 1, attack range is a little narrow.<br>When combined with high speed, it can cover the narrow range to some extent.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot1.jpg?t=1643064377\" /><br><br></li><li> Wide shot<br>Simple shot 2, perfect for clearing Zako.<br>The power when hitting all is the same as straight.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot2.jpg?t=1643064377\" /><br><br></li><li> Rolling shot<br>It can cover all directions, but ...<br>The power when hitting all the shots is the highest, but the use at the bottom of the screen is very poor ...<br>For advanced users as it is premised on using Fever's invincible time<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot3.jpg?t=1643064377\" /></li></ul><h2 class=\"bb_tag\"> Spell </h2>It's a powerful attack that consumes energy and releases it.<br>Energy will recover to 100% in 2 to 3 seconds, so use it sparingly.<br>You can check the energy with the gauge around your ship.<br><ul class=\"bb_ul\"><li> Blue: 100%, Spell available.<br></li><li> Green: Less than 100%, Spell available.<br></li><li> Red: Spell disabled.</li></ul><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene1.jpg?t=1643064377\" /><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene2.jpg?t=1643064377\" /><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene3.jpg?t=1643064377\" /><br><br><ul class=\"bb_ul\"><li> Bomb<br>High-powered bullet that explodes when touched.<br>When it explodes, the attack range expands over a wide area.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell1.jpg?t=1643064377\" /><br><br></li><li> Thunder<br>Fires a penetrating attack in a straight line with the nearest enemy.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell2.jpg?t=1643064377\" /><br><br></li><li> Kaihou<br>Tracking laser.<br>Chase and wipe out enemies for a certain period of time.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell3.jpg?t=1643064377\" /></li></ul><h2 class=\"bb_tag\"> Fever </h2>Super important system for capture.<br>When you activate Fever.<br><strong> Your ship becomes invincible and your shots are super-powered up. </strong><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/fever.jpg?t=1643064377\" /><br><br>Even if it hits an enemy bullet, it will not make a mistake and will eliminate the touched enemy bullet.<br>* Even if it hits the laser, it will not be a mistake, but it cannot be extinguished.<br><br>You can check the usable time in the fever time on the upper left of the screen.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/session_3.jpg?t=1643064377\" /><br><br>Fever time increases by acquiring peach items.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/momo.jpg?t=1643064377\" />",
+    "app_id": {
+      "name": "IKUSAAAAAAAN!",
+      "app_id": 1848730
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 22,
+        "description": "Steam Achievements"
+      },
+      {
+        "id": 18,
+        "description": "Partial Controller Support"
+      },
+      {
+        "id": 23,
+        "description": "Steam Cloud"
+      },
+      {
+        "id": 25,
+        "description": "Steam Leaderboards"
+      }
+    ],
+    "coming_soon": true,
+    "detailed_description": "<h2 class=\"bb_tag\">Experience of 193% exhilaration like never before </h2>Use the <strong> completely invincible </strong> fever system to shoot down the oncoming enemies!!<h2 class=\"bb_tag\"> Operation method </h2>Compatible with gamepads and keyboards.<br><br><ul class=\"bb_ul\"><li> Shot: An attack that can be shot without restrictions.<br>Pad: A button / Keyboard: Z key<br></li><li> Spell: An attack that consumes and shoots a spell gauge.<br>Pad: X button / Keyboard: X key<br></li><li> Fever: Fever will be invincible as long as the remaining time allows and the shot will be strengthened.<br>Pad: R1 button / Keyboard: L-Shift key<br></li><li> Pose: Pause the game.<br>Pad: Start button / Keyboard: ESC key</li></ul><br>* Key assignment can be changed with the key config.<h2 class=\"bb_tag\"> Shot </h2>It's a low-powered attack instead of shooting without limits.<br><ul class=\"bb_ul\"><li> Straight shot<br>Simple shot 1, attack range is a little narrow.<br>When combined with high speed, it can cover the narrow range to some extent.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot1.jpg?t=1643064377\" /><br><br></li><li> Wide shot<br>Simple shot 2, perfect for clearing Zako.<br>The power when hitting all is the same as straight.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot2.jpg?t=1643064377\" /><br><br></li><li> Rolling shot<br>It can cover all directions, but ...<br>The power when hitting all the shots is the highest, but the use at the bottom of the screen is very poor ...<br>For advanced users as it is premised on using Fever's invincible time<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot3.jpg?t=1643064377\" /></li></ul><h2 class=\"bb_tag\"> Spell </h2>It's a powerful attack that consumes energy and releases it.<br>Energy will recover to 100% in 2 to 3 seconds, so use it sparingly.<br>You can check the energy with the gauge around your ship.<br><ul class=\"bb_ul\"><li> Blue: 100%, Spell available.<br></li><li> Green: Less than 100%, Spell available.<br></li><li> Red: Spell disabled.</li></ul><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene1.jpg?t=1643064377\" /><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene2.jpg?t=1643064377\" /><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene3.jpg?t=1643064377\" /><br><br><ul class=\"bb_ul\"><li> Bomb<br>High-powered bullet that explodes when touched.<br>When it explodes, the attack range expands over a wide area.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell1.jpg?t=1643064377\" /><br><br></li><li> Thunder<br>Fires a penetrating attack in a straight line with the nearest enemy.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell2.jpg?t=1643064377\" /><br><br></li><li> Kaihou<br>Tracking laser.<br>Chase and wipe out enemies for a certain period of time.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell3.jpg?t=1643064377\" /></li></ul><h2 class=\"bb_tag\"> Fever </h2>Super important system for capture.<br>When you activate Fever.<br><strong> Your ship becomes invincible and your shots are super-powered up. </strong><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/fever.jpg?t=1643064377\" /><br><br>Even if it hits an enemy bullet, it will not make a mistake and will eliminate the touched enemy bullet.<br>* Even if it hits the laser, it will not be a mistake, but it cannot be extinguished.<br><br>You can check the usable time in the fever time on the upper left of the screen.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/session_3.jpg?t=1643064377\" /><br><br>Fever time increases by acquiring peach items.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/momo.jpg?t=1643064377\" />",
+    "developers": [
+      "\u5e7d\u3005\u71e6\u3005(yuyusansan)"
+    ],
+    "genres": [
+      {
+        "id": "1",
+        "description": "Action"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/header.jpg?t=1643064377",
+    "languages": "English, Japanese",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "\u5e7d\u3005\u71e6\u3005(yuyusansan)"
+    ],
+    "release_date": "2022-02-25",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_1484a8cba4dec4a0cf4dd0991735ee8412db2ebe.600x338.jpg?t=1643064377",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_1484a8cba4dec4a0cf4dd0991735ee8412db2ebe.1920x1080.jpg?t=1643064377"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_b8e18b12e8942e8a400f5827f55fb4afb1bdd811.600x338.jpg?t=1643064377",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_b8e18b12e8942e8a400f5827f55fb4afb1bdd811.1920x1080.jpg?t=1643064377"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_1da757dfcf040ff36eb07d7692e39515b0e9edb4.600x338.jpg?t=1643064377",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_1da757dfcf040ff36eb07d7692e39515b0e9edb4.1920x1080.jpg?t=1643064377"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_f13ba5388f3a2b896d3c0fe4cd0a49dde962d85d.600x338.jpg?t=1643064377",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_f13ba5388f3a2b896d3c0fe4cd0a49dde962d85d.1920x1080.jpg?t=1643064377"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_f642d6c3e2bfc49a60f696d4ca50328dda0cf2ca.600x338.jpg?t=1643064377",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_f642d6c3e2bfc49a60f696d4ca50328dda0cf2ca.1920x1080.jpg?t=1643064377"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_054c2aaccbef64e7163a072e169c93889730417b.600x338.jpg?t=1643064377",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_054c2aaccbef64e7163a072e169c93889730417b.1920x1080.jpg?t=1643064377"
+      },
+      {
+        "id": 6,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_97c0aac01cf44e60d45efc44cf91fa52d63b7925.600x338.jpg?t=1643064377",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_97c0aac01cf44e60d45efc44cf91fa52d63b7925.1920x1080.jpg?t=1643064377"
+      },
+      {
+        "id": 7,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_dece465f2817ae51f765e2dfcd2f50d9f2e4c2cf.600x338.jpg?t=1643064377",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_dece465f2817ae51f765e2dfcd2f50d9f2e4c2cf.1920x1080.jpg?t=1643064377"
+      },
+      {
+        "id": 8,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_417b037c5a5e4a94ba680e76343960ee46609164.600x338.jpg?t=1643064377",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/ss_417b037c5a5e4a94ba680e76343960ee46609164.1920x1080.jpg?t=1643064377"
+      }
+    ],
+    "short_description": "High Tension Fever Shooting Game!!!",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb2.PNG?t=1641402052\" /><br><br><strong>Tkium Exclusion Area is an horror escape game.</strong><br>This place is an asylum. It has been evacuated, but why? You need to get out of this place, and quickly. Even if this area looks abandoned, nothing can confirm that you are really alone.<br>You have to leave quickly, the fear is taking over you.<br>You are not alone in this place. Someone, or something, hunts the last survivors.<br>Bad things happen in the darkest places.<br><strong>Be aware of where you are.</strong><br><br><strong>This game is a one-time play, meaning that there is only one storyline and restarting it will not change any of the objects.</strong><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb.PNG?t=1641402052\" /><br><br><strong>The area is fully locked down due to unknow incidents.</strong><br>Find the ways to open each door, and to escape the area as fast as possible.<br>Be aware of your insanity: it can lead you to death. You need to get out of this place before the counter reaches 100%.<br>The timer shows how long you have been in here.",
+    "app_id": {
+      "name": "Tkium Exclusion Area",
+      "app_id": 1847810
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb2.PNG?t=1641402052\" /><br><br><strong>Tkium Exclusion Area is an horror escape game.</strong><br>This place is an asylum. It has been evacuated, but why? You need to get out of this place, and quickly. Even if this area looks abandoned, nothing can confirm that you are really alone.<br>You have to leave quickly, the fear is taking over you.<br>You are not alone in this place. Someone, or something, hunts the last survivors.<br>Bad things happen in the darkest places.<br><strong>Be aware of where you are.</strong><br><br><strong>This game is a one-time play, meaning that there is only one storyline and restarting it will not change any of the objects.</strong><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb.PNG?t=1641402052\" /><br><br><strong>The area is fully locked down due to unknow incidents.</strong><br>Find the ways to open each door, and to escape the area as fast as possible.<br>Be aware of your insanity: it can lead you to death. You need to get out of this place before the counter reaches 100%.<br>The timer shows how long you have been in here.",
+    "developers": [
+      "Tkium"
+    ],
+    "genres": [
+      {
+        "id": "23",
+        "description": "Indie"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/header.jpg?t=1641402052",
+    "languages": "English",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 1,
+    "owner_count": 10000,
+    "positive_reviews": 4,
+    "price": "299",
+    "publishers": [
+      "Tkium"
+    ],
+    "release_date": "2022-01-5",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_487c6bcc61c7e42f5f0f30d12e1391f0af8a8623.600x338.jpg?t=1641402052",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_487c6bcc61c7e42f5f0f30d12e1391f0af8a8623.1920x1080.jpg?t=1641402052"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_61c42a767b42565c9c912cb9fe3cf6826059b872.600x338.jpg?t=1641402052",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_61c42a767b42565c9c912cb9fe3cf6826059b872.1920x1080.jpg?t=1641402052"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_dcf9b6871e7b5b444e2292e783fc1da8667e4c3b.600x338.jpg?t=1641402052",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_dcf9b6871e7b5b444e2292e783fc1da8667e4c3b.1920x1080.jpg?t=1641402052"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_41d226166243e9c36dba1dbd4359cfaf767d47be.600x338.jpg?t=1641402052",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_41d226166243e9c36dba1dbd4359cfaf767d47be.1920x1080.jpg?t=1641402052"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_b9840c4b13c4fcef79ef708cbe43a799aa31d694.600x338.jpg?t=1641402052",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_b9840c4b13c4fcef79ef708cbe43a799aa31d694.1920x1080.jpg?t=1641402052"
+      }
+    ],
+    "short_description": "Tkium Exclusion Area is an horror escape game. You need to get out of this place, and quickly. Even if this area looks abandoned, nothing can confirm that you are really alone. You have to leave quickly, the fear is taking over you.",
+    "tags": {
+      "Action": 45,
+      "Action-Adventure": 38,
+      "Exploration": 36,
+      "3D": 33,
+      "First-Person": 31,
+      "Dark": 24,
+      "Horror": 23,
+      "Indie": 21,
+      "Singleplayer": 20
+    },
+    "website": "https://www.tkium.com",
+    "windows": true
+  },
+  {
+    "about_the_game": "After falling from your pond at the top of the tower you must climb your way back up! With only a rocket launcher and your sick jumps see how fast you can make it back up! HiddenFrog is a relaxing tower climber game where you play as a frog who has fallen off of his island at the top of the tower. Use launchpads and wall runs to help you climb the tower.<h2 class=\"bb_tag\">Use your rocket launcher to propel yourself backup!</h2><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847820/extras/Gameplay_002.gif?t=1642611941\" /><h2 class=\"bb_tag\">Wallrun to avoid gaps too large to propel across</h2><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847820/extras/Gameplay_001.gif?t=1642611941\" />",
+    "app_id": {
+      "name": "Hidden Frog",
+      "app_id": 1847820
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 25,
+        "description": "Steam Leaderboards"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "After falling from your pond at the top of the tower you must climb your way back up! With only a rocket launcher and your sick jumps see how fast you can make it back up! HiddenFrog is a relaxing tower climber game where you play as a frog who has fallen off of his island at the top of the tower. Use launchpads and wall runs to help you climb the tower.<h2 class=\"bb_tag\">Use your rocket launcher to propel yourself backup!</h2><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847820/extras/Gameplay_002.gif?t=1642611941\" /><h2 class=\"bb_tag\">Wallrun to avoid gaps too large to propel across</h2><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847820/extras/Gameplay_001.gif?t=1642611941\" />",
+    "developers": [
+      "Void Hook"
+    ],
+    "genres": [
+      {
+        "id": "4",
+        "description": "Casual"
+      },
+      {
+        "id": "23",
+        "description": "Indie"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/header.jpg?t=1642611941",
+    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 2,
+    "price": "99",
+    "publishers": [
+      "Void Hook"
+    ],
+    "release_date": "2022-01-19",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/ss_7e7994b5a3eb589f2a4735dd26ce101e16c9a939.600x338.jpg?t=1642611941",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/ss_7e7994b5a3eb589f2a4735dd26ce101e16c9a939.1920x1080.jpg?t=1642611941"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/ss_31e84bba73a6f4f156fd09a9a0fba3ee38dee45b.600x338.jpg?t=1642611941",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/ss_31e84bba73a6f4f156fd09a9a0fba3ee38dee45b.1920x1080.jpg?t=1642611941"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/ss_ea5e7c4cf25aa81e3a5860999471a13996ecde93.600x338.jpg?t=1642611941",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/ss_ea5e7c4cf25aa81e3a5860999471a13996ecde93.1920x1080.jpg?t=1642611941"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/ss_b1b22bf42e4cc688a85d66114203bdce01d767b7.600x338.jpg?t=1642611941",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/ss_b1b22bf42e4cc688a85d66114203bdce01d767b7.1920x1080.jpg?t=1642611941"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/ss_173dbd6b78bbc59f94ce79550c737d32a7b92983.600x338.jpg?t=1642611941",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/ss_173dbd6b78bbc59f94ce79550c737d32a7b92983.1920x1080.jpg?t=1642611941"
+      }
+    ],
+    "short_description": "Scale the tower and get back home as fast as you can!",
+    "tags": {
+      "Casual": 67,
+      "Platformer": 41,
+      "3D Platformer": 39,
+      "FPS": 36,
+      "3D": 32,
+      "First-Person": 27,
+      "Atmospheric": 24,
+      "Retro": 22,
+      "Indie": 21,
+      "Tutorial": 20,
+      "Singleplayer": 18
+    },
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "Gameplay:<br />\r\n<br />\r\nEngage with tight controls that require precision to master. Run, jump, dash, and slash to get to the end of each level.<br />\r\n<br />\r\nYour sword is your main weapon. You can find side weapons and ammo throughout the levels, but it is up to you when you decide to use them as they are in limited supply.<br />\r\n<br />\r\nKeep an eye on your stamina bar so you know when you can run and jump into the fray or when to ease the reins. <br />\r\n<br />\r\nRead letters to find hints and get deeper into the lore, explore multiple paths, solve puzzles and interact with objects to progress.<br />\r\n<br />\r\nManage your inventory as there are limited slots available for the weapons, ammo, and potions found throughout the world.<br />\r\n<br />\r\nArt: <br />\r\n<br />\r\nThis game is completely pixel art, even down to the custom fonts used. Enemies, attacks, and effects are animated one frame at a time. Using more colors than were possible with 8 bit, but less pixel density than 16 bit, the art has a style of its own which harkens back to both eras. Plentiful parallax scrolling further draws you into the world, giving depth to the 2D scenes.<br />\r\n<br />\r\nEach level is distinct, having their own themes both artistically and musically . <br />\r\n<br />\r\nMusic and Sound:<br />\r\n<br />\r\nThe music is scored and produced to invoke the sound of classic 16 bit games with melodies to keep you engaged on your journey.  The sound samples used are reduced in fidelity to recreate what it would have sounded like to squeeze each byte out of the memory.<br />\r\n<br />\r\nStory:<br />\r\n<br />\r\nA tale of woe and blight has befallen a small European town in 18XX. You are descended from a family of witch hunters with knowledge and skills that few possess. A letter beseeching you for assistance arrives, and though widowed and retired from the life brought on by your lineage, something impels you to go. Once you arrive, you find you have stumbled upon a great evil not seen since ages long forgotten. The town has been beset by powerful witches, who bring unto the earth the undead, monsters made of decaying flesh, creatures of nightmares and horror, all by use of their black blood magics and rituals. <br />\r\n<br />\r\nUnravel the mystery, defeat the hordes of monsters, and bring back peace to the people of this town\u2026 or die trying.",
+    "app_id": {
+      "name": "Witchbane",
+      "app_id": 1847840
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 18,
+        "description": "Partial Controller Support"
+      }
+    ],
+    "coming_soon": true,
+    "detailed_description": "Gameplay:<br />\r\n<br />\r\nEngage with tight controls that require precision to master. Run, jump, dash, and slash to get to the end of each level.<br />\r\n<br />\r\nYour sword is your main weapon. You can find side weapons and ammo throughout the levels, but it is up to you when you decide to use them as they are in limited supply.<br />\r\n<br />\r\nKeep an eye on your stamina bar so you know when you can run and jump into the fray or when to ease the reins. <br />\r\n<br />\r\nRead letters to find hints and get deeper into the lore, explore multiple paths, solve puzzles and interact with objects to progress.<br />\r\n<br />\r\nManage your inventory as there are limited slots available for the weapons, ammo, and potions found throughout the world.<br />\r\n<br />\r\nArt: <br />\r\n<br />\r\nThis game is completely pixel art, even down to the custom fonts used. Enemies, attacks, and effects are animated one frame at a time. Using more colors than were possible with 8 bit, but less pixel density than 16 bit, the art has a style of its own which harkens back to both eras. Plentiful parallax scrolling further draws you into the world, giving depth to the 2D scenes.<br />\r\n<br />\r\nEach level is distinct, having their own themes both artistically and musically . <br />\r\n<br />\r\nMusic and Sound:<br />\r\n<br />\r\nThe music is scored and produced to invoke the sound of classic 16 bit games with melodies to keep you engaged on your journey.  The sound samples used are reduced in fidelity to recreate what it would have sounded like to squeeze each byte out of the memory.<br />\r\n<br />\r\nStory:<br />\r\n<br />\r\nA tale of woe and blight has befallen a small European town in 18XX. You are descended from a family of witch hunters with knowledge and skills that few possess. A letter beseeching you for assistance arrives, and though widowed and retired from the life brought on by your lineage, something impels you to go. Once you arrive, you find you have stumbled upon a great evil not seen since ages long forgotten. The town has been beset by powerful witches, who bring unto the earth the undead, monsters made of decaying flesh, creatures of nightmares and horror, all by use of their black blood magics and rituals. <br />\r\n<br />\r\nUnravel the mystery, defeat the hordes of monsters, and bring back peace to the people of this town\u2026 or die trying.",
+    "developers": [
+      "Iconoclast Games"
+    ],
+    "genres": [
+      {
+        "id": "1",
+        "description": "Action"
+      },
+      {
+        "id": "25",
+        "description": "Adventure"
+      },
+      {
+        "id": "23",
+        "description": "Indie"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/header.jpg?t=1639592073",
+    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "Iconoclast Games"
+    ],
+    "release_date": "2022-09-21",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_a9e1aa83f54b7671d7761fc62108c5f7f5bbddd8.600x338.jpg?t=1639592073",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_a9e1aa83f54b7671d7761fc62108c5f7f5bbddd8.1920x1080.jpg?t=1639592073"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_e2822d2603f1529413ba1a944fa8e0cfd7be453b.600x338.jpg?t=1639592073",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_e2822d2603f1529413ba1a944fa8e0cfd7be453b.1920x1080.jpg?t=1639592073"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_431d74e8cf272b116756062fb66098a2b7d02207.600x338.jpg?t=1639592073",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_431d74e8cf272b116756062fb66098a2b7d02207.1920x1080.jpg?t=1639592073"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_cab49c5a9f00636d68e3cfb246fc033801710260.600x338.jpg?t=1639592073",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_cab49c5a9f00636d68e3cfb246fc033801710260.1920x1080.jpg?t=1639592073"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_f36fabd99c5dc91f846e47a0bc2842bd59dfd73a.600x338.jpg?t=1639592073",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_f36fabd99c5dc91f846e47a0bc2842bd59dfd73a.1920x1080.jpg?t=1639592073"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_157c7c6fb2b31ac09782a7ca05dde162b5124b5c.600x338.jpg?t=1639592073",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/ss_157c7c6fb2b31ac09782a7ca05dde162b5124b5c.1920x1080.jpg?t=1639592073"
+      }
+    ],
+    "short_description": "Witchbane is a retro-styled 2D action platformer where you must use your skills and weapons to defeat the evil brought unto the world by witches. Work your way through each distinct level and defeat the witch who controls the horde of monsters in that area to end the blight placed upon the land.",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847860/extras/descri\u00e7ao_da_pagina_da_loja.png?t=1643226401\" /><br><br>Daltoniel in his daily routine, from working out, wearing the costumes of his favorite heroes or eating his powerful enemies in delicious meals that he prepared himself, how good is it to enjoy life being a demigod slime.<h2 class=\"bb_tag\">features</h2><br><ul class=\"bb_ul\"><li>Jigsaw puzzle having 12 cute illustrations of Daltoniel</li></ul><ul class=\"bb_ul\"><li>For each jigsaw puzzle, 3 difficulty levels can be set</li></ul><ul class=\"bb_ul\"><li>A relaxing and imersive clean Background</li></ul><ul class=\"bb_ul\"><li>Zoom in/Zoom Out</li></ul><ul class=\"bb_ul\"><li>Draggable scenario</li></ul><ul class=\"bb_ul\"><li>A bunch of game juiciness</li></ul><ul class=\"bb_ul\"><li>Relax with a comforting and exclusive lo-fi soundtrack</li></ul>",
+    "app_id": {
+      "name": "Jigsaw Souls",
+      "app_id": 1847860
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 22,
+        "description": "Steam Achievements"
+      }
+    ],
+    "coming_soon": true,
+    "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847860/extras/descri\u00e7ao_da_pagina_da_loja.png?t=1643226401\" /><br><br>Daltoniel in his daily routine, from working out, wearing the costumes of his favorite heroes or eating his powerful enemies in delicious meals that he prepared himself, how good is it to enjoy life being a demigod slime.<h2 class=\"bb_tag\">features</h2><br><ul class=\"bb_ul\"><li>Jigsaw puzzle having 12 cute illustrations of Daltoniel</li></ul><ul class=\"bb_ul\"><li>For each jigsaw puzzle, 3 difficulty levels can be set</li></ul><ul class=\"bb_ul\"><li>A relaxing and imersive clean Background</li></ul><ul class=\"bb_ul\"><li>Zoom in/Zoom Out</li></ul><ul class=\"bb_ul\"><li>Draggable scenario</li></ul><ul class=\"bb_ul\"><li>A bunch of game juiciness</li></ul><ul class=\"bb_ul\"><li>Relax with a comforting and exclusive lo-fi soundtrack</li></ul>",
+    "developers": [
+      "Mr Tomatus"
+    ],
+    "genres": [
+      {
+        "id": "4",
+        "description": "Casual"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/header.jpg?t=1643226401",
+    "languages": "English<strong>*</strong>, French<strong>*</strong>, Italian<strong>*</strong>, German<strong>*</strong>, Spanish - Latin America<strong>*</strong>, Polish<strong>*</strong>, Portuguese - Brazil<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "Mr Tomatus"
+    ],
+    "release_date": "2022-02-11",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_d581b15836aaa6dd2457af38da9be6170b3c7fd1.600x338.jpg?t=1643226401",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_d581b15836aaa6dd2457af38da9be6170b3c7fd1.1920x1080.jpg?t=1643226401"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_5a4347681e54b819e1244ff87215123da53610de.600x338.jpg?t=1643226401",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_5a4347681e54b819e1244ff87215123da53610de.1920x1080.jpg?t=1643226401"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_6228163dceb0aa14f0f36958f8ab666ff0355ba7.600x338.jpg?t=1643226401",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_6228163dceb0aa14f0f36958f8ab666ff0355ba7.1920x1080.jpg?t=1643226401"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_087714d39f85826971d251499b43617fb3bbaf7c.600x338.jpg?t=1643226401",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_087714d39f85826971d251499b43617fb3bbaf7c.1920x1080.jpg?t=1643226401"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_b50c87982efc45e14f3b4b326aaceff75ce463a2.600x338.jpg?t=1643226401",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_b50c87982efc45e14f3b4b326aaceff75ce463a2.1920x1080.jpg?t=1643226401"
+      }
+    ],
+    "short_description": "A fun puzzle about Daltoniel, the protagonist from the Souls Saga by Pickles Entertainment. Relax resolving this jigsaw puzzle with 12 original pictures and 3 difficulty levels!",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "<strong><h2 class=\"bb_tag\">Play your part in the story</h2></strong><br>Enter the world of Synchronicity and discover its secrets! Follow one of the two available stories. Together with the characters, search for answers in a peculiar world. Find out what's behind it all... And try to break the infinite time loop.<br><strong><h2 class=\"bb_tag\">Your choices</h2></strong><br>Two different stories. Two people hungry for change. A rapidly changing world and an emerging new reality that turns out to be far from ideal. Shape a challenging and complex story, influenced by your choices. Uncover the hidden layers of a story.<br><strong><h2 class=\"bb_tag\">Heroes </h2></strong><br>Travel to the year 8022 and meet Vivian, a member of the space program. Immerse yourself in a disturbing adventure and explore a newly discovered world. <br>Choose the story of Magnus and travel to the year 10753 for a journey into humanity's darkest hour. Face a grim world ruled by machine lords.<br><strong><h2 class=\"bb_tag\">An intricate mystery unfolds</h2></strong><br>Discover what both stories have in common. <br>Enter Synchronicity and embark on a journey. <br>Doubts. Dilemmas. Promises. Hope. Struggle. Freedom.<br>When the &quot;synchronization process&quot; begins, time and reality cease to be what they were. <br><br><strong><h2 class=\"bb_tag\">Main features of the game:</h2></strong><br><ul class=\"bb_ul\"><li> Episodic adventure game<br></li><li> Choices that directly affect the ending of the story<br></li><li> Explore the insights of two characters: each character has a different story to tell<br></li><li> A multi-layered plot that unfolds into a complex tangle of intrigue<br></li><li> Poignant, original soundtrack<br></li><li> Polish voice acting</li></ul>",
+    "app_id": {
+      "name": "Synchronizacja",
+      "app_id": 1847900
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 22,
+        "description": "Steam Achievements"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "<strong><h2 class=\"bb_tag\">Play your part in the story</h2></strong><br>Enter the world of Synchronicity and discover its secrets! Follow one of the two available stories. Together with the characters, search for answers in a peculiar world. Find out what's behind it all... And try to break the infinite time loop.<br><strong><h2 class=\"bb_tag\">Your choices</h2></strong><br>Two different stories. Two people hungry for change. A rapidly changing world and an emerging new reality that turns out to be far from ideal. Shape a challenging and complex story, influenced by your choices. Uncover the hidden layers of a story.<br><strong><h2 class=\"bb_tag\">Heroes </h2></strong><br>Travel to the year 8022 and meet Vivian, a member of the space program. Immerse yourself in a disturbing adventure and explore a newly discovered world. <br>Choose the story of Magnus and travel to the year 10753 for a journey into humanity's darkest hour. Face a grim world ruled by machine lords.<br><strong><h2 class=\"bb_tag\">An intricate mystery unfolds</h2></strong><br>Discover what both stories have in common. <br>Enter Synchronicity and embark on a journey. <br>Doubts. Dilemmas. Promises. Hope. Struggle. Freedom.<br>When the &quot;synchronization process&quot; begins, time and reality cease to be what they were. <br><br><strong><h2 class=\"bb_tag\">Main features of the game:</h2></strong><br><ul class=\"bb_ul\"><li> Episodic adventure game<br></li><li> Choices that directly affect the ending of the story<br></li><li> Explore the insights of two characters: each character has a different story to tell<br></li><li> A multi-layered plot that unfolds into a complex tangle of intrigue<br></li><li> Poignant, original soundtrack<br></li><li> Polish voice acting</li></ul>",
+    "developers": [
+      "Chaos Group Games"
+    ],
+    "genres": [
+      {
+        "id": "25",
+        "description": "Adventure"
+      },
+      {
+        "id": "4",
+        "description": "Casual"
+      },
+      {
+        "id": "37",
+        "description": "Free to Play"
+      },
+      {
+        "id": "23",
+        "description": "Indie"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/header.jpg?t=1643540480",
+    "languages": "Polish<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": true,
+    "mac": true,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "Chaos Group Games"
+    ],
+    "release_date": "2022-01-21",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_2ecb6341eda4875bf24d657a60cd301314194ac6.600x338.jpg?t=1643540480",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_2ecb6341eda4875bf24d657a60cd301314194ac6.1920x1080.jpg?t=1643540480"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_0df2bf1f03726a8455e993aab7ef6343f4dae02b.600x338.jpg?t=1643540480",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_0df2bf1f03726a8455e993aab7ef6343f4dae02b.1920x1080.jpg?t=1643540480"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_52607b0fcdfa3468902b61b7a7cdcec498f78baa.600x338.jpg?t=1643540480",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_52607b0fcdfa3468902b61b7a7cdcec498f78baa.1920x1080.jpg?t=1643540480"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_7420c2f5a8cd9496a23687245b5e0767e13b2b2b.600x338.jpg?t=1643540480",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_7420c2f5a8cd9496a23687245b5e0767e13b2b2b.1920x1080.jpg?t=1643540480"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_827f9706c6dd24d7b550debf41bfbfd28527e2d4.600x338.jpg?t=1643540480",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_827f9706c6dd24d7b550debf41bfbfd28527e2d4.1920x1080.jpg?t=1643540480"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_b2965ae8db5da9902558470e0aceb5d572e5742a.600x338.jpg?t=1643540480",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/ss_b2965ae8db5da9902558470e0aceb5d572e5742a.1920x1080.jpg?t=1643540480"
+      }
+    ],
+    "short_description": "The first chapter of the Polish game Visual Novel. Enter the world of Synchronization and discover its secrets.",
+    "tags": [],
+    "website": "https://www.chaosgroupgames.com",
+    "windows": true
+  },
+  {
+    "about_the_game": "Survive for as long as you can while playing as the blue robot Shrumblo! The objective of this game is to lure Grumblo, the red demon, into several moving spikes which temporarily stuns him, and also earns you a point. Survive for as long as you can and earn a high score! By earning a high score you can earn more trophies as you progress. There are two sets of trophies, one for the main mode where you are pursued by only one enemy, and another set for the Double Grumblo Madness mode, where two enemies will pursue you at once. <br><br>This game tries to invoke the feeling of classic arcade games that are easy to understand, hard to master, and enjoyable in short bursts. I hope you have fun!<br><br><strong>List of features:</strong><br>1. An intro cutscene explaining the plot of the game<br>2. A high score feature to track your progression.<br>3. Trophies you unlock by getting higher scores over time.<br>4. A base game mode where you are chased by Grumblo (the red circle looking fellow) and lure him into moving spikes to earn points. This can be seen in more detail in the trailer on this page. <br>5. A bonus game mode where there are two Grumblos chasing after you.<br><br><strong>List of mechanics:</strong><br><br>1. You can of course use the WASD keys to move<br>2. Use the shift key to turn on Shrumblo's jet boots to move faster. The meter for this will deplete the longer you use it, but will recharge over time.<br>3. If Shrumblo is close to Grumblo the dash meter will recharge faster.<br>4. If Shrumblo is touched by the spikes or Grumblo the game will end, and if you got a high score it will be saved.",
+    "app_id": {
+      "name": "Shrumblo and the Magical Grumblo",
+      "app_id": 1847920
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      }
+    ],
+    "coming_soon": false,
+    "detailed_description": "Survive for as long as you can while playing as the blue robot Shrumblo! The objective of this game is to lure Grumblo, the red demon, into several moving spikes which temporarily stuns him, and also earns you a point. Survive for as long as you can and earn a high score! By earning a high score you can earn more trophies as you progress. There are two sets of trophies, one for the main mode where you are pursued by only one enemy, and another set for the Double Grumblo Madness mode, where two enemies will pursue you at once. <br><br>This game tries to invoke the feeling of classic arcade games that are easy to understand, hard to master, and enjoyable in short bursts. I hope you have fun!<br><br><strong>List of features:</strong><br>1. An intro cutscene explaining the plot of the game<br>2. A high score feature to track your progression.<br>3. Trophies you unlock by getting higher scores over time.<br>4. A base game mode where you are chased by Grumblo (the red circle looking fellow) and lure him into moving spikes to earn points. This can be seen in more detail in the trailer on this page. <br>5. A bonus game mode where there are two Grumblos chasing after you.<br><br><strong>List of mechanics:</strong><br><br>1. You can of course use the WASD keys to move<br>2. Use the shift key to turn on Shrumblo's jet boots to move faster. The meter for this will deplete the longer you use it, but will recharge over time.<br>3. If Shrumblo is close to Grumblo the dash meter will recharge faster.<br>4. If Shrumblo is touched by the spikes or Grumblo the game will end, and if you got a high score it will be saved.",
+    "developers": [
+      "Squidnow",
+      "Ooftroop"
+    ],
+    "genres": [
+      {
+        "id": "1",
+        "description": "Action"
+      },
+      {
+        "id": "4",
+        "description": "Casual"
+      },
+      {
+        "id": "23",
+        "description": "Indie"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/header.jpg?t=1640899006",
+    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 2,
+    "price": "99",
+    "publishers": [
+      "Squidnow"
+    ],
+    "release_date": "2021-12-30",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/ss_3011a87da638c682075bff02e0ca99505c636e72.600x338.jpg?t=1640899006",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/ss_3011a87da638c682075bff02e0ca99505c636e72.1920x1080.jpg?t=1640899006"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/ss_9e43426475e5dd746e7cbd7ef984430f4291fdf6.600x338.jpg?t=1640899006",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/ss_9e43426475e5dd746e7cbd7ef984430f4291fdf6.1920x1080.jpg?t=1640899006"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/ss_46cb922db0ad02c9fee493848b20e7a39585208e.600x338.jpg?t=1640899006",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/ss_46cb922db0ad02c9fee493848b20e7a39585208e.1920x1080.jpg?t=1640899006"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/ss_601b8768759e3b8d2d96a141bace30fe6e068592.600x338.jpg?t=1640899006",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/ss_601b8768759e3b8d2d96a141bace30fe6e068592.1920x1080.jpg?t=1640899006"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/ss_4dbfad2c2d49aa3f753ae111a1725201af903351.600x338.jpg?t=1640899006",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/ss_4dbfad2c2d49aa3f753ae111a1725201af903351.1920x1080.jpg?t=1640899006"
+      }
+    ],
+    "short_description": "Survive for as long as you can while playing as the blue robot Shrumblo! The objective of this game is to lure Grumblo, the red demon, into several moving spikes which temporarily stuns him, and also earns you a point. Survive for as long as you can and earn a high score!",
+    "tags": {
+      "Action": 72,
+      "Arcade": 47,
+      "Real Time Tactics": 42,
+      "2D": 41,
+      "Cartoon": 37,
+      "Cartoony": 32,
+      "Colorful": 29,
+      "Cute": 27,
+      "Top-Down": 25,
+      "Aliens": 23,
+      "Casual": 22,
+      "Indie": 21,
+      "Robots": 21,
+      "Sci-fi": 19,
+      "PvE": 17,
+      "Score Attack": 15,
+      "Singleplayer": 13
+    },
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "Signum Perfectum is a turn-based card game between two opponents that battle using constructed decks of 25 cards.<br><br>Defeat your enemies by casting magic upon them or protect yourself from their curses. Winning matches rewards in the form of new cards.<br><br>There are currenly 22 unique cards to collect, but more will come.<br><br>Each card has different sign that you need to &quot;catch&quot; during a match before card can be played. The bigger the level of card the bigger the power but also the harder is to catch the sign.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847930/extras/play-card.gif?t=1642757511\" /><br><br>Level up your hero by casting cards to be able to use more powerful cards. There are four levels: Apprentice, Mage, High Mage and Archmage.<br><br>You can play single player quests and competitions or play against other players in multiplayer PvP matches.",
+    "app_id": {
+      "name": "Signum Perfectum",
+      "app_id": 1847930
+    },
+    "categories": [
+      {
+        "id": 2,
+        "description": "Single-player"
+      },
+      {
+        "id": 1,
+        "description": "Multi-player"
+      },
+      {
+        "id": 49,
+        "description": "PvP"
+      },
+      {
+        "id": 36,
+        "description": "Online PvP"
+      },
+      {
+        "id": 22,
+        "description": "Steam Achievements"
+      },
+      {
+        "id": 23,
+        "description": "Steam Cloud"
+      },
+      {
+        "id": 25,
+        "description": "Steam Leaderboards"
+      }
+    ],
+    "coming_soon": true,
+    "detailed_description": "Signum Perfectum is a turn-based card game between two opponents that battle using constructed decks of 25 cards.<br><br>Defeat your enemies by casting magic upon them or protect yourself from their curses. Winning matches rewards in the form of new cards.<br><br>There are currenly 22 unique cards to collect, but more will come.<br><br>Each card has different sign that you need to &quot;catch&quot; during a match before card can be played. The bigger the level of card the bigger the power but also the harder is to catch the sign.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847930/extras/play-card.gif?t=1642757511\" /><br><br>Level up your hero by casting cards to be able to use more powerful cards. There are four levels: Apprentice, Mage, High Mage and Archmage.<br><br>You can play single player quests and competitions or play against other players in multiplayer PvP matches.",
+    "developers": [
+      "ovo6"
+    ],
+    "genres": [
+      {
+        "id": "23",
+        "description": "Indie"
+      },
+      {
+        "id": "3",
+        "description": "RPG"
+      },
+      {
+        "id": "2",
+        "description": "Strategy"
+      }
+    ],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/header.jpg?t=1642757511",
+    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      "ovo6"
+    ],
+    "release_date": "Spring 2022",
+    "screenshots": [
+      {
+        "id": 0,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_fa93b2e58d544f82cda57e07e0d91d7904119b1f.600x338.jpg?t=1642757511",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_fa93b2e58d544f82cda57e07e0d91d7904119b1f.1920x1080.jpg?t=1642757511"
+      },
+      {
+        "id": 1,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_4562b5468875f16be94bab14324a9b190691cfde.600x338.jpg?t=1642757511",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_4562b5468875f16be94bab14324a9b190691cfde.1920x1080.jpg?t=1642757511"
+      },
+      {
+        "id": 2,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_79c145d4c92156eccb5f6e309a6f616703fe6c24.600x338.jpg?t=1642757511",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_79c145d4c92156eccb5f6e309a6f616703fe6c24.1920x1080.jpg?t=1642757511"
+      },
+      {
+        "id": 3,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_bcc8c700e8036b18cb0197a59c2eb5d698a5e73b.600x338.jpg?t=1642757511",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_bcc8c700e8036b18cb0197a59c2eb5d698a5e73b.1920x1080.jpg?t=1642757511"
+      },
+      {
+        "id": 4,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_e55b6cf795b68e5cd6078ebf609a2fbfbf8ed8be.600x338.jpg?t=1642757511",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_e55b6cf795b68e5cd6078ebf609a2fbfbf8ed8be.1920x1080.jpg?t=1642757511"
+      },
+      {
+        "id": 5,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_4c6237baad9e9cf061fd3139fde9219bed60147f.600x338.jpg?t=1642757511",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_4c6237baad9e9cf061fd3139fde9219bed60147f.1920x1080.jpg?t=1642757511"
+      },
+      {
+        "id": 6,
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_7038a5be3f743d413235b944da3b92c2ac663cfd.600x338.jpg?t=1642757511",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_7038a5be3f743d413235b944da3b92c2ac663cfd.1920x1080.jpg?t=1642757511"
+      }
+    ],
+    "short_description": "Collectible card game where opponents fight in turns casting magic upon each other.",
+    "tags": [],
+    "website": null,
+    "windows": true
+  },
+  {
+    "about_the_game": "",
+    "app_id": {
+      "name": "Fleshgait Playtest",
+      "app_id": 1847960
+    },
+    "categories": [],
+    "coming_soon": false,
+    "detailed_description": "",
+    "developers": [],
+    "genres": [],
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847960/header.jpg?t=1639798264",
+    "languages": null,
+    "linux": false,
+    "mac": false,
+    "name": "",
+    "negative_reviews": 0,
+    "owner_count": 10000,
+    "positive_reviews": 0,
+    "price": null,
+    "publishers": [
+      ""
+    ],
+    "release_date": "2021-12-17",
+    "screenshots": [],
+    "short_description": "",
+    "tags": [],
+    "website": null,
+    "windows": true
+  }
+]
