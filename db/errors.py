@@ -1,6 +1,10 @@
+import os
 from update_logger import UpdateLogger
 
-ulogger = UpdateLogger("./update_log.json")
+
+current_dir = os.path.dirname(__file__)
+
+ulogger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
 
 class Error(Exception):
     """Base class for other exeptions"""

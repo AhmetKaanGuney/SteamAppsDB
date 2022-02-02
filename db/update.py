@@ -1,5 +1,7 @@
+import os
 import time
 import datetime
+import traceback
 import json
 import sqlite3
 import logging
@@ -14,30 +16,20 @@ from errors import (
 )
 from update_logger import UpdateLogger
 
+# Dirs
+current_dir = os.path.dirname(__file__)
+parent_dir = os.path.dirname(current_dir)
+
 # Config
-config = dotenv_values("../.env")
-
-# TODO finish email
-# E-mail
-context = ssl.create_default_context()
-message = """\
-Subject: Test for SMTP
-
-This is a message from Python."""
-
-with smtplib.SMTP_SSL(
-    config["SMTP_SERVER"], config["PORT"], context=context) as server:
-    server.login(config["SENDER_EMAIL"], config["PASSWORD"])
-    server.sendmail(config["SENDER_EMAIL"], config["RECEIVER_EMAIL"], message)
-
-exit(0)
-
+config = dotenv_values(os.path.join(parent_dir, ".env"))
 
 # Init Loggers
 logging.basicConfig(level=logging.DEBUG)
-u_logger = UpdateLogger("./update_log.json")
+
+u_logger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
 update_log = u_logger.log
 
+# Test
 FAIL_API = "https://store.steampowered.com/api/appdetails/?appids=360032"
 
 # Max owner limit, if an app's owner count breaks the limit
@@ -52,8 +44,8 @@ STEAMSPY_WAIT_DURATION = 1
 STEAM_REQUEST_LIMIT = 3
 
 # File paths
-APPLIST_FILE = "./applist.json"
-APPLIST_FILTERED_FILE = "./applist_filtered.json"
+APPLIST_FILE = os.path.join(current_dir, "applist.json")
+APPLIST_FILTERED_FILE = os.path.join(current_dir, "applist_filtered.json")
 
 # API's
 # Append appid to app details API to get app details
@@ -62,7 +54,6 @@ STEAM_APP_DETAILS_API_BASE = "https://store.steampowered.com/api/appdetails/?app
 STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails&appid="
 
 
-# TODO record latest request date
 # TODO email weekly report and errors
 
 def main():
@@ -92,34 +83,27 @@ def main():
     logging.info(f"Length of Limited Applist: {len(limited_applist):,}")
     logging.debug(f"Applist Index: {applist_index}")
 
-    apps_data = {}
+    update_log["applist_length"] = len(applist)
 
-    if applist_index == -1:
-        skip = False
-    else:
-        skip = True
+    apps_data = {}
 
     # =============================== #
     #  Get App Details for each App   #
     # =============================== #
     logging.debug("Iterating over LIMITED APPLIST...")
-    for app in limited_applist:
+    logging.debug(f"Steam Request Count: {update_log['steam_request_count']}")
+
+
+    for i, app in enumerate(limited_applist[applist_index:]):
         appid = app["appid"]
-
-        if skip:
-            # skip to where the last iteration ended
-            if applist_index != appid:
-                continue
-            else:
-                skip = False
-
-        # API's
-        steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(appid)
-        steam_api = STEAM_APP_DETAILS_API_BASE + str(appid)
 
         # Remove redundant appid from field of the app
         # becuse it'll be used as an index in the DB
         app.pop("appid")
+
+        # API's
+        steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(appid)
+        steam_api = STEAM_APP_DETAILS_API_BASE + str(appid)
 
         # ====================== #
         #  FETCH FROM STEAMSPY   #
@@ -130,8 +114,10 @@ def main():
         min_owner_count = get_min_owner_count(steamspy_data)
 
         if min_owner_count > MAX_OWNERS:
-            logging.debug(f"App: '{appid}' has {min_owner_count:,} owners which is over {MAX_OWNERS=:,}. Skipping...")
-            logging.debug("Skipping...")
+            logging.debug(
+                f"App: '{appid}' has {min_owner_count:,} owners. "
+                f"Which is over {MAX_OWNERS=:,}. Skipping..."
+                )
             continue
 
         # Update app info
@@ -174,6 +160,7 @@ def main():
                 # Update the app info
                 app.update(app_details_from_steam)
                 update_log["updated_apps"] += 1
+
                 # Record to apps_data
                 apps_data[appid] = app
         else:
@@ -182,14 +169,12 @@ def main():
             continue
 
     if update_log["steam_request_limit_reached"]:
-        update_log["applist_index"] = appid
+        update_log["applist_index"] += i
         update_log["steam_request_count"] = 0
         update_log["steam_request_limit_reached"] = False
     else:
-        # If the last item in the app list is updated
-        # without breaking the steam's request limit
-        # reset applist index to -1
-        update_log["applist_index"] = -1
+        # If the last item in the app list is updated, reset the log
+        update_log["reset_log"] = True
 
     write_to_json(apps_data, "./app_details.json", indent=2)
 
@@ -228,7 +213,6 @@ def fetch_applist(api: str):
                     "name": app["name"]
                 }
             )
-
     return applist
 
 
@@ -264,10 +248,37 @@ def write_to_json(data: any, file_path: str, indent=0):
         json.dump(data, f, indent=indent)
 
 
+def email(msg):
+    context = ssl.create_default_context()
+
+    with smtplib.SMTP_SSL(
+        config["SMTP_SERVER"], config["PORT"], context=context) as server:
+        server.login(config["SENDER_EMAIL"], config["PASSWORD"])
+        server.sendmail(config["SENDER_EMAIL"], config["RECEIVER_EMAIL"], msg)
+
+
 if __name__ == "__main__":
     try:
         main()
-    except Error as e:
+        msg = f"""\
+Subject: DB Update Success
+
+Updated Apps: {update_log["updated_apps"]:,} / {update_log["applist_length"]:,}
+Rejected Apps: {len(update_log["rejected_apps"])}
+"""
+        print("EMAIL: \n")
+        print(msg)
+        # email(msg)
+
+    except Exception as e:
+        msg = f"""\
+Subject: DB Update Failed
+
+Update failed due to an error:
+{traceback.format_exc()}"""
+        print("EMAIL: \n")
+        print(msg +  "\nended")
+        # email(msg)
         raise e
     finally:
         u_logger.save()

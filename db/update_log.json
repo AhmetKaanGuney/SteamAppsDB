@@ -1,8 +1,14 @@
 {
-  "last_request_to_steam": "2022-01-31 12:46:37.697774",
-  "steam_request_count": 2,
+  "reset_log": true,
+  "last_request_to_steam": "2022-02-02 10:28:52.425404",
+  "steam_request_count": 0,
   "steam_request_limit_reached": false,
-  "updated_apps": 0,
-  "applist_index": -1,
-  "rejected_apps": []
+  "applist_length": 134933,
+  "updated_apps": 3,
+  "applist_index": 6,
+  "rejected_apps": [
+    216938,
+    660010,
+    660130
+  ]
 }

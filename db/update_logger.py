@@ -9,12 +9,9 @@ class UpdateLogger:
     def __init__(self, file: str):
         self.file = file
         self.log = self._load_file()
-        self.log.update(
-            {
-            "updated_apps": 0,
-            "rejected_apps": []
-            }
-        )
+        if self.log["reset_log"]:
+            print("Resetting log!")
+            self._reset_log()
 
     def _load_file(self) -> dict:
         with open(self.file, "r") as f:
@@ -32,7 +29,13 @@ class UpdateLogger:
 
     def _reset_log(self):
         self.log = {
-            "lastest_request_to_steam": "",
-            "failed_apps": []
+            "reset_log": False,
+            "last_request_to_steam": "",
+            "steam_request_count": 0,
+            "steam_request_limit_reached": False,
+            "applist_length": 0,
+            "updated_apps": 0,
+            "applist_index": 0,
+            "rejected_apps": []
         }
         self.save()
