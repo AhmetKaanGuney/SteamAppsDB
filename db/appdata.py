@@ -6,17 +6,17 @@ class AppData:
     """An interface for app data"""
     app_id: int = 0
     name: str = ""
-    price: [int, None] = None
+    price: int = None
 
     release_date: str = ""
     coming_soon: bool = False
 
-    developers: list[str] = field(default_factory=list)
-    publishers: list[str] = field(default_factory=list)
+    developers: list[str] = None
+    publishers: list[str] = None
 
-    tags: dict = field(default_factory=dict)
-    genres: dict = field(default_factory=dict)
-    categories: dict = field(default_factory=dict)
+    tags: dict = None
+    genres: dict = None
+    categories: dict = None
 
     owner_count: int = 0
     positive_reviews: int = 0
@@ -28,7 +28,7 @@ class AppData:
 
     website: str = ""
     header_image: str = ""
-    screenshots: list[dict] = field(default_factory=list)
+    screenshots: list[dict] = None
 
     languages: str = ""
 
@@ -36,14 +36,21 @@ class AppData:
     mac: bool = False
     linux: bool = False
 
+
+    def __init__(self, appdata=None):
+        if appdata:
+            self.update(appdata)
+
+
     def update(self, attributes: dict):
-        """Updates existing attributes.
+        """
+        Updates existing attributes.
         Raises error if attribute doesn't exists.
         """
         # Check for typos
         for a in attributes:
             if a not in self.__attributes__:
-                raise AttributeError(f"Attribute not found: '{a}'")
+                raise AttributeError(f"'{type(self).__name__}' object has no attribute '{a}'")
 
         self.__dict__.update(attributes)
 
@@ -63,9 +70,16 @@ class AppData:
 
     @property
     def __attributes__(self) -> list[str]:
-        """Returns all attributes, that are not callable or dunder methods."""
-        attributes = [a for a in dir(self) if not (a.startswith("__") or callable(getattr(self, a)))]
+        """Returns public attributes, that are not callable or dunder methods."""
+        attributes = []
+        for a in dir(self):
+            if not (a.startswith("_") or callable(getattr(self, a))):
+                attributes.append(a)
         return attributes
+
+
+    def __getitem__(self, key):
+        return self.__getattribute__(key)
 
     def __repr__(self) -> str:
         repr_object = {}

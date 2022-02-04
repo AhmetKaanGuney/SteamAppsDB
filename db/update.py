@@ -97,8 +97,8 @@ def main():
 
     for i, app in enumerate(limited_applist[applist_index:]):
         app_id = app["appid"]
-        app_data = AppData()
-        app_data.update({"name": app["name"], "app_id": app["appid"]})
+        appdata = AppData()
+        appdata.update({"name": app["name"], "app_id": app["appid"]})
 
         # API's
         steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(app_id)
@@ -121,7 +121,7 @@ def main():
 
         # Update app info
         app_details_from_steamspy = map_steamspy_data(steamspy_data)
-        app_data.update(app_details_from_steamspy)
+        appdata.update(app_details_from_steamspy)
 
         # =================== #
         #  FETCH FROM STEAM   #
@@ -153,11 +153,11 @@ def main():
                 app_details_from_steam = map_steam_data(steam_data)
 
                 # Update the app info
-                app_data.update(app_details_from_steam)
+                appdata.update(app_details_from_steam)
                 update_log["updated_apps"] += 1
 
                 # Record to apps_data
-                apps_data.append(app_data.as_dict())
+                apps_data.append(appdata.as_dict())
 
         else:
             logging.debug(f"Steam responded with {steam_response}. AppID: {app_id}")

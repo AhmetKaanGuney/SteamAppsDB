@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS apps (
     about_the_game TEXT,
     short_description TEXT,
     detailed_description TEXT,
-    website TEXT
+    website TEXT,
     header_image TEXT,
     screenshots TEXT,
     languages TEXT,
@@ -23,18 +23,19 @@ CREATE TABLE IF NOT EXISTS apps (
 );
 -- TAGS
 CREATE TABLE IF NOT EXISTS tags (
-    tag_id INTEGER PRIMARY KEY,
-    tag_decription TEXT
+    tag_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
+    name TEXT,
+    votes INTEGER
 );
 -- GENRES
 CREATE TABLE IF NOT EXISTS genres (
     genre_id INTEGER PRIMARY KEY,
-    genre_decription TEXT
+    name TEXT
 );
 -- CATEGORIES
 CREATE TABLE IF NOT EXISTS categories (
     category_id INTEGER PRIMARY KEY,
-    category_decription TEXT
+    name TEXT
 );
 -- APP <-> TAGS MAP
 CREATE TABLE IF NOT EXISTS apps_tags (
