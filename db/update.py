@@ -37,7 +37,6 @@ FAIL_API = "https://store.steampowered.com/api/appdetails/?appids=360032"
 
 # Max owner limit, if an app's owner count breaks the limit
 # that app will be ignored
-# MAX_OWNERS = 1_000_000
 MAX_OWNERS = 1_000_000
 
 # Time to wait in between request in ms
@@ -158,7 +157,7 @@ def main():
                 update_log["updated_apps"] += 1
 
                 # Record to apps_data
-                apps_data.append(app_data.serialize())
+                apps_data.append(app_data.as_dict())
 
         else:
             logging.debug(f"Steam responded with {steam_response}. AppID: {app_id}")
@@ -221,8 +220,8 @@ def request_from(api: str, timeout=1):
             response = requests.get(api, timeout=timeout)
             return response
         except requests.Timeout:
-            print("Request Timed Out:", api)
-            print("Attempt:", attempt)
+            logging.debug("Request Timed Out:", api)
+            logging.debug("Attempt:", attempt)
             time.sleep(10)
             attempt += 1
 
@@ -232,48 +231,78 @@ def request_from(api: str, timeout=1):
 def map_steam_data(steam_data: dict) -> dict:
     """Parses Steam data and returns it in a better format
     returns: {
-        'developers': list[str],
-        'publishers': list[str],
-        'release_date': str,
-        'coming_soon': bool,
-        'genres': list[dict],
-        'categories': list[dict],
-        'about_the_game': str,
-        'short_description': str,
-        'detailed_description': str,
-        'header_image': str,
-        'screenshots': list[dict],
-        'website': str,
-        'languages': str,
-        'windows': bool,
-        'mac': bool,
-        'linux': bool
-    }"""
-    fields = [
-        "developers", "publishers", "categories", "genres",
-        "about_the_game", "short_description", "detailed_description",
-        "header_image", "screenshots", "website"
+        developers, publishers,
+        release_date, coming_soon,
+        genres, categories,
+        about_the_game, short_description,
+        detailed_description,
+        website, header_image, screenshots,
+        languages, windows, mac, linux
+    }
+    """
+    keys = [
+        "developers", "publishers", "about_the_game",
+        "short_description", "detailed_description",
+        "website", "header_image", "screenshots"
         ]
-    app_details = {k:v for k, v in steam_data.items() if k in fields}
+    available_keys = [k for k in keys if k in steam_data.keys()]
+    app_details = {k:v for k, v in steam_data.items() if k in available_keys}
 
-    # Serialize date and languages for DB
+    # SPECIAL CASES
+
+    # Simplify genres and categories fields. For example:
+    # genres: [{'id': 23, 'description': 'Indie'}]
+    # Turn into:
+    # genres: {'Indie': 23}
+    genres_categs = {}
+    for key in ["genres", "categories"]:
+        try:
+            steam_data[key]
+        except KeyError:
+            genres_categs[key] = {}
+            continue
+
+        genres_categs[key] = {}
+        for obj in steam_data[key]:
+            genres_categs[key].update({obj["description"]: obj["id"]})
+
+    # Release Date
     try:
-        release_date = format_date(steam_data["release_date"]["date"])
-    except (IndexError, KeyError):
         release_date = steam_data["release_date"]["date"]
+        coming_soon = steam_data["release_date"]["coming_soon"]
+        try:
+            release_date = format_date(release_date)
+        except IndexError:
+            pass
+    except KeyError:
+        release_date = ""
+        coming_soon = False
 
+    # Languages
     try:
         languages = steam_data["supported_languages"]
+        # if string is in HTML format
+        # check if it contains English then don't bother with parsing it
+        if "<" in languages:
+            if "English" in languages:
+                languages = "English"
+            else:
+                languages = ""
     except KeyError:
-        languages = None
+        languages = ""
 
-    # TODO parse supported languages
-    coming_soon = steam_data["release_date"]["coming_soon"]
-    platforms = steam_data["platforms"]
+    # Platforms
+    try:
+        platforms = steam_data["platforms"]
+    except KeyError:
+        platforms = {"windows": False, "mac": False, "linux": False}
 
+    # UPDATE
     app_details.update({
         "release_date": release_date,
         "coming_soon": coming_soon,
+        "genres": genres_categs["genres"],
+        "categories": genres_categs["categories"],
         "languages": languages,
         "windows": platforms["windows"],
         "mac": platforms["mac"],
@@ -298,7 +327,6 @@ def map_steamspy_data(steamspy_data: dict) -> dict:
         "negative_reviews": steamspy_data["negative"],
         "tags": steamspy_data["tags"]
     }
-
     return app_details
 
 

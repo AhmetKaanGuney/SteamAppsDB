@@ -1,40 +1,25 @@
 [
   {
     "about_the_game": "FEATURES:<br />\r\n<br />\r\n- 300 levels and 50 challenges<br />\r\n- Unique gameplay<br />\r\n- Mind games<br />\r\n- Motion logic<br />\r\n- Adaptive hint system<br />\r\n- More than 25 languages",
-    "app_id": {
-      "name": "Pirates of the Maverta",
-      "app_id": 1848280
+    "app_id": 1848280,
+    "categories": {
+      "Single-player": 2,
+      "Steam Achievements": 22
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 22,
-        "description": "Steam Achievements"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "FEATURES:<br />\r\n<br />\r\n- 300 levels and 50 challenges<br />\r\n- Unique gameplay<br />\r\n- Mind games<br />\r\n- Motion logic<br />\r\n- Adaptive hint system<br />\r\n- More than 25 languages",
     "developers": [
       "My Label Game Studio"
     ],
-    "genres": [
-      {
-        "id": "4",
-        "description": "Casual"
-      },
-      {
-        "id": "23",
-        "description": "Indie"
-      }
-    ],
+    "genres": {
+      "Casual": "4",
+      "Indie": "23"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/header.jpg?t=1643462230",
-    "languages": "English<strong>*</strong>, French<strong>*</strong>, Italian<strong>*</strong>, German<strong>*</strong>, Spanish - Spain<strong>*</strong>, Arabic<strong>*</strong>, Bulgarian<strong>*</strong>, Portuguese - Brazil<strong>*</strong>, Hungarian<strong>*</strong>, Vietnamese<strong>*</strong>, Greek<strong>*</strong>, Danish<strong>*</strong>, Spanish - Latin America<strong>*</strong>, Traditional Chinese<strong>*</strong>, Simplified Chinese<strong>*</strong>, Korean<strong>*</strong>, Dutch<strong>*</strong>, Norwegian<strong>*</strong>, Polish<strong>*</strong>, Portuguese<strong>*</strong>, Romanian<strong>*</strong>, Russian<strong>*</strong>, Thai<strong>*</strong>, Turkish<strong>*</strong>, Ukrainian<strong>*</strong>, Finnish<strong>*</strong>, Czech<strong>*</strong>, Swedish<strong>*</strong>, Japanese<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": true,
-    "name": "",
+    "name": "Pirates of the Maverta",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 1,
@@ -81,7 +66,7 @@
       "Puzzle": 38,
       "Side Scroller": 34,
       "3D": 31,
-      "Isometric": 29,
+      "Isometric": 30,
       "Singleplayer": 22,
       "Indie": 21
     },
@@ -90,36 +75,24 @@
   },
   {
     "about_the_game": "FEATURES:<br />\r\n<br />\r\n- 300 levels and 50 challenges<br />\r\n- Unique gameplay<br />\r\n- Mind games<br />\r\n- Motion logic<br />\r\n- Adaptive hint system<br />\r\n- More than 25 languages",
-    "app_id": {
-      "name": "Maverta Island",
-      "app_id": 1848290
+    "app_id": 1848290,
+    "categories": {
+      "Single-player": 2,
+      "Steam Achievements": 22
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 22,
-        "description": "Steam Achievements"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "FEATURES:<br />\r\n<br />\r\n- 300 levels and 50 challenges<br />\r\n- Unique gameplay<br />\r\n- Mind games<br />\r\n- Motion logic<br />\r\n- Adaptive hint system<br />\r\n- More than 25 languages",
     "developers": [
       "My Label Game Studio"
     ],
-    "genres": [
-      {
-        "id": "23",
-        "description": "Indie"
-      }
-    ],
+    "genres": {
+      "Indie": "23"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/header.jpg?t=1642545156",
-    "languages": "English<strong>*</strong>, French<strong>*</strong>, Italian<strong>*</strong>, German<strong>*</strong>, Spanish - Spain<strong>*</strong>, Arabic<strong>*</strong>, Bulgarian<strong>*</strong>, Portuguese - Brazil<strong>*</strong>, Hungarian<strong>*</strong>, Vietnamese<strong>*</strong>, Greek<strong>*</strong>, Danish<strong>*</strong>, Spanish - Latin America<strong>*</strong>, Traditional Chinese<strong>*</strong>, Simplified Chinese<strong>*</strong>, Korean<strong>*</strong>, Dutch<strong>*</strong>, Norwegian<strong>*</strong>, Polish<strong>*</strong>, Portuguese<strong>*</strong>, Romanian<strong>*</strong>, Russian<strong>*</strong>, Thai<strong>*</strong>, Turkish<strong>*</strong>, Ukrainian<strong>*</strong>, Finnish<strong>*</strong>, Czech<strong>*</strong>, Swedish<strong>*</strong>, Japanese<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": true,
-    "name": "",
+    "name": "Maverta Island",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -162,32 +135,23 @@
   },
   {
     "about_the_game": "The House Of Closed Doors is a game in which you are locked in a mysterious house.<br>Immerse yourself in the atmosphere of a dark old mansion.<br>Explore mysterious rooms, collect various items, try to find a way out and stay alive. <br><br><ul class=\"bb_ul\"><li>Nice graphics </li></ul><ul class=\"bb_ul\"><li>Search items</li></ul><ul class=\"bb_ul\"><li>Interesting gameplay</li></ul>",
-    "app_id": {
-      "name": "The Home Of Closed Doors",
-      "app_id": 1848300
+    "app_id": 1848300,
+    "categories": {
+      "Single-player": 2
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "The House Of Closed Doors is a game in which you are locked in a mysterious house.<br>Immerse yourself in the atmosphere of a dark old mansion.<br>Explore mysterious rooms, collect various items, try to find a way out and stay alive. <br><br><ul class=\"bb_ul\"><li>Nice graphics </li></ul><ul class=\"bb_ul\"><li>Search items</li></ul><ul class=\"bb_ul\"><li>Interesting gameplay</li></ul>",
     "developers": [
       "Mar3ow@gmail.com"
     ],
-    "genres": [
-      {
-        "id": "23",
-        "description": "Indie"
-      }
-    ],
+    "genres": {
+      "Indie": "23"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/header.jpg?t=1641898583",
     "languages": "English, Russian",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "The Home Of Closed Doors",
     "negative_reviews": 2,
     "owner_count": 10000,
     "positive_reviews": 2,
@@ -243,32 +207,23 @@
   },
   {
     "about_the_game": "<i>A lewd cooking game where you mix potions to make the best slimes!</i><br><br>You open your sexy shop and sell your slimes to an infinite queue of customers.<br>Take a moment to enjoy their lewd performances or customize your place!<br><br><strong>Features</strong><br><ul class=\"bb_ul\"><li>    Play an endless cooking game<br></li><li>    Create slimes combining potions<br></li><li>    Unlock sex positions<br></li><li>    Watch them having fun<br></li><li>    Many furry characters will visit your place.<br></li><li>    Clean, customize, decorate your place with the store</li></ul>",
-    "app_id": {
-      "name": "Just in Slime",
-      "app_id": 1848310
+    "app_id": 1848310,
+    "categories": {
+      "Single-player": 2
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      }
-    ],
     "coming_soon": true,
     "detailed_description": "<i>A lewd cooking game where you mix potions to make the best slimes!</i><br><br>You open your sexy shop and sell your slimes to an infinite queue of customers.<br>Take a moment to enjoy their lewd performances or customize your place!<br><br><strong>Features</strong><br><ul class=\"bb_ul\"><li>    Play an endless cooking game<br></li><li>    Create slimes combining potions<br></li><li>    Unlock sex positions<br></li><li>    Watch them having fun<br></li><li>    Many furry characters will visit your place.<br></li><li>    Clean, customize, decorate your place with the store</li></ul>",
     "developers": [
       "Malerouille"
     ],
-    "genres": [
-      {
-        "id": "23",
-        "description": "Indie"
-      }
-    ],
+    "genres": {
+      "Indie": "23"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/header.jpg?t=1641422284",
-    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Just in Slime",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -326,47 +281,29 @@
   },
   {
     "about_the_game": "<h2 class=\"bb_tag\">A novel with great RPG turn-based battles. A great entry point for newcomers!</h2><br><strong>Warning! There is no exploration at all! This is the complete true remake of Crimson Sword Saga: The Peloran Wars!</strong><h2 class=\"bb_tag\">Features</h2><br><ul class=\"bb_ul\"><li> Adjustable difficulty (4 Difficulties) and a lot of options;<br></li><li> A detailed tutorial;<br></li><li> 14 playable characters;<br></li><li> 21 chapters;<br></li><li> Fast and deep strategic RPG turn-based battles;<br></li><li> Great soundtrack reminiscent of old JRPG classic;<br></li><li> Great pixel graphics reminiscent of old JRPG classic.</li></ul>",
-    "app_id": {
-      "name": "Clarent Saga: Chronicles",
-      "app_id": 1848330
+    "app_id": 1848330,
+    "categories": {
+      "Single-player": 2
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "<h2 class=\"bb_tag\">A novel with great RPG turn-based battles. A great entry point for newcomers!</h2><br><strong>Warning! There is no exploration at all! This is the complete true remake of Crimson Sword Saga: The Peloran Wars!</strong><h2 class=\"bb_tag\">Features</h2><br><ul class=\"bb_ul\"><li> Adjustable difficulty (4 Difficulties) and a lot of options;<br></li><li> A detailed tutorial;<br></li><li> 14 playable characters;<br></li><li> 21 chapters;<br></li><li> Fast and deep strategic RPG turn-based battles;<br></li><li> Great soundtrack reminiscent of old JRPG classic;<br></li><li> Great pixel graphics reminiscent of old JRPG classic.</li></ul>",
     "developers": [
       "David Nguyen"
     ],
-    "genres": [
-      {
-        "id": "23",
-        "description": "Indie"
-      },
-      {
-        "id": "3",
-        "description": "RPG"
-      },
-      {
-        "id": "2",
-        "description": "Strategy"
-      },
-      {
-        "id": "70",
-        "description": "Early Access"
-      }
-    ],
+    "genres": {
+      "Indie": "23",
+      "RPG": "3",
+      "Strategy": "2",
+      "Early Access": "70"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/header.jpg?t=1641155516",
-    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Clarent Saga: Chronicles",
     "negative_reviews": 3,
     "owner_count": 10000,
-    "positive_reviews": 16,
+    "positive_reviews": 17,
     "price": "999",
     "publishers": [
       "David Nguyen"
@@ -428,53 +365,29 @@
     "windows": true
   },
   {
-    "about_the_game": "<strong> <i> FEAR: Call of the village </i> </strong> is a first-person horror game made in realistic 3D graphics that immerses you in an atmosphere of horror and fears you. The gameplay consists in collecting notes, solving riddles and escaping from ghosts, as well as in other mechanics inherent in any horror in order to survive and escape.<br><br>In it you have to get into a mysterious village and solve various riddles, the solution of which will be hindered by various inexplicable phenomena by science. Also, to complete the game, you will have to collect the necessary items that may come in handy in the passage or even be necessary. Meet the new protagonist, screamers and storyline!<h2 class=\"bb_tag\"> Brief background: </h2>The main character, an ordinary unremarkable guy, found himself in a rather strange abandoned village. At first glance, this place does not repulse at all, but even &quot;pleases&quot; the eye, however, as he progresses, the main character encounters many ghosts and other otherworldly creatures and phenomena. Therefore, more and more cute village ceases to be like a cozy place, and every next minute spent in it convinces you that you need to quickly get out of this God-forsaken place!<br><br><img src=\"https://media.st.dl.pinyuncloud.com/steam/apps/1848410/extras/HK-WBS-TNsM.jpg?t=1643714394\" crossorigin=\"anonymous\"/><br><br>You have to overcome your fear, going through gloomy locations for the main character, solving various puzzles along the way and trying to understand what is going on in general, how you got here, and most importantly, how to get out of this enchanted village.<br><br>By purchasing the game you will get the best emotions that you have never received!",
-    "app_id": {
-      "name": "FEAR: Call of the village",
-      "app_id": 1848410
+    "about_the_game": "<strong> <i> FEAR: Call of the village </i> </strong> is a first-person horror game made in realistic 3D graphics that immerses you in an atmosphere of horror and fears you. The gameplay consists in collecting notes, solving riddles and escaping from ghosts, as well as in other mechanics inherent in any horror in order to survive and escape.<br><br>In it you have to get into a mysterious village and solve various riddles, the solution of which will be hindered by various inexplicable phenomena by science. Also, to complete the game, you will have to collect the necessary items that may come in handy in the passage or even be necessary. Meet the new protagonist, screamers and storyline!<h2 class=\"bb_tag\"> Brief background: </h2>The main character, an ordinary unremarkable guy, found himself in a rather strange abandoned village. At first glance, this place does not repulse at all, but even &quot;pleases&quot; the eye, however, as he progresses, the main character encounters many ghosts and other otherworldly creatures and phenomena. Therefore, more and more cute village ceases to be like a cozy place, and every next minute spent in it convinces you that you need to quickly get out of this God-forsaken place!<br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848410/extras/HK-WBS-TNsM.jpg?t=1643714394\" /><br><br>You have to overcome your fear, going through gloomy locations for the main character, solving various puzzles along the way and trying to understand what is going on in general, how you got here, and most importantly, how to get out of this enchanted village.<br><br>By purchasing the game you will get the best emotions that you have never received!",
+    "app_id": 1848410,
+    "categories": {
+      "Single-player": 2,
+      "Steam Achievements": 22,
+      "Steam Cloud": 23
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 22,
-        "description": "Steam Achievements"
-      },
-      {
-        "id": 23,
-        "description": "Steam Cloud"
-      }
-    ],
     "coming_soon": true,
-    "detailed_description": "<strong> <i> FEAR: Call of the village </i> </strong> is a first-person horror game made in realistic 3D graphics that immerses you in an atmosphere of horror and fears you. The gameplay consists in collecting notes, solving riddles and escaping from ghosts, as well as in other mechanics inherent in any horror in order to survive and escape.<br><br>In it you have to get into a mysterious village and solve various riddles, the solution of which will be hindered by various inexplicable phenomena by science. Also, to complete the game, you will have to collect the necessary items that may come in handy in the passage or even be necessary. Meet the new protagonist, screamers and storyline!<h2 class=\"bb_tag\"> Brief background: </h2>The main character, an ordinary unremarkable guy, found himself in a rather strange abandoned village. At first glance, this place does not repulse at all, but even &quot;pleases&quot; the eye, however, as he progresses, the main character encounters many ghosts and other otherworldly creatures and phenomena. Therefore, more and more cute village ceases to be like a cozy place, and every next minute spent in it convinces you that you need to quickly get out of this God-forsaken place!<br><br><img src=\"https://media.st.dl.pinyuncloud.com/steam/apps/1848410/extras/HK-WBS-TNsM.jpg?t=1643714394\" crossorigin=\"anonymous\"/><br><br>You have to overcome your fear, going through gloomy locations for the main character, solving various puzzles along the way and trying to understand what is going on in general, how you got here, and most importantly, how to get out of this enchanted village.<br><br>By purchasing the game you will get the best emotions that you have never received!",
+    "detailed_description": "<strong> <i> FEAR: Call of the village </i> </strong> is a first-person horror game made in realistic 3D graphics that immerses you in an atmosphere of horror and fears you. The gameplay consists in collecting notes, solving riddles and escaping from ghosts, as well as in other mechanics inherent in any horror in order to survive and escape.<br><br>In it you have to get into a mysterious village and solve various riddles, the solution of which will be hindered by various inexplicable phenomena by science. Also, to complete the game, you will have to collect the necessary items that may come in handy in the passage or even be necessary. Meet the new protagonist, screamers and storyline!<h2 class=\"bb_tag\"> Brief background: </h2>The main character, an ordinary unremarkable guy, found himself in a rather strange abandoned village. At first glance, this place does not repulse at all, but even &quot;pleases&quot; the eye, however, as he progresses, the main character encounters many ghosts and other otherworldly creatures and phenomena. Therefore, more and more cute village ceases to be like a cozy place, and every next minute spent in it convinces you that you need to quickly get out of this God-forsaken place!<br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848410/extras/HK-WBS-TNsM.jpg?t=1643714394\" /><br><br>You have to overcome your fear, going through gloomy locations for the main character, solving various puzzles along the way and trying to understand what is going on in general, how you got here, and most importantly, how to get out of this enchanted village.<br><br>By purchasing the game you will get the best emotions that you have never received!",
     "developers": [
       "5K Gamers"
     ],
-    "genres": [
-      {
-        "id": "1",
-        "description": "Action"
-      },
-      {
-        "id": "25",
-        "description": "Adventure"
-      },
-      {
-        "id": "23",
-        "description": "Indie"
-      },
-      {
-        "id": "28",
-        "description": "Simulation"
-      }
-    ],
+    "genres": {
+      "Action": "1",
+      "Adventure": "25",
+      "Indie": "23",
+      "Simulation": "28"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/header.jpg?t=1643714394",
-    "languages": "English, Russian<strong>*</strong>, French, Italian, German, Spanish - Spain, Arabic, Bulgarian, Portuguese - Brazil, Hungarian, Vietnamese, Greek, Danish, Traditional Chinese, Korean, Dutch, Norwegian, Polish, Portuguese, Romanian, Thai, Turkish, Finnish, Czech, Swedish, Japanese<br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "FEAR: Call of the village",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -523,32 +436,23 @@
   },
   {
     "about_the_game": "<i>DEVIL'S ROCK<br>An island off the coast of Louisiana <br>1932</i><br><br>\u201cEver since I heard of the treasure inside Bellemore Manor I've been obsessed by it. People said the house was still haunted by the ghosts of the wedding that disappeared there decades ago, but if the ghosts knew where the treasure was hidden, I just had to ask them.<br><br>But there's more to the treasure than I could have ever expected, and now I've awakened a household of spirits who don't mind that they're dead, and an evil phantom determined to find the treasure before I do.<br><br>Fixing the situation won't just mean getting to the treasure first, but also figuring out what happened on the island all those years ago. But I have a feeling that in order to do that, I'll have to die too.\u201d<br><br><i>- The Diary of Murphy McCallan</i><br><br><ul class=\"bb_ul\"><li>Classic adventure game puzzles, with over 100 useable items, and a built-in hint system<br></li><li>Over 65 gorgeous hand-drawn locations at full HD resolution, plus dozens more full-screen paintings, documents, and other details to investigate.<br></li><li>More than 30 fully voiced characters to interact with, and two hours of original music</li></ul>",
-    "app_id": {
-      "name": "Foolish Mortals",
-      "app_id": 1848440
+    "app_id": 1848440,
+    "categories": {
+      "Single-player": 2
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      }
-    ],
     "coming_soon": true,
     "detailed_description": "<i>DEVIL'S ROCK<br>An island off the coast of Louisiana <br>1932</i><br><br>\u201cEver since I heard of the treasure inside Bellemore Manor I've been obsessed by it. People said the house was still haunted by the ghosts of the wedding that disappeared there decades ago, but if the ghosts knew where the treasure was hidden, I just had to ask them.<br><br>But there's more to the treasure than I could have ever expected, and now I've awakened a household of spirits who don't mind that they're dead, and an evil phantom determined to find the treasure before I do.<br><br>Fixing the situation won't just mean getting to the treasure first, but also figuring out what happened on the island all those years ago. But I have a feeling that in order to do that, I'll have to die too.\u201d<br><br><i>- The Diary of Murphy McCallan</i><br><br><ul class=\"bb_ul\"><li>Classic adventure game puzzles, with over 100 useable items, and a built-in hint system<br></li><li>Over 65 gorgeous hand-drawn locations at full HD resolution, plus dozens more full-screen paintings, documents, and other details to investigate.<br></li><li>More than 30 fully voiced characters to interact with, and two hours of original music</li></ul>",
     "developers": [
       "Inklingwood Studios"
     ],
-    "genres": [
-      {
-        "id": "25",
-        "description": "Adventure"
-      }
-    ],
+    "genres": {
+      "Adventure": "25"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/header.jpg?t=1642158982",
-    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Foolish Mortals",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -591,36 +495,24 @@
   },
   {
     "about_the_game": "Your name is Cyborg 17,<br />\r\n<br />\r\nUpon Escaping The Facility Where you we\u2019re manufactured your internal program was Triggered setting your system into Critical self destruct mode. With just 24 hours left to live until self destruction In a Race against Time You must stay alive In a constant fight for survival to escape the evil forces that created you. It is time to embark on a journey to find a way to restore your system back to normal before it\u2019s too late\u2026",
-    "app_id": {
-      "name": "System Critical: The Race Against Time",
-      "app_id": 1848470
+    "app_id": 1848470,
+    "categories": {
+      "Single-player": 2
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      }
-    ],
     "coming_soon": true,
     "detailed_description": "Your name is Cyborg 17,<br />\r\n<br />\r\nUpon Escaping The Facility Where you we\u2019re manufactured your internal program was Triggered setting your system into Critical self destruct mode. With just 24 hours left to live until self destruction In a Race against Time You must stay alive In a constant fight for survival to escape the evil forces that created you. It is time to embark on a journey to find a way to restore your system back to normal before it\u2019s too late\u2026",
     "developers": [
       "Old Formulas"
     ],
-    "genres": [
-      {
-        "id": "1",
-        "description": "Action"
-      },
-      {
-        "id": "25",
-        "description": "Adventure"
-      }
-    ],
+    "genres": {
+      "Action": "1",
+      "Adventure": "25"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/header.jpg?t=1642660710",
-    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "System Critical: The Race Against Time",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -1088,40 +980,25 @@
   },
   {
     "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/20220104_193743.gif?t=1641952055\" /><br><br><i>Busted free from The Lab's control, he's on the run... Bionic Tadpole!</i> <br>Every bullet has Bionic Tadpole's name on it as he escapes R-Man City in the stolen bionic suit!<br><br>\u2022 Run-N-Gun, beat the timer, and don't let your gun overheat.<br>\u2022 Elements of fun platforming, bullet-hell and twin stick-controlled action!<br>\u2022 Original music by <strong>MaximusCXI</strong>, created for each Stage.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/nirab_idle.gif?t=1641952055\" />",
-    "app_id": {
-      "name": "Bionic Tadpole",
-      "app_id": 1848540
+    "app_id": 1848540,
+    "categories": {
+      "Single-player": 2,
+      "Full controller support": 28
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 28,
-        "description": "Full controller support"
-      }
-    ],
     "coming_soon": true,
     "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/20220104_193743.gif?t=1641952055\" /><br><br><i>Busted free from The Lab's control, he's on the run... Bionic Tadpole!</i> <br>Every bullet has Bionic Tadpole's name on it as he escapes R-Man City in the stolen bionic suit!<br><br>\u2022 Run-N-Gun, beat the timer, and don't let your gun overheat.<br>\u2022 Elements of fun platforming, bullet-hell and twin stick-controlled action!<br>\u2022 Original music by <strong>MaximusCXI</strong>, created for each Stage.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/nirab_idle.gif?t=1641952055\" />",
     "developers": [
       "SaGa76"
     ],
-    "genres": [
-      {
-        "id": "1",
-        "description": "Action"
-      },
-      {
-        "id": "23",
-        "description": "Indie"
-      }
-    ],
+    "genres": {
+      "Action": "1",
+      "Indie": "23"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/header.jpg?t=1641952055",
     "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Bionic Tadpole",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -1179,36 +1056,24 @@
   },
   {
     "about_the_game": "The Space-Time Gravity Travelers have been compromised. They have been sent to a Skelton Zone and it has become your duty to ensure they escape to safety before the enemy forces descend upon them. They are helpless in the gravity suits and with an inability to remove them amid travel only you can carry them to their freedom.<br />\r\n<br />\r\nFight your way through the Skelton Zone utilizing weaponry. Discover the resources for your survival. Most of all deliver the travelers to the escape portal to ensure they survive. Fight, run and hide when the task becomes impossible. <br />\r\n<br />\r\nPrepare to save the last remaining chemically unaltered. Discover the secrets.<br />\r\n<br />\r\nREMEMBER:<br />\r\nFind the travelers as they emerge.<br />\r\nFight to defend the defenseless travelers. They will be incapable of movement or defense due to their suit technology.<br />\r\nTake the travelers to the portal as to deliver them to their destination.<br />\r\n<br />\r\nSkelton is an FPS Horror game about surviving the numerous enemies encountered and fighting back with found weaponry. Also you must begin Searching for the travelers, collecting their teleport devices and bringing them to the escape destination.",
-    "app_id": {
-      "name": "Skelton",
-      "app_id": 1848570
+    "app_id": 1848570,
+    "categories": {
+      "Single-player": 2
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "The Space-Time Gravity Travelers have been compromised. They have been sent to a Skelton Zone and it has become your duty to ensure they escape to safety before the enemy forces descend upon them. They are helpless in the gravity suits and with an inability to remove them amid travel only you can carry them to their freedom.<br />\r\n<br />\r\nFight your way through the Skelton Zone utilizing weaponry. Discover the resources for your survival. Most of all deliver the travelers to the escape portal to ensure they survive. Fight, run and hide when the task becomes impossible. <br />\r\n<br />\r\nPrepare to save the last remaining chemically unaltered. Discover the secrets.<br />\r\n<br />\r\nREMEMBER:<br />\r\nFind the travelers as they emerge.<br />\r\nFight to defend the defenseless travelers. They will be incapable of movement or defense due to their suit technology.<br />\r\nTake the travelers to the portal as to deliver them to their destination.<br />\r\n<br />\r\nSkelton is an FPS Horror game about surviving the numerous enemies encountered and fighting back with found weaponry. Also you must begin Searching for the travelers, collecting their teleport devices and bringing them to the escape destination.",
     "developers": [
       "Bry Guy"
     ],
-    "genres": [
-      {
-        "id": "1",
-        "description": "Action"
-      },
-      {
-        "id": "25",
-        "description": "Adventure"
-      }
-    ],
+    "genres": {
+      "Action": "1",
+      "Adventure": "25"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/header.jpg?t=1643599879",
-    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Skelton",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -1266,52 +1131,28 @@
   },
   {
     "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
-    "app_id": {
-      "name": "Sang: The Desert Blade",
-      "app_id": 1848600
+    "app_id": 1848600,
+    "categories": {
+      "Single-player": 2,
+      "Steam Achievements": 22,
+      "Full controller support": 28
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 22,
-        "description": "Steam Achievements"
-      },
-      {
-        "id": 28,
-        "description": "Full controller support"
-      }
-    ],
     "coming_soon": true,
     "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
     "developers": [
       "Fiskyfisko"
     ],
-    "genres": [
-      {
-        "id": "1",
-        "description": "Action"
-      },
-      {
-        "id": "25",
-        "description": "Adventure"
-      },
-      {
-        "id": "23",
-        "description": "Indie"
-      },
-      {
-        "id": "3",
-        "description": "RPG"
-      }
-    ],
+    "genres": {
+      "Action": "1",
+      "Adventure": "25",
+      "Indie": "23",
+      "RPG": "3"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/header.jpg?t=1640901562",
     "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Sang: The Desert Blade",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -1364,40 +1205,25 @@
   },
   {
     "about_the_game": "<strong>VR Async Balls</strong> will immerse you into the virtual world of the cosmopark, where you can play on a slot machine. You have to hold two balls at one and  the same time on different moving tracks. Firstly, only one level is available for you, after passing it, the next will be opened. There are 20 levels in the game, each of them is more difficult than the previous one. The tracks curiously bend into space and after pressing the Start button, they begin to move at a constant speed. You need to prevent two balls from falling off these tracks with your hands and bring them to the end.<br>Trained people, like pianists, can easily move their hands in different directions independently of each other. This simulator will allow you to check how asynchronous your brain works, how accurately and consciously you can move your hands, how much you can concentrate and control the movements of two balls at once. <br>This little game will bring you a lot of fun and joy from its passage. Good luck!",
-    "app_id": {
-      "name": "VR Async Balls",
-      "app_id": 1848640
+    "app_id": 1848640,
+    "categories": {
+      "Single-player": 2
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "<strong>VR Async Balls</strong> will immerse you into the virtual world of the cosmopark, where you can play on a slot machine. You have to hold two balls at one and  the same time on different moving tracks. Firstly, only one level is available for you, after passing it, the next will be opened. There are 20 levels in the game, each of them is more difficult than the previous one. The tracks curiously bend into space and after pressing the Start button, they begin to move at a constant speed. You need to prevent two balls from falling off these tracks with your hands and bring them to the end.<br>Trained people, like pianists, can easily move their hands in different directions independently of each other. This simulator will allow you to check how asynchronous your brain works, how accurately and consciously you can move your hands, how much you can concentrate and control the movements of two balls at once. <br>This little game will bring you a lot of fun and joy from its passage. Good luck!",
     "developers": [
       "Aviahel"
     ],
-    "genres": [
-      {
-        "id": "23",
-        "description": "Indie"
-      },
-      {
-        "id": "28",
-        "description": "Simulation"
-      },
-      {
-        "id": "18",
-        "description": "Sports"
-      }
-    ],
+    "genres": {
+      "Indie": "23",
+      "Simulation": "28",
+      "Sports": "18"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/header.jpg?t=1641815348",
     "languages": "English, Russian",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "VR Async Balls",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 1,
@@ -1470,32 +1296,23 @@
   },
   {
     "about_the_game": "Artist Alya wakes up on the banks of a river with no memories and only a journal, painting supplies, and a ticket for a train that leaves in 5 days. You have until then to recover her memories. <br><br>And with every choice changing what you remember...<br><br>Good luck!<br><br><strong>Features</strong><br><ul class=\"bb_ul\"><li>Pixel-style aesthetics keeps focus on story </li><li>Simple controls, but not a simple plot </li><li>Story-centric RPG where every choice you make changes how the game plays out </li><li>Each playthrough takes around 2 hours to complete, but multiple playthroughs are necessary if you want to uncover the whole story </li><li>No combat, but plenty to do... you play as an artist after all </li></ul><br><strong>Warning</strong><br>There are some passing mentions of disturbing elements (such as death). However, nothing gruesome or in-depth is shown or talked about.",
-    "app_id": {
-      "name": "Remembrance",
-      "app_id": 1848660
+    "app_id": 1848660,
+    "categories": {
+      "Single-player": 2
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "Artist Alya wakes up on the banks of a river with no memories and only a journal, painting supplies, and a ticket for a train that leaves in 5 days. You have until then to recover her memories. <br><br>And with every choice changing what you remember...<br><br>Good luck!<br><br><strong>Features</strong><br><ul class=\"bb_ul\"><li>Pixel-style aesthetics keeps focus on story </li><li>Simple controls, but not a simple plot </li><li>Story-centric RPG where every choice you make changes how the game plays out </li><li>Each playthrough takes around 2 hours to complete, but multiple playthroughs are necessary if you want to uncover the whole story </li><li>No combat, but plenty to do... you play as an artist after all </li></ul><br><strong>Warning</strong><br>There are some passing mentions of disturbing elements (such as death). However, nothing gruesome or in-depth is shown or talked about.",
     "developers": [
       "Kizmet Rose"
     ],
-    "genres": [
-      {
-        "id": "23",
-        "description": "Indie"
-      }
-    ],
+    "genres": {
+      "Indie": "23"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/header.jpg?t=1642295069",
     "languages": "English",
     "linux": true,
     "mac": true,
-    "name": "",
+    "name": "Remembrance",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 1,
@@ -1550,20 +1367,17 @@
   },
   {
     "about_the_game": "",
-    "app_id": {
-      "name": "RocketBallZ Playtest",
-      "app_id": 1848670
-    },
-    "categories": [],
+    "app_id": 1848670,
+    "categories": {},
     "coming_soon": false,
     "detailed_description": "",
     "developers": [],
-    "genres": [],
+    "genres": {},
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/header.jpg?t=1639765740",
-    "languages": null,
+    "languages": "",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "RocketBallZ Playtest",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -1631,36 +1445,24 @@
   },
   {
     "about_the_game": "A 2D single-player strategy game about a rescue mission that takes place in space, and it is up to the rescue team to venture out and find the missing astronauts, to rescue them from the dangers of space. The player must rotate the rings and align the astronauts on top, for them to enter the ship safely, and escape.",
-    "app_id": {
-      "name": "Operation S",
-      "app_id": 1848680
+    "app_id": 1848680,
+    "categories": {
+      "Single-player": 2
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "A 2D single-player strategy game about a rescue mission that takes place in space, and it is up to the rescue team to venture out and find the missing astronauts, to rescue them from the dangers of space. The player must rotate the rings and align the astronauts on top, for them to enter the ship safely, and escape.",
     "developers": [
       "Game Changers"
     ],
-    "genres": [
-      {
-        "id": "4",
-        "description": "Casual"
-      },
-      {
-        "id": "2",
-        "description": "Strategy"
-      }
-    ],
+    "genres": {
+      "Casual": "4",
+      "Strategy": "2"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/header.jpg?t=1641886760",
     "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Operation S",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -1708,52 +1510,28 @@
   },
   {
     "about_the_game": "<h2 class=\"bb_tag\">Features</h2><strong><ul class=\"bb_ul\"><li>Roguelite ACT</li></ul></strong>Challenge again and again in the never repeated level. In each life, you will encounter different enemies and treasures<br><br><strong><ul class=\"bb_ul\"><li>Powerful Treasure System</li></ul></strong>ninjasoul has rich treasure skills and powerful property system. Each skill can be matched with other skills, and entry can even directly change the scope and form of skills! You can experience the charm of ARPG games in this roguelite act game<br><br><strong><ul class=\"bb_ul\"><li>A Combat System Then Suitable For Everyone</li></ul></strong>in the game, players can choose to focus on the speed duel between the blades, or focus on building their own BD (treasure matching) and use Katana skill and Ninjutsu to kill the enemy<br><br><strong><ul class=\"bb_ul\"><li>Explore a World Full of Unknowns</li></ul></strong>hidden treasure boxes are set in different corners of each level. Exploring levels in battle may get unknown gains!<br><br><strong><ul class=\"bb_ul\"><li>Unique Customs Clearance Reward</li></ul></strong>After a game of customs clearance, players can choose one of equip for permanent fusion! Players can get the ability to this equip and use it in the next game!<br>Of course, after each customs clearance, the enemy will become more cruel. If you want to get more fusion opportunities, you must face these enemies who become more cruel<br><br><strong><ul class=\"bb_ul\"><li>Shuriken and Iisen</li></ul></strong>at the moment when the enemy makes an attack, the Ninja can throw Kunai to seal the enemy's action and use &quot;Iisen&quot; to pursue<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/IISEN.gif?t=1642247222\" /><br><br><strong><ul class=\"bb_ul\"><li>Katana Skill and Ninjutsu</li></ul></strong>In the game, Katana and scroll have active skills<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/ZONE_slash.gif?t=1642247222\" /><br>Players can use these powerful active skills to destroy all enemies in one fell swoop<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/BIG_BOOM.gif?t=1642247222\" />",
-    "app_id": {
-      "name": "\u5996\u5200\u9000\u9b54\u5fcd",
-      "app_id": 1848710
+    "app_id": 1848710,
+    "categories": {
+      "Single-player": 2,
+      "Full controller support": 28,
+      "Steam Cloud": 23
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 28,
-        "description": "Full controller support"
-      },
-      {
-        "id": 23,
-        "description": "Steam Cloud"
-      }
-    ],
     "coming_soon": true,
     "detailed_description": "<h2 class=\"bb_tag\">Features</h2><strong><ul class=\"bb_ul\"><li>Roguelite ACT</li></ul></strong>Challenge again and again in the never repeated level. In each life, you will encounter different enemies and treasures<br><br><strong><ul class=\"bb_ul\"><li>Powerful Treasure System</li></ul></strong>ninjasoul has rich treasure skills and powerful property system. Each skill can be matched with other skills, and entry can even directly change the scope and form of skills! You can experience the charm of ARPG games in this roguelite act game<br><br><strong><ul class=\"bb_ul\"><li>A Combat System Then Suitable For Everyone</li></ul></strong>in the game, players can choose to focus on the speed duel between the blades, or focus on building their own BD (treasure matching) and use Katana skill and Ninjutsu to kill the enemy<br><br><strong><ul class=\"bb_ul\"><li>Explore a World Full of Unknowns</li></ul></strong>hidden treasure boxes are set in different corners of each level. Exploring levels in battle may get unknown gains!<br><br><strong><ul class=\"bb_ul\"><li>Unique Customs Clearance Reward</li></ul></strong>After a game of customs clearance, players can choose one of equip for permanent fusion! Players can get the ability to this equip and use it in the next game!<br>Of course, after each customs clearance, the enemy will become more cruel. If you want to get more fusion opportunities, you must face these enemies who become more cruel<br><br><strong><ul class=\"bb_ul\"><li>Shuriken and Iisen</li></ul></strong>at the moment when the enemy makes an attack, the Ninja can throw Kunai to seal the enemy's action and use &quot;Iisen&quot; to pursue<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/IISEN.gif?t=1642247222\" /><br><br><strong><ul class=\"bb_ul\"><li>Katana Skill and Ninjutsu</li></ul></strong>In the game, Katana and scroll have active skills<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/ZONE_slash.gif?t=1642247222\" /><br>Players can use these powerful active skills to destroy all enemies in one fell swoop<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/BIG_BOOM.gif?t=1642247222\" />",
     "developers": [
       "Ash Game Studio"
     ],
-    "genres": [
-      {
-        "id": "1",
-        "description": "Action"
-      },
-      {
-        "id": "25",
-        "description": "Adventure"
-      },
-      {
-        "id": "23",
-        "description": "Indie"
-      },
-      {
-        "id": "70",
-        "description": "Early Access"
-      }
-    ],
+    "genres": {
+      "Action": "1",
+      "Adventure": "25",
+      "Indie": "23",
+      "Early Access": "70"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/header.jpg?t=1642247222",
     "languages": "English, Simplified Chinese",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "\u5996\u5200\u9000\u9b54\u5fcd",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -1796,48 +1574,27 @@
   },
   {
     "about_the_game": "<h2 class=\"bb_tag\">Experience of 193% exhilaration like never before </h2>Use the <strong> completely invincible </strong> fever system to shoot down the oncoming enemies!!<h2 class=\"bb_tag\"> Operation method </h2>Compatible with gamepads and keyboards.<br><br><ul class=\"bb_ul\"><li> Shot: An attack that can be shot without restrictions.<br>Pad: A button / Keyboard: Z key<br></li><li> Spell: An attack that consumes and shoots a spell gauge.<br>Pad: X button / Keyboard: X key<br></li><li> Fever: Fever will be invincible as long as the remaining time allows and the shot will be strengthened.<br>Pad: R1 button / Keyboard: L-Shift key<br></li><li> Pose: Pause the game.<br>Pad: Start button / Keyboard: ESC key</li></ul><br>* Key assignment can be changed with the key config.<h2 class=\"bb_tag\"> Shot </h2>It's a low-powered attack instead of shooting without limits.<br><ul class=\"bb_ul\"><li> Straight shot<br>Simple shot 1, attack range is a little narrow.<br>When combined with high speed, it can cover the narrow range to some extent.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot1.jpg?t=1643064377\" /><br><br></li><li> Wide shot<br>Simple shot 2, perfect for clearing Zako.<br>The power when hitting all is the same as straight.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot2.jpg?t=1643064377\" /><br><br></li><li> Rolling shot<br>It can cover all directions, but ...<br>The power when hitting all the shots is the highest, but the use at the bottom of the screen is very poor ...<br>For advanced users as it is premised on using Fever's invincible time<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot3.jpg?t=1643064377\" /></li></ul><h2 class=\"bb_tag\"> Spell </h2>It's a powerful attack that consumes energy and releases it.<br>Energy will recover to 100% in 2 to 3 seconds, so use it sparingly.<br>You can check the energy with the gauge around your ship.<br><ul class=\"bb_ul\"><li> Blue: 100%, Spell available.<br></li><li> Green: Less than 100%, Spell available.<br></li><li> Red: Spell disabled.</li></ul><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene1.jpg?t=1643064377\" /><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene2.jpg?t=1643064377\" /><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene3.jpg?t=1643064377\" /><br><br><ul class=\"bb_ul\"><li> Bomb<br>High-powered bullet that explodes when touched.<br>When it explodes, the attack range expands over a wide area.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell1.jpg?t=1643064377\" /><br><br></li><li> Thunder<br>Fires a penetrating attack in a straight line with the nearest enemy.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell2.jpg?t=1643064377\" /><br><br></li><li> Kaihou<br>Tracking laser.<br>Chase and wipe out enemies for a certain period of time.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell3.jpg?t=1643064377\" /></li></ul><h2 class=\"bb_tag\"> Fever </h2>Super important system for capture.<br>When you activate Fever.<br><strong> Your ship becomes invincible and your shots are super-powered up. </strong><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/fever.jpg?t=1643064377\" /><br><br>Even if it hits an enemy bullet, it will not make a mistake and will eliminate the touched enemy bullet.<br>* Even if it hits the laser, it will not be a mistake, but it cannot be extinguished.<br><br>You can check the usable time in the fever time on the upper left of the screen.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/session_3.jpg?t=1643064377\" /><br><br>Fever time increases by acquiring peach items.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/momo.jpg?t=1643064377\" />",
-    "app_id": {
-      "name": "IKUSAAAAAAAN!",
-      "app_id": 1848730
+    "app_id": 1848730,
+    "categories": {
+      "Single-player": 2,
+      "Steam Achievements": 22,
+      "Partial Controller Support": 18,
+      "Steam Cloud": 23,
+      "Steam Leaderboards": 25
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 22,
-        "description": "Steam Achievements"
-      },
-      {
-        "id": 18,
-        "description": "Partial Controller Support"
-      },
-      {
-        "id": 23,
-        "description": "Steam Cloud"
-      },
-      {
-        "id": 25,
-        "description": "Steam Leaderboards"
-      }
-    ],
     "coming_soon": true,
     "detailed_description": "<h2 class=\"bb_tag\">Experience of 193% exhilaration like never before </h2>Use the <strong> completely invincible </strong> fever system to shoot down the oncoming enemies!!<h2 class=\"bb_tag\"> Operation method </h2>Compatible with gamepads and keyboards.<br><br><ul class=\"bb_ul\"><li> Shot: An attack that can be shot without restrictions.<br>Pad: A button / Keyboard: Z key<br></li><li> Spell: An attack that consumes and shoots a spell gauge.<br>Pad: X button / Keyboard: X key<br></li><li> Fever: Fever will be invincible as long as the remaining time allows and the shot will be strengthened.<br>Pad: R1 button / Keyboard: L-Shift key<br></li><li> Pose: Pause the game.<br>Pad: Start button / Keyboard: ESC key</li></ul><br>* Key assignment can be changed with the key config.<h2 class=\"bb_tag\"> Shot </h2>It's a low-powered attack instead of shooting without limits.<br><ul class=\"bb_ul\"><li> Straight shot<br>Simple shot 1, attack range is a little narrow.<br>When combined with high speed, it can cover the narrow range to some extent.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot1.jpg?t=1643064377\" /><br><br></li><li> Wide shot<br>Simple shot 2, perfect for clearing Zako.<br>The power when hitting all is the same as straight.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot2.jpg?t=1643064377\" /><br><br></li><li> Rolling shot<br>It can cover all directions, but ...<br>The power when hitting all the shots is the highest, but the use at the bottom of the screen is very poor ...<br>For advanced users as it is premised on using Fever's invincible time<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/shot3.jpg?t=1643064377\" /></li></ul><h2 class=\"bb_tag\"> Spell </h2>It's a powerful attack that consumes energy and releases it.<br>Energy will recover to 100% in 2 to 3 seconds, so use it sparingly.<br>You can check the energy with the gauge around your ship.<br><ul class=\"bb_ul\"><li> Blue: 100%, Spell available.<br></li><li> Green: Less than 100%, Spell available.<br></li><li> Red: Spell disabled.</li></ul><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene1.jpg?t=1643064377\" /><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene2.jpg?t=1643064377\" /><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/ene3.jpg?t=1643064377\" /><br><br><ul class=\"bb_ul\"><li> Bomb<br>High-powered bullet that explodes when touched.<br>When it explodes, the attack range expands over a wide area.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell1.jpg?t=1643064377\" /><br><br></li><li> Thunder<br>Fires a penetrating attack in a straight line with the nearest enemy.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell2.jpg?t=1643064377\" /><br><br></li><li> Kaihou<br>Tracking laser.<br>Chase and wipe out enemies for a certain period of time.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/spell3.jpg?t=1643064377\" /></li></ul><h2 class=\"bb_tag\"> Fever </h2>Super important system for capture.<br>When you activate Fever.<br><strong> Your ship becomes invincible and your shots are super-powered up. </strong><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/fever.jpg?t=1643064377\" /><br><br>Even if it hits an enemy bullet, it will not make a mistake and will eliminate the touched enemy bullet.<br>* Even if it hits the laser, it will not be a mistake, but it cannot be extinguished.<br><br>You can check the usable time in the fever time on the upper left of the screen.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/session_3.jpg?t=1643064377\" /><br><br>Fever time increases by acquiring peach items.<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848730/extras/momo.jpg?t=1643064377\" />",
     "developers": [
       "\u5e7d\u3005\u71e6\u3005(yuyusansan)"
     ],
-    "genres": [
-      {
-        "id": "1",
-        "description": "Action"
-      }
-    ],
+    "genres": {
+      "Action": "1"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/header.jpg?t=1643064377",
     "languages": "English, Japanese",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "IKUSAAAAAAAN!",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -1900,32 +1657,23 @@
   },
   {
     "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb2.PNG?t=1641402052\" /><br><br><strong>Tkium Exclusion Area is an horror escape game.</strong><br>This place is an asylum. It has been evacuated, but why? You need to get out of this place, and quickly. Even if this area looks abandoned, nothing can confirm that you are really alone.<br>You have to leave quickly, the fear is taking over you.<br>You are not alone in this place. Someone, or something, hunts the last survivors.<br>Bad things happen in the darkest places.<br><strong>Be aware of where you are.</strong><br><br><strong>This game is a one-time play, meaning that there is only one storyline and restarting it will not change any of the objects.</strong><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb.PNG?t=1641402052\" /><br><br><strong>The area is fully locked down due to unknow incidents.</strong><br>Find the ways to open each door, and to escape the area as fast as possible.<br>Be aware of your insanity: it can lead you to death. You need to get out of this place before the counter reaches 100%.<br>The timer shows how long you have been in here.",
-    "app_id": {
-      "name": "Tkium Exclusion Area",
-      "app_id": 1847810
+    "app_id": 1847810,
+    "categories": {
+      "Single-player": 2
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb2.PNG?t=1641402052\" /><br><br><strong>Tkium Exclusion Area is an horror escape game.</strong><br>This place is an asylum. It has been evacuated, but why? You need to get out of this place, and quickly. Even if this area looks abandoned, nothing can confirm that you are really alone.<br>You have to leave quickly, the fear is taking over you.<br>You are not alone in this place. Someone, or something, hunts the last survivors.<br>Bad things happen in the darkest places.<br><strong>Be aware of where you are.</strong><br><br><strong>This game is a one-time play, meaning that there is only one storyline and restarting it will not change any of the objects.</strong><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb.PNG?t=1641402052\" /><br><br><strong>The area is fully locked down due to unknow incidents.</strong><br>Find the ways to open each door, and to escape the area as fast as possible.<br>Be aware of your insanity: it can lead you to death. You need to get out of this place before the counter reaches 100%.<br>The timer shows how long you have been in here.",
     "developers": [
       "Tkium"
     ],
-    "genres": [
-      {
-        "id": "23",
-        "description": "Indie"
-      }
-    ],
+    "genres": {
+      "Indie": "23"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/header.jpg?t=1641402052",
     "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Tkium Exclusion Area",
     "negative_reviews": 1,
     "owner_count": 10000,
     "positive_reviews": 4,
@@ -1978,40 +1726,25 @@
   },
   {
     "about_the_game": "After falling from your pond at the top of the tower you must climb your way back up! With only a rocket launcher and your sick jumps see how fast you can make it back up! HiddenFrog is a relaxing tower climber game where you play as a frog who has fallen off of his island at the top of the tower. Use launchpads and wall runs to help you climb the tower.<h2 class=\"bb_tag\">Use your rocket launcher to propel yourself backup!</h2><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847820/extras/Gameplay_002.gif?t=1642611941\" /><h2 class=\"bb_tag\">Wallrun to avoid gaps too large to propel across</h2><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847820/extras/Gameplay_001.gif?t=1642611941\" />",
-    "app_id": {
-      "name": "Hidden Frog",
-      "app_id": 1847820
+    "app_id": 1847820,
+    "categories": {
+      "Single-player": 2,
+      "Steam Leaderboards": 25
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 25,
-        "description": "Steam Leaderboards"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "After falling from your pond at the top of the tower you must climb your way back up! With only a rocket launcher and your sick jumps see how fast you can make it back up! HiddenFrog is a relaxing tower climber game where you play as a frog who has fallen off of his island at the top of the tower. Use launchpads and wall runs to help you climb the tower.<h2 class=\"bb_tag\">Use your rocket launcher to propel yourself backup!</h2><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847820/extras/Gameplay_002.gif?t=1642611941\" /><h2 class=\"bb_tag\">Wallrun to avoid gaps too large to propel across</h2><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847820/extras/Gameplay_001.gif?t=1642611941\" />",
     "developers": [
       "Void Hook"
     ],
-    "genres": [
-      {
-        "id": "4",
-        "description": "Casual"
-      },
-      {
-        "id": "23",
-        "description": "Indie"
-      }
-    ],
+    "genres": {
+      "Casual": "4",
+      "Indie": "23"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/header.jpg?t=1642611941",
-    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Hidden Frog",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 2,
@@ -2066,44 +1799,26 @@
   },
   {
     "about_the_game": "Gameplay:<br />\r\n<br />\r\nEngage with tight controls that require precision to master. Run, jump, dash, and slash to get to the end of each level.<br />\r\n<br />\r\nYour sword is your main weapon. You can find side weapons and ammo throughout the levels, but it is up to you when you decide to use them as they are in limited supply.<br />\r\n<br />\r\nKeep an eye on your stamina bar so you know when you can run and jump into the fray or when to ease the reins. <br />\r\n<br />\r\nRead letters to find hints and get deeper into the lore, explore multiple paths, solve puzzles and interact with objects to progress.<br />\r\n<br />\r\nManage your inventory as there are limited slots available for the weapons, ammo, and potions found throughout the world.<br />\r\n<br />\r\nArt: <br />\r\n<br />\r\nThis game is completely pixel art, even down to the custom fonts used. Enemies, attacks, and effects are animated one frame at a time. Using more colors than were possible with 8 bit, but less pixel density than 16 bit, the art has a style of its own which harkens back to both eras. Plentiful parallax scrolling further draws you into the world, giving depth to the 2D scenes.<br />\r\n<br />\r\nEach level is distinct, having their own themes both artistically and musically . <br />\r\n<br />\r\nMusic and Sound:<br />\r\n<br />\r\nThe music is scored and produced to invoke the sound of classic 16 bit games with melodies to keep you engaged on your journey.  The sound samples used are reduced in fidelity to recreate what it would have sounded like to squeeze each byte out of the memory.<br />\r\n<br />\r\nStory:<br />\r\n<br />\r\nA tale of woe and blight has befallen a small European town in 18XX. You are descended from a family of witch hunters with knowledge and skills that few possess. A letter beseeching you for assistance arrives, and though widowed and retired from the life brought on by your lineage, something impels you to go. Once you arrive, you find you have stumbled upon a great evil not seen since ages long forgotten. The town has been beset by powerful witches, who bring unto the earth the undead, monsters made of decaying flesh, creatures of nightmares and horror, all by use of their black blood magics and rituals. <br />\r\n<br />\r\nUnravel the mystery, defeat the hordes of monsters, and bring back peace to the people of this town\u2026 or die trying.",
-    "app_id": {
-      "name": "Witchbane",
-      "app_id": 1847840
+    "app_id": 1847840,
+    "categories": {
+      "Single-player": 2,
+      "Partial Controller Support": 18
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 18,
-        "description": "Partial Controller Support"
-      }
-    ],
     "coming_soon": true,
     "detailed_description": "Gameplay:<br />\r\n<br />\r\nEngage with tight controls that require precision to master. Run, jump, dash, and slash to get to the end of each level.<br />\r\n<br />\r\nYour sword is your main weapon. You can find side weapons and ammo throughout the levels, but it is up to you when you decide to use them as they are in limited supply.<br />\r\n<br />\r\nKeep an eye on your stamina bar so you know when you can run and jump into the fray or when to ease the reins. <br />\r\n<br />\r\nRead letters to find hints and get deeper into the lore, explore multiple paths, solve puzzles and interact with objects to progress.<br />\r\n<br />\r\nManage your inventory as there are limited slots available for the weapons, ammo, and potions found throughout the world.<br />\r\n<br />\r\nArt: <br />\r\n<br />\r\nThis game is completely pixel art, even down to the custom fonts used. Enemies, attacks, and effects are animated one frame at a time. Using more colors than were possible with 8 bit, but less pixel density than 16 bit, the art has a style of its own which harkens back to both eras. Plentiful parallax scrolling further draws you into the world, giving depth to the 2D scenes.<br />\r\n<br />\r\nEach level is distinct, having their own themes both artistically and musically . <br />\r\n<br />\r\nMusic and Sound:<br />\r\n<br />\r\nThe music is scored and produced to invoke the sound of classic 16 bit games with melodies to keep you engaged on your journey.  The sound samples used are reduced in fidelity to recreate what it would have sounded like to squeeze each byte out of the memory.<br />\r\n<br />\r\nStory:<br />\r\n<br />\r\nA tale of woe and blight has befallen a small European town in 18XX. You are descended from a family of witch hunters with knowledge and skills that few possess. A letter beseeching you for assistance arrives, and though widowed and retired from the life brought on by your lineage, something impels you to go. Once you arrive, you find you have stumbled upon a great evil not seen since ages long forgotten. The town has been beset by powerful witches, who bring unto the earth the undead, monsters made of decaying flesh, creatures of nightmares and horror, all by use of their black blood magics and rituals. <br />\r\n<br />\r\nUnravel the mystery, defeat the hordes of monsters, and bring back peace to the people of this town\u2026 or die trying.",
     "developers": [
       "Iconoclast Games"
     ],
-    "genres": [
-      {
-        "id": "1",
-        "description": "Action"
-      },
-      {
-        "id": "25",
-        "description": "Adventure"
-      },
-      {
-        "id": "23",
-        "description": "Indie"
-      }
-    ],
+    "genres": {
+      "Action": "1",
+      "Adventure": "25",
+      "Indie": "23"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/header.jpg?t=1639592073",
-    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Witchbane",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -2151,36 +1866,24 @@
   },
   {
     "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847860/extras/descri\u00e7ao_da_pagina_da_loja.png?t=1643226401\" /><br><br>Daltoniel in his daily routine, from working out, wearing the costumes of his favorite heroes or eating his powerful enemies in delicious meals that he prepared himself, how good is it to enjoy life being a demigod slime.<h2 class=\"bb_tag\">features</h2><br><ul class=\"bb_ul\"><li>Jigsaw puzzle having 12 cute illustrations of Daltoniel</li></ul><ul class=\"bb_ul\"><li>For each jigsaw puzzle, 3 difficulty levels can be set</li></ul><ul class=\"bb_ul\"><li>A relaxing and imersive clean Background</li></ul><ul class=\"bb_ul\"><li>Zoom in/Zoom Out</li></ul><ul class=\"bb_ul\"><li>Draggable scenario</li></ul><ul class=\"bb_ul\"><li>A bunch of game juiciness</li></ul><ul class=\"bb_ul\"><li>Relax with a comforting and exclusive lo-fi soundtrack</li></ul>",
-    "app_id": {
-      "name": "Jigsaw Souls",
-      "app_id": 1847860
+    "app_id": 1847860,
+    "categories": {
+      "Single-player": 2,
+      "Steam Achievements": 22
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 22,
-        "description": "Steam Achievements"
-      }
-    ],
     "coming_soon": true,
     "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847860/extras/descri\u00e7ao_da_pagina_da_loja.png?t=1643226401\" /><br><br>Daltoniel in his daily routine, from working out, wearing the costumes of his favorite heroes or eating his powerful enemies in delicious meals that he prepared himself, how good is it to enjoy life being a demigod slime.<h2 class=\"bb_tag\">features</h2><br><ul class=\"bb_ul\"><li>Jigsaw puzzle having 12 cute illustrations of Daltoniel</li></ul><ul class=\"bb_ul\"><li>For each jigsaw puzzle, 3 difficulty levels can be set</li></ul><ul class=\"bb_ul\"><li>A relaxing and imersive clean Background</li></ul><ul class=\"bb_ul\"><li>Zoom in/Zoom Out</li></ul><ul class=\"bb_ul\"><li>Draggable scenario</li></ul><ul class=\"bb_ul\"><li>A bunch of game juiciness</li></ul><ul class=\"bb_ul\"><li>Relax with a comforting and exclusive lo-fi soundtrack</li></ul>",
     "developers": [
       "Mr Tomatus"
     ],
-    "genres": [
-      {
-        "id": "4",
-        "description": "Casual"
-      }
-    ],
+    "genres": {
+      "Casual": "4"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/header.jpg?t=1643226401",
-    "languages": "English<strong>*</strong>, French<strong>*</strong>, Italian<strong>*</strong>, German<strong>*</strong>, Spanish - Latin America<strong>*</strong>, Polish<strong>*</strong>, Portuguese - Brazil<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Jigsaw Souls",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -2223,48 +1926,27 @@
   },
   {
     "about_the_game": "<strong><h2 class=\"bb_tag\">Play your part in the story</h2></strong><br>Enter the world of Synchronicity and discover its secrets! Follow one of the two available stories. Together with the characters, search for answers in a peculiar world. Find out what's behind it all... And try to break the infinite time loop.<br><strong><h2 class=\"bb_tag\">Your choices</h2></strong><br>Two different stories. Two people hungry for change. A rapidly changing world and an emerging new reality that turns out to be far from ideal. Shape a challenging and complex story, influenced by your choices. Uncover the hidden layers of a story.<br><strong><h2 class=\"bb_tag\">Heroes </h2></strong><br>Travel to the year 8022 and meet Vivian, a member of the space program. Immerse yourself in a disturbing adventure and explore a newly discovered world. <br>Choose the story of Magnus and travel to the year 10753 for a journey into humanity's darkest hour. Face a grim world ruled by machine lords.<br><strong><h2 class=\"bb_tag\">An intricate mystery unfolds</h2></strong><br>Discover what both stories have in common. <br>Enter Synchronicity and embark on a journey. <br>Doubts. Dilemmas. Promises. Hope. Struggle. Freedom.<br>When the &quot;synchronization process&quot; begins, time and reality cease to be what they were. <br><br><strong><h2 class=\"bb_tag\">Main features of the game:</h2></strong><br><ul class=\"bb_ul\"><li> Episodic adventure game<br></li><li> Choices that directly affect the ending of the story<br></li><li> Explore the insights of two characters: each character has a different story to tell<br></li><li> A multi-layered plot that unfolds into a complex tangle of intrigue<br></li><li> Poignant, original soundtrack<br></li><li> Polish voice acting</li></ul>",
-    "app_id": {
-      "name": "Synchronizacja",
-      "app_id": 1847900
+    "app_id": 1847900,
+    "categories": {
+      "Single-player": 2,
+      "Steam Achievements": 22
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 22,
-        "description": "Steam Achievements"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "<strong><h2 class=\"bb_tag\">Play your part in the story</h2></strong><br>Enter the world of Synchronicity and discover its secrets! Follow one of the two available stories. Together with the characters, search for answers in a peculiar world. Find out what's behind it all... And try to break the infinite time loop.<br><strong><h2 class=\"bb_tag\">Your choices</h2></strong><br>Two different stories. Two people hungry for change. A rapidly changing world and an emerging new reality that turns out to be far from ideal. Shape a challenging and complex story, influenced by your choices. Uncover the hidden layers of a story.<br><strong><h2 class=\"bb_tag\">Heroes </h2></strong><br>Travel to the year 8022 and meet Vivian, a member of the space program. Immerse yourself in a disturbing adventure and explore a newly discovered world. <br>Choose the story of Magnus and travel to the year 10753 for a journey into humanity's darkest hour. Face a grim world ruled by machine lords.<br><strong><h2 class=\"bb_tag\">An intricate mystery unfolds</h2></strong><br>Discover what both stories have in common. <br>Enter Synchronicity and embark on a journey. <br>Doubts. Dilemmas. Promises. Hope. Struggle. Freedom.<br>When the &quot;synchronization process&quot; begins, time and reality cease to be what they were. <br><br><strong><h2 class=\"bb_tag\">Main features of the game:</h2></strong><br><ul class=\"bb_ul\"><li> Episodic adventure game<br></li><li> Choices that directly affect the ending of the story<br></li><li> Explore the insights of two characters: each character has a different story to tell<br></li><li> A multi-layered plot that unfolds into a complex tangle of intrigue<br></li><li> Poignant, original soundtrack<br></li><li> Polish voice acting</li></ul>",
     "developers": [
       "Chaos Group Games"
     ],
-    "genres": [
-      {
-        "id": "25",
-        "description": "Adventure"
-      },
-      {
-        "id": "4",
-        "description": "Casual"
-      },
-      {
-        "id": "37",
-        "description": "Free to Play"
-      },
-      {
-        "id": "23",
-        "description": "Indie"
-      }
-    ],
+    "genres": {
+      "Adventure": "25",
+      "Casual": "4",
+      "Free to Play": "37",
+      "Indie": "23"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/header.jpg?t=1643540480",
-    "languages": "Polish<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "",
     "linux": true,
     "mac": true,
-    "name": "",
+    "name": "Synchronizacja",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -2312,41 +1994,26 @@
   },
   {
     "about_the_game": "Survive for as long as you can while playing as the blue robot Shrumblo! The objective of this game is to lure Grumblo, the red demon, into several moving spikes which temporarily stuns him, and also earns you a point. Survive for as long as you can and earn a high score! By earning a high score you can earn more trophies as you progress. There are two sets of trophies, one for the main mode where you are pursued by only one enemy, and another set for the Double Grumblo Madness mode, where two enemies will pursue you at once. <br><br>This game tries to invoke the feeling of classic arcade games that are easy to understand, hard to master, and enjoyable in short bursts. I hope you have fun!<br><br><strong>List of features:</strong><br>1. An intro cutscene explaining the plot of the game<br>2. A high score feature to track your progression.<br>3. Trophies you unlock by getting higher scores over time.<br>4. A base game mode where you are chased by Grumblo (the red circle looking fellow) and lure him into moving spikes to earn points. This can be seen in more detail in the trailer on this page. <br>5. A bonus game mode where there are two Grumblos chasing after you.<br><br><strong>List of mechanics:</strong><br><br>1. You can of course use the WASD keys to move<br>2. Use the shift key to turn on Shrumblo's jet boots to move faster. The meter for this will deplete the longer you use it, but will recharge over time.<br>3. If Shrumblo is close to Grumblo the dash meter will recharge faster.<br>4. If Shrumblo is touched by the spikes or Grumblo the game will end, and if you got a high score it will be saved.",
-    "app_id": {
-      "name": "Shrumblo and the Magical Grumblo",
-      "app_id": 1847920
+    "app_id": 1847920,
+    "categories": {
+      "Single-player": 2
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      }
-    ],
     "coming_soon": false,
     "detailed_description": "Survive for as long as you can while playing as the blue robot Shrumblo! The objective of this game is to lure Grumblo, the red demon, into several moving spikes which temporarily stuns him, and also earns you a point. Survive for as long as you can and earn a high score! By earning a high score you can earn more trophies as you progress. There are two sets of trophies, one for the main mode where you are pursued by only one enemy, and another set for the Double Grumblo Madness mode, where two enemies will pursue you at once. <br><br>This game tries to invoke the feeling of classic arcade games that are easy to understand, hard to master, and enjoyable in short bursts. I hope you have fun!<br><br><strong>List of features:</strong><br>1. An intro cutscene explaining the plot of the game<br>2. A high score feature to track your progression.<br>3. Trophies you unlock by getting higher scores over time.<br>4. A base game mode where you are chased by Grumblo (the red circle looking fellow) and lure him into moving spikes to earn points. This can be seen in more detail in the trailer on this page. <br>5. A bonus game mode where there are two Grumblos chasing after you.<br><br><strong>List of mechanics:</strong><br><br>1. You can of course use the WASD keys to move<br>2. Use the shift key to turn on Shrumblo's jet boots to move faster. The meter for this will deplete the longer you use it, but will recharge over time.<br>3. If Shrumblo is close to Grumblo the dash meter will recharge faster.<br>4. If Shrumblo is touched by the spikes or Grumblo the game will end, and if you got a high score it will be saved.",
     "developers": [
       "Squidnow",
       "Ooftroop"
     ],
-    "genres": [
-      {
-        "id": "1",
-        "description": "Action"
-      },
-      {
-        "id": "4",
-        "description": "Casual"
-      },
-      {
-        "id": "23",
-        "description": "Indie"
-      }
-    ],
+    "genres": {
+      "Action": "1",
+      "Casual": "4",
+      "Indie": "23"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/header.jpg?t=1640899006",
-    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Shrumblo and the Magical Grumblo",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 2,
@@ -2407,64 +2074,31 @@
   },
   {
     "about_the_game": "Signum Perfectum is a turn-based card game between two opponents that battle using constructed decks of 25 cards.<br><br>Defeat your enemies by casting magic upon them or protect yourself from their curses. Winning matches rewards in the form of new cards.<br><br>There are currenly 22 unique cards to collect, but more will come.<br><br>Each card has different sign that you need to &quot;catch&quot; during a match before card can be played. The bigger the level of card the bigger the power but also the harder is to catch the sign.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847930/extras/play-card.gif?t=1642757511\" /><br><br>Level up your hero by casting cards to be able to use more powerful cards. There are four levels: Apprentice, Mage, High Mage and Archmage.<br><br>You can play single player quests and competitions or play against other players in multiplayer PvP matches.",
-    "app_id": {
-      "name": "Signum Perfectum",
-      "app_id": 1847930
+    "app_id": 1847930,
+    "categories": {
+      "Single-player": 2,
+      "Multi-player": 1,
+      "PvP": 49,
+      "Online PvP": 36,
+      "Steam Achievements": 22,
+      "Steam Cloud": 23,
+      "Steam Leaderboards": 25
     },
-    "categories": [
-      {
-        "id": 2,
-        "description": "Single-player"
-      },
-      {
-        "id": 1,
-        "description": "Multi-player"
-      },
-      {
-        "id": 49,
-        "description": "PvP"
-      },
-      {
-        "id": 36,
-        "description": "Online PvP"
-      },
-      {
-        "id": 22,
-        "description": "Steam Achievements"
-      },
-      {
-        "id": 23,
-        "description": "Steam Cloud"
-      },
-      {
-        "id": 25,
-        "description": "Steam Leaderboards"
-      }
-    ],
     "coming_soon": true,
     "detailed_description": "Signum Perfectum is a turn-based card game between two opponents that battle using constructed decks of 25 cards.<br><br>Defeat your enemies by casting magic upon them or protect yourself from their curses. Winning matches rewards in the form of new cards.<br><br>There are currenly 22 unique cards to collect, but more will come.<br><br>Each card has different sign that you need to &quot;catch&quot; during a match before card can be played. The bigger the level of card the bigger the power but also the harder is to catch the sign.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847930/extras/play-card.gif?t=1642757511\" /><br><br>Level up your hero by casting cards to be able to use more powerful cards. There are four levels: Apprentice, Mage, High Mage and Archmage.<br><br>You can play single player quests and competitions or play against other players in multiplayer PvP matches.",
     "developers": [
       "ovo6"
     ],
-    "genres": [
-      {
-        "id": "23",
-        "description": "Indie"
-      },
-      {
-        "id": "3",
-        "description": "RPG"
-      },
-      {
-        "id": "2",
-        "description": "Strategy"
-      }
-    ],
+    "genres": {
+      "Indie": "23",
+      "RPG": "3",
+      "Strategy": "2"
+    },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/header.jpg?t=1642757511",
-    "languages": "English<strong>*</strong><br><strong>*</strong>languages with full audio support",
+    "languages": "English",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Signum Perfectum",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,
@@ -2517,20 +2151,17 @@
   },
   {
     "about_the_game": "",
-    "app_id": {
-      "name": "Fleshgait Playtest",
-      "app_id": 1847960
-    },
-    "categories": [],
+    "app_id": 1847960,
+    "categories": {},
     "coming_soon": false,
     "detailed_description": "",
     "developers": [],
-    "genres": [],
+    "genres": {},
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847960/header.jpg?t=1639798264",
-    "languages": null,
+    "languages": "",
     "linux": false,
     "mac": false,
-    "name": "",
+    "name": "Fleshgait Playtest",
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 0,

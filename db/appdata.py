@@ -14,9 +14,9 @@ class AppData:
     developers: list[str] = field(default_factory=list)
     publishers: list[str] = field(default_factory=list)
 
-    tags: list[dict] = field(default_factory=list)
-    genres: list[dict] = field(default_factory=list)
-    categories: list[dict] = field(default_factory=list)
+    tags: dict = field(default_factory=dict)
+    genres: dict = field(default_factory=dict)
+    categories: dict = field(default_factory=dict)
 
     owner_count: int = 0
     positive_reviews: int = 0
@@ -36,18 +36,25 @@ class AppData:
     mac: bool = False
     linux: bool = False
 
-    def update(self, mapping: dict):
-        """Dictionary update method"""
-        self.__dict__.update(mapping)
+    def update(self, attributes: dict):
+        """Updates existing attributes.
+        Raises error if attribute doesn't exists.
+        """
+        # Check for typos
+        for a in attributes:
+            if a not in self.__attributes__:
+                raise AttributeError(f"Attribute not found: '{a}'")
 
-    def serialize(self):
-        """Retrun object as dict. JSON serializeable"""
+        self.__dict__.update(attributes)
+
+    def as_dict(self) -> dict:
+        """Returns atributes as key value pairs."""
         obj = {}
         for a in self.__attributes__:
             obj[a] = self.__getattribute__(a)
         return obj
 
-    def json(self, indent=0):
+    def json(self, indent=0) -> str:
         output = {}
         for a in self.__attributes__:
             output[a] = self.__getattribute__(a)
@@ -55,12 +62,12 @@ class AppData:
         return json.dumps(output, indent=indent)
 
     @property
-    def __attributes__(self):
-        """Returns all attributes, that are not callable or dunder methods"""
+    def __attributes__(self) -> list[str]:
+        """Returns all attributes, that are not callable or dunder methods."""
         attributes = [a for a in dir(self) if not (a.startswith("__") or callable(getattr(self, a)))]
         return attributes
 
-    def __repr__(self):
+    def __repr__(self) -> str:
         repr_object = {}
         for a in self.__attributes__:
             repr_object[a] = self.__getattribute__(a)
@@ -72,16 +79,16 @@ if __name__ == "__main__":
     app1_dict = {
         "app_id": 1847860,
         "name": "Jigsaw Souls",
-        "owners": "0 .. 20,000",
+        "owner_count": "0 .. 20,000",
         "price": None,
         "tags": [],
         "positive_reviews": 0,
         "negative_reviews": 0,
-        "detailed_description": "<img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1847860/extras/descri\u00e7ao_da_pagina_da_loja.png?t=1643226401\" /><br><br>Daltoniel in his daily routine, from working out, wearing the costumes of his favorite heroes or eating his powerful enemies in delicious meals that he prepared himself, how good is it to enjoy life being a demigod slime.<h2 class=\"bb_tag\">features</h2><br><ul class=\"bb_ul\"><li>Jigsaw puzzle having 12 cute illustrations of Daltoniel</li></ul><ul class=\"bb_ul\"><li>For each jigsaw puzzle, 3 difficulty levels can be set</li></ul><ul class=\"bb_ul\"><li>A relaxing and imersive clean Background</li></ul><ul class=\"bb_ul\"><li>Zoom in/Zoom Out</li></ul><ul class=\"bb_ul\"><li>Draggable scenario</li></ul><ul class=\"bb_ul\"><li>A bunch of game juiciness</li></ul><ul class=\"bb_ul\"><li>Relax with a comforting and exclusive lo-fi soundtrack</li></ul>",
-        "about_the_game": "<img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1847860/extras/descri\u00e7ao_da_pagina_da_loja.png?t=1643226401\" /><br><br>Daltoniel in his daily routine, from working out, wearing the costumes of his favorite heroes or eating his powerful enemies in delicious meals that he prepared himself, how good is it to enjoy life being a demigod slime.<h2 class=\"bb_tag\">features</h2><br><ul class=\"bb_ul\"><li>Jigsaw puzzle having 12 cute illustrations of Daltoniel</li></ul><ul class=\"bb_ul\"><li>For each jigsaw puzzle, 3 difficulty levels can be set</li></ul><ul class=\"bb_ul\"><li>A relaxing and imersive clean Background</li></ul><ul class=\"bb_ul\"><li>Zoom in/Zoom Out</li></ul><ul class=\"bb_ul\"><li>Draggable scenario</li></ul><ul class=\"bb_ul\"><li>A bunch of game juiciness</li></ul><ul class=\"bb_ul\"><li>Relax with a comforting and exclusive lo-fi soundtrack</li></ul>",
-        "short_description": "A fun puzzle about Daltoniel, the protagonist from the Souls Saga by Pickles Entertainment. Relax resolving this jigsaw puzzle with 12 original pictures and 3 difficulty levels!",
-        "supported_languages": "English<strong>*</strong>, French<strong>*</strong>, Italian<strong>*</strong>, German<strong>*</strong>, Spanish - Latin America<strong>*</strong>, Polish<strong>*</strong>, Portuguese - Brazil<strong>*</strong><br><strong>*</strong>languages with full audio support",
-        "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/header.jpg?t=1643226401",
+        "detailed_description": "",
+        "about_the_game": "",
+        "short_description": "A fun puzzle about Daltoniel.",
+        "languages": "English<strong>*</strong>, French<strong>*</strong>",
+        "header_image": "",
         "website": None,
         "developers": [
         "Mr Tomatus"
@@ -104,8 +111,8 @@ if __name__ == "__main__":
         "screenshots": [
         {
             "id": 0,
-            "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_d581b15836aaa6dd2457af38da9be6170b3c7fd1.600x338.jpg?t=1643226401",
-            "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_d581b15836aaa6dd2457af38da9be6170b3c7fd1.1920x1080.jpg?t=1643226401"
+            "path_thumbnail": "",
+            "path_full": ""
         } ],
         "languages": "",
         "release_date": "2022-02-11",
@@ -115,8 +122,8 @@ if __name__ == "__main__":
         "linux": False
     }
     app1 = AppData()
-    app1.coming_soon = False
-    app1.update({"TEST": "TEST"})
-    app1.update({"LOL": ["lila", "lele", "lolo"]})
+    app1.update(app1_dict)
+    app1.update({"about_the_game": "TEST"})
+    app1.update({"languages": ["lila", "lele", "lolo"]})
     print(app1.json(indent=2))
     # print(app1.__attributes__)
