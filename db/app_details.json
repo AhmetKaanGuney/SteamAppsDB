@@ -23,7 +23,7 @@
     "negative_reviews": 0,
     "owner_count": 10000,
     "positive_reviews": 1,
-    "price": "119",
+    "price": "199",
     "publishers": [
       "My Label Game Studio"
     ],
@@ -1069,7 +1069,7 @@
       "Action": "1",
       "Adventure": "25"
     },
-    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/header.jpg?t=1643599879",
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/header.jpg?t=1644170097",
     "languages": "English",
     "linux": false,
     "mac": false,
@@ -1085,43 +1085,33 @@
     "screenshots": [
       {
         "id": 0,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_265c0a46823c796e2fd3ba267df8f2024a75ae53.600x338.jpg?t=1643599879",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_265c0a46823c796e2fd3ba267df8f2024a75ae53.1920x1080.jpg?t=1643599879"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_58d1db0c4192134e40e84b68b5be162920873f65.600x338.jpg?t=1644170097",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_58d1db0c4192134e40e84b68b5be162920873f65.1920x1080.jpg?t=1644170097"
       },
       {
         "id": 1,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_c5fd81fde978822d38d181e412877803b493835d.600x338.jpg?t=1643599879",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_c5fd81fde978822d38d181e412877803b493835d.1920x1080.jpg?t=1643599879"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_333585b4f665773b9d3e37015abf27efa4be06b1.600x338.jpg?t=1644170097",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_333585b4f665773b9d3e37015abf27efa4be06b1.1920x1080.jpg?t=1644170097"
       },
       {
         "id": 2,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_0cfb4cb7584b773b66576ddaa5dd41e35fc15ead.600x338.jpg?t=1643599879",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_0cfb4cb7584b773b66576ddaa5dd41e35fc15ead.1920x1080.jpg?t=1643599879"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_c936f3d34f0efe597b06f63187bda12a9d48a74e.600x338.jpg?t=1644170097",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_c936f3d34f0efe597b06f63187bda12a9d48a74e.1920x1080.jpg?t=1644170097"
       },
       {
         "id": 3,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_50d420524bfd5204ca070d9dc8b317313cdbc8f8.600x338.jpg?t=1643599879",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_50d420524bfd5204ca070d9dc8b317313cdbc8f8.1920x1080.jpg?t=1643599879"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_65b11c0f03659e90ae3e1e8389c6129c8d77bc03.600x338.jpg?t=1644170097",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_65b11c0f03659e90ae3e1e8389c6129c8d77bc03.1920x1080.jpg?t=1644170097"
       },
       {
         "id": 4,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_58d1db0c4192134e40e84b68b5be162920873f65.600x338.jpg?t=1643599879",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_58d1db0c4192134e40e84b68b5be162920873f65.1920x1080.jpg?t=1643599879"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_3a076df4694e95a13be801868c2dd1c4cd712172.600x338.jpg?t=1644170097",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_3a076df4694e95a13be801868c2dd1c4cd712172.1920x1080.jpg?t=1644170097"
       },
       {
         "id": 5,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_333585b4f665773b9d3e37015abf27efa4be06b1.600x338.jpg?t=1643599879",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_333585b4f665773b9d3e37015abf27efa4be06b1.1920x1080.jpg?t=1643599879"
-      },
-      {
-        "id": 6,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_c936f3d34f0efe597b06f63187bda12a9d48a74e.600x338.jpg?t=1643599879",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_c936f3d34f0efe597b06f63187bda12a9d48a74e.1920x1080.jpg?t=1643599879"
-      },
-      {
-        "id": 7,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_65b11c0f03659e90ae3e1e8389c6129c8d77bc03.600x338.jpg?t=1643599879",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_65b11c0f03659e90ae3e1e8389c6129c8d77bc03.1920x1080.jpg?t=1643599879"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_8d063a1650d1263c5adb5a83166a943b86d95cd7.600x338.jpg?t=1644170097",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/ss_8d063a1650d1263c5adb5a83166a943b86d95cd7.1920x1080.jpg?t=1644170097"
       }
     ],
     "short_description": "Help the travelers escape the horrors of the Skelton Zone.",
@@ -1130,7 +1120,7 @@
     "windows": true
   },
   {
-    "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
+    "about_the_game": "<img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
     "app_id": 1848600,
     "categories": {
       "Single-player": 2,
@@ -1138,7 +1128,7 @@
       "Full controller support": 28
     },
     "coming_soon": true,
-    "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
+    "detailed_description": "<img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
     "developers": [
       "Fiskyfisko"
     ],

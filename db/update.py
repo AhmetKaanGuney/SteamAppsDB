@@ -27,7 +27,7 @@ parent_dir = os.path.dirname(current_dir)
 config = dotenv_values(os.path.join(parent_dir, ".env"))
 
 # Init Loggers
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 u_logger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
 update_log = u_logger.log
@@ -264,7 +264,7 @@ def map_steam_data(steam_data: dict) -> dict:
 
         genres_categs[key] = {}
         for obj in steam_data[key]:
-            genres_categs[key].update({obj["description"]: obj["id"]})
+            genres_categs[key].update({obj["description"]: int(obj["id"])})
 
     # Release Date
     try:

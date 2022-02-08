@@ -1,5 +1,4 @@
-from dataclasses import dataclass, field
-import json
+from dataclasses import dataclass
 
 @dataclass
 class AppData:
@@ -11,12 +10,12 @@ class AppData:
     release_date: str = ""
     coming_soon: bool = False
 
-    developers: list[str] = field(default_factory=list)
-    publishers: list[str] = field(default_factory=list)
+    developers: list[str] = None
+    publishers: list[str] = None
 
-    tags: dict = field(default_factory=dict)
-    genres: dict = field(default_factory=dict)
-    categories: dict = field(default_factory=dict)
+    tags: dict = None
+    genres: dict = None
+    categories: dict = None
 
     owner_count: int = 0
     positive_reviews: int = 0
@@ -28,13 +27,17 @@ class AppData:
 
     website: str = ""
     header_image: str = ""
-    screenshots: list[dict] = field(default_factory=list)
+    screenshots: list[dict] = None
 
     languages: str = ""
 
     windows: bool = False
     mac: bool = False
     linux: bool = False
+
+    def __init__(self, app_data=None):
+        if app_data:
+            self.update(app_data)
 
     def update(self, attributes: dict):
         """Updates existing attributes.
@@ -64,7 +67,7 @@ class AppData:
     @property
     def __attributes__(self) -> list[str]:
         """Returns all attributes, that are not callable or dunder methods."""
-        attributes = [a for a in dir(self) if not (a.startswith("__") or callable(getattr(self, a)))]
+        attributes = [a for a in dir(self) if not (a.startswith("_") or callable(getattr(self, a)))]
         return attributes
 
     def __repr__(self) -> str:
