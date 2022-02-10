@@ -1,8 +1,11 @@
 import os
 import sqlite3
 import json
+import logging
 
 from appdata import AppData
+
+logging.basicConfig(level=logging.DEBUG)
 
 current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
@@ -10,7 +13,7 @@ parent_dir = os.path.dirname(current_dir)
 database = os.path.join(current_dir, "apps.db")
 memory = ":memory:"
 
-json_fields = ["developers", "publishers", "screenshots"]
+json_fields = ("developers", "publishers", "screenshots")
 
 
 def insert_app(app_data: AppData, db):
@@ -85,13 +88,12 @@ def get_applist(order_by, filters, offset, batchsize) -> list[AppData]:
 
 
 def get_app_details(app_id: int, db) -> AppData:
+    logging.debug(f"get_app_details()")
     query = db.execute("SELECT * FROM apps WHERE app_id=?", (app_id, )).fetchone()
 
     table_info = db.execute("PRAGMA table_info(apps)").fetchall()
-    columns = []
-    for i in table_info:
-        # Index for the column name
-        columns.append(i[1])
+    # Add column names
+    columns = (i[1] for i in table_info)
     
     app_data = {}
     for i, col in enumerate(columns):
@@ -100,25 +102,18 @@ def get_app_details(app_id: int, db) -> AppData:
         else:
             app_data[col] = query[i]
     
-    # BUILD QUERY!!!
-    # tag_query = build_query({
-    #     "table": "apps_tags", 
-    #     "columns": ["tag_id"],
-    #     "conditions": [f"app_id = {app_id}"]
-    #     })
-    # tag_ids = [i[0] for i in db.execute(tag_query).fetchall()]
-    # print("TAG_IDs:\n", tag_ids)
+    tags = get_tags(app_id, db)
+    genres = get_genres(app_id, db)
+    categories = get_categories(app_id, db)
 
-    sql = f"""\
-    SELECT tag_id, name FROM tags
-    WHERE tag_id IN (
-        SELECT tag_id FROM apps_tags
-        WHERE app_id = :app_id
-    )
-    """
-    tags = db.execute(sql, {"app_id": app_id}).fetchall()
-    print("TAGS:\n", tags)
-
+    for i in (("tags", tags), ("genres", genres), ("categories", categories)):
+        app_data.update({i[0]: i[1]})
+    
+    logging.debug(f"  Tags: {tags}")
+    logging.debug(f"  Genres: {genres}")
+    logging.debug(f"  Categories: {categories}")
+    logging.debug(f"  App_data: {app_data}")
+    
     return AppData(app_data)
 
 
@@ -157,22 +152,56 @@ def build_query(query: dict) -> str:
 
 
 def get_app_snippet(app_id: int, db):
+    logging.debug("get_app_snippet()")
+
     app_query = db.execute("""
-    SELECT app_id, name, price, release_date, 
-    header_image, windows, mac, linux
-    FROM apps
-    WHERE app_id=?""", (app_id, ))
-    print("App:")
-    print(app_query.fetchall())
+        SELECT app_id, name, price, release_date, 
+        header_image, windows, mac, linux
+        FROM apps
+        WHERE app_id = :app_id""", {"app_id": app_id}).fetchone()
+    columns = ("app_id", "name", "price", "release_date", "header_image", "windows", "mac", "linux")
+    app_snippet = {columns[i]: app_query[i] for i in range(len(app_query))}
 
-    tags_querry = db.execute("""
-    SELECT tag_id, name FROM tags 
-    WHERE tag_id = (
-        SELECT tag_id FROM apps_tags WHERE app_id=:app_id
-    )""", {"app_id": app_id})
-    print("Tag:")
-    print(tags_querry.fetchall())
+    tag_query = get_tags(app_id, db)
+    app_snippet.update({"tags": tag_query})
 
+    logging.debug(f"  App Snippet: {app_snippet}")
+    return app_snippet
+
+
+def get_tags(app_id: int, db):
+    tags = db.execute(f"""
+        SELECT name, tag_id FROM tags 
+        WHERE tag_id IN (
+            SELECT tag_id FROM apps_tags
+            WHERE app_id = :app_id
+        )""", {"app_id": app_id}).fetchall()
+
+    return {i[0]: i[1] for i in tags}
+
+
+def get_genres(app_id: int, db):
+    genres = db.execute(f"""
+        SELECT name, genre_id FROM genres
+        WHERE genre_id IN (
+            SELECT genre_id FROM apps_genres
+            WHERE app_id = :app_id
+        )""", {"app_id": app_id}
+    ).fetchall()
+
+    return {i[0]: i[1] for i in genres}
+
+
+def get_categories(app_id: int, db):
+    categories = db.execute(f"""
+        SELECT name, category_id FROM categories
+        WHERE category_id IN (
+            SELECT category_id FROM apps_categories
+            WHERE app_id = :app_id
+        )""", {"app_id": app_id}
+    ).fetchall()
+
+    return {i[0]: i[1] for i in categories}
 
 
 def print_table(table: str, db):
@@ -316,17 +345,18 @@ if __name__ == "__main__":
         print("Inserting AppData...")
         insert_app(AppData(app_data), db)
 
-        query = {"table": "apps", "columns": ["app_id", "name"], "conditions": ["price > 100", "languages = 'English'", "positive_reviews = 1"]}
-        sql = build_query(query)
-        print(f"QUERY: \n{sql}")
-        print(f"RESULT:\n{db.execute(sql).fetchall()}")
+        # query = {"table": "apps", "columns": ["app_id", "name"], "conditions": ["price > 100", "languages = 'English'", "positive_reviews = 1"]}
+        # sql = build_query(query)
+        # print(f"QUERY: \n{sql}")
+        # print(f"RESULT:\n{db.execute(sql).fetchall()}")
 
         insert_app(AppData(app_data2), db)
         print("App Details: ")
         get_app_details(app_id, db)
         # get_app_details(2, db)
+        print("App Snippet: ")
         get_app_snippet(app_id, db)
-        for i in ["genres", "categories", "tags"]:
-            print(i.upper(), ": ")
-            query = {"table": i, "columns": ["*"], "conditions": []}
-            print(db.execute(build_query(query)).fetchall())
+        # for i in ["genres", "categories", "tags"]:
+        #     print(i.upper(), ": ")
+        #     query = {"table": i, "columns": ["*"], "conditions": []}
+        #     print(db.execute(build_query(query)).fetchall())

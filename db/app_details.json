@@ -12,8 +12,8 @@
       "My Label Game Studio"
     ],
     "genres": {
-      "Casual": "4",
-      "Indie": "23"
+      "Casual": 4,
+      "Indie": 23
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848280/header.jpg?t=1643462230",
     "languages": "English",
@@ -86,7 +86,7 @@
       "My Label Game Studio"
     ],
     "genres": {
-      "Indie": "23"
+      "Indie": 23
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848290/header.jpg?t=1642545156",
     "languages": "English",
@@ -145,7 +145,7 @@
       "Mar3ow@gmail.com"
     ],
     "genres": {
-      "Indie": "23"
+      "Indie": 23
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848300/header.jpg?t=1641898583",
     "languages": "English, Russian",
@@ -217,7 +217,7 @@
       "Malerouille"
     ],
     "genres": {
-      "Indie": "23"
+      "Indie": 23
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848310/header.jpg?t=1641422284",
     "languages": "English",
@@ -291,10 +291,10 @@
       "David Nguyen"
     ],
     "genres": {
-      "Indie": "23",
-      "RPG": "3",
-      "Strategy": "2",
-      "Early Access": "70"
+      "Indie": 23,
+      "RPG": 3,
+      "Strategy": 2,
+      "Early Access": 70
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848330/header.jpg?t=1641155516",
     "languages": "English",
@@ -304,7 +304,7 @@
     "negative_reviews": 3,
     "owner_count": 10000,
     "positive_reviews": 17,
-    "price": "999",
+    "price": "899",
     "publishers": [
       "David Nguyen"
     ],
@@ -365,7 +365,7 @@
     "windows": true
   },
   {
-    "about_the_game": "<strong> <i> FEAR: Call of the village </i> </strong> is a first-person horror game made in realistic 3D graphics that immerses you in an atmosphere of horror and fears you. The gameplay consists in collecting notes, solving riddles and escaping from ghosts, as well as in other mechanics inherent in any horror in order to survive and escape.<br><br>In it you have to get into a mysterious village and solve various riddles, the solution of which will be hindered by various inexplicable phenomena by science. Also, to complete the game, you will have to collect the necessary items that may come in handy in the passage or even be necessary. Meet the new protagonist, screamers and storyline!<h2 class=\"bb_tag\"> Brief background: </h2>The main character, an ordinary unremarkable guy, found himself in a rather strange abandoned village. At first glance, this place does not repulse at all, but even &quot;pleases&quot; the eye, however, as he progresses, the main character encounters many ghosts and other otherworldly creatures and phenomena. Therefore, more and more cute village ceases to be like a cozy place, and every next minute spent in it convinces you that you need to quickly get out of this God-forsaken place!<br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848410/extras/HK-WBS-TNsM.jpg?t=1643714394\" /><br><br>You have to overcome your fear, going through gloomy locations for the main character, solving various puzzles along the way and trying to understand what is going on in general, how you got here, and most importantly, how to get out of this enchanted village.<br><br>By purchasing the game you will get the best emotions that you have never received!",
+    "about_the_game": "<strong> <i> FEAR: Call of the village </i> </strong> is a first-person horror game made in realistic 3D graphics that immerses you in an atmosphere of horror and fears you. The gameplay consists in collecting notes, solving riddles and escaping from ghosts, as well as in other mechanics inherent in any horror in order to survive and escape.<br><br>In it you have to get into a mysterious village and solve various riddles, the solution of which will be hindered by various inexplicable phenomena by science. Also, to complete the game, you will have to collect the necessary items that may come in handy in the passage or even be necessary. Meet the new protagonist, screamers and storyline!<h2 class=\"bb_tag\"> Brief background: </h2>The main character, an ordinary unremarkable guy, found himself in a rather strange abandoned village. At first glance, this place does not repulse at all, but even &quot;pleases&quot; the eye, however, as he progresses, the main character encounters many ghosts and other otherworldly creatures and phenomena. Therefore, more and more cute village ceases to be like a cozy place, and every next minute spent in it convinces you that you need to quickly get out of this God-forsaken place!<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848410/extras/HK-WBS-TNsM.jpg?t=1643714394\" /><br><br>You have to overcome your fear, going through gloomy locations for the main character, solving various puzzles along the way and trying to understand what is going on in general, how you got here, and most importantly, how to get out of this enchanted village.<br><br>By purchasing the game you will get the best emotions that you have never received!",
     "app_id": 1848410,
     "categories": {
       "Single-player": 2,
@@ -373,15 +373,15 @@
       "Steam Cloud": 23
     },
     "coming_soon": true,
-    "detailed_description": "<strong> <i> FEAR: Call of the village </i> </strong> is a first-person horror game made in realistic 3D graphics that immerses you in an atmosphere of horror and fears you. The gameplay consists in collecting notes, solving riddles and escaping from ghosts, as well as in other mechanics inherent in any horror in order to survive and escape.<br><br>In it you have to get into a mysterious village and solve various riddles, the solution of which will be hindered by various inexplicable phenomena by science. Also, to complete the game, you will have to collect the necessary items that may come in handy in the passage or even be necessary. Meet the new protagonist, screamers and storyline!<h2 class=\"bb_tag\"> Brief background: </h2>The main character, an ordinary unremarkable guy, found himself in a rather strange abandoned village. At first glance, this place does not repulse at all, but even &quot;pleases&quot; the eye, however, as he progresses, the main character encounters many ghosts and other otherworldly creatures and phenomena. Therefore, more and more cute village ceases to be like a cozy place, and every next minute spent in it convinces you that you need to quickly get out of this God-forsaken place!<br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848410/extras/HK-WBS-TNsM.jpg?t=1643714394\" /><br><br>You have to overcome your fear, going through gloomy locations for the main character, solving various puzzles along the way and trying to understand what is going on in general, how you got here, and most importantly, how to get out of this enchanted village.<br><br>By purchasing the game you will get the best emotions that you have never received!",
+    "detailed_description": "<strong> <i> FEAR: Call of the village </i> </strong> is a first-person horror game made in realistic 3D graphics that immerses you in an atmosphere of horror and fears you. The gameplay consists in collecting notes, solving riddles and escaping from ghosts, as well as in other mechanics inherent in any horror in order to survive and escape.<br><br>In it you have to get into a mysterious village and solve various riddles, the solution of which will be hindered by various inexplicable phenomena by science. Also, to complete the game, you will have to collect the necessary items that may come in handy in the passage or even be necessary. Meet the new protagonist, screamers and storyline!<h2 class=\"bb_tag\"> Brief background: </h2>The main character, an ordinary unremarkable guy, found himself in a rather strange abandoned village. At first glance, this place does not repulse at all, but even &quot;pleases&quot; the eye, however, as he progresses, the main character encounters many ghosts and other otherworldly creatures and phenomena. Therefore, more and more cute village ceases to be like a cozy place, and every next minute spent in it convinces you that you need to quickly get out of this God-forsaken place!<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848410/extras/HK-WBS-TNsM.jpg?t=1643714394\" /><br><br>You have to overcome your fear, going through gloomy locations for the main character, solving various puzzles along the way and trying to understand what is going on in general, how you got here, and most importantly, how to get out of this enchanted village.<br><br>By purchasing the game you will get the best emotions that you have never received!",
     "developers": [
       "5K Gamers"
     ],
     "genres": {
-      "Action": "1",
-      "Adventure": "25",
-      "Indie": "23",
-      "Simulation": "28"
+      "Action": 1,
+      "Adventure": 25,
+      "Indie": 23,
+      "Simulation": 28
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848410/header.jpg?t=1643714394",
     "languages": "English",
@@ -446,7 +446,7 @@
       "Inklingwood Studios"
     ],
     "genres": {
-      "Adventure": "25"
+      "Adventure": 25
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848440/header.jpg?t=1642158982",
     "languages": "English",
@@ -505,8 +505,8 @@
       "Old Formulas"
     ],
     "genres": {
-      "Action": "1",
-      "Adventure": "25"
+      "Action": 1,
+      "Adventure": 25
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848470/header.jpg?t=1642660710",
     "languages": "English",
@@ -979,20 +979,20 @@
     "windows": true
   },
   {
-    "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/20220104_193743.gif?t=1641952055\" /><br><br><i>Busted free from The Lab's control, he's on the run... Bionic Tadpole!</i> <br>Every bullet has Bionic Tadpole's name on it as he escapes R-Man City in the stolen bionic suit!<br><br>\u2022 Run-N-Gun, beat the timer, and don't let your gun overheat.<br>\u2022 Elements of fun platforming, bullet-hell and twin stick-controlled action!<br>\u2022 Original music by <strong>MaximusCXI</strong>, created for each Stage.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/nirab_idle.gif?t=1641952055\" />",
+    "about_the_game": "<img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848540/extras/20220104_193743.gif?t=1641952055\" /><br><br><i>Busted free from The Lab's control, he's on the run... Bionic Tadpole!</i> <br>Every bullet has Bionic Tadpole's name on it as he escapes R-Man City in the stolen bionic suit!<br><br>\u2022 Run-N-Gun, beat the timer, and don't let your gun overheat.<br>\u2022 Elements of fun platforming, bullet-hell and twin stick-controlled action!<br>\u2022 Original music by <strong>MaximusCXI</strong>, created for each Stage.<br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848540/extras/nirab_idle.gif?t=1641952055\" />",
     "app_id": 1848540,
     "categories": {
       "Single-player": 2,
       "Full controller support": 28
     },
     "coming_soon": true,
-    "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/20220104_193743.gif?t=1641952055\" /><br><br><i>Busted free from The Lab's control, he's on the run... Bionic Tadpole!</i> <br>Every bullet has Bionic Tadpole's name on it as he escapes R-Man City in the stolen bionic suit!<br><br>\u2022 Run-N-Gun, beat the timer, and don't let your gun overheat.<br>\u2022 Elements of fun platforming, bullet-hell and twin stick-controlled action!<br>\u2022 Original music by <strong>MaximusCXI</strong>, created for each Stage.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848540/extras/nirab_idle.gif?t=1641952055\" />",
+    "detailed_description": "<img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848540/extras/20220104_193743.gif?t=1641952055\" /><br><br><i>Busted free from The Lab's control, he's on the run... Bionic Tadpole!</i> <br>Every bullet has Bionic Tadpole's name on it as he escapes R-Man City in the stolen bionic suit!<br><br>\u2022 Run-N-Gun, beat the timer, and don't let your gun overheat.<br>\u2022 Elements of fun platforming, bullet-hell and twin stick-controlled action!<br>\u2022 Original music by <strong>MaximusCXI</strong>, created for each Stage.<br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848540/extras/nirab_idle.gif?t=1641952055\" />",
     "developers": [
       "SaGa76"
     ],
     "genres": {
-      "Action": "1",
-      "Indie": "23"
+      "Action": 1,
+      "Indie": 23
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848540/header.jpg?t=1641952055",
     "languages": "English",
@@ -1066,18 +1066,18 @@
       "Bry Guy"
     ],
     "genres": {
-      "Action": "1",
-      "Adventure": "25"
+      "Action": 1,
+      "Adventure": 25
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848570/header.jpg?t=1644170097",
     "languages": "English",
     "linux": false,
     "mac": false,
     "name": "Skelton",
-    "negative_reviews": 0,
+    "negative_reviews": 2,
     "owner_count": 10000,
-    "positive_reviews": 0,
-    "price": null,
+    "positive_reviews": 7,
+    "price": "99",
     "publishers": [
       "Bry Guy"
     ],
@@ -1115,12 +1115,22 @@
       }
     ],
     "short_description": "Help the travelers escape the horrors of the Skelton Zone.",
-    "tags": [],
+    "tags": {
+      "Action": 66,
+      "Adventure": 60,
+      "Action-Adventure": 37,
+      "FPS": 34,
+      "First-Person": 31,
+      "Horror": 25,
+      "Combat": 23,
+      "Linear": 21,
+      "Singleplayer": 19
+    },
     "website": null,
     "windows": true
   },
   {
-    "about_the_game": "<img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
+    "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
     "app_id": 1848600,
     "categories": {
       "Single-player": 2,
@@ -1128,15 +1138,15 @@
       "Full controller support": 28
     },
     "coming_soon": true,
-    "detailed_description": "<img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
+    "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/about.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/combat.gif?t=1640901562\" /><br><br>Sang: The Desert Blade is a Souls-like Action RPG, inspired by Dark Souls and The Legend of Zelda: A Link to the Past, where you explore, fight, overcome challenges and defeat terrifying bosses in the unforgiving world of Zemsluna. <br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/smith.gif?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/gameplay.png?t=1640901562\" /><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848600/extras/story.png?t=1640901562\" /><br><br>Follow the story of Sang as she looks for her long lost kin. Being born a Blood Seer, she has a gift allowing her to see world ending events as well as her own demise. This gift was seen as a curse, leading to her mother fleeing far away from home with her. As she wakes up from one of her visions, she finds herself in Meziskal, a long lost town of distant dreams. She befriends the kind that inhabits this place, setting up to figure out what happened to outer world...and her kin.<br><br><i>Zemsluna's inhabitants now twisted, and as husk, wander her grounds. Hostile to those that survived,<strong> they must be slayed.</strong></i><br><br>The deities have grown silent... and it's up to you to find out what happened.",
     "developers": [
       "Fiskyfisko"
     ],
     "genres": {
-      "Action": "1",
-      "Adventure": "25",
-      "Indie": "23",
-      "RPG": "3"
+      "Action": 1,
+      "Adventure": 25,
+      "Indie": 23,
+      "RPG": 3
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848600/header.jpg?t=1640901562",
     "languages": "English",
@@ -1205,9 +1215,9 @@
       "Aviahel"
     ],
     "genres": {
-      "Indie": "23",
-      "Simulation": "28",
-      "Sports": "18"
+      "Indie": 23,
+      "Simulation": 28,
+      "Sports": 18
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848640/header.jpg?t=1641815348",
     "languages": "English, Russian",
@@ -1296,7 +1306,7 @@
       "Kizmet Rose"
     ],
     "genres": {
-      "Indie": "23"
+      "Indie": 23
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848660/header.jpg?t=1642295069",
     "languages": "English",
@@ -1361,7 +1371,7 @@
     "categories": {},
     "coming_soon": false,
     "detailed_description": "",
-    "developers": [],
+    "developers": null,
     "genres": {},
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848670/header.jpg?t=1639765740",
     "languages": "",
@@ -1445,8 +1455,8 @@
       "Game Changers"
     ],
     "genres": {
-      "Casual": "4",
-      "Strategy": "2"
+      "Casual": 4,
+      "Strategy": 2
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848680/header.jpg?t=1641886760",
     "languages": "English",
@@ -1499,7 +1509,7 @@
     "windows": true
   },
   {
-    "about_the_game": "<h2 class=\"bb_tag\">Features</h2><strong><ul class=\"bb_ul\"><li>Roguelite ACT</li></ul></strong>Challenge again and again in the never repeated level. In each life, you will encounter different enemies and treasures<br><br><strong><ul class=\"bb_ul\"><li>Powerful Treasure System</li></ul></strong>ninjasoul has rich treasure skills and powerful property system. Each skill can be matched with other skills, and entry can even directly change the scope and form of skills! You can experience the charm of ARPG games in this roguelite act game<br><br><strong><ul class=\"bb_ul\"><li>A Combat System Then Suitable For Everyone</li></ul></strong>in the game, players can choose to focus on the speed duel between the blades, or focus on building their own BD (treasure matching) and use Katana skill and Ninjutsu to kill the enemy<br><br><strong><ul class=\"bb_ul\"><li>Explore a World Full of Unknowns</li></ul></strong>hidden treasure boxes are set in different corners of each level. Exploring levels in battle may get unknown gains!<br><br><strong><ul class=\"bb_ul\"><li>Unique Customs Clearance Reward</li></ul></strong>After a game of customs clearance, players can choose one of equip for permanent fusion! Players can get the ability to this equip and use it in the next game!<br>Of course, after each customs clearance, the enemy will become more cruel. If you want to get more fusion opportunities, you must face these enemies who become more cruel<br><br><strong><ul class=\"bb_ul\"><li>Shuriken and Iisen</li></ul></strong>at the moment when the enemy makes an attack, the Ninja can throw Kunai to seal the enemy's action and use &quot;Iisen&quot; to pursue<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/IISEN.gif?t=1642247222\" /><br><br><strong><ul class=\"bb_ul\"><li>Katana Skill and Ninjutsu</li></ul></strong>In the game, Katana and scroll have active skills<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/ZONE_slash.gif?t=1642247222\" /><br>Players can use these powerful active skills to destroy all enemies in one fell swoop<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/BIG_BOOM.gif?t=1642247222\" />",
+    "about_the_game": "<h2 class=\"bb_tag\">Features</h2><strong><ul class=\"bb_ul\"><li>Roguelite ACT</li></ul></strong>Challenge again and again in the never repeated level. In each life, you will encounter different enemies and treasures<br><br><strong><ul class=\"bb_ul\"><li>Powerful Treasure System</li></ul></strong>ninjasoul has rich treasure skills and powerful property system. Each skill can be matched with other skills, and entry can even directly change the scope and form of skills! You can experience the charm of ARPG games in this roguelite act game<br><br><strong><ul class=\"bb_ul\"><li>A Combat System Then Suitable For Everyone</li></ul></strong>in the game, players can choose to focus on the speed duel between the blades, or focus on building their own BD (treasure matching) and use Katana skill and Ninjutsu to kill the enemy<br><br><strong><ul class=\"bb_ul\"><li>Explore a World Full of Unknowns</li></ul></strong>hidden treasure boxes are set in different corners of each level. Exploring levels in battle may get unknown gains!<br><br><strong><ul class=\"bb_ul\"><li>Unique Customs Clearance Reward</li></ul></strong>After a game of customs clearance, players can choose one of equip for permanent fusion! Players can get the ability to this equip and use it in the next game!<br>Of course, after each customs clearance, the enemy will become more cruel. If you want to get more fusion opportunities, you must face these enemies who become more cruel<br><br><strong><ul class=\"bb_ul\"><li>Shuriken and Iisen</li></ul></strong>at the moment when the enemy makes an attack, the Ninja can throw Kunai to seal the enemy's action and use &quot;Iisen&quot; to pursue<br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848710/extras/IISEN.gif?t=1642247222\" /><br><br><strong><ul class=\"bb_ul\"><li>Katana Skill and Ninjutsu</li></ul></strong>In the game, Katana and scroll have active skills<br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848710/extras/ZONE_slash.gif?t=1642247222\" /><br>Players can use these powerful active skills to destroy all enemies in one fell swoop<br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848710/extras/BIG_BOOM.gif?t=1642247222\" />",
     "app_id": 1848710,
     "categories": {
       "Single-player": 2,
@@ -1507,15 +1517,15 @@
       "Steam Cloud": 23
     },
     "coming_soon": true,
-    "detailed_description": "<h2 class=\"bb_tag\">Features</h2><strong><ul class=\"bb_ul\"><li>Roguelite ACT</li></ul></strong>Challenge again and again in the never repeated level. In each life, you will encounter different enemies and treasures<br><br><strong><ul class=\"bb_ul\"><li>Powerful Treasure System</li></ul></strong>ninjasoul has rich treasure skills and powerful property system. Each skill can be matched with other skills, and entry can even directly change the scope and form of skills! You can experience the charm of ARPG games in this roguelite act game<br><br><strong><ul class=\"bb_ul\"><li>A Combat System Then Suitable For Everyone</li></ul></strong>in the game, players can choose to focus on the speed duel between the blades, or focus on building their own BD (treasure matching) and use Katana skill and Ninjutsu to kill the enemy<br><br><strong><ul class=\"bb_ul\"><li>Explore a World Full of Unknowns</li></ul></strong>hidden treasure boxes are set in different corners of each level. Exploring levels in battle may get unknown gains!<br><br><strong><ul class=\"bb_ul\"><li>Unique Customs Clearance Reward</li></ul></strong>After a game of customs clearance, players can choose one of equip for permanent fusion! Players can get the ability to this equip and use it in the next game!<br>Of course, after each customs clearance, the enemy will become more cruel. If you want to get more fusion opportunities, you must face these enemies who become more cruel<br><br><strong><ul class=\"bb_ul\"><li>Shuriken and Iisen</li></ul></strong>at the moment when the enemy makes an attack, the Ninja can throw Kunai to seal the enemy's action and use &quot;Iisen&quot; to pursue<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/IISEN.gif?t=1642247222\" /><br><br><strong><ul class=\"bb_ul\"><li>Katana Skill and Ninjutsu</li></ul></strong>In the game, Katana and scroll have active skills<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/ZONE_slash.gif?t=1642247222\" /><br>Players can use these powerful active skills to destroy all enemies in one fell swoop<br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1848710/extras/BIG_BOOM.gif?t=1642247222\" />",
+    "detailed_description": "<h2 class=\"bb_tag\">Features</h2><strong><ul class=\"bb_ul\"><li>Roguelite ACT</li></ul></strong>Challenge again and again in the never repeated level. In each life, you will encounter different enemies and treasures<br><br><strong><ul class=\"bb_ul\"><li>Powerful Treasure System</li></ul></strong>ninjasoul has rich treasure skills and powerful property system. Each skill can be matched with other skills, and entry can even directly change the scope and form of skills! You can experience the charm of ARPG games in this roguelite act game<br><br><strong><ul class=\"bb_ul\"><li>A Combat System Then Suitable For Everyone</li></ul></strong>in the game, players can choose to focus on the speed duel between the blades, or focus on building their own BD (treasure matching) and use Katana skill and Ninjutsu to kill the enemy<br><br><strong><ul class=\"bb_ul\"><li>Explore a World Full of Unknowns</li></ul></strong>hidden treasure boxes are set in different corners of each level. Exploring levels in battle may get unknown gains!<br><br><strong><ul class=\"bb_ul\"><li>Unique Customs Clearance Reward</li></ul></strong>After a game of customs clearance, players can choose one of equip for permanent fusion! Players can get the ability to this equip and use it in the next game!<br>Of course, after each customs clearance, the enemy will become more cruel. If you want to get more fusion opportunities, you must face these enemies who become more cruel<br><br><strong><ul class=\"bb_ul\"><li>Shuriken and Iisen</li></ul></strong>at the moment when the enemy makes an attack, the Ninja can throw Kunai to seal the enemy's action and use &quot;Iisen&quot; to pursue<br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848710/extras/IISEN.gif?t=1642247222\" /><br><br><strong><ul class=\"bb_ul\"><li>Katana Skill and Ninjutsu</li></ul></strong>In the game, Katana and scroll have active skills<br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848710/extras/ZONE_slash.gif?t=1642247222\" /><br>Players can use these powerful active skills to destroy all enemies in one fell swoop<br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1848710/extras/BIG_BOOM.gif?t=1642247222\" />",
     "developers": [
       "Ash Game Studio"
     ],
     "genres": {
-      "Action": "1",
-      "Adventure": "25",
-      "Indie": "23",
-      "Early Access": "70"
+      "Action": 1,
+      "Adventure": 25,
+      "Indie": 23,
+      "Early Access": 70
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848710/header.jpg?t=1642247222",
     "languages": "English, Simplified Chinese",
@@ -1578,7 +1588,7 @@
       "\u5e7d\u3005\u71e6\u3005(yuyusansan)"
     ],
     "genres": {
-      "Action": "1"
+      "Action": 1
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1848730/header.jpg?t=1643064377",
     "languages": "English, Japanese",
@@ -1646,20 +1656,20 @@
     "windows": true
   },
   {
-    "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb2.PNG?t=1641402052\" /><br><br><strong>Tkium Exclusion Area is an horror escape game.</strong><br>This place is an asylum. It has been evacuated, but why? You need to get out of this place, and quickly. Even if this area looks abandoned, nothing can confirm that you are really alone.<br>You have to leave quickly, the fear is taking over you.<br>You are not alone in this place. Someone, or something, hunts the last survivors.<br>Bad things happen in the darkest places.<br><strong>Be aware of where you are.</strong><br><br><strong>This game is a one-time play, meaning that there is only one storyline and restarting it will not change any of the objects.</strong><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb.PNG?t=1641402052\" /><br><br><strong>The area is fully locked down due to unknow incidents.</strong><br>Find the ways to open each door, and to escape the area as fast as possible.<br>Be aware of your insanity: it can lead you to death. You need to get out of this place before the counter reaches 100%.<br>The timer shows how long you have been in here.",
+    "about_the_game": "<img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1847810/extras/back_thumb2.PNG?t=1644241785\" /><br><br><strong>Tkium Exclusion Area is a short horror escape game which takes place in\u00a0an asylum.</strong> It has been evacuated, but why? You need to get out of this place, and quickly. Even if this area looks abandoned, nothing can confirm that you are really alone.<br>You have to leave as fast as possible, the fear is taking over you.<br>You are not alone in this place. Someone, or something, hunts the last survivors.<br>Bad things happen in the darkest places.<br><strong>Be aware of where you are.</strong><br><br><strong>This game is a one-time play, meaning that there is only one storyline and restarting it will not change any of the objects.</strong><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1847810/extras/back_thumb.PNG?t=1644241785\" /><br><br><strong>The area is fully locked down due to unknow incidents.</strong><br>Find the ways to open each door, and to escape the area as fast as possible.<br>Be aware of your insanity: it can lead you to death. You need to get out of this place before the counter reaches 100%.<br>The timer shows how long you have been in here.",
     "app_id": 1847810,
     "categories": {
       "Single-player": 2
     },
     "coming_soon": false,
-    "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb2.PNG?t=1641402052\" /><br><br><strong>Tkium Exclusion Area is an horror escape game.</strong><br>This place is an asylum. It has been evacuated, but why? You need to get out of this place, and quickly. Even if this area looks abandoned, nothing can confirm that you are really alone.<br>You have to leave quickly, the fear is taking over you.<br>You are not alone in this place. Someone, or something, hunts the last survivors.<br>Bad things happen in the darkest places.<br><strong>Be aware of where you are.</strong><br><br><strong>This game is a one-time play, meaning that there is only one storyline and restarting it will not change any of the objects.</strong><br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847810/extras/back_thumb.PNG?t=1641402052\" /><br><br><strong>The area is fully locked down due to unknow incidents.</strong><br>Find the ways to open each door, and to escape the area as fast as possible.<br>Be aware of your insanity: it can lead you to death. You need to get out of this place before the counter reaches 100%.<br>The timer shows how long you have been in here.",
+    "detailed_description": "<img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1847810/extras/back_thumb2.PNG?t=1644241785\" /><br><br><strong>Tkium Exclusion Area is a short horror escape game which takes place in\u00a0an asylum.</strong> It has been evacuated, but why? You need to get out of this place, and quickly. Even if this area looks abandoned, nothing can confirm that you are really alone.<br>You have to leave as fast as possible, the fear is taking over you.<br>You are not alone in this place. Someone, or something, hunts the last survivors.<br>Bad things happen in the darkest places.<br><strong>Be aware of where you are.</strong><br><br><strong>This game is a one-time play, meaning that there is only one storyline and restarting it will not change any of the objects.</strong><br><br><img src=\"https://cdn.cloudflare.steamstatic.com/steam/apps/1847810/extras/back_thumb.PNG?t=1644241785\" /><br><br><strong>The area is fully locked down due to unknow incidents.</strong><br>Find the ways to open each door, and to escape the area as fast as possible.<br>Be aware of your insanity: it can lead you to death. You need to get out of this place before the counter reaches 100%.<br>The timer shows how long you have been in here.",
     "developers": [
       "Tkium"
     ],
     "genres": {
-      "Indie": "23"
+      "Indie": 23
     },
-    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/header.jpg?t=1641402052",
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/header.jpg?t=1644241785",
     "languages": "English",
     "linux": false,
     "mac": false,
@@ -1675,31 +1685,31 @@
     "screenshots": [
       {
         "id": 0,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_487c6bcc61c7e42f5f0f30d12e1391f0af8a8623.600x338.jpg?t=1641402052",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_487c6bcc61c7e42f5f0f30d12e1391f0af8a8623.1920x1080.jpg?t=1641402052"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_487c6bcc61c7e42f5f0f30d12e1391f0af8a8623.600x338.jpg?t=1644241785",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_487c6bcc61c7e42f5f0f30d12e1391f0af8a8623.1920x1080.jpg?t=1644241785"
       },
       {
         "id": 1,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_61c42a767b42565c9c912cb9fe3cf6826059b872.600x338.jpg?t=1641402052",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_61c42a767b42565c9c912cb9fe3cf6826059b872.1920x1080.jpg?t=1641402052"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_61c42a767b42565c9c912cb9fe3cf6826059b872.600x338.jpg?t=1644241785",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_61c42a767b42565c9c912cb9fe3cf6826059b872.1920x1080.jpg?t=1644241785"
       },
       {
         "id": 2,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_dcf9b6871e7b5b444e2292e783fc1da8667e4c3b.600x338.jpg?t=1641402052",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_dcf9b6871e7b5b444e2292e783fc1da8667e4c3b.1920x1080.jpg?t=1641402052"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_dcf9b6871e7b5b444e2292e783fc1da8667e4c3b.600x338.jpg?t=1644241785",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_dcf9b6871e7b5b444e2292e783fc1da8667e4c3b.1920x1080.jpg?t=1644241785"
       },
       {
         "id": 3,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_41d226166243e9c36dba1dbd4359cfaf767d47be.600x338.jpg?t=1641402052",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_41d226166243e9c36dba1dbd4359cfaf767d47be.1920x1080.jpg?t=1641402052"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_41d226166243e9c36dba1dbd4359cfaf767d47be.600x338.jpg?t=1644241785",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_41d226166243e9c36dba1dbd4359cfaf767d47be.1920x1080.jpg?t=1644241785"
       },
       {
         "id": 4,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_b9840c4b13c4fcef79ef708cbe43a799aa31d694.600x338.jpg?t=1641402052",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_b9840c4b13c4fcef79ef708cbe43a799aa31d694.1920x1080.jpg?t=1641402052"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_b9840c4b13c4fcef79ef708cbe43a799aa31d694.600x338.jpg?t=1644241785",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847810/ss_b9840c4b13c4fcef79ef708cbe43a799aa31d694.1920x1080.jpg?t=1644241785"
       }
     ],
-    "short_description": "Tkium Exclusion Area is an horror escape game. You need to get out of this place, and quickly. Even if this area looks abandoned, nothing can confirm that you are really alone. You have to leave quickly, the fear is taking over you.",
+    "short_description": "Tkium Exclusion Area is a short horror escape game. You need to get out of this place, and quickly. Even if this area looks abandoned, nothing can confirm that you are really alone. You have to leave quickly, the fear is taking over you.",
     "tags": {
       "Action": 45,
       "Action-Adventure": 38,
@@ -1727,8 +1737,8 @@
       "Void Hook"
     ],
     "genres": {
-      "Casual": "4",
-      "Indie": "23"
+      "Casual": 4,
+      "Indie": 23
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847820/header.jpg?t=1642611941",
     "languages": "English",
@@ -1800,9 +1810,9 @@
       "Iconoclast Games"
     ],
     "genres": {
-      "Action": "1",
-      "Adventure": "25",
-      "Indie": "23"
+      "Action": 1,
+      "Adventure": 25,
+      "Indie": 23
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847840/header.jpg?t=1639592073",
     "languages": "English",
@@ -1855,21 +1865,21 @@
     "windows": true
   },
   {
-    "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847860/extras/descri\u00e7ao_da_pagina_da_loja.png?t=1643226401\" /><br><br>Daltoniel in his daily routine, from working out, wearing the costumes of his favorite heroes or eating his powerful enemies in delicious meals that he prepared himself, how good is it to enjoy life being a demigod slime.<h2 class=\"bb_tag\">features</h2><br><ul class=\"bb_ul\"><li>Jigsaw puzzle having 12 cute illustrations of Daltoniel</li></ul><ul class=\"bb_ul\"><li>For each jigsaw puzzle, 3 difficulty levels can be set</li></ul><ul class=\"bb_ul\"><li>A relaxing and imersive clean Background</li></ul><ul class=\"bb_ul\"><li>Zoom in/Zoom Out</li></ul><ul class=\"bb_ul\"><li>Draggable scenario</li></ul><ul class=\"bb_ul\"><li>A bunch of game juiciness</li></ul><ul class=\"bb_ul\"><li>Relax with a comforting and exclusive lo-fi soundtrack</li></ul>",
+    "about_the_game": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847860/extras/descri\u00e7ao_da_pagina_da_loja.png?t=1644437326\" /><br><br>Daltoniel in his daily routine, from working out, wearing the costumes of his favorite heroes or eating his powerful enemies in delicious meals that he prepared himself, how good is it to enjoy life being a demigod slime.<h2 class=\"bb_tag\">features</h2><br><ul class=\"bb_ul\"><li>Jigsaw puzzle having 12 cute illustrations of Daltoniel</li></ul><ul class=\"bb_ul\"><li>For each jigsaw puzzle, 3 difficulty levels can be set</li></ul><ul class=\"bb_ul\"><li>A relaxing and imersive clean Background</li></ul><ul class=\"bb_ul\"><li>Zoom in/Zoom Out</li></ul><ul class=\"bb_ul\"><li>Draggable scenario</li></ul><ul class=\"bb_ul\"><li>A bunch of game juiciness</li></ul><ul class=\"bb_ul\"><li>Relax with a comforting and exclusive lo-fi soundtrack</li></ul>",
     "app_id": 1847860,
     "categories": {
       "Single-player": 2,
       "Steam Achievements": 22
     },
     "coming_soon": true,
-    "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847860/extras/descri\u00e7ao_da_pagina_da_loja.png?t=1643226401\" /><br><br>Daltoniel in his daily routine, from working out, wearing the costumes of his favorite heroes or eating his powerful enemies in delicious meals that he prepared himself, how good is it to enjoy life being a demigod slime.<h2 class=\"bb_tag\">features</h2><br><ul class=\"bb_ul\"><li>Jigsaw puzzle having 12 cute illustrations of Daltoniel</li></ul><ul class=\"bb_ul\"><li>For each jigsaw puzzle, 3 difficulty levels can be set</li></ul><ul class=\"bb_ul\"><li>A relaxing and imersive clean Background</li></ul><ul class=\"bb_ul\"><li>Zoom in/Zoom Out</li></ul><ul class=\"bb_ul\"><li>Draggable scenario</li></ul><ul class=\"bb_ul\"><li>A bunch of game juiciness</li></ul><ul class=\"bb_ul\"><li>Relax with a comforting and exclusive lo-fi soundtrack</li></ul>",
+    "detailed_description": "<img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847860/extras/descri\u00e7ao_da_pagina_da_loja.png?t=1644437326\" /><br><br>Daltoniel in his daily routine, from working out, wearing the costumes of his favorite heroes or eating his powerful enemies in delicious meals that he prepared himself, how good is it to enjoy life being a demigod slime.<h2 class=\"bb_tag\">features</h2><br><ul class=\"bb_ul\"><li>Jigsaw puzzle having 12 cute illustrations of Daltoniel</li></ul><ul class=\"bb_ul\"><li>For each jigsaw puzzle, 3 difficulty levels can be set</li></ul><ul class=\"bb_ul\"><li>A relaxing and imersive clean Background</li></ul><ul class=\"bb_ul\"><li>Zoom in/Zoom Out</li></ul><ul class=\"bb_ul\"><li>Draggable scenario</li></ul><ul class=\"bb_ul\"><li>A bunch of game juiciness</li></ul><ul class=\"bb_ul\"><li>Relax with a comforting and exclusive lo-fi soundtrack</li></ul>",
     "developers": [
       "Mr Tomatus"
     ],
     "genres": {
-      "Casual": "4"
+      "Casual": 4
     },
-    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/header.jpg?t=1643226401",
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/header.jpg?t=1644437326",
     "languages": "English",
     "linux": false,
     "mac": false,
@@ -1885,28 +1895,28 @@
     "screenshots": [
       {
         "id": 0,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_d581b15836aaa6dd2457af38da9be6170b3c7fd1.600x338.jpg?t=1643226401",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_d581b15836aaa6dd2457af38da9be6170b3c7fd1.1920x1080.jpg?t=1643226401"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_d581b15836aaa6dd2457af38da9be6170b3c7fd1.600x338.jpg?t=1644437326",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_d581b15836aaa6dd2457af38da9be6170b3c7fd1.1920x1080.jpg?t=1644437326"
       },
       {
         "id": 1,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_5a4347681e54b819e1244ff87215123da53610de.600x338.jpg?t=1643226401",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_5a4347681e54b819e1244ff87215123da53610de.1920x1080.jpg?t=1643226401"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_5a4347681e54b819e1244ff87215123da53610de.600x338.jpg?t=1644437326",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_5a4347681e54b819e1244ff87215123da53610de.1920x1080.jpg?t=1644437326"
       },
       {
         "id": 2,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_6228163dceb0aa14f0f36958f8ab666ff0355ba7.600x338.jpg?t=1643226401",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_6228163dceb0aa14f0f36958f8ab666ff0355ba7.1920x1080.jpg?t=1643226401"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_6228163dceb0aa14f0f36958f8ab666ff0355ba7.600x338.jpg?t=1644437326",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_6228163dceb0aa14f0f36958f8ab666ff0355ba7.1920x1080.jpg?t=1644437326"
       },
       {
         "id": 3,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_087714d39f85826971d251499b43617fb3bbaf7c.600x338.jpg?t=1643226401",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_087714d39f85826971d251499b43617fb3bbaf7c.1920x1080.jpg?t=1643226401"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_087714d39f85826971d251499b43617fb3bbaf7c.600x338.jpg?t=1644437326",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_087714d39f85826971d251499b43617fb3bbaf7c.1920x1080.jpg?t=1644437326"
       },
       {
         "id": 4,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_b50c87982efc45e14f3b4b326aaceff75ce463a2.600x338.jpg?t=1643226401",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_b50c87982efc45e14f3b4b326aaceff75ce463a2.1920x1080.jpg?t=1643226401"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_b50c87982efc45e14f3b4b326aaceff75ce463a2.600x338.jpg?t=1644437326",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847860/ss_b50c87982efc45e14f3b4b326aaceff75ce463a2.1920x1080.jpg?t=1644437326"
       }
     ],
     "short_description": "A fun puzzle about Daltoniel, the protagonist from the Souls Saga by Pickles Entertainment. Relax resolving this jigsaw puzzle with 12 original pictures and 3 difficulty levels!",
@@ -1927,10 +1937,10 @@
       "Chaos Group Games"
     ],
     "genres": {
-      "Adventure": "25",
-      "Casual": "4",
-      "Free to Play": "37",
-      "Indie": "23"
+      "Adventure": 25,
+      "Casual": 4,
+      "Free to Play": 37,
+      "Indie": 23
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847900/header.jpg?t=1643540480",
     "languages": "",
@@ -1995,9 +2005,9 @@
       "Ooftroop"
     ],
     "genres": {
-      "Action": "1",
-      "Casual": "4",
-      "Indie": "23"
+      "Action": 1,
+      "Casual": 4,
+      "Indie": 23
     },
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847920/header.jpg?t=1640899006",
     "languages": "English",
@@ -2063,7 +2073,7 @@
     "windows": true
   },
   {
-    "about_the_game": "Signum Perfectum is a turn-based card game between two opponents that battle using constructed decks of 25 cards.<br><br>Defeat your enemies by casting magic upon them or protect yourself from their curses. Winning matches rewards in the form of new cards.<br><br>There are currenly 22 unique cards to collect, but more will come.<br><br>Each card has different sign that you need to &quot;catch&quot; during a match before card can be played. The bigger the level of card the bigger the power but also the harder is to catch the sign.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847930/extras/play-card.gif?t=1642757511\" /><br><br>Level up your hero by casting cards to be able to use more powerful cards. There are four levels: Apprentice, Mage, High Mage and Archmage.<br><br>You can play single player quests and competitions or play against other players in multiplayer PvP matches.",
+    "about_the_game": "Signum Perfectum is a turn-based card game between two opponents that battle using constructed decks of 25 cards.<br><br>Defeat your enemies by casting magic upon them or protect yourself from their curses. Winning matches rewards in the form of new cards.<br><br>There are currenly 22 unique cards to collect, but more will come.<br><br>Each card has different sign that you need to &quot;catch&quot; during a match before card can be played. The bigger the level of card the bigger the power but also the harder is to catch the sign.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847930/extras/play-card.gif?t=1644478978\" /><br><br>Level up your hero by casting cards to be able to use more powerful cards. There are four levels: Apprentice, Mage, High Mage and Archmage.<br><br>You can play single player quests and competitions or play against other players in multiplayer PvP matches.",
     "app_id": 1847930,
     "categories": {
       "Single-player": 2,
@@ -2075,16 +2085,16 @@
       "Steam Leaderboards": 25
     },
     "coming_soon": true,
-    "detailed_description": "Signum Perfectum is a turn-based card game between two opponents that battle using constructed decks of 25 cards.<br><br>Defeat your enemies by casting magic upon them or protect yourself from their curses. Winning matches rewards in the form of new cards.<br><br>There are currenly 22 unique cards to collect, but more will come.<br><br>Each card has different sign that you need to &quot;catch&quot; during a match before card can be played. The bigger the level of card the bigger the power but also the harder is to catch the sign.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847930/extras/play-card.gif?t=1642757511\" /><br><br>Level up your hero by casting cards to be able to use more powerful cards. There are four levels: Apprentice, Mage, High Mage and Archmage.<br><br>You can play single player quests and competitions or play against other players in multiplayer PvP matches.",
+    "detailed_description": "Signum Perfectum is a turn-based card game between two opponents that battle using constructed decks of 25 cards.<br><br>Defeat your enemies by casting magic upon them or protect yourself from their curses. Winning matches rewards in the form of new cards.<br><br>There are currenly 22 unique cards to collect, but more will come.<br><br>Each card has different sign that you need to &quot;catch&quot; during a match before card can be played. The bigger the level of card the bigger the power but also the harder is to catch the sign.<br><br><img src=\"https://cdn.akamai.steamstatic.com/steam/apps/1847930/extras/play-card.gif?t=1644478978\" /><br><br>Level up your hero by casting cards to be able to use more powerful cards. There are four levels: Apprentice, Mage, High Mage and Archmage.<br><br>You can play single player quests and competitions or play against other players in multiplayer PvP matches.",
     "developers": [
       "ovo6"
     ],
     "genres": {
-      "Indie": "23",
-      "RPG": "3",
-      "Strategy": "2"
+      "Indie": 23,
+      "RPG": 3,
+      "Strategy": 2
     },
-    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/header.jpg?t=1642757511",
+    "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/header.jpg?t=1644478978",
     "languages": "English",
     "linux": false,
     "mac": false,
@@ -2096,42 +2106,42 @@
     "publishers": [
       "ovo6"
     ],
-    "release_date": "Spring 2022",
+    "release_date": "2022",
     "screenshots": [
       {
         "id": 0,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_fa93b2e58d544f82cda57e07e0d91d7904119b1f.600x338.jpg?t=1642757511",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_fa93b2e58d544f82cda57e07e0d91d7904119b1f.1920x1080.jpg?t=1642757511"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_fa93b2e58d544f82cda57e07e0d91d7904119b1f.600x338.jpg?t=1644478978",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_fa93b2e58d544f82cda57e07e0d91d7904119b1f.1920x1080.jpg?t=1644478978"
       },
       {
         "id": 1,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_4562b5468875f16be94bab14324a9b190691cfde.600x338.jpg?t=1642757511",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_4562b5468875f16be94bab14324a9b190691cfde.1920x1080.jpg?t=1642757511"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_4562b5468875f16be94bab14324a9b190691cfde.600x338.jpg?t=1644478978",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_4562b5468875f16be94bab14324a9b190691cfde.1920x1080.jpg?t=1644478978"
       },
       {
         "id": 2,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_79c145d4c92156eccb5f6e309a6f616703fe6c24.600x338.jpg?t=1642757511",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_79c145d4c92156eccb5f6e309a6f616703fe6c24.1920x1080.jpg?t=1642757511"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_79c145d4c92156eccb5f6e309a6f616703fe6c24.600x338.jpg?t=1644478978",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_79c145d4c92156eccb5f6e309a6f616703fe6c24.1920x1080.jpg?t=1644478978"
       },
       {
         "id": 3,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_bcc8c700e8036b18cb0197a59c2eb5d698a5e73b.600x338.jpg?t=1642757511",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_bcc8c700e8036b18cb0197a59c2eb5d698a5e73b.1920x1080.jpg?t=1642757511"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_bcc8c700e8036b18cb0197a59c2eb5d698a5e73b.600x338.jpg?t=1644478978",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_bcc8c700e8036b18cb0197a59c2eb5d698a5e73b.1920x1080.jpg?t=1644478978"
       },
       {
         "id": 4,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_e55b6cf795b68e5cd6078ebf609a2fbfbf8ed8be.600x338.jpg?t=1642757511",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_e55b6cf795b68e5cd6078ebf609a2fbfbf8ed8be.1920x1080.jpg?t=1642757511"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_e6be9020834cbdd06318dcc968cd81ca0949b997.600x338.jpg?t=1644478978",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_e6be9020834cbdd06318dcc968cd81ca0949b997.1920x1080.jpg?t=1644478978"
       },
       {
         "id": 5,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_4c6237baad9e9cf061fd3139fde9219bed60147f.600x338.jpg?t=1642757511",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_4c6237baad9e9cf061fd3139fde9219bed60147f.1920x1080.jpg?t=1642757511"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_f90ef0e0cfc9028d1b5d1f81837892cc13c563f0.600x338.jpg?t=1644478978",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_f90ef0e0cfc9028d1b5d1f81837892cc13c563f0.1920x1080.jpg?t=1644478978"
       },
       {
         "id": 6,
-        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_7038a5be3f743d413235b944da3b92c2ac663cfd.600x338.jpg?t=1642757511",
-        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_7038a5be3f743d413235b944da3b92c2ac663cfd.1920x1080.jpg?t=1642757511"
+        "path_thumbnail": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_7038a5be3f743d413235b944da3b92c2ac663cfd.600x338.jpg?t=1644478978",
+        "path_full": "https://cdn.akamai.steamstatic.com/steam/apps/1847930/ss_7038a5be3f743d413235b944da3b92c2ac663cfd.1920x1080.jpg?t=1644478978"
       }
     ],
     "short_description": "Collectible card game where opponents fight in turns casting magic upon each other.",
@@ -2145,7 +2155,7 @@
     "categories": {},
     "coming_soon": false,
     "detailed_description": "",
-    "developers": [],
+    "developers": null,
     "genres": {},
     "header_image": "https://cdn.akamai.steamstatic.com/steam/apps/1847960/header.jpg?t=1639798264",
     "languages": "",
@@ -2160,7 +2170,7 @@
       ""
     ],
     "release_date": "2021-12-17",
-    "screenshots": [],
+    "screenshots": null,
     "short_description": "",
     "tags": [],
     "website": null,
