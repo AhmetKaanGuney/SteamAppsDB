@@ -1,9 +1,62 @@
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 import json
 
+
 @dataclass
-class AppData:
-    """An interface for app data"""
+class DataContainer:
+    """Metaclass for customized dataclass"""
+
+    def __init__(self, data=None):
+        if data:
+            self.update(data)
+
+    def update(self, attributes: dict):
+        """Updates existing attributes. Raises error if attribute doesn't exists."""
+        # Check for typos
+        for a in attributes:
+            if a not in self.__attributes__:
+                raise AttributeError(f"'{type(self).__name__}' object has no attribute '{a}'")
+
+        self.__dict__.update(attributes)
+
+    @property
+    def __attributes__(self) -> list[str]:
+        """Returns public attributes, that are not callable or dunder methods."""
+        attributes = []
+        for a in dir(self):
+            if not (a.startswith("_") or callable(getattr(self, a))):
+                attributes.append(a)
+        return attributes
+
+    def items(self) -> list[tuple]:
+        items_view = []
+        for a in self.__attributes__:
+            items_view.append((a, self.__getattribute__(a)))
+        return items_view
+
+    def as_dict(self) -> dict:
+        """Returns atributes as key value pairs."""
+        obj = {}
+        for a in self.__attributes__:
+            obj[a] = self.__getattribute__(a)
+        return obj
+
+    def json(self, indent=0) -> str:
+        output = {}
+        for a in self.__attributes__:
+            output[a] = self.__getattribute__(a)
+            json.dumps(output)
+        return json.dumps(output, indent=indent)
+
+    def __getitem__(self, key):
+        return self.__getattribute__(key)
+
+    def __repr__(self) -> str:
+        return str(self.json(indent=2))
+
+
+class AppDetails(DataContainer):
+    """An interface for app details"""
     app_id: int = 0
     name: str = ""
     price: int = None
@@ -37,56 +90,25 @@ class AppData:
     linux: bool = False
 
 
-    def __init__(self, appdata=None):
-        if appdata:
-            self.update(appdata)
+class AppSnippet(DataContainer):
+    """An interface for app snippet"""
+    app_id: int = None
+    name: str = ""
+    price: int = None
 
+    release_date: str = ""
+    coming_soon: bool = False
 
-    def update(self, attributes: dict):
-        """
-        Updates existing attributes.
-        Raises error if attribute doesn't exists.
-        """
-        # Check for typos
-        for a in attributes:
-            if a not in self.__attributes__:
-                raise AttributeError(f"'{type(self).__name__}' object has no attribute '{a}'")
+    positive_reviews: int = 0
+    negative_reviews: int = 0
+    owner_count: int = 0
 
-        self.__dict__.update(attributes)
+    header_image: str = ""
 
-    def as_dict(self) -> dict:
-        """Returns atributes as key value pairs."""
-        obj = {}
-        for a in self.__attributes__:
-            obj[a] = self.__getattribute__(a)
-        return obj
+    windows: bool = False
+    mac: bool = False
+    linux: bool = False
 
-    def json(self, indent=0) -> str:
-        output = {}
-        for a in self.__attributes__:
-            output[a] = self.__getattribute__(a)
-            json.dumps(output)
-        return json.dumps(output, indent=indent)
-
-    @property
-    def __attributes__(self) -> list[str]:
-        """Returns public attributes, that are not callable or dunder methods."""
-        attributes = []
-        for a in dir(self):
-            if not (a.startswith("_") or callable(getattr(self, a))):
-                attributes.append(a)
-        return attributes
-
-
-    def __getitem__(self, key):
-        return self.__getattribute__(key)
-
-    def __repr__(self) -> str:
-        repr_object = {}
-        for a in self.__attributes__:
-            repr_object[a] = self.__getattribute__(a)
-
-        return str(repr_object)
 
 
 if __name__ == "__main__":
@@ -135,9 +157,10 @@ if __name__ == "__main__":
         "mac": False,
         "linux": False
     }
-    app1 = AppData()
+    app1 = AppDetails()
     app1.update(app1_dict)
     app1.update({"about_the_game": "TEST"})
     app1.update({"languages": ["lila", "lele", "lolo"]})
     print(app1.json(indent=2))
+    app_snippet = AppSnippet()
     # print(app1.__attributes__)

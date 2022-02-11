@@ -3,7 +3,7 @@ import sqlite3
 import json
 import logging
 
-from appdata import AppData
+from appdata import AppDetails, AppSnippet
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -13,13 +13,16 @@ parent_dir = os.path.dirname(current_dir)
 database = os.path.join(current_dir, "apps.db")
 memory = ":memory:"
 
+VALID_FIELDS = AppDetails().__attributes__
 json_fields = ("developers", "publishers", "screenshots")
 
 
-def insert_app(app_data: AppData, db):
-    print("App ID: ", app_data.app_id)
+def insert_app(app_details: AppDetails, db):
+    print("App ID: ", app_details.app_id)
+    app_id = app_details.app_id
     data = {}
-    for k, v in app_data.as_dict().items():
+    # Covert some columns to json
+    for k, v in app_details.items():
         if k in json_fields:
             data[k] = json.dumps(v)
         else:
@@ -37,98 +40,131 @@ def insert_app(app_data: AppData, db):
             :languages, :windows, :mac, :linux
         )""", data)
 
-    if app_data.genres:
-        for name, _id in app_data.genres.items():
+    if app_details.genres:
+        for name, _id in app_details.genres.items():
             db.execute("INSERT OR IGNORE INTO genres VALUES (:genre_id, :name)", {"genre_id": _id, "name": name})
-            db.execute("INSERT INTO apps_genres VALUES (:app_id, :genre_id)", {"app_id": app_data.app_id, "genre_id": _id})
+            db.execute("INSERT INTO apps_genres VALUES (:app_id, :genre_id)", {"app_id": app_id, "genre_id": _id})
 
-    if app_data.categories:
-        for name, _id in app_data.categories.items():
+    if app_details.categories:
+        for name, _id in app_details.categories.items():
             db.execute("INSERT OR IGNORE INTO categories VALUES (:category_id, :name)", {"category_id": _id, "name": name})
-            db.execute("INSERT INTO apps_categories VALUES (:app_id, :category_id)", {"app_id": app_data.app_id, "category_id": _id})
+            db.execute("INSERT INTO apps_categories VALUES (:app_id, :category_id)", {"app_id": app_id, "category_id": _id})
 
-    if app_data.tags:
-        for name, votes in app_data.tags.items():
+    # Tags don't come with ids. they come with vote count for that tag
+    if app_details.tags:
+        for name, votes in app_details.tags.items():
             # Check tag name
             tag_id = db.execute("SELECT tag_id FROM tags WHERE name = :name", {"name": name}).fetchone()
             if tag_id:
-                db.execute("INSERT INTO apps_tags VALUES (:app_id, :tag_id, :votes)", {"app_id": app_data.app_id, "tag_id": tag_id[0], "votes": votes})
+                db.execute("INSERT INTO apps_tags VALUES (:app_id, :tag_id, :votes)", {"app_id": app_id, "tag_id": tag_id[0], "votes": votes})
             else:
                 db.execute("INSERT INTO tags VALUES (:tag_id, :name)", {"tag_id": tag_id, "name": name})
-                db.execute("INSERT INTO apps_tags VALUES (:app_id, :tag_id, :votes)", {"app_id": app_data.app_id, "tag_id": db.lastrowid, "votes": votes})
+                db.execute("INSERT INTO apps_tags VALUES (:app_id, :tag_id, :votes)", {"app_id": app_id, "tag_id": db.lastrowid, "votes": votes})
 
 
-# def get_applist(order_by, filters: dict, offset, batchsize, db) -> list[AppData]:
-def get_applist(filters: dict, db) -> list[AppData]:
+# TODO add the parameters
+def get_applist(db) -> list[AppSnippet]:
     """\
-    Returns list of app objects.
+    Returns list of app snippets.
     ordery_by: ORDER BY,
     filters: WHERE,
     batchsize: LIMIT
     offset: OFFSET
     """
     filters = {
-        "tags": [1],
+        "tags": [],
         "genres": [],
         "categories": []
     }
-    # App One: tags=1,2  genres=1,2  categories=1,2
-    # App Two: tags=2,3  genres=2,3  categories=2,3
-    # App Three: tags=3,4  genres=3,4  categories=3,4
+    order_by = {
+        "price": "ASC",
+        "release_date": "DESC"
+    }
+    limit = 20
+    offset = 0
 
-    empty_filters = []
-    # Check values
+    # Check LIMIT, OFFSET
+    for i in [limit, offset]:
+        if not isinstance(i, int):
+            raise ValueError(f"'{i}' should be an int.")
+
+    # Check ORDER BY
+    for col, direction in order_by.items():
+        if col not in VALID_FIELDS:
+            raise ValueError(f"'{col}' is not a valid column to order by.")
+        if direction not in ("ASC", "DESC"):
+            raise ValueError(f"'{direction}' is not a valid direction. Direction can only be 'ASC' or 'DESC'.")
+
+    # Check FIELDS
     for k in filters:
+        if k not in ("tags", "genres", "categories"):
+            raise ValueError(f"'{k}' is not a valid filter.")
         if not filters[k]:
-            empty_filters.append(k)
             continue
-
         # Protect againsts injection  - only accept integer values
         for i in filters[k]:
             if not isinstance(i, int):
-                raise ValueError(f"For filtering '{k}', can only use type int for their ids")
+                raise ValueError(f"For filtering '{k}', can only use type int for their ids.")
 
     tags = ",".join([str(i) for i in filters["tags"]])
     genres = ",".join([str(i) for i in filters["genres"]])
     categories = ",".join([str(i) for i in filters["categories"]])
-    print("tags joined:", tags)
-    print("genres joined:", genres)
-    print("categories joined:", categories)
 
-    # TODO skip for empty filter then
-    # append all app_ids to a filtered_app_ids set()
-    # Order: Select apps where app_id in filtered_app_ids ORDER BY (someting) DESC
-    tag_filtered = db.execute(f"SELECT DISTINCT app_id FROM apps_tags WHERE tag_id IN ({tags})").fetchall()
-    genre_filtered = db.execute(f"SELECT DISTINCT app_id FROM apps_genres WHERE genre_id IN ({genres})").fetchall()
-    category_filtered = db.execute(f"SELECT DISTINCT app_id FROM apps_categories WHERE category_id IN ({categories})").fetchall()
+    # Build sql
+    tag_sql = ""
+    genre_sql = ""
+    category_sql = ""
 
-    print("tag filtered:", tag_filtered)
-    print("genre filtered:", genre_filtered)
-    print("categorie filtered:", category_filtered)
+    if filters["tags"]:
+       tag_sql = f"SELECT DISTINCT app_id FROM apps_tags WHERE tag_id IN ({tags})"
 
-    # filter_sql = db.execute("""
-    #     SELECT app_id FROM apps_tags WHERE tag_id IN :tags
-    #     INNER JOIN (
-    #         SELE
-    #     )
-    # """)
-    # sqlite3
-    #  LIMIT and OFFSET
-    # EXAMPLE:
-    # batchsize = 1000
-    # offset = 0
-    # while True:
-    #     c.execute(
-    #         'SELECT words FROM testWords ORDER BY somecriteria LIMIT ? OFFSET ?',
-    #         (batchsize, offset))
-    #     batch = list(c)
-    #     offset += batchsize
-    #     if not batch:
-    #         break
-    pass
+    if filters["genres"]:
+        genre_sql = f"SELECT DISTINCT app_id FROM apps_genres WHERE genre_id IN ({genres})"
+
+    if filters["categories"]:
+        category_sql = f"SELECT DISTINCT app_id FROM apps_categories WHERE category_id IN ({categories})"
+
+    # Filter empty sql strings and join them
+    filter_sql = " INTERSECT ".join([i for i in [tag_sql, genre_sql, category_sql] if i])
+    print("filter_sql: ", filter_sql)
+
+    if order_by:
+        order_sql = f" ORDER BY " + ", ".join((f"{col} {direction}" for col, direction in order_by.items()))
+    else:
+        order_sql = ""
+    print(order_sql)
+
+    snippet_columns = (
+        "app_id", "name", "price",
+        "release_date", "coming_soon",
+        "positive_reviews", "negative_reviews", "owner_count",
+        "header_image", "windows", "mac", "linux"
+    )
+
+    if filter_sql:
+        ordered_apps = db.execute(f"""
+            SELECT {",".join(snippet_columns)}
+            FROM apps
+            WHERE app_id IN ({filter_sql}) {order_sql}
+            LIMIT {limit} OFFSET {offset}
+            """).fetchall()
+    else:
+        ordered_apps = db.execute(f"""
+            SELECT {",".join(snippet_columns)}
+            FROM apps
+            LIMIT {limit} OFFSET {offset}
+            """).fetchall()
+
+    # Match queried columns with fetched values
+    applist = []
+    for app in ordered_apps:
+        snippet_data = {col: app[i] for i, col in enumerate(snippet_columns)}
+        applist.append(AppSnippet(snippet_data))
+
+    return applist
 
 
-def get_app_details(app_id: int, db) -> AppData:
+def get_app_details(app_id: int, db) -> AppDetails:
     logging.debug(f"get_app_details()")
     query = db.execute("SELECT * FROM apps WHERE app_id=?", (app_id, )).fetchone()
 
@@ -155,7 +191,7 @@ def get_app_details(app_id: int, db) -> AppData:
     logging.debug(f"  Categories: {categories}")
     logging.debug(f"  App_data: {app_data}")
 
-    return AppData(app_data)
+    return AppDetails(app_data)
 
 
 def build_query(table_name: str, columns: list[str], conditions: list[str]) -> str:
@@ -282,9 +318,9 @@ if __name__ == "__main__":
 
     with Connection(memory) as db:
         init_db(db)
-        insert_app(AppData(app_data1), db)
-        insert_app(AppData(app_data2), db)
-        insert_app(AppData(app_data3), db)
+        insert_app(AppDetails(app_data1), db)
+        insert_app(AppDetails(app_data2), db)
+        insert_app(AppDetails(app_data3), db)
 
         print("APPS TAGS: ")
         print_table("apps_tags", db)
@@ -298,4 +334,4 @@ if __name__ == "__main__":
         #     query = {"table": i, "columns": ["*"], "conditions": []}
         #     print(db.execute(build_query(query)).fetchall())
 
-        get_applist({}, db)
+        get_applist(db)

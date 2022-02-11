@@ -2,7 +2,7 @@
     {
         "app_id": 1,
         "name": "App One",
-        "price": "100",
+        "price": 100,
         "release_date": "2000-01-01",
         "coming_soon": false,
 
@@ -48,7 +48,7 @@
     {
         "app_id": 2,
         "name": "App Two",
-        "price": "200",
+        "price": 200,
         "release_date": "2000-01-02",
         "coming_soon": false,
 
@@ -94,7 +94,7 @@
     {
         "app_id": 3,
         "name": "App Three",
-        "price": "300",
+        "price": 300,
         "release_date": "2000-01-03",
         "coming_soon": false,
 

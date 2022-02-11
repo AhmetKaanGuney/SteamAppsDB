@@ -17,7 +17,7 @@ from errors import (
     ServerError, SteamResponseError
 )
 from update_logger import UpdateLogger
-from appdata import AppData
+from appdata import AppDetails
 
 # Dirs
 current_dir = os.path.dirname(__file__)
@@ -86,7 +86,7 @@ def main():
 
     update_log["applist_length"] = len(applist)
 
-    apps_data: list[AppData] = []
+    apps_data: list[AppDetails] = []
 
     # =============================== #
     #  Get App Details for each App   #
@@ -97,8 +97,7 @@ def main():
 
     for i, app in enumerate(limited_applist[applist_index:]):
         app_id = app["appid"]
-        appdata = AppData()
-        appdata.update({"name": app["name"], "app_id": app["appid"]})
+        appdata = AppDetails({"name": app["name"], "app_id": app["appid"]})
 
         # API's
         steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(app_id)
@@ -252,7 +251,7 @@ def map_steam_data(steam_data: dict) -> dict:
 
     # Simplify genres and categories fields. For example:
     # genres: [{'id': 23, 'description': 'Indie'}]
-    # Turn into:
+    # Turns into:
     # genres: {'Indie': 23}
     genres_categs = {}
     for key in ["genres", "categories"]:
@@ -320,6 +319,9 @@ def map_steamspy_data(steamspy_data: dict) -> dict:
         'negative_reviews': int
         'tags': list,
     }"""
+    if steamspy_data["price"]:
+        steamspy_data["price"] = int(steamspy_data["price"])
+
     app_details = {
         "price": steamspy_data["price"],
         "owner_count": get_average(steamspy_data["owners"]),
@@ -352,7 +354,7 @@ def format_date(date: str) -> str:
     return formatted_date
 
 
-def get_average(owner_count: str):
+def get_average(owner_count: str) -> int:
     owner_count_list = owner_count.split("..")
     owner_count_list = [i.strip() for i in owner_count_list]
     min_owners_list = owner_count_list[0]
