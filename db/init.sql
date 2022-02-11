@@ -24,23 +24,23 @@ CREATE TABLE IF NOT EXISTS apps (
 -- TAGS
 CREATE TABLE IF NOT EXISTS tags (
     tag_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
-    name TEXT,
-    votes INTEGER
+    name UNIQUE
 );
 -- GENRES
 CREATE TABLE IF NOT EXISTS genres (
     genre_id INTEGER PRIMARY KEY,
-    name TEXT
+    name TEXT UNIQUE
 );
 -- CATEGORIES
 CREATE TABLE IF NOT EXISTS categories (
     category_id INTEGER PRIMARY KEY,
-    name TEXT
+    name TEXT UNIQUE
 );
 -- APP <-> TAGS MAP
 CREATE TABLE IF NOT EXISTS apps_tags (
     app_id INTEGER,
-    tag_id INTEGER
+    tag_id INTEGER,
+    votes INTEGER
 );
 -- APP <-> GENRES MAP
 CREATE TABLE IF NOT EXISTS apps_genres (

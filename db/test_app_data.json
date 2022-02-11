@@ -1,0 +1,140 @@
+[
+    {
+        "app_id": 1,
+        "name": "App One",
+        "price": "100",
+        "release_date": "2000-01-01",
+        "coming_soon": false,
+
+        "developers": ["Developer 1"],
+        "publishers": ["Publisher 1"],
+        "owner_count": 10000,
+        "positive_reviews": 1,
+        "negative_reviews": 0,
+
+        "about_the_game": "about the game...",
+        "short_description": "short description..",
+        "detailed_description": "detailed description...",
+
+        "website": "website_link",
+        "header_image": "header_img",
+        "screenshots": [
+        {
+            "id": 0,
+            "path_thumbnail": "ss_img"
+        },
+        {
+            "id": 1,
+            "path_thumbnail": "ss_img"
+        }
+        ],
+        "languages": "English",
+        "windows": true,
+        "mac": true,
+        "linux": false,
+        "categories": {
+            "C1": 1,
+            "C2": 2
+        },
+        "genres":{
+            "G1": 1,
+            "G2": 2
+        },
+        "tags": {
+            "T1": 10,
+            "T2": 20
+        }
+    },
+    {
+        "app_id": 2,
+        "name": "App Two",
+        "price": "200",
+        "release_date": "2000-01-02",
+        "coming_soon": false,
+
+        "developers": ["Developer 2.1", "Developer 2.2"],
+        "publishers": ["Publisher 2.1", "Publisher 2.2"],
+        "owner_count": 20000,
+        "positive_reviews": 2,
+        "negative_reviews": 0,
+
+        "about_the_game": "about the game...",
+        "short_description": "short description..",
+        "detailed_description": "detailed description...",
+
+        "website": "website_link",
+        "header_image": "header_img",
+        "screenshots": [
+        {
+            "id": 0,
+            "path_thumbnail": "ss_img"
+        },
+        {
+            "id": 1,
+            "path_thumbnail": "ss_img"
+        }
+        ],
+        "languages": "English",
+        "windows": true,
+        "mac": false,
+        "linux": false,
+        "categories": {
+            "C2": 2,
+            "C3": 3
+        },
+        "genres":{
+            "G2": 2,
+            "G3": 3
+        },
+        "tags": {
+            "T2": 20,
+            "T3": 30
+        }
+    },
+    {
+        "app_id": 3,
+        "name": "App Three",
+        "price": "300",
+        "release_date": "2000-01-03",
+        "coming_soon": false,
+
+        "developers": ["Developer 3", "Developer 3"],
+        "publishers": ["Publisher 3", "Publisher 3"],
+        "owner_count": 30000,
+        "positive_reviews": 0,
+        "negative_reviews": 3,
+
+        "about_the_game": "about the game...",
+        "short_description": "short description..",
+        "detailed_description": "detailed description...",
+
+        "website": "website_link",
+        "header_image": "header_img",
+        "screenshots": [
+        {
+            "id": 0,
+            "path_thumbnail": "ss_img"
+        },
+        {
+            "id": 1,
+            "path_thumbnail": "ss_img"
+        }
+        ],
+        "languages": "English",
+        "windows": true,
+        "mac": false,
+        "linux": true,
+        "categories": {
+            "C3": 3,
+            "C4": 4
+        },
+        "genres":{
+            "G3": 3,
+            "G4": 4
+        },
+        "tags": {
+            "T3": 30,
+            "T4": 40
+        }
+    }
+]
