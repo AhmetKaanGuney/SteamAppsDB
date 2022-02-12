@@ -61,7 +61,7 @@ STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails
 
 
 # TODO email weekly report
-# TODO check for lastest request to steam 
+# TODO check for lastest request to steam
 # if two days haven't passed don't excute the script
 # check this before main(), in the if __name__ == "__main__" block
 
@@ -69,7 +69,7 @@ def main():
     logging.info("===             DB UPDATE            ===")
     logging.info(f"=== Date: {datetime.datetime.utcnow()} ===")
 
-    applist_fetched = True
+    applist_fetched = update_log["applist_fetched"]
 
     # ========================= #
     #  Get App List from Steam  #
@@ -77,14 +77,16 @@ def main():
     if not applist_fetched:
         logging.debug(f"Fetching applist from: {APPLIST_API}")
 
-        applist = fetch_applist(APPLIST_API, APPLIST_FILE)
+        applist = fetch_applist(APPLIST_API)
         update_log["steam_request_count"] += 1
 
         # Save to File
         write_to_json(applist, APPLIST_FILE)
+        exit(0)
+        update_log["applist_fetched"] = True
 
     with open(APPLIST_FILE, "r") as f:
-        applist = json.load(f)["applist"]
+        applist = json.load(f)
 
     limited_applist = applist[:30]
     applist_index = update_log["applist_index"]
@@ -102,8 +104,8 @@ def main():
 
 
     for i, app in enumerate(limited_applist[applist_index:]):
-        app_id = app["appid"]
-        app_details = AppDetails({"name": app["name"], "app_id": app["appid"]})
+        app_id = app["app_id"]
+        app_details = AppDetails({"name": app["name"], "app_id": app["app_id"]})
 
         # API's
         steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(app_id)
@@ -165,7 +167,7 @@ def main():
                     insert_app(app_details, db)
 
                 update_log["updated_apps"] += 1
-        
+
         else:
             logging.debug(f"Steam responded with {steam_response}. AppID: {app_id}")
             update_log["rejected_apps"].append(app_id)
@@ -179,7 +181,7 @@ def main():
         # If the last item in the app list is updated, reset the log
         update_log["reset_log"] = True
 
-    
+
 
 
 def fetch(api: str) -> dict:
@@ -201,18 +203,23 @@ def fetch(api: str) -> dict:
 
 
 def fetch_applist(api: str):
-    """Steam's return format: {'applist': [{appid: int, name: str}]}"""
+    """Steam's response format: {
+        'applist': {
+            'apps': [
+                {appid: int, name: str}
+            ]
+        }"""
 
     update_log["last_request_to_steam"] = str(datetime.datetime.utcnow())
     response_json = fetch(api)
+    applist = []
 
-    applist = {"applist": []}
     # Save each app that has a name
-    for app in response_json["applist"]:
+    for app in response_json["applist"]["apps"]:
         if app["name"]:
-            applist["applist"].append(
+            applist.append(
                 {
-                    "appid": app["appid"],
+                    "app_id": app["appid"],
                     "name": app["name"]
                 }
             )
@@ -390,7 +397,7 @@ def get_min_owner_count(app_details: dict) -> int:
     return int(min_owners_str)
 
 
-def write_to_json(data: any, file_path: str, indent=0):
+def write_to_json(data: any, file_path: str, indent=None):
     with open(file_path, "w") as f:
         json.dump(data, f, indent=indent)
 

@@ -34,6 +34,7 @@ class UpdateLogger:
             "steam_request_count": 0,
             "steam_request_limit_reached": False,
             "applist_length": 0,
+            "applist_fetched": False,
             "updated_apps": 0,
             "non_game_apps": 0,
             "applist_index": 0,

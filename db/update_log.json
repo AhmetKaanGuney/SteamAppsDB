@@ -1,23 +1,12 @@
 {
-  "reset_log": true,
-  "last_request_to_steam": "2022-02-12 13:33:03.130793",
-  "steam_request_count": 50,
+  "reset_log": false,
+  "last_request_to_steam": "2022-02-12 19:25:10.751997",
+  "steam_request_count": 4,
   "steam_request_limit_reached": false,
-  "applist_length": 134933,
-  "updated_apps": 35,
-  "non_game_apps": 3,
+  "applist_length": 0,
+  "applist_fetched": false,
+  "updated_apps": 0,
+  "non_game_apps": 0,
   "applist_index": 0,
-  "rejected_apps": [
-    216938,
-    660010,
-    660130,
-    216938,
-    660010,
-    216938,
-    660010,
-    660130,
-    216938,
-    660010,
-    660130
-  ]
+  "rejected_apps": []
 }
