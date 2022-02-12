@@ -1,24 +1,28 @@
 """Initialize sqlite database"""
 import sqlite3
-
 import os
 
-# TODO check init script
-# TODO check tables
+from database import Connection, DATABASE_PATH
+
 current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
 
-database = os.path.join(current_dir, "apps.db")
+# Initialize databa with init.sql file
 init_script = os.path.join(current_dir, "init.sql")
 
-with open(init_script) as f:
-    script_as_str = f.read()
+def main():
+    print(f"Initializing database at '{init_script}'...")
 
-con = sqlite3.connect(database)
-cur = con.cursor()
+    # Get file content
+    with open(init_script) as f:
+        script_as_str = f.read()
 
-cur.executescript(script_as_str)
+    # Execute
+    with Connection(DATABASE_PATH) as db:
+        db.executescript(script_as_str)
 
-con.commit()
-con.close()
+    print("Initialisation successful!")
 
+
+if __name__ == "__main__":
+    main()

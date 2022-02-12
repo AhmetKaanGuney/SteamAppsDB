@@ -163,4 +163,3 @@ if __name__ == "__main__":
     app1.update({"languages": ["lila", "lele", "lolo"]})
     print(app1.json(indent=2))
     app_snippet = AppSnippet()
-    # print(app1.__attributes__)
