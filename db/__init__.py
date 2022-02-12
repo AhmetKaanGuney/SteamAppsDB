@@ -3,15 +3,16 @@ import sqlite3
 import os
 import sys
 
-from database import Connection, DATABASE_PATH
-
-current_dir = os.path.dirname(__file__)
-
-# Initialize databa with init.sql file
-init_script = os.path.join(current_dir, "init.sql")
 
 def main():
-    print(f"Initializing database at '{init_script}'...")
+    from database import Connection, DATABASE_PATH
+
+    current_dir = os.path.dirname(__file__)
+
+    # Initialize databa with init.sql file
+    init_script = os.path.join(current_dir, "init.sql")
+
+    print(f"Initializing database at '{init_script}'")
 
     reset_db = False
     # If script is called with '-r' delete db and recreate it

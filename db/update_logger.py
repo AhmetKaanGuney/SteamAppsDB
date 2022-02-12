@@ -1,6 +1,20 @@
 """Manages update_log"""
 import json
 
+DEFAULT_LOG = {
+    "reset_log": False,
+    "last_request_to_steam": "",
+    "steam_request_count": 0,
+    "steam_request_limit_reached": False,
+    "applist_length": 0,
+    "applist_fetched": False,
+    "updated_apps": 0,
+    "non_game_apps": 0,
+    "applist_index": 0,
+    "rejected_apps": []
+}
+
+
 class UpdateLogger:
     """On init loads file.
     On update: updates dictionary key with new value
@@ -28,16 +42,5 @@ class UpdateLogger:
 
 
     def _reset_log(self):
-        self.log = {
-            "reset_log": False,
-            "last_request_to_steam": "",
-            "steam_request_count": 0,
-            "steam_request_limit_reached": False,
-            "applist_length": 0,
-            "applist_fetched": False,
-            "updated_apps": 0,
-            "non_game_apps": 0,
-            "applist_index": 0,
-            "rejected_apps": []
-        }
+        self.log = DEFAULT_LOG
         self.save()

@@ -35,9 +35,6 @@ update_log = update_logger.log
 # Config
 config = dotenv_values(os.path.join(parent_dir, ".env"))
 
-# Test
-FAIL_API = "https://store.steampowered.com/api/appdetails/?appids=360032"
-
 # Max owner limit
 # if an app's owner count breaks this limit
 # that app will not be stored into the database
@@ -82,7 +79,6 @@ def main():
 
         # Save to File
         write_to_json(applist, APPLIST_FILE)
-        exit(0)
         update_log["applist_fetched"] = True
 
     with open(APPLIST_FILE, "r") as f:
