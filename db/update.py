@@ -17,29 +17,33 @@ from errors import (
     ServerError, SteamResponseError
 )
 from update_logger import UpdateLogger
-from appdata import AppDetails
+from appdata import AppDetails, AppSnippet
+from database import DATABASE_PATH, Connection, insert_app
+
+logging.debug(f"Database Path: {DATABASE_PATH}")
 
 # Dirs
 current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
 
-# Config
-config = dotenv_values(os.path.join(parent_dir, ".env"))
 
 # Init Loggers
 logging.basicConfig(level=logging.INFO)
+update_logger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
+update_log = update_logger.log
 
-u_logger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
-update_log = u_logger.log
+# Config
+config = dotenv_values(os.path.join(parent_dir, ".env"))
 
 # Test
 FAIL_API = "https://store.steampowered.com/api/appdetails/?appids=360032"
 
-# Max owner limit, if an app's owner count breaks the limit
-# that app will be ignored
+# Max owner limit
+# if an app's owner count breaks this limit
+# that app will not be stored into the database
 MAX_OWNERS = 1_000_000
 
-# Time to wait in between request in ms
+# Time to wait in between request in seconds
 STEAM_WAIT_DURATION = 1
 STEAMSPY_WAIT_DURATION = 1
 STEAM_REQUEST_LIMIT = 100_000
@@ -48,6 +52,7 @@ STEAM_REQUEST_LIMIT = 100_000
 APPLIST_FILE = os.path.join(current_dir, "applist.json")
 APPLIST_FILTERED_FILE = os.path.join(current_dir, "applist_filtered.json")
 
+
 # API's
 # Append appid to app details API to get app details
 APPLIST_API = "https://api.steampowered.com/ISteamApps/GetAppList/v2/"
@@ -55,7 +60,10 @@ STEAM_APP_DETAILS_API_BASE = "https://store.steampowered.com/api/appdetails/?app
 STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails&appid="
 
 
-# TODO email weekly report and errors
+# TODO email weekly report
+# TODO check for lastest request to steam 
+# if two days haven't passed don't excute the script
+# check this before main(), in the if __name__ == "__main__" block
 
 def main():
     logging.info("===             DB UPDATE            ===")
@@ -86,8 +94,6 @@ def main():
 
     update_log["applist_length"] = len(applist)
 
-    apps_data: list[AppDetails] = []
-
     # =============================== #
     #  Get App Details for each App   #
     # =============================== #
@@ -97,7 +103,7 @@ def main():
 
     for i, app in enumerate(limited_applist[applist_index:]):
         app_id = app["appid"]
-        appdata = AppDetails({"name": app["name"], "app_id": app["appid"]})
+        app_details = AppDetails({"name": app["name"], "app_id": app["appid"]})
 
         # API's
         steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(app_id)
@@ -120,7 +126,7 @@ def main():
 
         # Update app info
         app_details_from_steamspy = map_steamspy_data(steamspy_data)
-        appdata.update(app_details_from_steamspy)
+        app_details.update(app_details_from_steamspy)
 
         # =================== #
         #  FETCH FROM STEAM   #
@@ -152,12 +158,14 @@ def main():
                 app_details_from_steam = map_steam_data(steam_data)
 
                 # Update the app info
-                appdata.update(app_details_from_steam)
+                app_details.update(app_details_from_steam)
+
+                # Save to db
+                with Connection(DATABASE_PATH) as db:
+                    insert_app(app_details, db)
+
                 update_log["updated_apps"] += 1
-
-                # Record to apps_data
-                apps_data.append(appdata.as_dict())
-
+        
         else:
             logging.debug(f"Steam responded with {steam_response}. AppID: {app_id}")
             update_log["rejected_apps"].append(app_id)
@@ -171,7 +179,7 @@ def main():
         # If the last item in the app list is updated, reset the log
         update_log["reset_log"] = True
 
-    write_to_json(apps_data, "./app_details.json", indent=2)
+    
 
 
 def fetch(api: str) -> dict:
@@ -422,4 +430,4 @@ Update failed due to an error:
         # email(msg)
         raise e
     finally:
-        u_logger.save()
+        update_logger.save()

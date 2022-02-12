@@ -91,7 +91,7 @@ class AppDetails(DataContainer):
 
 
 class AppSnippet(DataContainer):
-    """An interface for app snippet"""
+    """An interface for holding app snippet data"""
     app_id: int = None
     name: str = ""
     price: int = None
