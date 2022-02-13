@@ -1,5 +1,6 @@
 venv/
 .vscode/
+__pycache__/
 db/__pycache__/
 db/apps.db
 db/update_log.json

@@ -3,9 +3,13 @@ import sqlite3
 import json
 import logging
 
-from appdata import AppDetails, AppSnippet
+try:
+    from appdata import AppDetails, AppSnippet
+except ImportError:
+    from .appdata import AppDetails, AppSnippet
+    
 
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 current_dir = os.path.dirname(__file__)
 DATABASE_PATH = os.path.join(current_dir, "apps.db")

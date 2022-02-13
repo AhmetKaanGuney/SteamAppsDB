@@ -3,10 +3,7 @@ import sqlite3
 import os
 import sys
 
-
 def main():
-    from database import Connection, DATABASE_PATH
-
     current_dir = os.path.dirname(__file__)
 
     # Initialize databa with init.sql file
@@ -43,4 +40,5 @@ def main():
 
 
 if __name__ == "__main__":
+    from database import Connection, DATABASE_PATH
     main()

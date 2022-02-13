@@ -11,14 +11,25 @@ import smtplib, ssl
 import requests
 from dotenv import dotenv_values
 
-from errors import (
-    Error, RequestTimeoutError, RequestFailedError,
-    UnauthorizedError, ForbiddenError, NotFoundError,
-    ServerError, SteamResponseError
-)
-from update_logger import UpdateLogger
-from appdata import AppDetails, AppSnippet
-from database import DATABASE_PATH, Connection, insert_app
+try:
+    from errors import (
+        Error, RequestTimeoutError, RequestFailedError,
+        UnauthorizedError, ForbiddenError, NotFoundError,
+        ServerError, SteamResponseError
+    )
+    from update_logger import UpdateLogger
+    from appdata import AppDetails, AppSnippet
+    from database import DATABASE_PATH, Connection, insert_app
+except:
+    from .errors import (
+        Error, RequestTimeoutError, RequestFailedError,
+        UnauthorizedError, ForbiddenError, NotFoundError,
+        ServerError, SteamResponseError
+    )
+    from .update_logger import UpdateLogger
+    from .appdata import AppDetails, AppSnippet
+    from .database import DATABASE_PATH, Connection, insert_app
+
 
 logging.debug(f"Database Path: {DATABASE_PATH}")
 

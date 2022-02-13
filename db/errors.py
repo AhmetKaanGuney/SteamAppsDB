@@ -1,5 +1,9 @@
 import os
-from update_logger import UpdateLogger
+
+try:
+    from update_logger import UpdateLogger
+except ImportError:
+    from .update_logger import UpdateLogger
 
 
 current_dir = os.path.dirname(__file__)
