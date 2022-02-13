@@ -1,5 +1,6 @@
 import os
 import json
+import subprocess
 
 from db.update_logger import DEFAULT_LOG
 
@@ -51,14 +52,6 @@ if __name__ == "__main__":
         print("Creating venv...")
         os.system("python -m venv venv")
 
-        print("---")
-
-        print("Activating venv...")
-        os.system("venv.ps1")
-
-        print("---")
-
-        print("Installing requirements...")
-        os.system("pip install -r requirements.txt")
-
-    print("Setup succesfull!\n")
+    print("Setup succesfull!")
+    print("Activate venv with 'init_env.ps1' then install requirements with: ")
+    print("pip install -r requirements.txt\n")
