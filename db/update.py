@@ -19,7 +19,10 @@ try:
     )
     from update_logger import UpdateLogger
     from appdata import AppDetails, AppSnippet
-    from database import DATABASE_PATH, Connection, insert_app
+    from database import (
+        DATABASE_PATH, Connection,
+        insert_app, insert_non_game_app, insert_rejected_app,
+        get_non_game_apps, get_rejected_apps)
 except:
     from .errors import (
         Error, RequestTimeoutError, RequestFailedError,
@@ -28,7 +31,10 @@ except:
     )
     from .update_logger import UpdateLogger
     from .appdata import AppDetails, AppSnippet
-    from .database import DATABASE_PATH, Connection, insert_app
+    from .database import (
+        DATABASE_PATH, Connection,
+        insert_app, insert_non_game_app, insert_rejected_app,
+        get_non_game_apps, get_rejected_apps)
 
 
 logging.debug(f"Database Path: {DATABASE_PATH}")
@@ -40,6 +46,7 @@ parent_dir = os.path.dirname(current_dir)
 
 # Init Loggers
 logging.basicConfig(level=logging.INFO)
+
 update_logger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
 update_log = update_logger.log
 
@@ -74,8 +81,8 @@ STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails
 # check this before main(), in the if __name__ == "__main__" block
 
 def main():
-    logging.info("===             DB UPDATE            ===")
-    logging.info(f"=== Date: {datetime.datetime.utcnow()} ===")
+    print("===             DB UPDATE            ===")
+    print(f"=== Date: {datetime.datetime.utcnow()} ===")
 
     applist_fetched = update_log["applist_fetched"]
 
@@ -92,26 +99,42 @@ def main():
         write_to_json(applist, APPLIST_FILE)
         update_log["applist_fetched"] = True
 
+
+    # Get Saved Applist
     with open(APPLIST_FILE, "r") as f:
         applist = json.load(f)
 
-    limited_applist = applist[:30]
+
     applist_index = update_log["applist_index"]
 
-    logging.info(f"Length of Limited Applist: {len(limited_applist):,}")
-    logging.debug(f"Applist Index: {applist_index}")
+    applist_length = len(applist[applist_index:])
+    update_log["applist_length"] = applist_length
 
-    update_log["applist_length"] = len(applist)
+    print(f"Length of Applist: {applist_length:,}")
+    print(f"Starting From Index: {applist_index}")
+    print(f"Current Steam Request Count: {update_log['steam_request_count']}")
 
+
+    # For testing use limited applist
+    # limited_applist = applist[applist_index : applist_index + 30]
+
+    print("Starting to iterate over Applist:")
     # =============================== #
     #  Get App Details for each App   #
     # =============================== #
-    logging.debug("Iterating over LIMITED APPLIST...")
-    logging.debug(f"Steam Request Count: {update_log['steam_request_count']}")
 
+    with Connection(DATABASE_PATH) as db:
+        non_game_apps = get_non_game_apps(db)
 
-    for i, app in enumerate(limited_applist[applist_index:]):
+    for i, app in enumerate(applist[applist_index:]):
+        print(f"Iteration: {i}", end='\r')
         app_id = app["app_id"]
+
+        # If app is not a game skip
+        if app_id in non_game_apps:
+            logging.debug(f"App is not a game. AppID: '{app_id}'\nSkipping...")
+            continue
+
         app_details = AppDetails({"name": app["name"], "app_id": app["app_id"]})
 
         # API's
@@ -160,7 +183,11 @@ def main():
             steam_data = steam_response["data"]
             # Check if app is a game
             if steam_data["type"] != "game":
-                logging.debug(f"App '{app_id}' is not a game. Skipping...")
+                logging.debug(f"App '{app_id}' is not a game. Recording app_id then skipping...")
+
+                with Connection(DATABASE_PATH) as db:
+                    insert_non_game_app(app_id, db)
+
                 update_log["non_game_apps"] += 1
                 continue
             else:
@@ -174,10 +201,13 @@ def main():
                     insert_app(app_details, db)
 
                 update_log["updated_apps"] += 1
-
         else:
             logging.debug(f"Steam responded with {steam_response}. AppID: {app_id}")
-            update_log["rejected_apps"].append(app_id)
+
+            with Connection(DATABASE_PATH) as db:
+                insert_rejected_app(app_id, db)
+
+            update_log["rejected_apps"] += 1
             continue
 
     if update_log["steam_request_limit_reached"]:
@@ -421,26 +451,33 @@ def email(msg):
 if __name__ == "__main__":
     try:
         main()
+        print("")
         msg = f"""\
 Subject: Update Successful
 
 Updated Apps: {update_log["updated_apps"]:,} / {update_log["applist_length"]:,}
-Rejected Apps: {len(update_log["rejected_apps"])}
+Rejected Apps: {update_log["rejected_apps"]}
 Non-Game Apps: {update_log["non_game_apps"]}
 Steam Request Count: {update_log["steam_request_count"]}
 """
-        print("EMAIL: \n")
-        print(msg)
+        # print("EMAIL: \n")
+        # print(msg)
         # email(msg)
 
     except Exception as e:
+        print("")
         msg = f"""\
 Subject: Update Failed
 
+Updated Apps: {update_log["updated_apps"]:,} / {update_log["applist_length"]:,}
+Rejected Apps: {update_log["rejected_apps"]}
+Non-Game Apps: {update_log["non_game_apps"]}
+Steam Request Count: {update_log["steam_request_count"]}
+
 Update failed due to an error:
 {traceback.format_exc()}"""
-        print("EMAIL: \n")
-        print(msg +  "\nended")
+        # print("EMAIL: \n")
+        # print(msg +  "\nended")
         # email(msg)
         raise e
     finally:

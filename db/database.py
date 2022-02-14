@@ -7,9 +7,9 @@ try:
     from appdata import AppDetails, AppSnippet
 except ImportError:
     from .appdata import AppDetails, AppSnippet
-    
 
-logging.basicConfig(level=logging.DEBUG)
+
+logging.basicConfig(level=logging.CRITICAL)
 
 current_dir = os.path.dirname(__file__)
 DATABASE_PATH = os.path.join(current_dir, "apps.db")
@@ -71,8 +71,17 @@ def insert_app(app_details: AppDetails, db):
                                 {"app_id": app_id, "tag_id": db.lastrowid, "votes": votes})
 
 
-def get_applist(filters: dict, order_by: dict, limit, offset, db) -> list[AppSnippet]:
+def insert_non_game_app(app_id: int, db):
+    db.execute("INSERT OR IGNORE INTO non_game_apps VALUES (?)", (app_id, ))
+
+
+def insert_rejected_app(app_id: int, db):
+    db.execute("INSERT OR IGNORE INTO rejected_apps VALUES (?)", (app_id, ))
+
+
+def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
     """
+    Returns list of app snippets as dict objects.
     ordery_by: {
         column_name: order (only 'ASC' or 'DESC')
         }
@@ -91,13 +100,13 @@ def get_applist(filters: dict, order_by: dict, limit, offset, db) -> list[AppSni
         raise TypeError(f"'{offset}' is not an int. Offset parameter should be an int.")
 
     # Check ORDER BY
-    for col, order in order_by.items():
+    for col, direction in order.items():
         if col not in APP_DETAILS_FIELDS:
             raise ValueError(f"'{col}' is not a valid column to order by.")
-        if order not in ("ASC", "DESC"):
-            raise ValueError(f"'{order}' is not a valid order. Order can only be 'ASC' or 'DESC'.")
+        if direction not in ("ASC", "DESC"):
+            raise ValueError(f"'{direction}' is not a valid direction. Direction can only be 'ASC' or 'DESC'.")
 
-    # Check FIELDS
+    # Check FILTERS
     for f in filters:
         if f not in ("tags", "genres", "categories"):
             raise ValueError(f"'{f}' is not a valid filter.")
@@ -138,8 +147,8 @@ def get_applist(filters: dict, order_by: dict, limit, offset, db) -> list[AppSni
     logging.debug(f"Filter Columns String: '{filter_columns}'")
     logging.debug(f"Filter Sql : '{filter_sql}'")
 
-    if order_by:
-        order_sql = f"ORDER BY " + ", ".join((f"{col} {direction}" for col, direction in order_by.items()))
+    if order:
+        order_sql = f"ORDER BY " + ", ".join((f"{col} {direction}" for col, direction in order.items()))
     else:
         order_sql = ""
 
@@ -164,7 +173,7 @@ def get_applist(filters: dict, order_by: dict, limit, offset, db) -> list[AppSni
     applist = []
     for app in ordered_apps:
         snippet_data = {col: app[i] for i, col in enumerate(APP_SNIPPET_FIELDS)}
-        applist.append(AppSnippet(snippet_data))
+        applist.append(snippet_data)
 
     return applist
 
@@ -228,6 +237,16 @@ def get_categories(app_id: int, db):
     return {i[0]: i[1] for i in categories}
 
 
+def get_non_game_apps(db):
+    result = db.execute(f"SELECT * FROM non_game_apps").fetchall()
+    return [i[0] for i in result]
+
+
+def get_rejected_apps(db):
+    result = db.execute("SELECT * FROM rejected_apps").fetchall()
+    return [i[0] for i in result]
+
+
 def print_table(table: str, db):
         table = db.execute(f"SELECT * FROM {table}")
         for row in table.fetchall():
@@ -285,11 +304,26 @@ if __name__ == "__main__":
             "genres": [],
             "categories": []
         }
-        order_by = {
+        order = {
             "price": "ASC",
             "release_date": "DESC"
         }
         limit = 20
         offset = 0
-        applist = get_applist(filters, order_by, limit, offset, db)
+        applist = get_applist(filters, order, limit, offset, db)
         print("APPLIST: \n", applist)
+
+        for i in range(5):
+            insert_non_game_app(i, db)
+            insert_rejected_app(i, db)
+
+        print("Insert non-game-app")
+        print_table("non_game_apps", db)
+
+        print("Insert rejected-app")
+        print_table("rejected_apps", db)
+
+        non_game_apps = get_non_game_apps(db)
+        rejected_apps = get_rejected_apps(db)
+        print("Non game apps: ", non_game_apps)
+        print("Rejected apss: ", rejected_apps)

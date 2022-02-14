@@ -1,23 +1,38 @@
 """Web API for Steam apps database"""
+import time
 import json
 import sys
 from flask import (
     Flask,
     request,
     render_template,
+    jsonify
 )
 
-from .db.database import (
-    get_app_details,
-    get_applist,
-    Connection,
-    DATABASE_PATH
-)
+try:
+    from .db.database import (
+        get_app_details,
+        get_applist,
+        Connection,
+        DATABASE_PATH
+    )
 
-from .db.appdata import (
-    AppDetails,
-    AppSnippet
-)
+    from .db.appdata import (
+        AppDetails,
+        AppSnippet
+    )
+except ImportError:
+    from db.database import (
+        get_app_details,
+        get_applist,
+        Connection,
+        DATABASE_PATH
+    )
+
+    from db.appdata import (
+        AppDetails,
+        AppSnippet
+    )
 
 
 app = Flask(__name__)
@@ -29,25 +44,28 @@ def app_details(app_id):
         return get_app_details(app_id, db).json(indent=None)
 
 
-# http://127.0.0.1:5000/GetAppList?<filters>&<order_by>
+# http://127.0.0.1:5000/GetAppList?filters=<tag=1,2,3&genre>&<order_by>
+
 @app.route("/GetAppList")
 def app_list():
-    print("APP LIST: ")
-    # Default Values
-    filters = {
-        "tags": [],
-        "genres": [],
-        "categories": []
-    }
-    order_by = {
-        "release_date": "DESC",
-    }
-    order = request.args.get("order_by")
-    # TODO ad tags categories genres
-    print(filters)
-    return "Applist Response"
+    BATCH_SIZE = 20
+    print("<== APP LIST ==>")
+    print("Request URL: ", request.url)
+    query = json.loads(request.json)
+    print("Request JSON: ", query)
+
+    start = time.perf_counter()
+
+    with Connection(DATABASE_PATH) as db:
+        app_list = get_applist(query["filters"], query["order"], BATCH_SIZE, query["index"], db)
+
+        stop = time.perf_counter()
+        print("Time took: ", stop - start, " secs.")
+        print("<==============>")
+
+        return jsonify(app_list)
 
 @app.route("/", methods=["GET"])
 def api_doc():
-    return render_template("api.html") 
+    return render_template("api.md")
 

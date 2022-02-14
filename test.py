@@ -1,6 +1,16 @@
 import requests
 import json
-params = {"tags": [1, 2], "genres": [1], "categories": [1], "order_by": [{"price": "DESC"}]}
-response = requests.get("http://127.0.0.1:5000/GetAppList", params=params)
+
+filters = {
+    "tags": [2],
+    "genres": [2],
+    "categories": []
+}
+order = {
+    "price": "ASC",
+    "release_date": "DESC"
+}
+data = {"filters": filters, "order": order, "index": 0}
+response = requests.get("http://127.0.0.1:5000/GetAppList", json=json.dumps(data))
 print(response.url)
-print(response.text)
+print(json.loads(response.text))
