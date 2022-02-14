@@ -236,7 +236,7 @@ def fetch(api: str) -> dict:
     elif response.status_code == 404:
         raise NotFoundError(api, update_log)
     else:
-        raise RequestFailedError(response.status_code, update_log)
+        raise RequestFailedError(f"API: {api} failed with {response.status_code} status code.", update_log)
 
 
 def fetch_applist(api: str):
@@ -460,9 +460,9 @@ Rejected Apps: {update_log["rejected_apps"]}
 Non-Game Apps: {update_log["non_game_apps"]}
 Steam Request Count: {update_log["steam_request_count"]}
 """
-        # print("EMAIL: \n")
-        # print(msg)
-        # email(msg)
+        print("Info: \n")
+        print(msg)
+        email(msg)
 
     except Exception as e:
         print("")
@@ -478,7 +478,7 @@ Update failed due to an error:
 {traceback.format_exc()}"""
         # print("EMAIL: \n")
         # print(msg +  "\nended")
-        # email(msg)
+        email(msg)
         raise e
     finally:
         update_logger.save()

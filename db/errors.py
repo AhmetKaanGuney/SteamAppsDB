@@ -26,9 +26,9 @@ class RequestTimeoutError(Error):
 
 class RequestFailedError(Error):
     """Request failed with unknown error"""
-    def __init__(self, status_code: str, log={}):
+    def __init__(self, msg: str, log={}):
         Error.log(log)
-        super().__init__(status_code)
+        super().__init__(msg)
 
 
 class UnauthorizedError(Error):
