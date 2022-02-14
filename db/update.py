@@ -74,6 +74,7 @@ APPLIST_API = "https://api.steampowered.com/ISteamApps/GetAppList/v2/"
 STEAM_APP_DETAILS_API_BASE = "https://store.steampowered.com/api/appdetails/?appids="
 STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails&appid="
 
+LATEST_INDEX = 0
 
 # TODO email weekly report
 # TODO check for lastest request to steam
@@ -127,7 +128,9 @@ def main():
         non_game_apps = get_non_game_apps(db)
 
     for i, app in enumerate(applist[applist_index:]):
-        print(f"Iteration: {i}", end='\r')
+        LATEST_INDEX = i
+        print(f"Iteration: {i}", end="\r")
+    	
         app_id = app["app_id"]
 
         # If app is not a game skip
@@ -466,6 +469,7 @@ Steam Request Count: {update_log["steam_request_count"]}
 
     except Exception as e:
         print("")
+        update_log["applist_index"] = LATEST_INDEX
         msg = f"""\
 Subject: Update Failed
 
