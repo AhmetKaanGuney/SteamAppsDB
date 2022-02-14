@@ -51,7 +51,7 @@ update_logger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
 update_log = update_logger.log
 
 # Config
-config = dotenv_values(os.path.join(parent_dir, ".env"))
+env = dotenv_values(os.path.join(parent_dir, ".env"))
 
 # Max owner limit
 # if an app's owner count breaks this limit
@@ -59,7 +59,7 @@ config = dotenv_values(os.path.join(parent_dir, ".env"))
 MAX_OWNERS = 1_000_000
 
 # Time to wait in between request in seconds
-STEAM_WAIT_DURATION = 1
+STEAM_WAIT_DURATION = 2
 STEAMSPY_WAIT_DURATION = 1
 STEAM_REQUEST_LIMIT = 100_000
 
@@ -130,7 +130,8 @@ def main():
     for i, app in enumerate(applist[applist_index:]):
         LATEST_INDEX = i
         print(f"Iteration: {i}", end="\r")
-    	
+        raise Error()
+
         app_id = app["app_id"]
 
         # If app is not a game skip
@@ -446,16 +447,20 @@ def email(msg):
     context = ssl.create_default_context()
 
     with smtplib.SMTP_SSL(
-        config["SMTP_SERVER"], config["PORT"], context=context) as server:
-        server.login(config["SENDER_EMAIL"], config["PASSWORD"])
-        server.sendmail(config["SENDER_EMAIL"], config["RECEIVER_EMAIL"], msg)
+        env["SMTP_SERVER"], env["PORT"], context=context) as server:
+        server.login(env["SENDER_EMAIL"], env["PASSWORD"])
+        server.sendmail(env["SENDER_EMAIL"], env["RECEIVER_EMAIL"], msg)
+
+
+
+
 
 
 if __name__ == "__main__":
     try:
         main()
-        print("")
-        msg = f"""\
+
+        success_msg = f"""\
 Subject: Update Successful
 
 Updated Apps: {update_log["updated_apps"]:,} / {update_log["applist_length"]:,}
@@ -463,14 +468,14 @@ Rejected Apps: {update_log["rejected_apps"]}
 Non-Game Apps: {update_log["non_game_apps"]}
 Steam Request Count: {update_log["steam_request_count"]}
 """
+
+        print("")
         print("Info: \n")
-        print(msg)
-        email(msg)
+        print(success_msg)
+        email(success_msg)
 
     except Exception as e:
-        print("")
-        update_log["applist_index"] = LATEST_INDEX
-        msg = f"""\
+    	fail_msg = f"""\
 Subject: Update Failed
 
 Updated Apps: {update_log["updated_apps"]:,} / {update_log["applist_length"]:,}
@@ -479,10 +484,14 @@ Non-Game Apps: {update_log["non_game_apps"]}
 Steam Request Count: {update_log["steam_request_count"]}
 
 Update failed due to an error:
-{traceback.format_exc()}"""
-        # print("EMAIL: \n")
-        # print(msg +  "\nended")
-        email(msg)
+{traceback.format_exc()}
+"""
+		print("")
+		update_log["applist_index"] = LATEST_INDEX
+		print(f"Recording applist_index {LATEST_INDEX}")
+		email(fail_msg)
         raise e
+
     finally:
-        update_logger.save()
+    	  update_logger.save()
+    	  print("finally")
