@@ -13,7 +13,6 @@ logging.basicConfig(level=logging.CRITICAL)
 
 current_dir = os.path.dirname(__file__)
 APPS_DB_PATH = os.path.join(current_dir, "apps.db")
-UPDATE_DB_PATH = os.path.join(current_dir, "update.db")
 
 APP_DETAILS_FIELDS = AppDetails().__attributes__
 APP_SNIPPET_FIELDS = AppSnippet().__attributes__
@@ -76,8 +75,14 @@ def insert_non_game_app(app_id: int, db):
     db.execute("INSERT OR IGNORE INTO non_game_apps VALUES (?)", (app_id, ))
 
 
-def insert_rejected_app(app_id: int, db):
-    db.execute("INSERT OR IGNORE INTO rejected_apps VALUES (?)", (app_id, ))
+def insert_failed_request(app_id: int, api_provider:str, cause:str, status_code:int,  db):
+    db.execute("""\
+        REPLACE INTO failed_requests
+        VALUES (:app_id, :api_provider, :cause, :status_code)
+        """,
+        {"app_id": app_id, "api_provider": api_provider,
+         "cause": cause, "status_code":status_code}
+    )
 
 
 def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
@@ -243,8 +248,12 @@ def get_non_game_apps(db):
     return [i[0] for i in result]
 
 
-def get_rejected_apps(db):
-    result = db.execute("SELECT * FROM rejected_apps").fetchall()
+def get_failed_apps(causes: list[str], db):
+    sql = "SELECT app_id FROM failed_requests"
+    if causes:
+        sql += f"WHERE cause IN ({','.join(causes)})"
+
+    result = db.execute(sql).fetchall()
     return [i[0] for i in result]
 
 

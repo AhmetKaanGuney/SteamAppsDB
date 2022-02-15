@@ -13,35 +13,36 @@ from dotenv import dotenv_values
 
 try:
     from errors import (
-        Error, RequestTimeoutError, RequestFailedError,
+        FetchError, RequestTimeoutError, RequestFailedWithUnknownError,
         UnauthorizedError, ForbiddenError, NotFoundError,
         ServerError, SteamResponseError
     )
     from update_logger import UpdateLogger
     from appdata import AppDetails, AppSnippet
     from database import (
-        DATABASE_PATH, Connection,
-        insert_app, insert_non_game_app, insert_rejected_app,
-        get_non_game_apps, get_rejected_apps)
+        APPS_DB_PATH, APPS_DB_PATH, Connection,
+        insert_app, insert_non_game_app, insert_failed_request,
+        get_non_game_apps, get_failed_apps)
 except:
     from .errors import (
-        Error, RequestTimeoutError, RequestFailedError,
+        FetchError, RequestTimeoutError, RequestFailedWithUnknownError,
         UnauthorizedError, ForbiddenError, NotFoundError,
         ServerError, SteamResponseError
     )
     from .update_logger import UpdateLogger
     from .appdata import AppDetails, AppSnippet
     from .database import (
-        DATABASE_PATH, Connection,
-        insert_app, insert_non_game_app, insert_rejected_app,
-        get_non_game_apps, get_rejected_apps)
+        APPS_DB_PATH, APPS_DB_PATH, Connection,
+        insert_app, insert_non_game_app, insert_failed_request,
+        get_non_game_apps, get_failed_apps)
 
 
-logging.debug(f"Database Path: {DATABASE_PATH}")
+logging.debug(f"Apps Database Path: {APPS_DB_PATH}")
 
 # Dirs
 current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
+DEBUG_LOG = "./debug.log"
 
 
 # Init Loggers
@@ -58,10 +59,10 @@ env = dotenv_values(os.path.join(parent_dir, ".env"))
 # that app will not be stored into the database
 MAX_OWNERS = 1_000_000
 
+REQUEST_TIMEOUT = 15
 # Time to wait in between request in seconds
-STEAM_WAIT_DURATION = 2
-STEAMSPY_WAIT_DURATION = 1
-STEAM_REQUEST_LIMIT = 100_000
+RATE_LIMIT = 1
+STEAM_REQUEST_LIMIT = 50_000
 
 # File paths
 APPLIST_FILE = os.path.join(current_dir, "applist.json")
@@ -81,15 +82,13 @@ STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails
 # check this before main(), in the if __name__ == "__main__" block
 
 def main():
-    print("===             DB UPDATE         "   ===")
+    print("===             DB UPDATE              ===")
     print(f"=== Date: {datetime.datetime.utcnow()} ===")
-
-    applist_fetched = update_log["applist_fetched"]
 
     # ========================= #
     #  Get App List from Steam  #
     # ========================= #
-    if not applist_fetched:
+    if not update_log["applist_fetched"]:
         logging.debug(f"Fetching applist from: {APPLIST_API}")
 
         applist = fetch_applist(APPLIST_API)
@@ -100,14 +99,13 @@ def main():
         update_log["applist_fetched"] = True
 
 
-    # Get Saved Applist
-    with open(APPLIST_FILE, "r") as f:
-        applist = json.load(f)
-
-
+    # Get Saved Applist starting from where it's left off
     applist_index = update_log["applist_index"]
+    with open(APPLIST_FILE, "r") as f:
+        applist = json.load(f)[applist_index:]
 
-    applist_length = len(applist[applist_index:])
+
+    applist_length = len(applist)
     update_log["applist_length"] = applist_length
 
     print(f"Length of Applist: {applist_length:,}")
@@ -118,19 +116,19 @@ def main():
     # For testing use limited applist
     # limited_applist = applist[applist_index : applist_index + 30]
 
-    print("Starting to iterate over Applist:")
     # =============================== #
     #  Get App Details for each App   #
     # =============================== #
-    global LATEST_INDEX
+    global LAST_INDEX
 
-    with Connection(DATABASE_PATH) as db:
+    with Connection(APPS_DB_PATH) as db:
         non_game_apps = get_non_game_apps(db)
 
-    for i, app in enumerate(applist[applist_index:]):
-        LATEST_INDEX = i
-        print(f"Iteration: {i}", end="\r")
+    print("Starting to iterate over Applist:")
 
+    for i, app in enumerate(applist):
+        print(f"Iteration: {i}", end="\r")
+        LAST_INDEX = i
 
         app_id = app["app_id"]
 
@@ -139,6 +137,12 @@ def main():
             logging.debug(f"App is not a game. AppID: '{app_id}'\nSkipping...")
             continue
 
+        # ================================= #
+        #   Wait Before Making Any Request  #
+        # ================================= #
+        time.sleep(RATE_LIMIT)
+
+        # Create Appdetails
         app_details = AppDetails({"name": app["name"], "app_id": app["app_id"]})
 
         # API's
@@ -148,7 +152,19 @@ def main():
         # ====================== #
         #  FETCH FROM STEAMSPY   #
         # ====================== #
-        steamspy_data = fetch(steamspy_api)
+        try:
+            steamspy_data = fetch(steamspy_api)
+        except FetchError as e:
+            # Record failed request and skip to next app
+            error_name = type(e).__name__
+            print(f"\n{error_name}: {e.response.status_code} | URL: {e.response.url}\nSkipping...")
+
+            with Connection(APPS_DB_PATH) as db:
+                insert_failed_request(app_id, "steamspy", error_name, e.response.status_code, db)
+
+            update_log["failed_requests"] += 1
+            continue
+
 
         # Check minimum owner count to eliminate games over a million owners
         min_owner_count = get_min_owner_count(steamspy_data)
@@ -172,13 +188,25 @@ def main():
             update_log["steam_request_limit_reached"] = True
             logging.info(
                 f"Request limit reached! "
-                f"Request count: {update_log['steam_request_count']} | "
-                f"Request Limit: {STEAM_REQUEST_LIMIT}"
+                + f"Request count: {update_log['steam_request_count']} | "
+                + f"Request Limit: {STEAM_REQUEST_LIMIT}"
                 )
             break
 
-        # Response Example : {"000000": {"success": true, "data": {...}}}
-        steam_response = fetch(steam_api)[str(app_id)]
+        try:
+            # Response Example : {"000000": {"success": true, "data": {...}}}
+            steam_response = fetch(steam_api)[str(app_id)]
+        except FetchError as e:
+            error_name = type(e).__name__
+            print(f"\n{error_name}: {e.response.status_code} | URL: {e.response.url}\nSkipping...")
+
+            with Connection(APPS_DB_PATH) as db:
+                insert_failed_request(app_id, "steam", error_name, e.response.status_code, db)
+
+            update_log["last_request_to_steam"] = str(datetime.datetime.utcnow())
+            update_log["steam_request_count"] += 1
+            update_log["failed_requests"] += 1
+            continue
 
         update_log["last_request_to_steam"] = str(datetime.datetime.utcnow())
         update_log["steam_request_count"] += 1
@@ -189,7 +217,8 @@ def main():
             if steam_data["type"] != "game":
                 logging.debug(f"App '{app_id}' is not a game. Recording app_id then skipping...")
 
-                with Connection(DATABASE_PATH) as db:
+                # Record non-game_apps so they aren't requested for in the future
+                with Connection(APPS_DB_PATH) as db:
                     insert_non_game_app(app_id, db)
 
                 update_log["non_game_apps"] += 1
@@ -201,17 +230,17 @@ def main():
                 app_details.update(app_details_from_steam)
 
                 # Save to db
-                with Connection(DATABASE_PATH) as db:
+                with Connection(APPS_DB_PATH) as db:
                     insert_app(app_details, db)
 
                 update_log["updated_apps"] += 1
         else:
             logging.debug(f"Steam responded with {steam_response}. AppID: {app_id}")
 
-            with Connection(DATABASE_PATH) as db:
-                insert_rejected_app(app_id, db)
+            with Connection(APPS_DB_PATH) as db:
+                insert_failed_request(app_id, "steam", "failed", None, db)
 
-            update_log["rejected_apps"] += 1
+            update_log["failed_requests"] += 1
             continue
 
     if update_log["steam_request_limit_reached"]:
@@ -219,46 +248,89 @@ def main():
         update_log["steam_request_count"] = 0
         update_log["steam_request_limit_reached"] = False
     else:
-        # If the last item in the app list is updated, reset the log
+        # If the last item in the app list is updated
+        # without reaching steam_request_limit
+        # that means update finished so reset the log
         update_log["reset_log"] = True
-
-
 
 
 def fetch(api: str) -> dict:
     """Makes a request to an API and returns JSON. If request fails will raise Exeception."""
-    response = request_from(api)
+    response = attempt_request(api)
 
-    if response.status_code == 200:
+    msg = {
+        "url": response.url,
+        "headers": response.headers,
+        "text": response.text,
+    }
+    if response.status_code == requests.codes.ok:
         return response.json()
-    elif response.status_code == 432:
-        print(f"\n432 Too many requests? API: {api}\nWaiting 30 secs...\n")
-        time.sleep(30)
+
+    elif 400 <= response.status_code < 500:
+        debug_log(json.dumps(msg, indent=4))
+
+        if response.status_code == 401:
+            raise UnauthorizedError(response, update_log)
+        elif response.status_code == 403:
+            raise ForbiddenError(response, update_log)
+        elif response.status_code == 404:
+            raise NotFoundError(response, update_log)
+        else:
+            if response.status_code == 429:
+                print(f"\nHTTPError: 429 - Too Many Requests | URL: {response.url}")
+            print("Waiting 30 secs...")
+            time.sleep(30)
+
         print("Trying again...")
         return fetch(api)
-    elif response.status_code == 429:
-        print(f"\n432 Too many requests? API: {api}\nWaiting 1 min...\n")
-        time.sleep(60)
-        print("Trying again...")
-        return fetch(api)
-    elif response.status_code == 500:   # server error
-        print(f"\n500 Server Error :{api}\nWaiting 30 secs...\n")
-        time.sleep(30)
-        print("Trying again...")
-        raise ServerError(api, update_log)
-    elif response.status_code == 502:
-        print(f"\n502 Bad Gateway :{api}\nWaiting 30 secs...\n")
-        time.sleep(30)
-        print("Trying again...")
-        return fetch(api)
-    elif response.status_code == 401:
-        raise UnauthorizedError(api, update_log)
-    elif response.status_code == 403:
-        raise ForbiddenError(api, update_log)
-    elif response.status_code == 404:
-        raise NotFoundError(api, update_log)
+
+    elif 500 <= response.status_code < 600:
+        print(f"\nServer Error: {response.status_code} | URL: {response.url}")
+        debug_log(json.dumps(msg, indent=4))
+        # Raise error cuz dont know how to handle it
+        raise ServerError(response, update_log)
     else:
-        raise RequestFailedError(f"API: {api} failed with {response.status_code} status code.", update_log)
+        print(f"\nUnknownHTTPError {response.status_code} | URL: {response.url}")
+        debug_log(json.dumps(msg, indent=4))
+        raise RequestFailedWithUnknownError(response, update_log)
+
+
+def attempt_request(api: str):
+    """
+    Tries 2 times before raising TimeoutError
+    If a connection error occurs tries to connect infinitely
+    """
+    attempt = 1
+    attempt_wait = 5
+    connection_wait = 10
+    connection_errors = 0
+    # 60 sec * 10 = 10 mins
+    connection_error_limit = 60
+
+    while attempt <= 3:
+        try:
+            response = requests.get(api, timeout=REQUEST_TIMEOUT)
+            return response
+        except requests.Timeout:
+            logging.debug("Request Timed Out:", api)
+            logging.debug("Attempt:", attempt)
+            # Wait for 5 then for 10 secs
+            time.sleep(attempt * attempt_wait)
+            attempt += 1
+        except requests.exceptions.ConnectionError as e:
+            if connection_errors == 0:
+                print("")
+            connection_errors += 1
+            if connection_errors >= connection_error_limit:
+                print(f"Couldn't connect for {connection_wait * connection_errors // 60} mins...")
+                raise e
+            else:
+                print(f"Connection Error! Error Count: {connection_errors} | Waiting for {connection_wait} secs...")
+                time.sleep(connection_wait)
+                print("Attempting again...")
+                continue
+    # If reached attempt limit
+    raise RequestTimeoutError(response, update_log)
 
 
 def fetch_applist(api: str):
@@ -283,22 +355,6 @@ def fetch_applist(api: str):
                 }
             )
     return applist
-
-
-def request_from(api: str, timeout=1):
-    """Tries 3 times before raising TimeoutError"""
-    attempt = 1
-    while attempt <= 2:
-        try:
-            response = requests.get(api, timeout=timeout)
-            return response
-        except requests.Timeout:
-            logging.debug("Request Timed Out:", api)
-            logging.debug("Attempt:", attempt)
-            time.sleep(10)
-            attempt += 1
-
-    raise RequestTimeoutError(api, update_log)
 
 
 def map_steam_data(steam_data: dict) -> dict:
@@ -461,6 +517,12 @@ def write_to_json(data: any, file_path: str, indent=None):
         json.dump(data, f, indent=indent)
 
 
+def debug_log(msg: str):
+    """Append to log"""
+    with open(DEBUG_LOG, "a") as f:
+        f.write(f"\n======================================================\n{msg}")
+
+
 def email(msg):
     context = ssl.create_default_context()
 
@@ -470,48 +532,55 @@ def email(msg):
         server.sendmail(env["SENDER_EMAIL"], env["RECEIVER_EMAIL"], msg)
 
 
+def create_msg(updated_apps, applist_length, failed_requests,
+                non_game_apps, steam_request_count, traceback=None):
+    if traceback:
+        subject = "Update Failed"
+        traceback_section = f"\nUpdate failed due to an error:\n{traceback.format_exc()}"
+    else:
+        subject = "Update Successful"
+        traceback_section = ""
 
+    return f"""\
+Subject: Update Successful
 
+Updated Apps: {updated_apps:,} / {applist_length:,}
+Rejected Apps: {failed_requests}
+Non-Game Apps: {non_game_apps}
+Steam Request Count: {steam_request_count}
+{traceback_section}"""
 
 
 if __name__ == "__main__":
-	try:
-		main()
+    ul = update_log
 
-		success_msg = f"""\
-Subject: Update Successful
+    try:
+        main()
+        success_msg = create_msg(
+            ul["updated_apps"], ul["applist_length"],
+            ul["failed_requests"], ul["non_game_apps"],
+            ul["steam_request_count"]
+            )
+        print(f"\n{success_msg}")
+        email(success_msg)
 
-Updated Apps: {update_log["updated_apps"]:,} / {update_log["applist_length"]:,}
-Rejected Apps: {update_log["rejected_apps"]}
-Non-Game Apps: {update_log["non_game_apps"]}
-Steam Request Count: {update_log["steam_request_count"]}
-"""
+    except (Exception, KeyboardInterrupt) as e:
+        fail_msg = create_msg(
+            ul["updated_apps"], ul["applist_length"],
+            ul["failed_requests"], ul["non_game_apps"],
+            ul["steam_request_count"], traceback=traceback
+            )
+        print("")
+        print(f"--> Current Steam Request Count: {ul['steam_request_count']}")
 
-		print("")
-		print("Info: \n")
-		print(success_msg)
-		email(success_msg)
+        ul["applist_index"] += LAST_INDEX
+        print(f"--> Recording applist_index as : {ul['applist_index']}")
 
-	except (Exception, KeyboardInterrupt) as e:
-		fail_msg = f"""\
-Subject: Update Failed
+        # Don't email if there is a connection error
+        if not isinstance(e, requests.exceptions.ConnectionError):
+            email(fail_msg)
+        raise e
 
-Updated Apps: {update_log["updated_apps"]:,} / {update_log["applist_length"]:,}
-Rejected Apps: {update_log["rejected_apps"]}
-Non-Game Apps: {update_log["non_game_apps"]}
-Steam Request Count: {update_log["steam_request_count"]}
-
-Update failed due to an error:
-{traceback.format_exc()}
-"""
-		print("")
-		print(f"--> Current Steam Request Count: {update_log['steam_request_count']}")
-
-		update_log["applist_index"] += LATEST_INDEX
-		print(f"--> Recording applist_index as : {update_log['applist_index']}")
-
-		email(fail_msg)
-		raise e
-	finally:
-		update_logger.save()
-		print("Update logger saved.\n")
+    finally:
+        update_logger.save()
+        print("\nUpdate logger saved.\n")

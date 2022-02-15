@@ -14,7 +14,7 @@ try:
         get_app_details,
         get_applist,
         Connection,
-        DATABASE_PATH
+        APPS_DB_PATH
     )
 
     from .db.appdata import (
@@ -26,7 +26,7 @@ except ImportError:
         get_app_details,
         get_applist,
         Connection,
-        DATABASE_PATH
+        APPS_DB_PATH
     )
 
     from db.appdata import (
@@ -40,7 +40,7 @@ app = Flask(__name__)
 
 @app.route("/GetAppDetails/<int:app_id>")
 def app_details(app_id):
-    with Connection(DATABASE_PATH) as db:
+    with Connection(APPS_DB_PATH) as db:
         return get_app_details(app_id, db).json(indent=None)
 
 
@@ -56,7 +56,7 @@ def app_list():
 
     start = time.perf_counter()
 
-    with Connection(DATABASE_PATH) as db:
+    with Connection(APPS_DB_PATH) as db:
         app_list = get_applist(query["filters"], query["order"], BATCH_SIZE, query["index"], db)
 
         stop = time.perf_counter()

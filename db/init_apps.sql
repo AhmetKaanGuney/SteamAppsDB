@@ -52,3 +52,14 @@ CREATE TABLE IF NOT EXISTS apps_categories (
     app_id INTEGER,
     category_id INTEGER
 );
+-- NON-GAME APPS
+CREATE TABLE IF NOT EXISTS non_game_apps (
+    app_id INTEGER UNIQUE
+);
+-- FAILED REQUESTS
+CREATE TABLE IF NOT EXISTS failed_requests (
+    app_id PRIMARY KEY,
+    api_provider TEXT,
+    cause TEXT,
+    status_code INTEGER
+)

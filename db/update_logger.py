@@ -11,7 +11,7 @@ DEFAULT_LOG = {
     "applist_index": 0,
     "updated_apps": 0,
     "non_game_apps": 0,
-    "rejected_apps": 0
+    "failed_requests": 0
 }
 
 
