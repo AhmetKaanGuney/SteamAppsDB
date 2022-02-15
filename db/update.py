@@ -74,7 +74,6 @@ APPLIST_API = "https://api.steampowered.com/ISteamApps/GetAppList/v2/"
 STEAM_APP_DETAILS_API_BASE = "https://store.steampowered.com/api/appdetails/?appids="
 STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails&appid="
 
-LATEST_INDEX = 0
 
 # TODO email weekly report
 # TODO check for lastest request to steam
@@ -123,6 +122,7 @@ def main():
     # =============================== #
     #  Get App Details for each App   #
     # =============================== #
+    global LATEST_INDEX
 
     with Connection(DATABASE_PATH) as db:
         non_game_apps = get_non_game_apps(db)
@@ -130,7 +130,7 @@ def main():
     for i, app in enumerate(applist[applist_index:]):
         LATEST_INDEX = i
         print(f"Iteration: {i}", end="\r")
-        raise Error()
+
 
         app_id = app["app_id"]
 
@@ -226,13 +226,31 @@ def main():
 
 
 def fetch(api: str) -> dict:
-    """Makes a request to an API and returns JSON. If fails will raise Exeception."""
+    """Makes a request to an API and returns JSON. If request fails will raise Exeception."""
     response = request_from(api)
 
     if response.status_code == 200:
         return response.json()
+    elif response.status_code == 432:
+        print(f"\n432 Too many requests? API: {api}\nWaiting 30 secs...\n")
+        time.sleep(30)
+        print("Trying again...")
+        return fetch(api)
+    elif response.status_code == 429:
+        print(f"\n432 Too many requests? API: {api}\nWaiting 1 min...\n")
+        time.sleep(60)
+        print("Trying again...")
+        return fetch(api)
     elif response.status_code == 500:   # server error
+        print(f"\n500 Server Error :{api}\nWaiting 30 secs...\n")
+        time.sleep(30)
+        print("Trying again...")
         raise ServerError(api, update_log)
+    elif response.status_code == 502:
+        print(f"\n502 Bad Gateway :{api}\nWaiting 30 secs...\n")
+        time.sleep(30)
+        print("Trying again...")
+        return fetch(api)
     elif response.status_code == 401:
         raise UnauthorizedError(api, update_log)
     elif response.status_code == 403:
@@ -270,7 +288,7 @@ def fetch_applist(api: str):
 def request_from(api: str, timeout=1):
     """Tries 3 times before raising TimeoutError"""
     attempt = 1
-    while attempt <= 3:
+    while attempt <= 2:
         try:
             response = requests.get(api, timeout=timeout)
             return response
@@ -457,10 +475,10 @@ def email(msg):
 
 
 if __name__ == "__main__":
-    try:
-        main()
+	try:
+		main()
 
-        success_msg = f"""\
+		success_msg = f"""\
 Subject: Update Successful
 
 Updated Apps: {update_log["updated_apps"]:,} / {update_log["applist_length"]:,}
@@ -469,13 +487,13 @@ Non-Game Apps: {update_log["non_game_apps"]}
 Steam Request Count: {update_log["steam_request_count"]}
 """
 
-        print("")
-        print("Info: \n")
-        print(success_msg)
-        email(success_msg)
+		print("")
+		print("Info: \n")
+		print(success_msg)
+		email(success_msg)
 
-    except Exception as e:
-    	fail_msg = f"""\
+	except (Exception, KeyboardInterrupt) as e:
+		fail_msg = f"""\
 Subject: Update Failed
 
 Updated Apps: {update_log["updated_apps"]:,} / {update_log["applist_length"]:,}
@@ -487,11 +505,13 @@ Update failed due to an error:
 {traceback.format_exc()}
 """
 		print("")
-		update_log["applist_index"] = LATEST_INDEX
-		print(f"Recording applist_index {LATEST_INDEX}")
-		email(fail_msg)
-        raise e
+		print(f"--> Current Steam Request Count: {update_log['steam_request_count']}")
 
-    finally:
-    	  update_logger.save()
-    	  print("finally")
+		update_log["applist_index"] += LATEST_INDEX
+		print(f"--> Recording applist_index as : {update_log['applist_index']}")
+
+		email(fail_msg)
+		raise e
+	finally:
+		update_logger.save()
+		print("Update logger saved.\n")
