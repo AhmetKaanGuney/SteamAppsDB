@@ -259,9 +259,10 @@ def fetch(api: str) -> dict:
     response = attempt_request(api)
 
     msg = {
+        "status_code": response.status_code,
         "url": response.url,
         "headers": response.headers,
-        "text": response.text,
+        "text": response.text
     }
     if response.status_code == requests.codes.ok:
         return response.json()
