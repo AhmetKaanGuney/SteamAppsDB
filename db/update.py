@@ -178,7 +178,11 @@ def main():
             break
 
         # Response Example : {"000000": {"success": true, "data": {...}}}
-        steam_response = fetch(steam_api)[str(app_id)]
+        try:
+        	steam_response = fetch(steam_api)[str(app_id)]
+        except RequestTimeoutError:
+        	# Add to timed out requests
+        	continue
 
         update_log["last_request_to_steam"] = str(datetime.datetime.utcnow())
         update_log["steam_request_count"] += 1
