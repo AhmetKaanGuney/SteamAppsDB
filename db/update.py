@@ -193,14 +193,6 @@ def main():
                 )
             break
 
-<<<<<<< HEAD
-        # Response Example : {"000000": {"success": true, "data": {...}}}
-        try:
-        	steam_response = fetch(steam_api)[str(app_id)]
-        except RequestTimeoutError:
-        	# Add to timed out requests
-        	continue
-=======
         try:
             # Response Example : {"000000": {"success": true, "data": {...}}}
             steam_response = fetch(steam_api)[str(app_id)]
@@ -215,7 +207,6 @@ def main():
             update_log["steam_request_count"] += 1
             update_log["failed_requests"] += 1
             continue
->>>>>>> 884c1a90f5ecd194f7e95ddbdf8213cd31b0bf08
 
         update_log["last_request_to_steam"] = str(datetime.datetime.utcnow())
         update_log["steam_request_count"] += 1
@@ -277,7 +268,7 @@ def fetch(api: str) -> dict:
         return response.json()
 
     elif 400 <= response.status_code < 500:
-        debug_log(json.dumps(msg, indent=4))
+        debug_log(msg)
 
         if response.status_code == 401:
             raise UnauthorizedError(response, update_log)
@@ -296,12 +287,12 @@ def fetch(api: str) -> dict:
 
     elif 500 <= response.status_code < 600:
         print(f"\nServer Error: {response.status_code} | URL: {response.url}")
-        debug_log(json.dumps(msg, indent=4))
+        debug_log(msg)
         # Raise error cuz dont know how to handle it
         raise ServerError(response, update_log)
     else:
         print(f"\nUnknownHTTPError {response.status_code} | URL: {response.url}")
-        debug_log(json.dumps(msg, indent=4))
+        debug_log(msg)
         raise RequestFailedWithUnknownError(response, update_log)
 
 
@@ -527,10 +518,11 @@ def write_to_json(data: any, file_path: str, indent=None):
         json.dump(data, f, indent=indent)
 
 
-def debug_log(msg: str):
+def debug_log(msg: dict):
     """Append to log"""
     with open(DEBUG_LOG, "a") as f:
-        f.write(f"\n======================================================\n{msg}")
+        f.write("\n======================================================\n")
+        f.write(",\n".join(str(k) + " : " + str(msg[k]) for k in msg))
 
 
 def email(msg):
@@ -552,7 +544,7 @@ def create_msg(updated_apps, applist_length, failed_requests,
         traceback_section = ""
 
     return f"""\
-Subject: Update Successful
+Subject: {subject}
 
 Updated Apps: {updated_apps:,} / {applist_length:,}
 Rejected Apps: {failed_requests}
@@ -562,6 +554,8 @@ Steam Request Count: {steam_request_count}
 
 
 if __name__ == "__main__":
+    debug_log({"test": "lol", "as": 2})
+    exit(0)
     ul = update_log
 
     try:
