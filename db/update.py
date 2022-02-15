@@ -82,7 +82,7 @@ LATEST_INDEX = 0
 # check this before main(), in the if __name__ == "__main__" block
 
 def main():
-    print("===             DB UPDATE            ===")
+    print("===             DB UPDATE         "   ===")
     print(f"=== Date: {datetime.datetime.utcnow()} ===")
 
     applist_fetched = update_log["applist_fetched"]

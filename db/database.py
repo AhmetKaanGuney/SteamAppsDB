@@ -12,7 +12,8 @@ except ImportError:
 logging.basicConfig(level=logging.CRITICAL)
 
 current_dir = os.path.dirname(__file__)
-DATABASE_PATH = os.path.join(current_dir, "apps.db")
+APPS_DB_PATH = os.path.join(current_dir, "apps.db")
+UPDATE_DB_PATH = os.path.join(current_dir, "update.db")
 
 APP_DETAILS_FIELDS = AppDetails().__attributes__
 APP_SNIPPET_FIELDS = AppSnippet().__attributes__
