@@ -7,9 +7,10 @@ def main():
     current_dir = os.path.dirname(__file__)
 
     # Initialize databa with init.sql file
-    init_script = os.path.join(current_dir, "init.sql")
+    init_apps_script = os.path.join(current_dir, "init_apps.sql")
+    init_update_script = os.path.join(current_dir, "init_update.sql")
 
-    print(f"Initializing database at '{init_script}'")
+    print(f"Initializing database at '{current_dir}'")
 
     reset_db = False
     # If script is called with '-r' delete db and recreate it
@@ -22,23 +23,23 @@ def main():
 
     if reset_db:
         try:
+            print("Deleting 'apps.db' ...")
             os.remove(os.path.join(current_dir, "apps.db"))
         except FileNotFoundError:
             print("Cannot delete 'apps.db', because file doesn't exists.")
             print("Resuming initialisation...")
 
     # Get file content
-    with open(init_script) as f:
-        script_as_str = f.read()
+    with open(init_apps_script) as apps_f:
+        init_apps_script_as_str = apps_f.read()
+
 
     # Execute
-    with Connection(DATABASE_PATH) as db:
-        print("Executing 'init.sql' script...")
-        db.executescript(script_as_str)
-
-    print("Initialisation successful!")
+    with Connection(APPS_DB_PATH) as db:
+        print("Executing 'init_apps.sql' script...")
+        db.executescript(init_apps_script_as_str)
 
 
 if __name__ == "__main__":
-    from database import Connection, DATABASE_PATH
+    from database import Connection, APPS_DB_PATH
     main()
