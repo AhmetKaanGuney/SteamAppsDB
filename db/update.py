@@ -22,7 +22,7 @@ try:
     from database import (
         APPS_DB_PATH, APPS_DB_PATH, Connection,
         insert_app, insert_non_game_app, insert_failed_request,
-        get_non_game_apps, get_failed_apps)
+        get_non_game_apps, get_failed_requests)
 except:
     from .errors import (
         FetchError, RequestTimeoutError, RequestFailedWithUnknownError,
@@ -34,7 +34,7 @@ except:
     from .database import (
         APPS_DB_PATH, APPS_DB_PATH, Connection,
         insert_app, insert_non_game_app, insert_failed_request,
-        get_non_game_apps, get_failed_apps)
+        get_non_game_apps, get_failed_requests)
 
 
 logging.debug(f"Apps Database Path: {APPS_DB_PATH}")
@@ -62,7 +62,7 @@ MAX_OWNERS = 1_000_000
 REQUEST_TIMEOUT = 15
 # Time to wait in between request in seconds
 RATE_LIMIT = 1
-STEAM_REQUEST_LIMIT = 50_000
+STEAM_REQUEST_LIMIT = 100_000
 
 # File paths
 APPLIST_FILE = os.path.join(current_dir, "applist.json")
@@ -311,7 +311,7 @@ def fetch(api: str) -> dict:
 
 def attempt_request(api: str):
     """
-    Tries 2 times before raising TimeoutError
+    Tries 3 times before raising TimeoutError
     If a connection error occurs tries to connect infinitely
     """
     attempt = 1

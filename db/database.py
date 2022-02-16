@@ -105,6 +105,22 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
     if not isinstance(offset, int):
         raise TypeError(f"'{offset}' is not an int. Offset parameter should be an int.")
 
+    # Check types and give default values if needed
+    if not filters:
+        filters = {
+            "tags": [],
+            "genres": [],
+            "categories": []
+        }
+    elif not isinstance(filters, dict):
+        raise TypeError("Filters must be type of dict.")
+
+    if not order:
+        order = {}
+    elif not isinstance(order, dict):
+        raise TypeError("Order must be type of dict.")
+
+
     # Check ORDER BY
     for col, direction in order.items():
         if col not in APP_DETAILS_FIELDS:
@@ -114,10 +130,15 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
 
     # Check FILTERS
     for f in filters:
+        # Check keys
         if f not in ("tags", "genres", "categories"):
             raise ValueError(f"'{f}' is not a valid filter.")
-        if not filters[f]:
-            continue
+
+        # Check values
+        if not isinstance(filters[f], list):
+            raise TypeError(f"Filter values must be lists.")
+
+        # Check value content
         # Protect againsts injection  - only accept integer values
         for _id in filters[f]:
             if not isinstance(_id, int):

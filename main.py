@@ -6,7 +6,8 @@ from flask import (
     Flask,
     request,
     render_template,
-    jsonify
+    jsonify,
+    abort
 )
 
 try:
@@ -44,29 +45,43 @@ app = Flask(__name__)
 
 @app.route("/GetAppDetails/<int:app_id>")
 def app_details(app_id):
+    start = time.perf_counter()
     with Connection(APPS_DB_PATH) as db:
-        return get_app_details(app_id, db).json(indent=None)
+        app_details = get_app_details(app_id, db).json(indent=None)
 
+    stop = time.perf_counter()
 
-# http://127.0.0.1:5000/GetAppList?filters=<tag=1,2,3&genre>&<order_by>
+    print("<==============>")
+    print(f"Time took: {stop - start:.1f} secs.")
+    print("<==============>")
+    return app_details
+
 
 @app.route("/GetAppList")
 def app_list():
     BATCH_SIZE = 20
-    print("<== APP LIST ==>")
-    print("Request URL: ", request.url)
-    query = json.loads(request.json)
-    print("Request JSON: ", query)
+
+    if request.json:
+        query = request.json
+    else:
+        return abort(400, "JSON filed is empty!")
+
+    filters = query["filters"]
+    order = query["order"]
+    index = query["index"]
 
     start = time.perf_counter()
 
     with Connection(APPS_DB_PATH) as db:
-        app_list = get_applist(query["filters"], query["order"], BATCH_SIZE, query["index"], db)
+        try:
+            app_list = get_applist(filters, order, BATCH_SIZE, index, db)
+        except (ValueError, TypeError) as e:
+            abort(400, e)
 
         stop = time.perf_counter()
-        print("Time took: ", stop - start, " secs.")
         print("<==============>")
-
+        print(f"Time took: {stop - start:.1f} secs.")
+        print("<==============>")
         return jsonify(app_list)
 
 @app.route("/", methods=["GET"])
