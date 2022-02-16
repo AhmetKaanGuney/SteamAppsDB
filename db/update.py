@@ -554,8 +554,6 @@ Steam Request Count: {steam_request_count}
 
 
 if __name__ == "__main__":
-    debug_log({"test": "lol", "as": 2})
-    exit(0)
     ul = update_log
 
     try:
