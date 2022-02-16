@@ -82,8 +82,10 @@ STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails
 # check this before main(), in the if __name__ == "__main__" block
 
 def main():
-    print("===             DB UPDATE              ===")
-    print(f"=== Date: {datetime.datetime.utcnow()} ===")
+    global start_time
+    start_time = time.time()
+    print("===           DB UPDATE          ===")
+    print(f"=== Start Date: {get_datetime().strftime('%Y-%m-%d %H:%M')} ===")
 
     # ========================= #
     #  Get App List from Steam  #
@@ -106,7 +108,7 @@ def main():
     applist_index = update_log["applist_index"]
     with open(APPLIST_FILE, "r") as f:
         applist = json.load(f)
-    
+
     remaining_apps = applist[applist_index:]
 
     applist_length = len(applist)
@@ -138,6 +140,10 @@ def main():
         LAST_INDEX = i
 
         app_id = app["app_id"]
+
+        # Save log every 100th iteration
+        if i % 100 == 0:
+            update_logger.save()
 
         # If app is not a game skip
         if app_id in non_game_apps:
@@ -524,6 +530,11 @@ def write_to_json(data: any, file_path: str, indent=None):
     with open(file_path, "w") as f:
         json.dump(data, f, indent=indent)
 
+def get_datetime():
+    return datetime.datetime.utcnow()
+
+def subtract_times(end, start) -> float:
+    return (end - start) // (60 * 60)
 
 def debug_log(msg: dict):
     """Append to log"""
@@ -534,14 +545,15 @@ def debug_log(msg: dict):
 
 def email(msg):
     context = ssl.create_default_context()
-
+    print(msg)
+    return
     with smtplib.SMTP_SSL(
         env["SMTP_SERVER"], env["PORT"], context=context) as server:
         server.login(env["SENDER_EMAIL"], env["PASSWORD"])
         server.sendmail(env["SENDER_EMAIL"], env["RECEIVER_EMAIL"], msg)
 
 
-def create_msg(ul, traceback=None):
+def create_msg(ul, run_time, traceback=None):
     updated_apps = ul["updated_apps"]
     applist_length = ul["applist_length"]
     old_index = ul["applist_index"]
@@ -559,11 +571,12 @@ def create_msg(ul, traceback=None):
     return f"""\
 Subject: {subject}
 
-Updated Apps: {updated_apps:,} / {applist_length:,}
-Remaning Apps: {applist_length - (old_index + LAST_INDEX):,}
-Failed Requests: {failed_requests:,}
-Non-Game Apps: {non_game_apps:,}
-Steam Request Count: {steam_request_count:,}
+Run Time        : {run_time:.1f} hours
+Updated Apps    : {updated_apps:,} / {applist_length:,}
+Remaning Apps   : {applist_length - (old_index + LAST_INDEX):,}
+Non-Game Apps   : {non_game_apps:,}
+Failed Requests : {failed_requests:,}
+Steam Requests  : {steam_request_count:,}
 {traceback_section}"""
 
 
@@ -571,12 +584,14 @@ if __name__ == "__main__":
     ul = update_log
     try:
         main()
-        success_msg = create_msg(ul)
+        run_time = subtract_times(time.time(), start_time)
+        success_msg = create_msg(ul, run_time)
         print(f"\n{success_msg}")
         email(success_msg)
 
     except (Exception, KeyboardInterrupt) as e:
-        fail_msg = create_msg(ul, traceback=traceback)
+        run_time = subtract_times(time.time(), start_time)
+        fail_msg = create_msg(ul, run_time, traceback=traceback)
         print("")
 
         # Don't email if there is a connection error
@@ -585,9 +600,13 @@ if __name__ == "__main__":
         raise e
 
     finally:
+        run_time = subtract_times(time.time(), start_time)
+        print(f"=== End Date  : {get_datetime().strftime('%Y-%m-%d %H:%M')} ===")
+
+        print(f"Run Time: {run_time:.1f} hours")
         ul["applist_index"] += LAST_INDEX
         ul["remaining_apps"] = ul["applist_length"] - ul["applist_index"]
-        
+
         print(f"--> Current Steam Request Count: {ul['steam_request_count']}")
         print(f"--> Recording applist_index as : {ul['applist_index']}")
         update_logger.save()

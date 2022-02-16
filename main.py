@@ -14,7 +14,9 @@ try:
         get_app_details,
         get_applist,
         Connection,
-        APPS_DB_PATH
+        APPS_DB_PATH,
+        get_failed_requests,
+        get_non_game_apps
     )
 
     from .db.appdata import (
@@ -26,7 +28,9 @@ except ImportError:
         get_app_details,
         get_applist,
         Connection,
-        APPS_DB_PATH
+        APPS_DB_PATH,
+        get_failed_requests,
+        get_non_game_apps
     )
 
     from db.appdata import (
@@ -69,3 +73,19 @@ def app_list():
 def api_doc():
     return render_template("api.md")
 
+
+# Server failed requests
+@app.route("/GetFailedRequests")
+def failed_requests():
+    with Connection(APPS_DB_PATH) as db:
+        failed_requests = get_failed_requests(None, db)
+
+    return jsonify(failed_requests)
+
+
+@app.route("/GetNonGameApps")
+def non_game_apps():
+    with Connection(APPS_DB_PATH) as db:
+        non_game_apps = get_non_game_apps(db)
+
+    return jsonify(non_game_apps)

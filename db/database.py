@@ -248,13 +248,26 @@ def get_non_game_apps(db):
     return [i[0] for i in result]
 
 
-def get_failed_apps(causes: list[str], db):
-    sql = "SELECT app_id FROM failed_requests"
+def get_failed_requests(causes: list[str], db):
+    sql = "SELECT app_id, api_provider, cause, status_code FROM failed_requests"
     if causes:
         sql += f"WHERE cause IN ({','.join(causes)})"
 
-    result = db.execute(sql).fetchall()
-    return [i[0] for i in result]
+    results = db.execute(sql).fetchall()
+    failed_requests = []
+
+    if not results:
+        return failed_requests
+
+    for i in results:
+        app = {
+            "app_id": i[0],
+            "api_provider": i[1],
+            "cause": i[2],
+            "status_code": i[3]
+        }
+        failed_requests.append(app)
+    return failed_requests
 
 
 def print_table(table: str, db):
