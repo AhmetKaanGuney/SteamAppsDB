@@ -1,8 +1,10 @@
 import os
+import sys
 import json
 import subprocess
 
 from db.update_logger import DEFAULT_LOG
+from db.database import APPS_DB_PATH
 
 current_dir = os.path.dirname(__file__)
 env_path = os.path.join(current_dir, ".env")
@@ -18,6 +20,12 @@ SMTP_SERVER = "smtp.gmail.com"
 PORT = 465"""
 
 if __name__ == "__main__":
+    reset = False
+    args = sys.argv
+    if len(args) == 2:
+        if args[1] == "-r":
+            reset = True
+             
 	# Create .env file
     print("Checking if env file exists...")
     if os.path.exists(env_path):
@@ -28,6 +36,12 @@ if __name__ == "__main__":
             env_file.write(env_content)
 
     print("---")
+
+    if reset:
+        print(f"Deleting {APPS_DB_PATH} ...")
+        os.remove(APPS_DB_PATH)
+        print(f"Deleting {update_log_path} ...")
+        os.remove(update_log_path)
 	
     # Execute db/__init__.py script
     init_file = os.path.join(current_dir, "db/__init__.py")
@@ -47,13 +61,4 @@ if __name__ == "__main__":
             json.dump(DEFAULT_LOG, log_file, indent=2)
     print("---")
 
-    print("Checking if venv exists...")
-    if os.path.exists(venv_path):
-        print("venv already exists!\nResuming...")
-    else:
-        print("Creating venv...")
-        os.system("python -m venv venv")
-
     print("Setup succesfull!")
-    print("Activate venv with 'init_env.ps1' then install requirements with: ")
-    print("pip install -r requirements.txt\n")
