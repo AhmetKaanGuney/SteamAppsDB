@@ -8,6 +8,7 @@ DEFAULT_LOG = {
     "steam_request_limit_reached": False,
     "steam_request_count": 0,
     "applist_length": 0,
+    "remaining_apps": 0,
     "applist_index": 0,
     "updated_apps": 0,
     "non_game_apps": 0,

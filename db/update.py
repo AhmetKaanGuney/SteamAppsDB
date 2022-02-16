@@ -88,8 +88,11 @@ def main():
     # ========================= #
     #  Get App List from Steam  #
     # ========================= #
-    if not update_log["applist_fetched"]:
-        logging.debug(f"Fetching applist from: {APPLIST_API}")
+    print("Checking if applist already fetched...")
+    if update_log["applist_fetched"]:
+        print("Applist alredy fetched!")
+    else:
+        print(f"Fetching applist from: {APPLIST_API}")
 
         applist = fetch_applist(APPLIST_API)
         update_log["steam_request_count"] += 1
@@ -102,13 +105,17 @@ def main():
     # Get Saved Applist starting from where it's left off
     applist_index = update_log["applist_index"]
     with open(APPLIST_FILE, "r") as f:
-        applist = json.load(f)[applist_index:]
-
+        applist = json.load(f)
+    
+    remaining_apps = applist[applist_index:]
 
     applist_length = len(applist)
-    update_log["applist_length"] = applist_length
+    remaining_length = len(remaining_apps)
 
-    print(f"Length of Applist: {applist_length:,}")
+    update_log["applist_length"] = applist_length
+    update_log["remaining_apps"] = remaining_length
+
+    print(f"Applist Length: {applist_length:,}")
     print(f"Starting From Index: {applist_index}")
     print(f"Current Steam Request Count: {update_log['steam_request_count']}")
 
@@ -124,10 +131,10 @@ def main():
     with Connection(APPS_DB_PATH) as db:
         non_game_apps = get_non_game_apps(db)
 
-    print("Starting to iterate over Applist:")
+    print(f"Fetching apps:")
 
-    for i, app in enumerate(applist):
-        print(f"Iteration: {i}", end="\r")
+    for i, app in enumerate(remaining_apps):
+        print(f"Progress: {i:,} / {remaining_length:,}", end="\r")
         LAST_INDEX = i
 
         app_id = app["app_id"]
@@ -534,8 +541,14 @@ def email(msg):
         server.sendmail(env["SENDER_EMAIL"], env["RECEIVER_EMAIL"], msg)
 
 
-def create_msg(updated_apps, applist_length, failed_requests,
-                non_game_apps, steam_request_count, traceback=None):
+def create_msg(ul, traceback=None):
+    updated_apps = ul["updated_apps"]
+    applist_length = ul["applist_length"]
+    old_index = ul["applist_index"]
+    failed_requests = ul["failed_requests"]
+    non_game_apps = ul["non_game_apps"]
+    steam_request_count = ul["steam_request_count"]
+
     if traceback:
         subject = "Update Failed"
         traceback_section = f"\nUpdate failed due to an error:\n{traceback.format_exc()}"
@@ -547,36 +560,24 @@ def create_msg(updated_apps, applist_length, failed_requests,
 Subject: {subject}
 
 Updated Apps: {updated_apps:,} / {applist_length:,}
-Rejected Apps: {failed_requests}
-Non-Game Apps: {non_game_apps}
-Steam Request Count: {steam_request_count}
+Remaning Apps: {applist_length - (old_index + LAST_INDEX):,}
+Failed Requests: {failed_requests:,}
+Non-Game Apps: {non_game_apps:,}
+Steam Request Count: {steam_request_count:,}
 {traceback_section}"""
 
 
 if __name__ == "__main__":
     ul = update_log
-
     try:
         main()
-        success_msg = create_msg(
-            ul["updated_apps"], ul["applist_length"],
-            ul["failed_requests"], ul["non_game_apps"],
-            ul["steam_request_count"]
-            )
+        success_msg = create_msg(ul)
         print(f"\n{success_msg}")
         email(success_msg)
 
     except (Exception, KeyboardInterrupt) as e:
-        fail_msg = create_msg(
-            ul["updated_apps"], ul["applist_length"],
-            ul["failed_requests"], ul["non_game_apps"],
-            ul["steam_request_count"], traceback=traceback
-            )
+        fail_msg = create_msg(ul, traceback=traceback)
         print("")
-        print(f"--> Current Steam Request Count: {ul['steam_request_count']}")
-
-        ul["applist_index"] += LAST_INDEX
-        print(f"--> Recording applist_index as : {ul['applist_index']}")
 
         # Don't email if there is a connection error
         if not isinstance(e, requests.exceptions.ConnectionError):
@@ -584,5 +585,10 @@ if __name__ == "__main__":
         raise e
 
     finally:
+        ul["applist_index"] += LAST_INDEX
+        ul["remaining_apps"] = ul["applist_length"] - ul["applist_index"]
+        
+        print(f"--> Current Steam Request Count: {ul['steam_request_count']}")
+        print(f"--> Recording applist_index as : {ul['applist_index']}")
         update_logger.save()
         print("\nUpdate logger saved.\n")
