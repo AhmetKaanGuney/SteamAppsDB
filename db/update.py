@@ -75,6 +75,8 @@ APPLIST_API = "https://api.steampowered.com/ISteamApps/GetAppList/v2/"
 STEAM_APP_DETAILS_API_BASE = "https://store.steampowered.com/api/appdetails/?appids="
 STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails&appid="
 
+# Format
+DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 
 # TODO email weekly report
 # TODO check for lastest request to steam
@@ -85,7 +87,7 @@ def main():
     global start_time
     start_time = time.time()
     print("===           DB UPDATE          ===")
-    print(f"=== Start Date: {get_datetime().strftime('%Y-%m-%d %H:%M')} ===")
+    print(f"=== Start Date: {now} ===")
 
     # ========================= #
     #  Get App List from Steam  #
@@ -199,7 +201,7 @@ def main():
         # Check for request limit
         if update_log["steam_request_count"] >= STEAM_REQUEST_LIMIT:
             update_log["steam_request_limit_reached"] = True
-            logging.info(
+            print(
                 f"Request limit reached! "
                 + f"Request count: {update_log['steam_request_count']} | "
                 + f"Request Limit: {STEAM_REQUEST_LIMIT}"
@@ -216,12 +218,12 @@ def main():
             with Connection(APPS_DB_PATH) as db:
                 insert_failed_request(app_id, "steam", error_name, e.response.status_code, db)
 
-            update_log["last_request_to_steam"] = str(datetime.datetime.utcnow())
+            update_log["last_request_to_steam"] = get_datetime_str()
             update_log["steam_request_count"] += 1
             update_log["failed_requests"] += 1
             continue
 
-        update_log["last_request_to_steam"] = str(datetime.datetime.utcnow())
+        update_log["last_request_to_steam"] = get_datetime_str()
         update_log["steam_request_count"] += 1
 
         if steam_response["success"]:
@@ -248,23 +250,12 @@ def main():
 
                 update_log["updated_apps"] += 1
         else:
-            logging.debug(f"Steam responded with {steam_response}. AppID: {app_id}")
-
             with Connection(APPS_DB_PATH) as db:
                 insert_failed_request(app_id, "steam", "failed", None, db)
 
             update_log["failed_requests"] += 1
             continue
 
-    if update_log["steam_request_limit_reached"]:
-        update_log["applist_index"] += i
-        update_log["steam_request_count"] = 0
-        update_log["steam_request_limit_reached"] = False
-    else:
-        # If the last item in the app list is updated
-        # without reaching steam_request_limit
-        # that means update finished so reset the log
-        update_log["reset_log"] = True
 
 
 def fetch(api: str) -> dict:
@@ -355,7 +346,7 @@ def fetch_applist(api: str):
             ]
         }"""
 
-    update_log["last_request_to_steam"] = str(datetime.datetime.utcnow())
+    update_log["last_request_to_steam"] = get_datetime_str()
     response_json = fetch(api)
     applist = []
 
@@ -530,8 +521,8 @@ def write_to_json(data: any, file_path: str, indent=None):
     with open(file_path, "w") as f:
         json.dump(data, f, indent=indent)
 
-def get_datetime():
-    return datetime.datetime.utcnow()
+def get_datetime_str():
+    return datetime.datetime.utcnow().strftime(DATETIME_FORMAT)
 
 def subtract_times(end, start) -> float:
     return (end - start) // (60 * 60)
@@ -553,7 +544,8 @@ def email(msg):
         server.sendmail(env["SENDER_EMAIL"], env["RECEIVER_EMAIL"], msg)
 
 
-def create_msg(ul, run_time, traceback=None):
+def create_msg(update_log, run_time, traceback=None):
+    ul = update_log
     updated_apps = ul["updated_apps"]
     applist_length = ul["applist_length"]
     old_index = ul["applist_index"]
@@ -581,13 +573,41 @@ Steam Requests  : {steam_request_count:,}
 
 
 if __name__ == "__main__":
+
+    # Check time passed since last request
+    now = datetime.datetime.utcnow()
+    last_request_to_steam = datetime.datetime.strptime(update_log["last_request_to_steam"], DATETIME_FORMAT)
+    time_passed = now - last_request_to_steam
+    if time_passed.days < 1:
+        print("1 day hasn't passed since the last update.")
+        print(f"Now                    : {now.strftime(DATETIME_FORMAT)}")
+        print(f"Last Request to Steam  : {last_request_to_steam.strftime(DATETIME_FORMAT)}")
+        print(f"Time Passed            : {time_passed}")
+        print("")
+        exit(0)
+
+
+    # =================== #
+    #         RUN         #
+    # =================== #
     ul = update_log
     try:
         main()
+
         run_time = subtract_times(time.time(), start_time)
         success_msg = create_msg(ul, run_time)
         print(f"\n{success_msg}")
         email(success_msg)
+
+        # After emailing reset steam request count
+        if ul["steam_request_limit_reached"]:
+            ul["steam_request_count"] = 0
+            ul["steam_request_limit_reached"] = False
+        else:
+            # If the last item in the app list is updated
+            # without reaching steam_request_limit
+            # that means update finished so reset the log
+            ul["reset_log"] = True
 
     except (Exception, KeyboardInterrupt) as e:
         run_time = subtract_times(time.time(), start_time)
@@ -601,9 +621,10 @@ if __name__ == "__main__":
 
     finally:
         run_time = subtract_times(time.time(), start_time)
-        print(f"=== End Date  : {get_datetime().strftime('%Y-%m-%d %H:%M')} ===")
+        print(f"=== End Date  : {get_datetime_str()} ===")
 
         print(f"Run Time: {run_time:.1f} hours")
+
         ul["applist_index"] += LAST_INDEX
         ul["remaining_apps"] = ul["applist_length"] - ul["applist_index"]
 

@@ -43,5 +43,7 @@ class UpdateLogger:
 
 
     def _reset_log(self):
-        self.log = DEFAULT_LOG
+        # Don't reset last request date
+        del DEFAULT_LOG["last_request_to_steam"]
+        self.log.update(DEFAULT_LOG)
         self.save()
