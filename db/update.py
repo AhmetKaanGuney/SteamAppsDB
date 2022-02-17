@@ -132,7 +132,7 @@ def main():
 
     with Connection(APPS_DB_PATH) as db:
         non_game_apps = get_non_game_apps(db)
-        failed_requests = get_failed_requests(f"WHERE cause == '{ServerError.__name__}'", db)
+        failed_requests = get_failed_requests(f"WHERE cause == 'failed'", db)
 
     if failed_requests:
         # Get only app_ids
