@@ -2,7 +2,7 @@
 import json
 
 DEFAULT_LOG = {
-    "last_request_to_steam": "",
+    "last_request_to_steam": "2000-01-01 00:00",
     "reset_log": False,
     "applist_fetched": False,
     "steam_request_limit_reached": False,
