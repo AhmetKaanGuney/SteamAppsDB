@@ -17,19 +17,19 @@ except ImportError:
 current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
 
-SERVER_IP = "192.168.1.232"
-PORT = "500"
+SERVER_IP = "192.168.1.119"
+PORT = "5000"
 NON_GAME_APPS_API = f"http://{SERVER_IP}:{PORT}/GetNonGameApps"
-FAILED_REQUESTS_API = f"htttp://{SERVER_IP}:{PORT}/GetFailedRequests"
+FAILED_REQUESTS_API = f"http://{SERVER_IP}:{PORT}/GetFailedRequests"
 
 def main():
     print("===           Download to DB          ===")
     print("Fetching non_game_apps...")
     non_game_apps = fetch(NON_GAME_APPS_API)
-    print(non_game_apps)
+    # print(non_game_apps)
     print("Fetching failed_requests...")
     failed_requests = fetch(FAILED_REQUESTS_API)
-    print(failed_requests)
+    # print(failed_requests)
 
     with Connection(APPS_DB_PATH) as db:
         print("Inserting non_game_apps...")

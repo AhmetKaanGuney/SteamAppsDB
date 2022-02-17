@@ -582,7 +582,7 @@ if __name__ == "__main__":
         print("1 day hasn't passed since the last update.")
         print(f"Now                    : {now.strftime(DATETIME_FORMAT)}")
         print(f"Last Request to Steam  : {last_request_to_steam.strftime(DATETIME_FORMAT)}")
-        print(f"Time Passed            : {time_passed}")
+        print(f"Time Passed            : {str(time_passed).split('.')[0]}")
         print("")
         exit(0)
 
