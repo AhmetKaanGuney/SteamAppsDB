@@ -23,6 +23,7 @@ def main():
             print("Actions: ")
             print("freeze : Writes non_game_apps and failed_requests to files")
             print("load-to-db : loads written files to database")
+            exit(0)
         if args[1] == "freeze":
             freeze()
             exit(0)
@@ -30,31 +31,27 @@ def main():
             load_to_db()
             exit(0)
 
+    if len(args) == 1:
+        filter_failed = ""
+        filter_failed = "WHERE cause != 'failed'"
+        with Connection(APPS_DB_PATH) as db:
+            failed_requests = db.execute(f"""
+                SELECT app_id, api_provider, cause, status_code
+                FROM failed_requests
+                {filter_failed}
+                """).fetchall()
 
-    filter_failed = ""
-    filter_failed = "WHERE cause == 'failed'"
-    with Connection(APPS_DB_PATH) as db:
-        failed_requests = db.execute(f"""
-            SELECT app_id, api_provider, cause, status_code
-            FROM failed_requests
-            {filter_failed}
-            """).fetchall()
+        print(f"Failed Requests ({len(failed_requests)}): ")
+        for i in failed_requests:
+            print(f"AppID: {i[0]} | Provider: {i[1]} | Cause: {i[2]} | Status Code: {i[3]}")
 
-    print(f"Failed Requests ({len(failed_requests)}): ")
-    for i in failed_requests:
-        print(f"AppID: {i[0]} | Provider: {i[1]} | Cause: {i[2]} | Status Code: {i[3]}")
+        print()
 
-    print()
+        with Connection(APPS_DB_PATH) as db:
+            non_game_apps = get_non_game_apps(db)
 
-    with Connection(APPS_DB_PATH) as db:
-        non_game_apps = get_non_game_apps(db)
-        for i in non_game_apps:
-            print(type(i))
-            exit(0)
-
-    print(f"Non-Game Apps: {len(non_game_apps)}")
-
-    print()
+        print(f"Non-Game Apps: {len(non_game_apps):,}")
+        print()
 
 
 def freeze():
