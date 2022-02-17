@@ -578,11 +578,14 @@ if __name__ == "__main__":
     now = datetime.datetime.utcnow()
     last_request_to_steam = datetime.datetime.strptime(update_log["last_request_to_steam"], DATETIME_FORMAT)
     time_passed = now - last_request_to_steam
+    a_day = datetime.timedelta(hours=24)
+
     if time_passed.days < 1:
         print("1 day hasn't passed since the last update.")
         print(f"Now                    : {now.strftime(DATETIME_FORMAT)}")
         print(f"Last Request to Steam  : {last_request_to_steam.strftime(DATETIME_FORMAT)}")
         print(f"Time Passed            : {str(time_passed).split('.')[0]}")
+        print(f"Retry After            : {str(a_day - time_passed).split('.')[0]}")
         print("")
         exit(0)
 
