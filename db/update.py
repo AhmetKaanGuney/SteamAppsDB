@@ -1,10 +1,10 @@
 import os
+import sys
 import time
 import math
 import datetime
 import traceback
 import json
-import sqlite3
 import logging
 import smtplib, ssl
 
@@ -20,7 +20,7 @@ try:
     from update_logger import UpdateLogger
     from appdata import AppDetails, AppSnippet
     from database import (
-        APPS_DB_PATH, APPS_DB_PATH, Connection,
+        APPS_DB_PATH, Connection,
         insert_app, insert_non_game_app, insert_failed_request,
         get_non_game_apps, get_failed_requests)
 except:
@@ -32,7 +32,7 @@ except:
     from .update_logger import UpdateLogger
     from .appdata import AppDetails, AppSnippet
     from .database import (
-        APPS_DB_PATH, APPS_DB_PATH, Connection,
+        APPS_DB_PATH, Connection,
         insert_app, insert_non_game_app, insert_failed_request,
         get_non_game_apps, get_failed_requests)
 
@@ -79,7 +79,6 @@ STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails
 DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 
 # TODO email weekly report
-# TODO check for lastest request to steam
 
 def main():
     global start_time
@@ -594,14 +593,25 @@ if __name__ == "__main__":
     time_passed = now - last_request_to_steam
     a_day = datetime.timedelta(hours=24)
 
-    # if time_passed.days < 1:
-    #     print("1 day hasn't passed since the last update.")
-    #     print(f"Now                    : {now.strftime(DATETIME_FORMAT)}")
-    #     print(f"Last Request to Steam  : {last_request_to_steam.strftime(DATETIME_FORMAT)}")
-    #     print(f"Time Passed            : {str(time_passed).split('.')[0]}")
-    #     print(f"Retry After            : {str(a_day - time_passed).split('.')[0]}")
-    #     print("")
-    #     exit(0)
+    ignore_timer = False
+    if len(sys.argv) == 2:
+        if sys.argv[1] == "--ignore-timer":
+            ignore_timer = True
+        if sys.argv[1] == "-h":
+            print("Use '--ignore-timer' to skip safety check for last request to Steam.\n")
+            exit(0)
+
+    if not ignore_timer:
+        if time_passed.days < 1:
+            print("1 day hasn't passed since the last update.")
+            print(f"Now                    : {now.strftime(DATETIME_FORMAT)}")
+            print(f"Last Request to Steam  : {last_request_to_steam.strftime(DATETIME_FORMAT)}")
+            print(f"Time Passed            : {str(time_passed).split('.')[0]}")
+            print(f"Retry After            : {str(a_day - time_passed).split('.')[0]}")
+            print("")
+            exit(0)
+    else:
+        print("Ignoring timer!")
 
 
     # =================== #
