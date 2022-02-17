@@ -264,15 +264,13 @@ def get_categories(app_id: int, db):
     return {i[0]: i[1] for i in categories}
 
 
-def get_non_game_apps(db):
+def get_non_game_apps(db) -> list[int]:
     result = db.execute(f"SELECT * FROM non_game_apps").fetchall()
     return [i[0] for i in result]
 
 
-def get_failed_requests(causes: list[str], db):
-    sql = "SELECT app_id, api_provider, cause, status_code FROM failed_requests"
-    if causes:
-        sql += f"WHERE cause IN ({','.join(causes)})"
+def get_failed_requests(where: str, db) -> list[dict]:
+    sql = f"SELECT app_id, api_provider, cause, status_code FROM failed_requests {where}"
 
     results = db.execute(sql).fetchall()
     failed_requests = []

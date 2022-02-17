@@ -21,6 +21,9 @@ if __name__ == "__main__":
 
     with Connection(APPS_DB_PATH) as db:
         non_game_apps = get_non_game_apps(db)
+        for i in non_game_apps:
+            print(type(i))
+            exit(0)
 
     print(f"Non-Game Apps: {len(non_game_apps)}")
 

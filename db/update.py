@@ -46,7 +46,7 @@ DEBUG_LOG = "./debug.log"
 
 
 # Init Loggers
-logging.basicConfig(level=logging.INFO)
+logging.basicConfig(level=logging.DEBUG)
 
 update_logger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
 update_log = update_logger.log
@@ -80,14 +80,12 @@ DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 
 # TODO email weekly report
 # TODO check for lastest request to steam
-# if two days haven't passed don't excute the script
-# check this before main(), in the if __name__ == "__main__" block
 
 def main():
     global start_time
     start_time = time.time()
     print("===           DB UPDATE          ===")
-    print(f"=== Start Date: {now} ===")
+    print(f"=== Start Date: {get_datetime_str()} ===")
 
     # ========================= #
     #  Get App List from Steam  #
@@ -128,12 +126,31 @@ def main():
     # limited_applist = applist[applist_index : applist_index + 30]
 
     # =============================== #
-    #  Get App Details for each App   #
+    #     Get Apps to be Ignored      #
     # =============================== #
-    global LAST_INDEX
+    apps_to_ignore = []
 
     with Connection(APPS_DB_PATH) as db:
         non_game_apps = get_non_game_apps(db)
+        failed_requests = get_failed_requests(f"WHERE cause == '{ServerError.__name__}'", db)
+
+    if failed_requests:
+        # Get only app_ids
+        failed_list = [i["app_id"] for i in failed_requests]
+        for _id in failed_list:
+            apps_to_ignore.append(_id)
+
+    if non_game_apps:
+        for _id in non_game_apps:
+            apps_to_ignore.append(_id)
+
+    print(f"Apps to be ignored: {len(apps_to_ignore):,}")
+
+
+    # =============================== #
+    #  Get App Details for each App   #
+    # =============================== #
+    global LAST_INDEX
 
     print(f"Fetching apps:")
 
@@ -148,8 +165,7 @@ def main():
             update_logger.save()
 
         # If app is not a game skip
-        if app_id in non_game_apps:
-            logging.debug(f"App is not a game. AppID: '{app_id}'\nSkipping...")
+        if app_id in apps_to_ignore:
             continue
 
         # ================================= #
@@ -536,8 +552,6 @@ def debug_log(msg: dict):
 
 def email(msg):
     context = ssl.create_default_context()
-    print(msg)
-    return
     with smtplib.SMTP_SSL(
         env["SMTP_SERVER"], env["PORT"], context=context) as server:
         server.login(env["SENDER_EMAIL"], env["PASSWORD"])
@@ -580,14 +594,14 @@ if __name__ == "__main__":
     time_passed = now - last_request_to_steam
     a_day = datetime.timedelta(hours=24)
 
-    if time_passed.days < 1:
-        print("1 day hasn't passed since the last update.")
-        print(f"Now                    : {now.strftime(DATETIME_FORMAT)}")
-        print(f"Last Request to Steam  : {last_request_to_steam.strftime(DATETIME_FORMAT)}")
-        print(f"Time Passed            : {str(time_passed).split('.')[0]}")
-        print(f"Retry After            : {str(a_day - time_passed).split('.')[0]}")
-        print("")
-        exit(0)
+    # if time_passed.days < 1:
+    #     print("1 day hasn't passed since the last update.")
+    #     print(f"Now                    : {now.strftime(DATETIME_FORMAT)}")
+    #     print(f"Last Request to Steam  : {last_request_to_steam.strftime(DATETIME_FORMAT)}")
+    #     print(f"Time Passed            : {str(time_passed).split('.')[0]}")
+    #     print(f"Retry After            : {str(a_day - time_passed).split('.')[0]}")
+    #     print("")
+    #     exit(0)
 
 
     # =================== #
