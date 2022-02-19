@@ -2,59 +2,6 @@ from dataclasses import dataclass
 import json
 
 
-@dataclass
-class DataContainer:
-    """Metaclass for customized dataclass"""
-
-    def __init__(self, data=None):
-        if data:
-            self.update(data)
-
-    def update(self, attributes: dict):
-        """Updates existing attributes. Raises error if attribute doesn't exists."""
-        # Check for typos
-        for a in attributes:
-            if a not in self.__attributes__:
-                raise AttributeError(f"'{type(self).__name__}' object has no attribute '{a}'")
-
-        self.__dict__.update(attributes)
-
-    @property
-    def __attributes__(self) -> list[str]:
-        """Returns public attributes, that are not callable or dunder methods."""
-        attributes = []
-        for a in dir(self):
-            if not (a.startswith("_") or callable(getattr(self, a))):
-                attributes.append(a)
-        return attributes
-
-    def items(self) -> list[tuple]:
-        items_view = []
-        for a in self.__attributes__:
-            items_view.append((a, self.__getattribute__(a)))
-        return items_view
-
-    def as_dict(self) -> dict:
-        """Returns atributes as key value pairs."""
-        obj = {}
-        for a in self.__attributes__:
-            obj[a] = self.__getattribute__(a)
-        return obj
-
-    def json(self, indent=0) -> str:
-        output = {}
-        for a in self.__attributes__:
-            output[a] = self.__getattribute__(a)
-            json.dumps(output)
-        return json.dumps(output, indent=indent)
-
-    def __getitem__(self, key):
-        return self.__getattribute__(key)
-
-    def __repr__(self) -> str:
-        return str(self.json(indent=2))
-
-
 class AppDetails(DataContainer):
     """An interface for app details"""
     app_id: int = 0
@@ -109,6 +56,58 @@ class AppSnippet(DataContainer):
     mac: bool = False
     linux: bool = False
 
+
+@dataclass
+class DataContainer:
+    """Metaclass for customized dataclass"""
+
+    def __init__(self, data=None):
+        if data:
+            self.update(data)
+
+    def update(self, attributes: dict):
+        """Updates existing attributes. Raises error if attribute doesn't exists."""
+        # Check for typos
+        for a in attributes:
+            if a not in self.__attributes__:
+                raise AttributeError(f"'{type(self).__name__}' object has no attribute '{a}'")
+
+        self.__dict__.update(attributes)
+
+    @property
+    def __attributes__(self) -> list[str]:
+        """Returns public attributes, that are not callable or dunder methods."""
+        attributes = []
+        for a in dir(self):
+            if not (a.startswith("_") or callable(getattr(self, a))):
+                attributes.append(a)
+        return attributes
+
+    def items(self) -> list[tuple]:
+        items_view = []
+        for a in self.__attributes__:
+            items_view.append((a, self.__getattribute__(a)))
+        return items_view
+
+    def as_dict(self) -> dict:
+        """Returns atributes as key value pairs."""
+        obj = {}
+        for a in self.__attributes__:
+            obj[a] = self.__getattribute__(a)
+        return obj
+
+    def json(self, indent=0) -> str:
+        output = {}
+        for a in self.__attributes__:
+            output[a] = self.__getattribute__(a)
+            json.dumps(output)
+        return json.dumps(output, indent=indent)
+
+    def __getitem__(self, key):
+        return self.__getattribute__(key)
+
+    def __repr__(self) -> str:
+        return str(self.json(indent=2))
 
 
 if __name__ == "__main__":

@@ -101,11 +101,12 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
     """
     # Check LIMIT, OFFSET
     if not isinstance(limit, int):
-        raise TypeError(f"'{limit}' is not an int. Limit parameter should be an int.")
+        raise TypeError(f"{limit} is not an int. Limit parameter should be an int.")
     if not isinstance(offset, int):
-        raise TypeError(f"'{offset}' is not an int. Offset parameter should be an int.")
+        raise TypeError(f"{offset} is not an int. Offset parameter should be an int.")
 
-    # Check types and give default values if needed
+    # CHECK FILTER #
+    # Use default if arg is None
     if not filters:
         filters = {
             "tags": [],
@@ -114,36 +115,40 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
         }
     elif not isinstance(filters, dict):
         raise TypeError("Filters must be type of dict.")
+    else:
+        # If FILTERS is a dict
+        expected_keys = ["tags", "genres", "categories"]
+        filter_keys = [k for k in filters]
 
+        for f in filters:
+            # Check key names
+            if f not in ("tags", "genres", "categories"):
+                raise ValueError(f"{f} is not a valid filter.")
+            # Check values
+            elif not isinstance(filters[f], list):
+                raise TypeError(f"Error: Invalid value for {f}: {filters[f]}, filter values must be type list.")
+            # Check value content to protect againsts injection
+            for _id in filters[f]:
+                if not isinstance(_id, int):
+                    raise TypeError(f"{_id} is not an int. To filter by {f},  use type int for ids.")
+
+        # Fill missing values
+        for k in expected_keys:
+            if k not in filter_keys:
+                filters[k] = []
+
+
+    # Check ORDER #
     if not order:
         order = {}
     elif not isinstance(order, dict):
         raise TypeError("Order must be type of dict.")
 
-
-    # Check ORDER BY
     for col, direction in order.items():
         if col not in APP_DETAILS_FIELDS:
-            raise ValueError(f"'{col}' is not a valid column to order by.")
+            raise ValueError(f"{col} is not a valid column to order by.")
         if direction not in ("ASC", "DESC"):
-            raise ValueError(f"'{direction}' is not a valid direction. Direction can only be 'ASC' or 'DESC'.")
-
-    # Check FILTERS
-    for f in filters:
-        # Check keys
-        if f not in ("tags", "genres", "categories"):
-            raise ValueError(f"'{f}' is not a valid filter.")
-
-        # Check values
-        if not isinstance(filters[f], list):
-            raise TypeError(f"Filter values must be lists.")
-
-        # Check value content
-        # Protect againsts injection  - only accept integer values
-        for _id in filters[f]:
-            if not isinstance(_id, int):
-                raise TypeError(f"'{_id}' is not an int. To filter by '{f}', can only use type int for their ids.")
-
+            raise ValueError(f"{direction} is not a valid direction. Direction can only be ASC or DESC.")
 
     tags = ",".join([str(i) for i in filters["tags"]])
     genres = ",".join([str(i) for i in filters["genres"]])
@@ -207,6 +212,8 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
 
 def get_app_details(app_id: int, db) -> AppDetails:
     query = db.execute("SELECT * FROM apps WHERE app_id=?", (app_id, )).fetchone()
+    if not query:
+        return None
 
     table_info = db.execute("PRAGMA table_info(apps)").fetchall()
     # Get column names

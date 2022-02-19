@@ -10,35 +10,41 @@ NON_GAME_APPS = f"http://{SERVER_IP}:{PORT}/GetNonGameApps"
 FAILED_REQUESTS = f"http://{SERVER_IP}:{PORT}/GetFailedRequests"
 
 query = {
-    "filters": None,
+    "filters": {
+        "tags": [1]
+    },
     "order": None,
     "index": 0
 }
 try:
     print("APPLIST: ")
     r = requests.get(APPLIST, json=query)
-    print(r.json())
+    print(r.text)
+    print(len(r.json()))
     print("------------------------------------------------------------")
+    exit()
 
     print("APP DETAILS: ")
     r = requests.get(APP_DETAILS)
-    for k, v in r.json().items():
-        print(k, " : ", type(v))
+    print(len(r.json()))
     print("------------------------------------------------------------")
 
     print("NON GAME APPS: ")
     r = requests.get(NON_GAME_APPS)
-    print(r.json())
+    print(len(r.json()))
     print("------------------------------------------------------------")
 
     print("FAILED REQUESTS: ")
     r = requests.get(FAILED_REQUESTS)
-    print(r.json())
+    print(len(r.json()))
     print("------------------------------------------------------------")
     print("ATTACKING: ")
     for i in range(1_000_000):
         r = requests.get(FAILED_REQUESTS)
-        print(f"Request Count: {i:,}", end="\r")
+        print(f"Request Count: {i:,}  |  {r.status_code}", end="\r")
+        if r.status_code == 429:
+            print()
+            break
 except json.JSONDecodeError as e:
     print("Error: ")
     print(r.text)

@@ -18,19 +18,19 @@ try:
         ServerError, RequestFailedWithUnknownError
     )
     from update_logger import UpdateLogger
-    from appdata import AppDetails, AppSnippet
+    from appdata import AppDetails
     from database import (
         APPS_DB_PATH, Connection,
         insert_app, insert_non_game_app, insert_failed_request,
         get_non_game_apps, get_failed_requests)
-except:
+except ImportError:
     from .errors import (
         FetchError, RequestTimeoutError, TooManyRequestsError,
         UnauthorizedError, ForbiddenError, NotFoundError,
         ServerError, RequestFailedWithUnknownError
     )
     from .update_logger import UpdateLogger
-    from .appdata import AppDetails, AppSnippet
+    from .appdata import AppDetails
     from .database import (
         APPS_DB_PATH, Connection,
         insert_app, insert_non_game_app, insert_failed_request,
@@ -81,8 +81,6 @@ DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 # TODO email weekly report
 
 def main():
-    global start_time
-    start_time = time.time()
     print("===           DB UPDATE          ===")
     print(f"=== Start Date: {get_datetime_str()} ===")
 
@@ -131,7 +129,7 @@ def main():
 
     with Connection(APPS_DB_PATH) as db:
         non_game_apps = get_non_game_apps(db)
-        failed_requests = get_failed_requests(f"WHERE cause == 'failed'", db)
+        failed_requests = get_failed_requests("WHERE cause == 'failed'", db)
 
     if failed_requests:
         # Get only app_ids
@@ -151,7 +149,7 @@ def main():
     # =============================== #
     global LAST_INDEX
 
-    print(f"Fetching apps:")
+    print("Fetching apps:")
 
     for i, app in enumerate(remaining_apps):
         print(f"Progress: {i:,} / {remaining_length:,}", end="\r")
@@ -360,17 +358,17 @@ def attempt_request(api: str):
             response = requests.get(api, timeout=REQUEST_TIMEOUT)
             return response
         except requests.Timeout:
-            logging.debug("Request Timed Out:", api)
-            logging.debug("Attempt:", attempt)
+            logging.debug(f"Request Timed Out: {api}")
+            logging.debug(f"Attempt: {attempt}")
             time.sleep(attempt * attempt_wait)
             attempt += 1
-        except requests.exceptions.ConnectionError as e:
+        except requests.exceptions.ConnectionError as connection_error:
             if connection_errors == 0:
                 print("")
             connection_errors += 1
             if connection_errors >= connection_error_limit:
                 print(f"Couldn't connect for {connection_wait * connection_errors // 60} mins...")
-                raise e
+                raise connection_error
             else:
                 print(f"Connection Error! Error Count: {connection_errors} | Waiting for {connection_wait} secs...")
                 time.sleep(connection_wait)
@@ -644,6 +642,8 @@ if __name__ == "__main__":
     #         RUN         #
     # =================== #
     ul = update_log
+    start_time = time.time()
+
     try:
         main()
 
