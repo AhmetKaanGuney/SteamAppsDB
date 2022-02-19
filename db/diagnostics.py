@@ -3,8 +3,9 @@ Diagnostics tool for apps database
 Usage: diagnostics.py [action]
 Actions:
 freeze      : Writes non_game_apps and failed_requests to files
-load-to-db  : loads written files to database
-fetch       : fetches diagnosis data from remote server and stores into apps.db
+merge       : saves diagnosis files to database
+pull        : fetches diagnosis data from remote server and stores into apps.db
+pull-old    : fetches diagnosis to db in old way
 fix         : tries to refetch apps that failed
 """
 import os
@@ -31,6 +32,9 @@ FAILED_REQUESTS_API = f"http://{SERVER_IP}:{PORT}/GetFailedRequests"
 FAILED_REQUESTS_PATH = os.path.join(current_dir, "diagnosis/failed_request.json")
 NON_GAME_APPS_PATH = os.path.join(current_dir, "diagnosis/non_game_apps.json")
 
+STEAM_APP_DETAILS_API_BASE = "https://store.steampowered.com/api/appdetails/?appids="
+STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails&appid="
+
 
 def main():
     if len(ARGS) == 2:
@@ -40,34 +44,28 @@ def main():
         elif ARGS[1] == "freeze":
             freeze()
             exit(0)
-        elif ARGS[1] == "load-to-db":
-            load_to_db()
+        elif ARGS[1] == "merge":
+            merge()
             exit(0)
-        elif ARGS[1] == "fetch":
-            fetch_remote()
+        elif ARGS[1] == "pull":
+            pull()
             exit(0)
+        elif ARGS[1] == "status":
+            where = "WHERE error != 'failed'"
+            with Connection(APPS_DB_PATH) as db:
+                failed_requests = get_failed_requests(where, db)
 
-    if len(ARGS) == 1:
-        filter_failed = ""
-        filter_failed = "WHERE error != 'failed'"
-        with Connection(APPS_DB_PATH) as db:
-            failed_requests = db.execute(f"""
-                SELECT error, status_code, url
-                FROM failed_requests
-                {filter_failed}
-                """).fetchall()
+            print(f"Failed Requests ({len(failed_requests)}) - without 'failed': ")
+            for i in failed_requests:
+                print(f"Error: {i[0]} | Status Code: {i[1]} | URL: {i[2]}")
 
-        print(f"Failed Requests ({len(failed_requests)}): ")
-        for i in failed_requests:
-            print(f"Error: {i[0]} | Status Code: {i[1]} | URL: {i[2]}")
+            print()
 
-        print()
+            with Connection(APPS_DB_PATH) as db:
+                non_game_apps = get_non_game_apps(db)
 
-        with Connection(APPS_DB_PATH) as db:
-            non_game_apps = get_non_game_apps(db)
-
-        print(f"Non-Game Apps: {len(non_game_apps):,}")
-        print()
+            print(f"Non-Game Apps: {len(non_game_apps):,}")
+            print()
     else:
         print(__doc__)
         exit(0)
@@ -94,7 +92,7 @@ def freeze():
         json.dump(non_game_apps, non_game_file)
 
 
-def load_to_db():
+def merge():
     print("Reading failed requests...")
     failed_size = os.path.getsize(FAILED_REQUESTS_PATH)
     if failed_size == 0:
@@ -127,7 +125,7 @@ def load_to_db():
         print("\nCompleted!")
 
 
-def fetch_remote():
+def pull():
     print("Fetching non_game_apps...")
     non_game_apps = fetch(NON_GAME_APPS_API)
     print("Fetching failed_requests...")
@@ -142,6 +140,31 @@ def fetch_remote():
         for i in failed_requests:
             insert_failed_request(
                 i["error"], i["status_code"], i["url"], db
+            )
+
+
+def pull_old():
+    print("Fetching non_game_apps...")
+    non_game_apps = fetch(NON_GAME_APPS_API)
+    print("Fetching failed_requests...")
+    failed_requests = fetch(FAILED_REQUESTS_API)
+
+    with Connection(APPS_DB_PATH) as db:
+        print("Inserting non_game_apps...")
+        for app_id in non_game_apps:
+            insert_non_game_app(app_id, db)
+
+        print("Inserting failed_requests...")
+        for i in failed_requests:
+            error = i["cause"]
+            status_code = i["status_code"]
+            url = ""
+            if i["api_provider"] == "steam":
+                url = STEAM_APP_DETAILS_API_BASE + str(i["app_id"])
+            elif i["api_provider"] == "steamspy":
+                url = STEAMSPY_APP_DETAILS_API_BASE + str(i["app_id"])
+            insert_failed_request(
+                error, status_code, url,  db
             )
 
 
