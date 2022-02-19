@@ -50,6 +50,9 @@ def main():
         elif ARGS[1] == "pull":
             pull()
             exit(0)
+        elif ARGS[1] == "pull-old":
+            pull_old()
+            exit(0)
         elif ARGS[1] == "status":
             where = "WHERE error != 'failed'"
             with Connection(APPS_DB_PATH) as db:
