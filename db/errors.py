@@ -22,12 +22,10 @@ class FetchError(Exception):
         ulogger.log = log
         ulogger.save()
 
-
 class RequestTimeoutError(FetchError):
     """The request timed out"""
-    def __init__(self, response: requests.Response, log=None):
+    def __init__(self, log=None):
         FetchError.log(log)
-        super().__init__(response)
 
 
 class RequestFailedWithUnknownError(FetchError):
@@ -65,16 +63,17 @@ class ServerError(FetchError):
         super().__init__(response)
 
 
-class SteamResponseError(FetchError):
-    """Raised when Steam responds with {'success': False}"""
-    def __init__(self, appid, log=None):
+class TooManyRequestsError(FetchError):
+    """Raised when server responds with 429 - Too Many Requests"""
+    def __init__(self, response, log=None):
         FetchError.log(log)
-        super().__init__(appid)
+        super().__init__(response)
 
 
 if __name__ == "__main__":
     try:
-        raise NotFoundError(requests.Response())
-    except RequestError as e:
-        print("Response: ", e.response)
-        print("Response Url: ", e.response.url)
+        raise RequestTimeoutError()
+    except Exception as e:
+        print("e :", type(e))
+        print("FetchError :", FetchError)
+        print(issubclass(type(e), FetchError) and not isinstance(e, RequestTimeoutError))

@@ -23,6 +23,7 @@ def main():
             print("Actions: ")
             print("freeze : Writes non_game_apps and failed_requests to files")
             print("load-to-db : loads written files to database")
+            print("")
             exit(0)
         if args[1] == "freeze":
             freeze()
@@ -89,7 +90,7 @@ def load_to_db():
             for i, r in enumerate(failed_requests):
                 print(f"Progress: {i:,}", end="\r")
                 insert_failed_request(r["app_id"], r["api_provider"], r["cause"], r["status_code"], db)
-        print("Completed!")
+        print("\nCompleted!")
 
 
     print("Reading non-game apps...")
@@ -105,7 +106,7 @@ def load_to_db():
             for i, app_id in enumerate(non_game_apps):
                 print(f"Progress: {i:,}", end="\r")
                 insert_non_game_app(app_id, db)
-        print("Completed!")
+        print("\nCompleted!")
 
 
 if __name__ == "__main__":

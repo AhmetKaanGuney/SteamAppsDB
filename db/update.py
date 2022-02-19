@@ -13,9 +13,9 @@ from dotenv import dotenv_values
 
 try:
     from errors import (
-        FetchError, RequestTimeoutError, RequestFailedWithUnknownError,
+        FetchError, RequestTimeoutError, TooManyRequestsError,
         UnauthorizedError, ForbiddenError, NotFoundError,
-        ServerError, SteamResponseError
+        ServerError, RequestFailedWithUnknownError
     )
     from update_logger import UpdateLogger
     from appdata import AppDetails, AppSnippet
@@ -25,9 +25,9 @@ try:
         get_non_game_apps, get_failed_requests)
 except:
     from .errors import (
-        FetchError, RequestTimeoutError, RequestFailedWithUnknownError,
+        FetchError, RequestTimeoutError, TooManyRequestsError,
         UnauthorizedError, ForbiddenError, NotFoundError,
-        ServerError, SteamResponseError
+        ServerError, RequestFailedWithUnknownError
     )
     from .update_logger import UpdateLogger
     from .appdata import AppDetails, AppSnippet
@@ -184,13 +184,25 @@ def main():
         # ====================== #
         try:
             steamspy_data = fetch(steamspy_api)
-        except FetchError as e:
-            # Record failed request and skip to next app
+        except Exception as e:
             error_name = type(e).__name__
-            print(f"\n{error_name}: {e.response.status_code} | URL: {e.response.url}\nSkipping...")
 
             with Connection(APPS_DB_PATH) as db:
-                insert_failed_request(app_id, "steamspy", error_name, e.response.status_code, db)
+                # If Exception is not a type of FecthError
+                # there might not be a response object
+                # So record the unexpected exception without referring to the response obj.
+                if issubclass(type(e), FetchError) and not isinstance(e, RequestTimeoutError):
+                    print(f"\n{error_name}: {e.response.status_code} | URL: {e.response.url}\nSkipping...")
+                    insert_failed_request(app_id, "steamspy", error_name, e.response.status_code, db)
+                else:
+                    print(f"\nError : {error_name} | URL: {steam_api}\nSkipping...")
+                    msg = {
+                        "error": error_name,
+                        "url": steam_api,
+                        "traceback": traceback.format_exc()
+                    }
+                    insert_failed_request(app_id, "steamspy", error_name, None, db)
+                    debug_log(msg)
 
             update_log["failed_requests"] += 1
             continue
@@ -226,12 +238,25 @@ def main():
         try:
             # Response Example : {"000000": {"success": true, "data": {...}}}
             steam_response = fetch(steam_api)[str(app_id)]
-        except FetchError as e:
+        except Exception as e:
             error_name = type(e).__name__
-            print(f"\n{error_name}: {e.response.status_code} | URL: {e.response.url}\nSkipping...")
 
             with Connection(APPS_DB_PATH) as db:
-                insert_failed_request(app_id, "steam", error_name, e.response.status_code, db)
+                # If Exception is not a type of FecthError or is a RequestTimeoutError
+                # there might not be a response object
+                # So record the unexpected exception without referring to the response obj.
+                if issubclass(type(e), FetchError) and not isinstance(e, RequestTimeoutError):
+                    print(f"\n{error_name}: {e.response.status_code} | URL: {e.response.url}\nSkipping...")
+                    insert_failed_request(app_id, "steam", error_name, e.response.status_code, db)
+                else:
+                    print(f"\nError : {error_name} | URL: {steam_api}\nSkipping...")
+                    msg = {
+                        "error": error_name,
+                        "url": steam_api,
+                        "traceback": traceback.format_exc()
+                    }
+                    insert_failed_request(app_id, "steam", error_name, None, db)
+                    debug_log(msg)
 
             update_log["last_request_to_steam"] = get_datetime_str()
             update_log["steam_request_count"] += 1
@@ -273,9 +298,12 @@ def main():
 
 
 
-def fetch(api: str) -> dict:
+def fetch(api: str, tries=0) -> dict:
     """Makes a request to an API and returns JSON. If request fails will raise Exeception."""
     response = attempt_request(api)
+
+    if response.text.startswith("<!DOCTYPE html>"):
+        response.text = "<--- HTML Content --->"
 
     msg = {
         "status_code": response.status_code,
@@ -283,6 +311,7 @@ def fetch(api: str) -> dict:
         "headers": response.headers,
         "text": response.text
     }
+
     if response.status_code == requests.codes.ok:
         return response.json()
 
@@ -295,22 +324,21 @@ def fetch(api: str) -> dict:
             raise ForbiddenError(response, update_log)
         elif response.status_code == 404:
             raise NotFoundError(response, update_log)
-        else:
-            if response.status_code == 429:
-                print(f"\nHTTPError: 429 - Too Many Requests | URL: {response.url}")
+        elif response.status_code == 429:
+            if tries > 2:
+                raise TooManyRequestsError(response, update_log)
+
+            print(f"\nHTTPError: 429 - Too Many Requests | URL: {response.url}")
             print("Waiting 30 secs...")
             time.sleep(30)
-
-        print("Trying again...")
-        return fetch(api)
+            print("Trying again...")
+            return fetch(api, tries=tries + 1)
 
     elif 500 <= response.status_code < 600:
-        print(f"\nServer Error: {response.status_code} | URL: {response.url}")
         debug_log(msg)
         # Raise error cuz dont know how to handle it
         raise ServerError(response, update_log)
     else:
-        print(f"\nUnknownHTTPError {response.status_code} | URL: {response.url}")
         debug_log(msg)
         raise RequestFailedWithUnknownError(response, update_log)
 
@@ -334,7 +362,6 @@ def attempt_request(api: str):
         except requests.Timeout:
             logging.debug("Request Timed Out:", api)
             logging.debug("Attempt:", attempt)
-            # Wait for 5 then for 10 secs
             time.sleep(attempt * attempt_wait)
             attempt += 1
         except requests.exceptions.ConnectionError as e:
@@ -350,7 +377,7 @@ def attempt_request(api: str):
                 print("Attempting again...")
                 continue
     # If reached attempt limit
-    raise RequestTimeoutError(response, update_log)
+    raise RequestTimeoutError(update_log)
 
 
 def fetch_applist(api: str):
@@ -586,7 +613,6 @@ Steam Requests  : {steam_request_count:,}
 
 
 if __name__ == "__main__":
-
     # Check time passed since last request
     now = datetime.datetime.utcnow()
     last_request_to_steam = datetime.datetime.strptime(update_log["last_request_to_steam"], DATETIME_FORMAT)
@@ -636,7 +662,7 @@ if __name__ == "__main__":
             # that means update finished so reset the log
             ul["reset_log"] = True
 
-    except (Exception, KeyboardInterrupt) as e:
+    except Exception as e:
         run_time = subtract_times(time.time(), start_time)
         fail_msg = create_msg(ul, run_time, traceback=traceback)
         print("")
@@ -645,6 +671,9 @@ if __name__ == "__main__":
         if not isinstance(e, requests.exceptions.ConnectionError):
             email(fail_msg)
         raise e
+
+    except KeyboardInterrupt:
+        exit(0)
 
     finally:
         run_time = subtract_times(time.time(), start_time)

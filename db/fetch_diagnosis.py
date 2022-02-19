@@ -8,11 +8,11 @@ try:
         )
 except ImportError:
     from .update import fetch
-    from database import (
+    from .database import (
         insert_failed_request, insert_non_game_app,
         APPS_DB_PATH, Connection
         )
-
+exit(0)
 # Dirs
 current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
