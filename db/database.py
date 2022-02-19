@@ -20,18 +20,18 @@ APP_SNIPPET_FIELDS = AppSnippet().__attributes__
 JSON_FILEDS = ("developers", "publishers", "screenshots")
 
 
-def insert_app(app_details: AppDetails, db):
-    app_id = app_details.app_id
+def insert_app(app_dets: AppDetails, db):
+    app_id = app_dets.app_id
     data = {}
     # Covert fields that are dictionary to json
     # and store them
-    for k, v in app_details.items():
+    for k, v in app_dets.items():
         if k in JSON_FILEDS:
             data[k] = json.dumps(v)
         else:
             data[k] = v
 
-    db.execute(f"""
+    db.execute("""
         REPLACE INTO apps
         VALUES (
             :app_id, :name, :price,
@@ -43,23 +43,23 @@ def insert_app(app_details: AppDetails, db):
             :languages, :windows, :mac, :linux
         )""", data)
 
-    if app_details.genres:
-        for name, _id in app_details.genres.items():
+    if app_dets.genres:
+        for name, _id in app_dets.genres.items():
             db.execute("INSERT OR IGNORE INTO genres VALUES (:genre_id, :name)",
                                             {"genre_id": _id, "name": name})
             db.execute("INSERT OR IGNORE INTO apps_genres VALUES (:app_id, :genre_id)",
                                                 {"app_id": app_id, "genre_id": _id})
 
-    if app_details.categories:
-        for name, _id in app_details.categories.items():
+    if app_dets.categories:
+        for name, _id in app_dets.categories.items():
             db.execute("INSERT OR IGNORE INTO categories VALUES (:category_id, :name)",
                                                 {"category_id": _id, "name": name})
             db.execute("INSERT OR IGNORE INTO apps_categories VALUES (:app_id, :category_id)",
                                                     {"app_id": app_id, "category_id": _id})
 
     # Tags don't come with ids. they come with vote count for that tag
-    if app_details.tags:
-        for name, votes in app_details.tags.items():
+    if app_dets.tags:
+        for name, votes in app_dets.tags.items():
             # Check tag name
             tag_id = db.execute("SELECT tag_id FROM tags WHERE name = :name", {"name": name}).fetchone()
             if tag_id:
@@ -75,13 +75,11 @@ def insert_non_game_app(app_id: int, db):
     db.execute("INSERT OR IGNORE INTO non_game_apps VALUES (?)", (app_id, ))
 
 
-def insert_failed_request(app_id: int, api_provider:str, cause:str, status_code:int,  db):
+def insert_failed_request(error: str,  status_code: int, url: str, db):
     db.execute("""\
         REPLACE INTO failed_requests
-        VALUES (:app_id, :api_provider, :cause, :status_code)
-        """,
-        {"app_id": app_id, "api_provider": api_provider,
-         "cause": cause, "status_code":status_code}
+        VALUES (:error, :status_code, :url)
+        """, {"error": error, "status_code": status_code, "url": url}
     )
 
 
@@ -137,7 +135,6 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
             if k not in filter_keys:
                 filters[k] = []
 
-
     # Check ORDER #
     if not order:
         order = {}
@@ -180,7 +177,7 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
     logging.debug(f"Filter Sql : '{filter_sql}'")
 
     if order:
-        order_sql = f"ORDER BY " + ", ".join((f"{col} {direction}" for col, direction in order.items()))
+        order_sql = "ORDER BY " + ", ".join((f"{col} {direction}" for col, direction in order.items()))
     else:
         order_sql = ""
 
@@ -204,8 +201,10 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
     # Match queried columns with fetched values
     applist = []
     for app in ordered_apps:
-        snippet_data = {col: app[i] for i, col in enumerate(APP_SNIPPET_FIELDS)}
-        applist.append(snippet_data)
+        snippet = {col: app[i] for i, col in enumerate(APP_SNIPPET_FIELDS)}
+        # There'll be an app_id field in the snippet
+        snippet["tags"] = get_tags(snippet["app_id"], db)
+        applist.append(snippet)
 
     return applist
 
@@ -236,19 +235,29 @@ def get_app_details(app_id: int, db) -> AppDetails:
     return AppDetails(app_data)
 
 
-def get_tags(app_id: int, db):
-    tags = db.execute(f"""
-        SELECT name, tag_id FROM tags
-        WHERE tag_id IN (
-            SELECT tag_id FROM apps_tags
-            WHERE app_id = :app_id
-        )""", {"app_id": app_id}).fetchall()
+def get_tags(app_id: int, db) -> list[dict]:
+    tags = []
+    ids_votes = db.execute("SELECT tag_id, votes FROM apps_tags WHERE app_id = ?", (app_id, )).fetchall()
 
-    return {i[0]: i[1] for i in tags}
+    if not ids_votes:
+        return None
+
+    for i in ids_votes:
+        _id = i[0]
+        votes = i[1]
+
+        tag = {}
+        tag["id"] = _id
+        tag["votes"] = votes
+        tag["name"] = db.execute("SELECT name FROM tags WHERE tag_id = ?", (_id,)).fetchone()[0]
+
+        tags.append(tag)
+
+    return tags
 
 
 def get_genres(app_id: int, db):
-    genres = db.execute(f"""
+    genres = db.execute("""
         SELECT name, genre_id FROM genres
         WHERE genre_id IN (
             SELECT genre_id FROM apps_genres
@@ -260,7 +269,7 @@ def get_genres(app_id: int, db):
 
 
 def get_categories(app_id: int, db):
-    categories = db.execute(f"""
+    categories = db.execute("""
         SELECT name, category_id FROM categories
         WHERE category_id IN (
             SELECT category_id FROM apps_categories
@@ -272,12 +281,12 @@ def get_categories(app_id: int, db):
 
 
 def get_non_game_apps(db) -> list[int]:
-    result = db.execute(f"SELECT * FROM non_game_apps").fetchall()
+    result = db.execute("SELECT * FROM non_game_apps").fetchall()
     return [i[0] for i in result]
 
 
 def get_failed_requests(where: str, db) -> list[dict]:
-    sql = f"SELECT app_id, api_provider, cause, status_code FROM failed_requests {where}"
+    sql = f"SELECT error, status_code, url FROM failed_requests {where}"
 
     results = db.execute(sql).fetchall()
     failed_requests = []
@@ -287,10 +296,9 @@ def get_failed_requests(where: str, db) -> list[dict]:
 
     for i in results:
         app = {
-            "app_id": i[0],
-            "api_provider": i[1],
-            "cause": i[2],
-            "status_code": i[3]
+            "error": i[0],
+            "status_code": i[1],
+            "url": i[2]
         }
         failed_requests.append(app)
     return failed_requests
@@ -364,7 +372,6 @@ if __name__ == "__main__":
 
         for i in range(5):
             insert_non_game_app(i, db)
-            insert_rejected_app(i, db)
 
         print("Insert non-game-app")
         print_table("non_game_apps", db)
@@ -373,6 +380,4 @@ if __name__ == "__main__":
         print_table("rejected_apps", db)
 
         non_game_apps = get_non_game_apps(db)
-        rejected_apps = get_rejected_apps(db)
         print("Non game apps: ", non_game_apps)
-        print("Rejected apss: ", rejected_apps)

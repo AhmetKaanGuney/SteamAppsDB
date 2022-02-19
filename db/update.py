@@ -6,7 +6,8 @@ import datetime
 import traceback
 import json
 import logging
-import smtplib, ssl
+import smtplib
+import ssl
 
 import requests
 from dotenv import dotenv_values
@@ -80,9 +81,10 @@ DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 
 # TODO email weekly report
 
+
 def main():
-    print("===           DB UPDATE          ===")
-    print(f"=== Start Date: {get_datetime_str()} ===")
+    print("||===            UPDATE             ===||")
+    print(f"||=== Start Date : {get_datetime_str()} ===||")
 
     # ========================= #
     #  Get App List from Steam  #
@@ -99,7 +101,6 @@ def main():
         # Save to File
         write_to_json(applist, APPLIST_FILE)
         update_log["applist_fetched"] = True
-
 
     # Get Saved Applist starting from where it's left off
     applist_index = update_log["applist_index"]
@@ -118,7 +119,6 @@ def main():
     print(f"Starting From Index: {applist_index}")
     print(f"Current Steam Request Count: {update_log['steam_request_count']}")
 
-
     # For testing use limited applist
     # limited_applist = applist[applist_index : applist_index + 30]
 
@@ -129,11 +129,11 @@ def main():
 
     with Connection(APPS_DB_PATH) as db:
         non_game_apps = get_non_game_apps(db)
-        failed_requests = get_failed_requests("WHERE cause == 'failed'", db)
+        failed_requests = get_failed_requests("WHERE error == 'failed'", db)
 
     if failed_requests:
         # Get only app_ids
-        failed_list = [i["app_id"] for i in failed_requests]
+        failed_list = [get_id_from_url(i["url"]) for i in failed_requests]
         for _id in failed_list:
             apps_to_ignore.append(_id)
 
@@ -142,7 +142,6 @@ def main():
             apps_to_ignore.append(_id)
 
     print(f"Apps to be ignored: {len(apps_to_ignore):,}")
-
 
     # =============================== #
     #  Get App Details for each App   #
@@ -171,7 +170,7 @@ def main():
         time.sleep(RATE_LIMIT)
 
         # Create Appdetails
-        app_details = AppDetails({"name": app["name"], "app_id": app["app_id"]})
+        app_details = AppDetails({"name": app["name"], "app_id": app_id})
 
         # API's
         steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(app_id)
@@ -189,22 +188,22 @@ def main():
                 # If Exception is not a type of FecthError
                 # there might not be a response object
                 # So record the unexpected exception without referring to the response obj.
+
                 if issubclass(type(e), FetchError) and not isinstance(e, RequestTimeoutError):
-                    print(f"\n{error_name}: {e.response.status_code} | URL: {e.response.url}\nSkipping...")
-                    insert_failed_request(app_id, "steamspy", error_name, e.response.status_code, db)
+                    print(f"\n{error_name}: {e.response.status_code} | URL: {steamspy_api}\nSkipping...")
+                    insert_failed_request(error_name, e.response.status_code, steamspy_api, db)
                 else:
                     print(f"\nError : {error_name} | URL: {steam_api}\nSkipping...")
                     msg = {
                         "error": error_name,
-                        "url": steam_api,
+                        "url": steamspy_api,
                         "traceback": traceback.format_exc()
                     }
-                    insert_failed_request(app_id, "steamspy", error_name, None, db)
+                    insert_failed_request(error_name, None, steamspy_api, db)
                     debug_log(msg)
 
             update_log["failed_requests"] += 1
             continue
-
 
         # Check minimum owner count to eliminate games over a million owners
         min_owner_count = get_min_owner_count(steamspy_data)
@@ -234,18 +233,15 @@ def main():
             break
 
         try:
-            # Response Example : {"000000": {"success": true, "data": {...}}}
+            # Steam Response Format : {"000000": {"success": true, "data": {...}}}
             steam_response = fetch(steam_api)[str(app_id)]
         except Exception as e:
             error_name = type(e).__name__
 
             with Connection(APPS_DB_PATH) as db:
-                # If Exception is not a type of FecthError or is a RequestTimeoutError
-                # there might not be a response object
-                # So record the unexpected exception without referring to the response obj.
                 if issubclass(type(e), FetchError) and not isinstance(e, RequestTimeoutError):
-                    print(f"\n{error_name}: {e.response.status_code} | URL: {e.response.url}\nSkipping...")
-                    insert_failed_request(app_id, "steam", error_name, e.response.status_code, db)
+                    print(f"\n{error_name}: {e.response.status_code} | URL: {steam_api}\nSkipping...")
+                    insert_failed_request(error_name, e.response.status_code, steam_api, db)
                 else:
                     print(f"\nError : {error_name} | URL: {steam_api}\nSkipping...")
                     msg = {
@@ -253,7 +249,7 @@ def main():
                         "url": steam_api,
                         "traceback": traceback.format_exc()
                     }
-                    insert_failed_request(app_id, "steam", error_name, None, db)
+                    insert_failed_request(error_name, None, steam_api, db)
                     debug_log(msg)
 
             update_log["last_request_to_steam"] = get_datetime_str()
@@ -289,11 +285,10 @@ def main():
                 update_log["updated_apps"] += 1
         else:
             with Connection(APPS_DB_PATH) as db:
-                insert_failed_request(app_id, "steam", "failed", None, db)
+                insert_failed_request("failed", None, steam_api, db)
 
             update_log["failed_requests"] += 1
             continue
-
 
 
 def fetch(api: str, tries=0) -> dict:
@@ -512,18 +507,18 @@ def format_date(date: str) -> str:
     date = date.replace(",", "")
     date = date.split(" ")
     months = {
-    "Jan": "01",
-    "Feb": "02",
-    "Mar": "03",
-    "Apr": "04",
-    "May": "05",
-    "Jun": "06",
-    "Jul": "07",
-    "Aug": "08",
-    "Sep": "09",
-    "Oct": "10",
-    "Nov": "11",
-    "Dec": "12",
+        "Jan": "01",
+        "Feb": "02",
+        "Mar": "03",
+        "Apr": "04",
+        "May": "05",
+        "Jun": "06",
+        "Jul": "07",
+        "Aug": "08",
+        "Sep": "09",
+        "Oct": "10",
+        "Nov": "11",
+        "Dec": "12",
     }
     formatted_date = date[2] + "-" + months[date[1]] + "-" + date[0]
     return formatted_date
@@ -557,21 +552,29 @@ def get_min_owner_count(app_details: dict) -> int:
     return int(min_owners_str)
 
 
+def get_id_from_url(url: str):
+    _id = url.split("=")[-1]
+    return int(_id)
+
+
 def write_to_json(data: any, file_path: str, indent=None):
     with open(file_path, "w") as f:
         json.dump(data, f, indent=indent)
 
+
 def get_datetime_str():
     return datetime.datetime.utcnow().strftime(DATETIME_FORMAT)
+
 
 def subtract_times(end, start) -> float:
     return (end - start) // (60 * 60)
 
+
 def debug_log(msg: dict):
     """Append to log"""
     with open(DEBUG_LOG, "a") as f:
-        f.write("\n======================================================\n")
         f.write(",\n".join(str(k) + " : " + str(msg[k]) for k in msg))
+        f.write("\n||======================================================||\n")
 
 
 def email(msg):
@@ -637,7 +640,6 @@ if __name__ == "__main__":
     else:
         print("Ignoring timer!")
 
-
     # =================== #
     #         RUN         #
     # =================== #
@@ -677,7 +679,7 @@ if __name__ == "__main__":
 
     finally:
         run_time = subtract_times(time.time(), start_time)
-        print(f"=== End Date  : {get_datetime_str()} ===")
+        print(f"||=== End Date  : {get_datetime_str()} ===||")
 
         print(f"Run Time: {run_time:.1f} hours")
 

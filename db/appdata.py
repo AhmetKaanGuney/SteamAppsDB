@@ -2,61 +2,6 @@ from dataclasses import dataclass
 import json
 
 
-class AppDetails(DataContainer):
-    """An interface for app details"""
-    app_id: int = 0
-    name: str = ""
-    price: int = None
-
-    release_date: str = ""
-    coming_soon: bool = False
-
-    developers: list[str] = None
-    publishers: list[str] = None
-
-    tags: dict = None
-    genres: dict = None
-    categories: dict = None
-
-    owner_count: int = 0
-    positive_reviews: int = 0
-    negative_reviews: int = 0
-
-    about_the_game: str = ""
-    short_description: str = ""
-    detailed_description: str = ""
-
-    website: str = ""
-    header_image: str = ""
-    screenshots: list[dict] = None
-
-    languages: str = ""
-
-    windows: bool = False
-    mac: bool = False
-    linux: bool = False
-
-
-class AppSnippet(DataContainer):
-    """An interface for holding app snippet data"""
-    app_id: int = None
-    name: str = ""
-    price: int = None
-
-    release_date: str = ""
-    coming_soon: bool = False
-
-    positive_reviews: int = 0
-    negative_reviews: int = 0
-    owner_count: int = 0
-
-    header_image: str = ""
-
-    windows: bool = False
-    mac: bool = False
-    linux: bool = False
-
-
 @dataclass
 class DataContainer:
     """Metaclass for customized dataclass"""
@@ -110,6 +55,61 @@ class DataContainer:
         return str(self.json(indent=2))
 
 
+class AppDetails(DataContainer):
+    """An interface for app details"""
+    app_id: int = 0
+    name: str = ""
+    price: int = None
+
+    release_date: str = ""
+    coming_soon: bool = False
+
+    developers: list[str] = None
+    publishers: list[str] = None
+
+    tags: list[dict] = None
+    genres: dict = None
+    categories: dict = None
+
+    owner_count: int = 0
+    positive_reviews: int = 0
+    negative_reviews: int = 0
+
+    about_the_game: str = ""
+    short_description: str = ""
+    detailed_description: str = ""
+
+    website: str = ""
+    header_image: str = ""
+    screenshots: list[dict] = None
+
+    languages: str = ""
+
+    windows: bool = False
+    mac: bool = False
+    linux: bool = False
+
+
+class AppSnippet(DataContainer):
+    """An interface for holding app snippet data"""
+    app_id: int = None
+    name: str = ""
+    price: int = None
+
+    release_date: str = ""
+    coming_soon: bool = False
+
+    positive_reviews: int = 0
+    negative_reviews: int = 0
+    owner_count: int = 0
+
+    header_image: str = ""
+
+    windows: bool = False
+    mac: bool = False
+    linux: bool = False
+
+
 if __name__ == "__main__":
     app1_dict = {
         "app_id": 1847860,
@@ -122,7 +122,6 @@ if __name__ == "__main__":
         "detailed_description": "",
         "about_the_game": "",
         "short_description": "A fun puzzle about Daltoniel.",
-        "languages": "English<strong>*</strong>, French<strong>*</strong>",
         "header_image": "",
         "website": None,
         "developers": [

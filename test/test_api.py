@@ -22,7 +22,6 @@ try:
     print(r.text)
     print(len(r.json()))
     print("------------------------------------------------------------")
-    exit()
 
     print("APP DETAILS: ")
     r = requests.get(APP_DETAILS)

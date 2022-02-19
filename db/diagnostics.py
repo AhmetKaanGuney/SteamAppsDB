@@ -1,50 +1,65 @@
-"""Diagnostics for apps.db"""
+"""
+Diagnostics tool for apps database
+Usage: diagnostics.py [action]
+Actions:
+freeze      : Writes non_game_apps and failed_requests to files
+load-to-db  : loads written files to database
+fetch       : fetches diagnosis data from remote server and stores into apps.db
+fix         : tries to refetch apps that failed
+"""
 import os
 import sys
 import json
 
+from update import fetch
 from database import (
     APPS_DB_PATH, Connection,
     get_failed_requests, get_non_game_apps,
     insert_failed_request, insert_non_game_app
 )
-current_dir = os.path.dirname(__file__)
-diagnostic_folder = "diagnostics"
-FAILED_REQUESTS_PATH = os.path.join(current_dir, diagnostic_folder, "failed_request.json")
-NON_GAME_APPS_PATH = os.path.join(current_dir, diagnostic_folder, "non_game_apps.json")
 
-args = sys.argv
+ARGS = sys.argv
+
+current_dir = os.path.dirname(__file__)
 write_to_json = False
 
+SERVER_IP = "192.168.1.119"
+PORT = "5000"
+NON_GAME_APPS_API = f"http://{SERVER_IP}:{PORT}/GetNonGameApps"
+FAILED_REQUESTS_API = f"http://{SERVER_IP}:{PORT}/GetFailedRequests"
+
+FAILED_REQUESTS_PATH = os.path.join(current_dir, "diagnosis/failed_request.json")
+NON_GAME_APPS_PATH = os.path.join(current_dir, "diagnosis/non_game_apps.json")
+
+
 def main():
-    if len(args) == 2:
-        if args[1] == "-h":
-            print(f"Usage: {__name__} [action]")
-            print("Actions: ")
-            print("freeze : Writes non_game_apps and failed_requests to files")
-            print("load-to-db : loads written files to database")
-            print("")
+    if len(ARGS) == 2:
+        if ARGS[1] == "-h":
+            print(__doc__)
             exit(0)
-        if args[1] == "freeze":
+        elif ARGS[1] == "freeze":
             freeze()
             exit(0)
-        if args[1] == "load-to-db":
+        elif ARGS[1] == "load-to-db":
             load_to_db()
             exit(0)
+        elif ARGS[1] == "fetch":
+            fetch_remote()
+            exit(0)
 
-    if len(args) == 1:
+    if len(ARGS) == 1:
         filter_failed = ""
-        filter_failed = "WHERE cause != 'failed'"
+        filter_failed = "WHERE error != 'failed'"
         with Connection(APPS_DB_PATH) as db:
             failed_requests = db.execute(f"""
-                SELECT app_id, api_provider, cause, status_code
+                SELECT error, status_code, url
                 FROM failed_requests
                 {filter_failed}
                 """).fetchall()
 
         print(f"Failed Requests ({len(failed_requests)}): ")
         for i in failed_requests:
-            print(f"AppID: {i[0]} | Provider: {i[1]} | Cause: {i[2]} | Status Code: {i[3]}")
+            print(f"Error: {i[0]} | Status Code: {i[1]} | URL: {i[2]}")
 
         print()
 
@@ -53,6 +68,9 @@ def main():
 
         print(f"Non-Game Apps: {len(non_game_apps):,}")
         print()
+    else:
+        print(__doc__)
+        exit(0)
 
 
 def freeze():
@@ -89,7 +107,7 @@ def load_to_db():
         with Connection(APPS_DB_PATH) as db:
             for i, r in enumerate(failed_requests):
                 print(f"Progress: {i:,}", end="\r")
-                insert_failed_request(r["app_id"], r["api_provider"], r["cause"], r["status_code"], db)
+                insert_failed_request(r["error"], r["status_code"], r["url"], db)
         print("\nCompleted!")
 
 
@@ -109,8 +127,26 @@ def load_to_db():
         print("\nCompleted!")
 
 
+def fetch_remote():
+    print("Fetching non_game_apps...")
+    non_game_apps = fetch(NON_GAME_APPS_API)
+    print("Fetching failed_requests...")
+    failed_requests = fetch(FAILED_REQUESTS_API)
+
+    with Connection(APPS_DB_PATH) as db:
+        print("Inserting non_game_apps...")
+        for app_id in non_game_apps:
+            insert_non_game_app(app_id, db)
+
+        print("Inserting failed_requests...")
+        for i in failed_requests:
+            insert_failed_request(
+                i["error"], i["status_code"], i["url"], db
+            )
+
+
 if __name__ == "__main__":
-    main()
-
-
-
+    try:
+        main()
+    except KeyboardInterrupt:
+        exit(0)

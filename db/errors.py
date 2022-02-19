@@ -11,6 +11,7 @@ current_dir = os.path.dirname(__file__)
 
 ulogger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
 
+
 class FetchError(Exception):
     """Base class for other exeptions"""
     def __init__(self, response: requests.Response):
@@ -21,6 +22,7 @@ class FetchError(Exception):
             raise ValueError("Cannot write empty log.")
         ulogger.log = log
         ulogger.save()
+
 
 class RequestTimeoutError(FetchError):
     """The request timed out"""

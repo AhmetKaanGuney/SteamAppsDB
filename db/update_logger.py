@@ -41,7 +41,6 @@ class UpdateLogger:
         with open(self.file, "w") as f:
             json.dump(self.log, f, indent=2)
 
-
     def _reset_log(self):
         # Don't reset last request date
         del DEFAULT_LOG["last_request_to_steam"]
