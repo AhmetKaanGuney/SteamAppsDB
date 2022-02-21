@@ -7,13 +7,13 @@ merge       : saves diagnosis files to database
 pull        : fetches diagnosis data from remote server and stores into apps.db
 split       : splits db in to small files and stores inside split_db
 join        : joins files in the split_db into apps.db file
-fix         : tries to refetch apps that failed
 """
 import os
 import sys
 import json
 
 from update import fetch
+from errors import FetchError
 from database import (
     APPS_DB_PATH, Connection,
     get_failed_requests, get_non_game_apps,

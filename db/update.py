@@ -116,6 +116,12 @@ def main():
     # =============================== #
     #  Get App Details for each App   #
     # =============================== #
+    ARGS = sys.argv
+    if len(ARGS) == 2:
+        if sys.argv[1] == "fix":
+            remaining_apps = get_failed_requests(f"WHERE error != 'failed'", db)
+            print("FIX MODE: ON ")
+
     print("Fetching apps:")
     global LAST_INDEX
 
@@ -151,7 +157,6 @@ def main():
             steamspy_data = fetch(steamspy_api)
         except Exception as e:
             error_name = type(e).__name__
-
             with Connection(APPS_DB_PATH) as db:
                 # If Exception is not a type of FecthError
                 # there might not be a response object
