@@ -5,6 +5,8 @@ Actions:
 freeze      : Writes non_game_apps and failed_requests to files
 merge       : saves diagnosis files to database
 pull        : fetches diagnosis data from remote server and stores into apps.db
+split       : splits db in to small files and stores inside split_db
+join        : joins files in the split_db into apps.db file
 fix         : tries to refetch apps that failed
 """
 import os
@@ -30,6 +32,8 @@ FAILED_REQUESTS_API = f"http://{SERVER_IP}:{PORT}/GetFailedRequests"
 
 FAILED_REQUESTS_PATH = os.path.join(current_dir, "diagnosis/failed_request.json")
 NON_GAME_APPS_PATH = os.path.join(current_dir, "diagnosis/non_game_apps.json")
+SPLIT_DIR = os.path.join(current_dir, "db_split")
+
 
 STEAM_APP_DETAILS_API_BASE = "https://store.steampowered.com/api/appdetails/?appids="
 STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails&appid="
@@ -52,7 +56,12 @@ def main():
         elif ARGS[1] == "pull":
             pull()
             exit(0)
-
+        elif ARGS[1] == "split":
+            split_db()
+            exit(0)
+        elif ARGS[1] == "join":
+            join_db()
+            exit(0)
     else:
         print(__doc__)
         exit(0)
@@ -63,7 +72,7 @@ def status():
     with Connection(APPS_DB_PATH) as db:
         failed_requests = get_failed_requests(where, db)
 
-    print(f"Failed Requests ({len(failed_requests)}) - without 'failed': ")
+    print(f"Failed Requests ({len(failed_requests)}) - without error: 'failed': ")
     for i in failed_requests:
         print(f"Error: {i['error']} | Status Code: {i['status_code']} | AppID: {i['app_id']} | Api Provider: {i['api_provider']}")
 
@@ -147,6 +156,54 @@ def pull():
                 i["app_id"], i["api_provider"], i["error"], i["status_code"], db
             )
 
+
+def split_db():
+    if os.path.exists(SPLIT_DIR):
+        for i in os.listdir(SPLIT_DIR):
+            fp = os.path.join(SPLIT_DIR, i)
+            os.remove(fp)
+    else:
+        os.mkdir(SPLIT_DIR)
+
+    MB = 1024 * 1024
+    chunk_size = 90 * MB
+    file_number = 0
+
+    with open(APPS_DB_PATH, "rb") as db_file:
+        chunk = db_file.read(chunk_size)
+
+        i = 0
+        while chunk:
+            print(f"Iteration: {i}", end="\r")
+
+            file_path = os.path.join(SPLIT_DIR, str(file_number))
+
+            with open(file_path, "wb") as chunk_file:
+                chunk_file.write(chunk)
+
+            file_number += 1
+            chunk = db_file.read(chunk_size)
+            i += 1
+
+        print("\nCompleted!")
+
+
+def join_db():
+    # reset file
+    open(APPS_DB_PATH, "wb").close()
+
+    for i in os.listdir(SPLIT_DIR):
+        print(f"Progress: {i}", end="\r")
+        fp = os.path.join(SPLIT_DIR, i)
+
+        with open(fp, "rb") as chunk_file:
+            batch = chunk_file.read()
+        with open(APPS_DB_PATH, "ab") as join_file:
+            join_file.write(batch)
+
+        os.remove(fp)
+
+    print("\nCompleted!")
 
 
 if __name__ == "__main__":
