@@ -15,13 +15,13 @@ import time
 import traceback
 
 from update_logger import UpdateLogger
-from errors import FetchError
-from appdata import AppDetails, AppSnippet
+from errors import FetchError, RequestTimeoutError
+from appdata import AppDetails
 from update import (
-    fetch, RATE_LIMIT, UPDATE_LOG_PATH, STEAM_REQUEST_LIMIT,
+    fetch, RATE_LIMIT, UPDATE_LOG_PATH,
     STEAM_APP_DETAILS_API_BASE, STEAMSPY_APP_DETAILS_API_BASE,
     map_steam_data, map_steamspy_data, get_min_owner_count,
-    MAX_OWNERS, get_datetime_str
+    MAX_OWNERS, get_datetime_str, debug_log
 
 )
 from database import (
@@ -287,7 +287,7 @@ def fix():
                     insert_app(app_details, db)
                     db.execute("DELETE FROM failed_requests WHERE app_id == ?", (app_id, ))
 
-                output["fixed"] += 1
+                fixed_apps += 1
         else:
             with Connection(APPS_DB_PATH) as db:
                 insert_failed_request(app_id, "steam", "failed", None, db)
