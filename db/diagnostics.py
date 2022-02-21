@@ -6,8 +6,6 @@ status      : Shows db status
 freeze      : Writes non_game_apps and failed_requests to files
 merge       : saves diagnosis files to database
 pull        : fetches diagnosis data from remote server and stores into apps.db
-split       : splits db in to small files and stores inside split_db
-join        : joins files in the split_db into apps.db file
 fix         : try to refetch failed requests
 """
 import os
@@ -67,12 +65,6 @@ def main():
             exit(0)
         elif ARGS[1] == "pull":
             pull()
-            exit(0)
-        elif ARGS[1] == "split":
-            split_db()
-            exit(0)
-        elif ARGS[1] == "join":
-            join_db()
             exit(0)
         elif ARGS[1] == "fix":
             fix()
@@ -183,57 +175,6 @@ def pull():
             insert_failed_request(
                 i["app_id"], i["api_provider"], i["error"], i["status_code"], db
             )
-
-
-def split_db():
-    if os.path.exists(SPLIT_DIR):
-        for i in os.listdir(SPLIT_DIR):
-            fp = os.path.join(SPLIT_DIR, i)
-            os.remove(fp)
-    else:
-        os.mkdir(SPLIT_DIR)
-
-    MB = 1024 * 1024
-    chunk_size = 90 * MB
-    file_number = 0
-
-    with open(APPS_DB_PATH, "rb") as db_file:
-        chunk = db_file.read(chunk_size)
-
-        i = 0
-        while chunk:
-            print(f"Iteration: {i}", end="\r")
-
-            file_path = os.path.join(SPLIT_DIR, str(file_number))
-
-            with open(file_path, "wb") as chunk_file:
-                chunk_file.write(chunk)
-
-            file_number += 1
-            chunk = db_file.read(chunk_size)
-            i += 1
-
-        print("\nCompleted!")
-
-
-def join_db():
-    # reset file
-    init_path = os.path.join(current_dir, "__init__.py")
-    os.system(f"python {init_path} -r")
-
-    print("Files: ", os.listdir(SPLIT_DIR))
-    for i in os.listdir(SPLIT_DIR):
-        print(f"Progress: {i}", end="\r")
-        fp = os.path.join(SPLIT_DIR, i)
-
-        with open(fp, "rb") as chunk_file:
-            batch = chunk_file.read()
-        with open(APPS_DB_PATH, "ab") as join_file:
-            join_file.write(batch)
-
-        os.remove(fp)
-
-    print("\nCompleted!")
 
 
 def fix():
