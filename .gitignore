@@ -6,6 +6,6 @@ db/applist.json
 db/apps.db
 db/debug.log
 db/update_log.json
-db/diagnostics/
+db/diagnosis/
 db/db_split/
 .env

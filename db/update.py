@@ -48,12 +48,13 @@ logging.debug(f"Apps Database Path: {APPS_DB_PATH}")
 current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
 DEBUG_LOG = "./debug.log"
+UPDATE_LOG_PATH = os.path.join(current_dir, "update_log.json")
 
 
 # Init Loggers
 logging.basicConfig(level=logging.DEBUG)
 
-update_logger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
+update_logger = UpdateLogger(UPDATE_LOG_PATH)
 update_log = update_logger.log
 
 # Config
@@ -116,12 +117,6 @@ def main():
     # =============================== #
     #  Get App Details for each App   #
     # =============================== #
-    ARGS = sys.argv
-    if len(ARGS) == 2:
-        if sys.argv[1] == "fix":
-            remaining_apps = get_failed_requests(f"WHERE error != 'failed'", db)
-            print("FIX MODE: ON ")
-
     print("Fetching apps:")
     global LAST_INDEX
 
@@ -641,9 +636,9 @@ if __name__ == "__main__":
     if len(sys.argv) == 2:
         if sys.argv[1] == "--ignore-timer":
             ignore_timer = True
-        if sys.argv[1] == "-h":
-            print("Use '--ignore-timer' to skip safety check for last request to Steam.\n")
-            exit(0)
+    if sys.argv[1] == "-h":
+        print("Use '--ignore-timer' to skip safety check for last request to Steam.\n")
+        exit(0)
 
     if not ignore_timer:
         if time_passed.days < 1:
