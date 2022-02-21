@@ -182,9 +182,7 @@ def fix():
         failed_requests = get_failed_requests("WHERE error != 'failed'", db)
 
     failed_length = len(failed_requests)
-    output = {
-        "fixed": 0,
-    }
+    fixed_apps = 0
     print("Refetching Failed Requests...")
     for i, row in enumerate(failed_requests):
         print(f"Progress: {i:,} / {failed_length}", end="\r")
@@ -295,9 +293,9 @@ def fix():
                 insert_failed_request(app_id, "steam", "failed", None, db)
             continue
 
-        print("\nFinished...")
-        print(f"Fixed Apps : {output['fixed']}")
-        update_logger.save()
+    print("\nFinished...")
+    print(f"Fixed Apps : {fixed_apps}")
+    update_logger.save()
 
 
 if __name__ == "__main__":
