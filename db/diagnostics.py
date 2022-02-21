@@ -30,6 +30,7 @@ PORT = "5000"
 NON_GAME_APPS_API = f"http://{SERVER_IP}:{PORT}/GetNonGameApps"
 FAILED_REQUESTS_API = f"http://{SERVER_IP}:{PORT}/GetFailedRequests"
 
+DIAGNOSIS_DIR = os.path.join(current_dir, "diagnosis")
 FAILED_REQUESTS_PATH = os.path.join(current_dir, "diagnosis/failed_request.json")
 NON_GAME_APPS_PATH = os.path.join(current_dir, "diagnosis/non_game_apps.json")
 SPLIT_DIR = os.path.join(current_dir, "db_split")
@@ -87,9 +88,8 @@ def status():
 
 def freeze():
     # Create dir if it doesnt exists
-    diagnostic_folder_path = os.path.join(current_dir, diagnostic_folder)
-    if not os.path.exists(diagnostic_folder_path):
-        os.mkdir(diagnostic_folder_path)
+    if not os.path.exists(DIAGNOSIS_DIR):
+        os.mkdir(DIAGNOSIS_DIR)
 
     with Connection(APPS_DB_PATH) as db:
         print("Loading failed requests...")
@@ -121,7 +121,6 @@ def merge():
                 print(f"Progress: {i:,}", end="\r")
                 insert_failed_request(request["app_id"], request["api_provider"], request["error"], request["status_code"], db)
         print("\nCompleted!")
-
 
     print("Reading non-game apps...")
     non_game_size = os.path.getsize(NON_GAME_APPS_PATH)
