@@ -58,7 +58,8 @@ CREATE TABLE IF NOT EXISTS non_game_apps (
 );
 -- FAILED REQUESTS
 CREATE TABLE IF NOT EXISTS failed_requests (
+    app_id PRIMARY KEY,
+    api_provider TEXT,
     error TEXT,
-    status_code INTEGER,
-    url TEXT
+    status_code INTEGER
 )

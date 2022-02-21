@@ -3,6 +3,7 @@ import sqlite3
 import os
 import sys
 
+
 def main():
     current_dir = os.path.dirname(__file__)
 
@@ -32,7 +33,6 @@ def main():
     # Get file content
     with open(init_apps_script) as apps_f:
         init_apps_script_as_str = apps_f.read()
-
 
     # Execute
     with Connection(APPS_DB_PATH) as db:

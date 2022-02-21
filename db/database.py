@@ -75,11 +75,11 @@ def insert_non_game_app(app_id: int, db):
     db.execute("INSERT OR IGNORE INTO non_game_apps VALUES (?)", (app_id, ))
 
 
-def insert_failed_request(error: str,  status_code: int, url: str, db):
+def insert_failed_request(app_id: int, api_provider: str, error: str,  status_code: int, db):
     db.execute("""\
         REPLACE INTO failed_requests
-        VALUES (:error, :status_code, :url)
-        """, {"error": error, "status_code": status_code, "url": url}
+        VALUES (:app_id, :api_provider, :error, :status_code)
+        """, {"app_id": app_id, "api_provider": api_provider, "error": error, "status_code": status_code}
     )
 
 
@@ -286,7 +286,7 @@ def get_non_game_apps(db) -> list[int]:
 
 
 def get_failed_requests(where: str, db) -> list[dict]:
-    sql = f"SELECT error, status_code, url FROM failed_requests {where}"
+    sql = f"SELECT app_id, api_provider, error, status_code FROM failed_requests {where}"
 
     results = db.execute(sql).fetchall()
     failed_requests = []
@@ -296,9 +296,10 @@ def get_failed_requests(where: str, db) -> list[dict]:
 
     for i in results:
         app = {
-            "error": i[0],
-            "status_code": i[1],
-            "url": i[2]
+            "app_id": i[0],
+            "api_provider": i[1],
+            "error": i[2],
+            "status_code": i[3]
         }
         failed_requests.append(app)
     return failed_requests
