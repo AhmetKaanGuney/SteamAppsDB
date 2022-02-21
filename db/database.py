@@ -71,6 +71,10 @@ def insert_app(app_dets: AppDetails, db):
                                 {"app_id": app_id, "tag_id": db.lastrowid, "votes": votes})
 
 
+def insert_app_over_million(app_id: int, db):
+    db.execute("INSERT OR IGNORE INTO apps_over_million VALUES (?)", (app_id, ))
+
+
 def insert_non_game_app(app_id: int, db):
     db.execute("INSERT OR IGNORE INTO non_game_apps VALUES (?)", (app_id, ))
 

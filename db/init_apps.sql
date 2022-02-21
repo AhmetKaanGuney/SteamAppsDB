@@ -21,6 +21,10 @@ CREATE TABLE IF NOT EXISTS apps (
     mac INTEGER,
     linux INTEGER
 );
+-- APPS OVER MILLION
+CREATE TABLE IF NOT EXISTS apps_over_million (
+    app_id INTEGER PRIMARY KEY
+);
 -- TAGS
 CREATE TABLE IF NOT EXISTS tags (
     tag_id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,
@@ -62,4 +66,4 @@ CREATE TABLE IF NOT EXISTS failed_requests (
     api_provider TEXT,
     error TEXT,
     status_code INTEGER
-)
+);

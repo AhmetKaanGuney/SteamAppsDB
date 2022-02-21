@@ -5,14 +5,14 @@ DEFAULT_LOG = {
     "last_request_to_steam": "2000-01-01 00:00",
     "reset_log": False,
     "applist_fetched": False,
-    "steam_request_limit_reached": False,
-    "steam_request_count": 0,
     "applist_length": 0,
-    "remaining_apps": 0,
+    "remaining_length": 0,
     "applist_index": 0,
+    "steam_request_count": 0,
     "updated_apps": 0,
     "non_game_apps": 0,
-    "failed_requests": 0
+    "failed_requests": 0,
+    "apps_over_million": 0
 }
 
 

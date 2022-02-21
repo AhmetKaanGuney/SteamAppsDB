@@ -22,8 +22,10 @@ try:
     from appdata import AppDetails
     from database import (
         APPS_DB_PATH, Connection,
-        insert_app, insert_non_game_app, insert_failed_request,
-        get_non_game_apps, get_failed_requests)
+        insert_app, insert_non_game_app,
+        insert_failed_request, insert_app_over_million,
+        get_non_game_apps, get_failed_requests
+    )
 except ImportError:
     from .errors import (
         FetchError, RequestTimeoutError, TooManyRequestsError,
@@ -34,8 +36,10 @@ except ImportError:
     from .appdata import AppDetails
     from .database import (
         APPS_DB_PATH, Connection,
-        insert_app, insert_non_game_app, insert_failed_request,
-        get_non_game_apps, get_failed_requests)
+        insert_app, insert_non_game_app,
+        insert_failed_request, insert_app_over_million,
+        get_non_game_apps, get_failed_requests
+    )
 
 
 logging.debug(f"Apps Database Path: {APPS_DB_PATH}")
@@ -89,84 +93,48 @@ def main():
     # ========================= #
     #  Get App List from Steam  #
     # ========================= #
-    print("Checking if applist already fetched...")
-    if update_log["applist_fetched"]:
-        print("Applist alredy fetched!")
-    else:
-        print(f"Fetching applist from: {APPLIST_API}")
-
-        applist = fetch_applist(APPLIST_API)
-        update_log["steam_request_count"] += 1
-
-        # Save to File
-        write_to_json(applist, APPLIST_FILE)
-        update_log["applist_fetched"] = True
-
-    # Get Saved Applist starting from where it's left off
+    applist = get_applist()
     applist_index = update_log["applist_index"]
-    with open(APPLIST_FILE, "r") as f:
-        applist = json.load(f)
-
-    remaining_apps = applist[applist_index:]
+    remaining_apps = applist[applist_index : applist_index + STEAM_REQUEST_LIMIT]
 
     applist_length = len(applist)
     remaining_length = len(remaining_apps)
 
     update_log["applist_length"] = applist_length
-    update_log["remaining_apps"] = remaining_length
+    update_log["remaining_length"] = remaining_length
 
     print(f"Applist Length: {applist_length:,}")
     print(f"Starting From Index: {applist_index}")
     print(f"Current Steam Request Count: {update_log['steam_request_count']}")
 
-    # For testing use limited applist
-    # limited_applist = applist[applist_index : applist_index + 30]
-
     # =============================== #
     #     Get Apps to be Ignored      #
     # =============================== #
-    apps_to_ignore = []
-
-    with Connection(APPS_DB_PATH) as db:
-        non_game_apps = get_non_game_apps(db)
-        failed_requests = get_failed_requests("WHERE error == 'failed'", db)
-
-    if failed_requests:
-        # Get only app_ids
-        failed_list = [i["app_id"] for i in failed_requests]
-        for _id in failed_list:
-            apps_to_ignore.append(_id)
-
-    if non_game_apps:
-        for _id in non_game_apps:
-            apps_to_ignore.append(_id)
-
+    apps_to_ignore = get_apps_to_ignore()
     print(f"Apps to be ignored: {len(apps_to_ignore):,}")
 
     # =============================== #
     #  Get App Details for each App   #
     # =============================== #
-    global LAST_INDEX
-
     print("Fetching apps:")
+    global LAST_INDEX
 
     for i, app in enumerate(remaining_apps):
         print(f"Progress: {i:,} / {remaining_length:,}", end="\r")
+
         LAST_INDEX = i
 
         app_id = app["app_id"]
-
-        # Save log every 100th iteration
-        if i % 100 == 0:
-            update_logger.save()
 
         # If app is not a game skip
         if app_id in apps_to_ignore:
             continue
 
-        # ================================= #
-        #   Wait Before Making Any Request  #
-        # ================================= #
+        # Save log every 100th iteration
+        if i % 100 == 0:
+            update_logger.save()
+
+        # Wait Before Making Any Request
         time.sleep(RATE_LIMIT)
 
         # Create Appdetails
@@ -209,10 +177,9 @@ def main():
         min_owner_count = get_min_owner_count(steamspy_data)
 
         if min_owner_count > MAX_OWNERS:
-            logging.debug(
-                f"App: '{app_id}' has {min_owner_count:,} owners. "
-                f"Which is over {MAX_OWNERS=:,}. Skipping..."
-                )
+            with Connection(APPS_DB_PATH) as db:
+                insert_app_over_million(app_id, db)
+                update_log["apps_over_million"] += 1
             continue
 
         # Update app info
@@ -222,16 +189,6 @@ def main():
         # =================== #
         #  FETCH FROM STEAM   #
         # =================== #
-        # Check for request limit
-        if update_log["steam_request_count"] >= STEAM_REQUEST_LIMIT:
-            update_log["steam_request_limit_reached"] = True
-            print(
-                f"Request limit reached! "
-                + f"Request count: {update_log['steam_request_count']} | "
-                + f"Request Limit: {STEAM_REQUEST_LIMIT}"
-                )
-            break
-
         try:
             # Steam Response Format : {"000000": {"success": true, "data": {...}}}
             steam_response = fetch(steam_api)[str(app_id)]
@@ -291,44 +248,47 @@ def main():
             continue
 
 
-def fetch(api: str, tries=0) -> dict:
+def fetch(api: str) -> dict:
     """Makes a request to an API and returns JSON. If request fails will raise Exeception."""
-    response = attempt_request(api)
+    attempt = 0
+    while attempt < 2:
+        response = attempt_request(api)
 
-    msg = {
-        "status_code": response.status_code,
-        "url": response.url,
-        "headers": response.headers,
-        "text": response.text
-    }
+        msg = {
+            "status_code": response.status_code,
+            "url": response.url,
+            "headers": response.headers,
+            "text": response.text
+        }
 
-    if response.status_code == requests.codes.ok:
-        return response.json()
-    elif 400 <= response.status_code < 500:
-        debug_log(msg)
+        if response.status_code == requests.codes.ok:
+            return response.json()
+        elif 400 <= response.status_code < 500:
+            debug_log(msg)
 
-        if response.status_code == 401:
-            raise UnauthorizedError(response, update_log)
-        elif response.status_code == 403:
-            raise ForbiddenError(response, update_log)
-        elif response.status_code == 404:
-            raise NotFoundError(response, update_log)
-        elif response.status_code == 429:
-            if tries > 2:
-                raise TooManyRequestsError(response, update_log)
+            if response.status_code == 401:
+                raise UnauthorizedError(response, update_log)
+            elif response.status_code == 403:
+                raise ForbiddenError(response, update_log)
+            elif response.status_code == 404:
+                raise NotFoundError(response, update_log)
+            elif response.status_code == 429:
+                attempt += 1
+                print(f"\nHTTPError: 429 - Too Many Requests | URL: {response.url}")
+                print("Waiting 30 secs...")
+                time.sleep(30)
+                print("Trying again...")
+                continue
+        elif 500 <= response.status_code < 600:
+            debug_log(msg)
+            # Raise error cuz dont know how to handle it
+            raise ServerError(response, update_log)
+        else:
+            debug_log(msg)
+            raise RequestFailedWithUnknownError(response, update_log)
 
-            print(f"\nHTTPError: 429 - Too Many Requests | URL: {response.url}")
-            print("Waiting 30 secs...")
-            time.sleep(30)
-            print("Trying again...")
-            return fetch(api, tries=tries + 1)
-    elif 500 <= response.status_code < 600:
-        debug_log(msg)
-        # Raise error cuz dont know how to handle it
-        raise ServerError(response, update_log)
-    else:
-        debug_log(msg)
-        raise RequestFailedWithUnknownError(response, update_log)
+    # If tried 3 times
+    raise TooManyRequestsError(response, update_log)
 
 
 def attempt_request(api: str):
@@ -390,6 +350,47 @@ def fetch_applist(api: str):
                 }
             )
     return applist
+
+
+def get_applist() -> dict:
+    print("Checking if applist already fetched...")
+    if update_log["applist_fetched"]:
+        print("Applist alredy fetched!")
+    else:
+        print(f"Fetching applist from: {APPLIST_API}")
+
+        applist = fetch_applist(APPLIST_API)
+
+        # Save to File
+        print("Saving applist...")
+        write_to_json(applist, APPLIST_FILE)
+        update_log["applist_fetched"] = True
+
+    with open(APPLIST_FILE, "r") as f:
+        applist = json.load(f)
+
+    return applist
+
+
+def get_apps_to_ignore() -> list:
+    apps_to_ignore = []
+
+    with Connection(APPS_DB_PATH) as db:
+        non_game_apps = get_non_game_apps(db)
+        failed_requests = get_failed_requests("WHERE error == 'failed'", db)
+
+    if failed_requests:
+        # Get only app_ids
+        failed_list = [i["app_id"] for i in failed_requests]
+        for _id in failed_list:
+            apps_to_ignore.append(_id)
+
+    if non_game_apps:
+        for _id in non_game_apps:
+            apps_to_ignore.append(_id)
+
+    return apps_to_ignore
+
 
 
 def map_steam_data(steam_data: dict) -> dict:
@@ -568,8 +569,11 @@ def subtract_times(end, start) -> float:
 def debug_log(msg: dict):
     """Append to log"""
 
-    if "<!DOCTYPE html>" in msg["text"]:
-        msg["taxt"] = "<--- HTML Error Response --->"
+    try:
+        if "<!DOCTYPE html>" in msg["text"]:
+            msg["taxt"] = "<--- HTML Error Response --->"
+    except KeyError:
+        pass
 
     with open(DEBUG_LOG, "a") as f:
         f.write(",\n".join(str(k) + " : " + str(msg[k]) for k in msg))
@@ -586,12 +590,14 @@ def email(msg):
 
 def create_msg(update_log, run_time, traceback=None):
     ul = update_log
-    updated_apps = ul["updated_apps"]
+    steam_request_count = ul["steam_request_count"]
     applist_length = ul["applist_length"]
-    old_index = ul["applist_index"]
+    remaining_length = ul["remaining_length"]
+    updated_apps = ul["updated_apps"]
     failed_requests = ul["failed_requests"]
     non_game_apps = ul["non_game_apps"]
-    steam_request_count = ul["steam_request_count"]
+    apps_over_million = ul["apps_over_million"]
+    applist_index = ul["applist_index"] + LAST_INDEX
 
     if traceback:
         subject = "Update Failed"
@@ -603,12 +609,19 @@ def create_msg(update_log, run_time, traceback=None):
     return f"""\
 Subject: {subject}
 
-Run Time        : {run_time:.1f} hours
-Updated Apps    : {updated_apps:,} / {applist_length:,}
-Remaning Apps   : {applist_length - (old_index + LAST_INDEX):,}
-Non-Game Apps   : {non_game_apps:,}
-Failed Requests : {failed_requests:,}
-Steam Requests  : {steam_request_count:,}
+Run Time          : {run_time:.1f} hours
+Steam Requests    : {steam_request_count:,}
+All Apps          : {applist_length:,}
+---
+Updated Apps      : {updated_apps:,} / {remaining_length:,}
+Non-Game Apps     : {non_game_apps:,}
+Failed Requests   : {failed_requests:,}
+Apps Over Million : {apps_over_million:,}
+---------------------------------------------
+Total: {updated_apps + non_game_apps + failed_requests + apps_over_million:,}
+
+Note: total should be equal to applist index ({applist_index:,})
+
 {traceback_section}"""
 
 
@@ -650,18 +663,11 @@ if __name__ == "__main__":
 
         run_time = subtract_times(time.time(), start_time)
         success_msg = create_msg(ul, run_time)
+
         print(f"\n{success_msg}")
         email(success_msg)
 
-        # After emailing reset steam request count
-        if ul["steam_request_limit_reached"]:
-            ul["steam_request_count"] = 0
-            ul["steam_request_limit_reached"] = False
-        else:
-            # If the last item in the app list is updated
-            # without reaching steam_request_limit
-            # that means update finished so reset the log
-            ul["reset_log"] = True
+        ul["reset_log"] = True
 
     except Exception as e:
         run_time = subtract_times(time.time(), start_time)
@@ -674,6 +680,8 @@ if __name__ == "__main__":
         raise e
 
     except KeyboardInterrupt:
+        print()
+        print(create_msg(ul,  subtract_times(time.time(), start_time)))
         exit(0)
 
     finally:
@@ -683,7 +691,7 @@ if __name__ == "__main__":
         print(f"Run Time: {run_time:.1f} hours")
 
         ul["applist_index"] += LAST_INDEX
-        ul["remaining_apps"] = ul["applist_length"] - ul["applist_index"]
+        ul["remaining_length"] = ul["applist_length"] - ul["remaining_length"]
 
         print(f"--> Current Steam Request Count: {ul['steam_request_count']}")
         print(f"--> Recording applist_index as : {ul['applist_index']}")

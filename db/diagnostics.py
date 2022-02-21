@@ -40,6 +40,9 @@ def main():
         if ARGS[1] == "-h":
             print(__doc__)
             exit(0)
+        elif ARGS[1] == "status":
+            status()
+            exit(0)
         elif ARGS[1] == "freeze":
             freeze()
             exit(0)
@@ -49,28 +52,28 @@ def main():
         elif ARGS[1] == "pull":
             pull()
             exit(0)
-        elif ARGS[1] == "pull-old":
-            pull_old()
-            exit(0)
-        elif ARGS[1] == "status":
-            where = "WHERE error != 'failed'"
-            with Connection(APPS_DB_PATH) as db:
-                failed_requests = get_failed_requests(where, db)
 
-            print(f"Failed Requests ({len(failed_requests)}) - without 'failed': ")
-            for i in failed_requests:
-                print(f"Error: {i['error']} | Status Code: {i['status_code']} | AppID: {i['app_id']} | Api Provider: {i['api_provider']}")
-
-            print()
-
-            with Connection(APPS_DB_PATH) as db:
-                non_game_apps = get_non_game_apps(db)
-
-            print(f"Non-Game Apps: {len(non_game_apps):,}")
-            print()
     else:
         print(__doc__)
         exit(0)
+
+
+def status():
+    where = "WHERE error != 'failed'"
+    with Connection(APPS_DB_PATH) as db:
+        failed_requests = get_failed_requests(where, db)
+
+    print(f"Failed Requests ({len(failed_requests)}) - without 'failed': ")
+    for i in failed_requests:
+        print(f"Error: {i['error']} | Status Code: {i['status_code']} | AppID: {i['app_id']} | Api Provider: {i['api_provider']}")
+
+    print()
+
+    with Connection(APPS_DB_PATH) as db:
+        non_game_apps = get_non_game_apps(db)
+
+    print(f"Non-Game Apps: {len(non_game_apps):,}")
+    print()
 
 
 def freeze():
@@ -143,6 +146,7 @@ def pull():
             insert_failed_request(
                 i["app_id"], i["api_provider"], i["error"], i["status_code"], db
             )
+
 
 
 if __name__ == "__main__":
