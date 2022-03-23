@@ -10,7 +10,9 @@ from flask import (
 )
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from flask_cors import CORS
 from werkzeug.exceptions import HTTPException
+from colorama import (init as init_colorama, Fore as color)
 
 try:
     from .db.database import (
@@ -41,8 +43,24 @@ except ImportError:
         AppSnippet
     )
 
+def get_duplicates(array):
+    duplicates = set()
+    for x, item1 in enumerate(array):
+        for y, item2 in enumerate(array):
+            # skip same index
+            if x == y:
+                continue
+
+            # Check duplication
+            if item1 == item2:
+                duplicates.add(item1)
+
+    return [i for i in duplicates]
+
+init_colorama(autoreset=True)
 
 app = Flask(__name__)
+CORS(app)
 
 limiter = Limiter(
     app,
@@ -66,9 +84,7 @@ def app_details(app_id):
 
     stop = time.perf_counter()
 
-    print("<==============>")
-    print(f"Time took: {stop - start:.1f} secs.")
-    print("<==============>")
+    print(color.YELLOW + f"Time took: {stop - start:.1f} secs.")
     return app
 
 
@@ -76,7 +92,6 @@ def app_details(app_id):
 @sql_limit
 def app_list():
     args = request.args
-    print("\n", request.args.keys())
 
     tags = get_as_list(args.get("tags", default=""))
     genres = get_as_list(args.get("genres", default=""))
@@ -88,15 +103,15 @@ def app_list():
         "categories": categories
     }
     order_params = args.get("order", default="owner_count,DESC").split(",")
-    order = {order_params[0]: order_params[1]}
-    index = int(args["index"])
+    order = parse_order_params(order_params)
+    index = int(args.get("index", default=0))
     limit = int(args.get("limit", default=20))
 
     if limit > 20:
         e = f"Error: limit={limit} cannot be greater than 20"
         abort(400, e)
 
-    print("filters: ", filters, "\norder: ", order, "\nindex: ", index, "\nlimit: ", limit)
+    # print("filters: ", filters, "\norder: ", order, "\nindex: ", index, "\nlimit: ", limit)
 
     start = time.perf_counter()
 
@@ -107,9 +122,17 @@ def app_list():
             abort(400, e)
 
         stop = time.perf_counter()
-        print("<==============>")
-        print(f"Time took: {stop - start:.1f} secs.")
-        print("<==============>")
+        print(color.YELLOW + f"Time took: {stop - start:.1f} secs.")
+
+        for i in app_list:
+            tag_list = i["tags"]
+            if not tag_list:
+                continue
+            tags = [i["id"] for i in tag_list]
+            duplicates = get_duplicates(tags)
+            if len(duplicates) != 0:
+                print(color.CYAN + f"APPID: {i['app_id']} | NAME: {i['name']} | TAGS: ", duplicates)
+
     return jsonify(app_list)
 
 
@@ -156,7 +179,7 @@ def non_game_apps():
 @app.errorhandler(HTTPException)
 def handle_exception(e):
     print()
-    print(e.name, e.description)
+    print(color.RED, e.name, e.description)
     response = e.get_response()
     response.data = json.dumps({
         "code": e.code,
@@ -172,3 +195,12 @@ def get_as_list(param: str):
         return [int(i) for i in param.split(",")]
     else:
         return []
+
+
+def parse_order_params(order_params) -> dict:
+    order = {}
+    i = 0
+    while i < len(order_params) - 1:
+        order[order_params[i]] = order_params[i+1]
+        i += 2
+    return order

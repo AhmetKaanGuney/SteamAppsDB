@@ -44,10 +44,13 @@ FAILED_REQUESTS_API = f"http://{SERVER_IP}:{PORT}/GetFailedRequests"
 DIAGNOSIS_DIR = os.path.join(current_dir, "diagnosis")
 FAILED_REQUESTS_PATH = os.path.join(current_dir, "diagnosis/failed_requests.json")
 NON_GAME_APPS_PATH = os.path.join(current_dir, "diagnosis/non_game_apps.json")
+DUPLICATION_PATH = os.path.join(DIAGNOSIS_DIR + "/apps_with_duplication.json")
+
 SPLIT_DIR = os.path.join(current_dir, "db_split")
 
 update_logger = UpdateLogger(UPDATE_LOG_PATH)
 update_log = update_logger.log
+
 
 def main():
     if len(ARGS) == 2:
@@ -68,6 +71,28 @@ def main():
             exit(0)
         elif ARGS[1] == "fix":
             fix()
+        elif ARGS[1] == "fix-duplicate":
+            # Create log file if it doesnt exists
+            if not os.path.exists(DUPLICATION_PATH):
+                default_log = {"index": 0, "applist": []}
+                save(default_log, DUPLICATION_PATH)
+
+            duplication_log = load(DUPLICATION_PATH)
+            duplication_log["applist"] = set(duplication_log["applist"])
+            try:
+                with Connection(APPS_DB_PATH) as db:
+                    fix_duplicate(duplication_log, db)
+            except KeyboardInterrupt:
+                pass
+            except Exception as e:
+                print("\n\n", traceback.format_exc())
+
+            print(f"Saving apps with duplication at: '{DUPLICATION_PATH}'")
+            duplication_log["applist"] = list(duplication_log["applist"])
+            save(duplication_log, DUPLICATION_PATH)
+            print("Total Apps with Duplication: ", len(duplication_log["applist"]))
+            print("Finished!\n")
+
         else:
             print(__doc__)
             exit(0)
@@ -175,6 +200,59 @@ def pull():
             insert_failed_request(
                 i["app_id"], i["api_provider"], i["error"], i["status_code"], db
             )
+
+
+def fix_duplicate(duplication_log, db):
+    # duplication["applist"] is a set
+    applist_query = db.execute("SELECT app_id FROM apps").fetchall()
+    applist = [i[0] for i in applist_query]
+    applist = applist[duplication_log["index"]:]
+    total_iteration = len(applist) - 1
+    duplication = 0
+
+    print("Starting from index: ", duplication_log["index"])
+
+    for iteration, appid in enumerate(applist):
+        print(f"Progress: {iteration:,} / {total_iteration:,} | Apps With Duplication: {duplication:,}", end="\r")
+        duplication_log["index"] += 1
+
+        tag_query = db.execute("""
+            SELECT tag_id
+            FROM apps_tags
+            WHERE app_id = ?
+            GROUP BY tag_id
+            HAVING COUNT(*) > 1
+            """, (appid, )).fetchall()
+
+        tags = [i[0] for i in tag_query]
+
+        if not tags:
+            continue
+
+        duplication += 1
+        duplication_log["applist"].add(appid)
+
+        # Delete duplicates
+        for tag_id in tags:
+            db.execute("""
+                DELETE FROM apps_tags
+                WHERE app_id = ? AND tag_id = ?
+                """, (appid, tag_id))
+
+    print(f"\nDeleted {duplication:,} tag sections.")
+
+
+
+
+
+def save(data, path):
+    with open(path, "w") as f:
+        json.dump(data, f)
+
+
+def load(path):
+    with open(path, "r") as f:
+        return json.load(f)
 
 
 def fix():

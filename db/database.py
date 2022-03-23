@@ -9,7 +9,7 @@ except ImportError:
     from .appdata import AppDetails, AppSnippet
 
 
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.CRITICAL)
 
 current_dir = os.path.dirname(__file__)
 APPS_DB_PATH = os.path.join(current_dir, "apps.db")
@@ -45,16 +45,16 @@ def insert_app(app_dets: AppDetails, db):
 
     if app_dets.genres:
         for name, _id in app_dets.genres.items():
-            db.execute("INSERT OR IGNORE INTO genres VALUES (:genre_id, :name)",
+            db.execute("REPLACE INTO genres VALUES (:genre_id, :name)",
                                             {"genre_id": _id, "name": name})
-            db.execute("INSERT OR IGNORE INTO apps_genres VALUES (:app_id, :genre_id)",
+            db.execute("REPLACE INTO apps_genres VALUES (:app_id, :genre_id)",
                                                 {"app_id": app_id, "genre_id": _id})
 
     if app_dets.categories:
         for name, _id in app_dets.categories.items():
-            db.execute("INSERT OR IGNORE INTO categories VALUES (:category_id, :name)",
+            db.execute("REPLACE INTO categories VALUES (:category_id, :name)",
                                                 {"category_id": _id, "name": name})
-            db.execute("INSERT OR IGNORE INTO apps_categories VALUES (:app_id, :category_id)",
+            db.execute("REPLACE INTO apps_categories VALUES (:app_id, :category_id)",
                                                     {"app_id": app_id, "category_id": _id})
 
     # Tags don't come with ids. they come with vote count for that tag
@@ -63,20 +63,20 @@ def insert_app(app_dets: AppDetails, db):
             # Check tag name
             tag_id = db.execute("SELECT tag_id FROM tags WHERE name = :name", {"name": name}).fetchone()
             if tag_id:
-                db.execute("INSERT OR IGNORE INTO apps_tags VALUES (:app_id, :tag_id, :votes)",
+                db.execute("REPLACE INTO apps_tags VALUES (:app_id, :tag_id, :votes)",
                                     {"app_id": app_id, "tag_id": tag_id[0], "votes": votes})
             else:
                 db.execute("INSERT INTO tags VALUES (:tag_id, :name)", {"tag_id": tag_id, "name": name})
-                db.execute("INSERT OR IGNORE INTO apps_tags VALUES (:app_id, :tag_id, :votes)",
+                db.execute("REPLACE INTO apps_tags VALUES (:app_id, :tag_id, :votes)",
                                 {"app_id": app_id, "tag_id": db.lastrowid, "votes": votes})
 
 
 def insert_app_over_million(app_id: int, db):
-    db.execute("INSERT OR IGNORE INTO apps_over_million VALUES (?)", (app_id, ))
+    db.execute("REPLACE INTO apps_over_million VALUES (?)", (app_id, ))
 
 
 def insert_non_game_app(app_id: int, db):
-    db.execute("INSERT OR IGNORE INTO non_game_apps VALUES (?)", (app_id, ))
+    db.execute("REPLACE INTO non_game_apps VALUES (?)", (app_id, ))
 
 
 def insert_failed_request(app_id: int, api_provider: str, error: str,  status_code: int, db):
@@ -173,7 +173,7 @@ def get_applist(filters: dict, order: dict, offset, limit, db) -> list[dict]:
     filter_columns = " INTERSECT ".join([s for s in [tag_sql, genre_sql, category_sql] if s])
 
     if filter_columns:
-        filter_sql = f"WHERE app_id IN ({filter_columns}) and coming_soon == 0"
+        filter_sql = f"WHERE app_id IN ({filter_columns})"
     else:
         filter_sql = ""
 
@@ -194,6 +194,7 @@ def get_applist(filters: dict, order: dict, offset, limit, db) -> list[dict]:
     combined_sql = f"""
     SELECT {",".join(APP_SNIPPET_FIELDS)}
     FROM apps
+    WHERE coming_soon = false
     {filter_sql}
     {order_sql}
     LIMIT {limit} OFFSET {offset}"""
@@ -242,7 +243,7 @@ def get_app_details(app_id: int, db) -> AppDetails:
 
 def get_tags(app_id: int, db) -> list[dict]:
     tags = []
-    ids_votes = db.execute("SELECT tag_id, votes FROM apps_tags WHERE app_id = ?", (app_id, )).fetchall()
+    ids_votes = db.execute("SELECT DISTINCT tag_id, votes FROM apps_tags WHERE app_id = ?", (app_id, )).fetchall()
 
     if not ids_votes:
         return None
@@ -312,7 +313,6 @@ def get_failed_requests(where: str, db) -> list[dict]:
 
 def check_column(col: str):
     if col.startswith("(") and col.endswith(")"):
-        print(col)
         operators = ("+", "-", "/", "*")
         content: str = col[1:-1]
         cols = [content]
