@@ -1,5 +1,6 @@
 """Web API for Steam apps database"""
 import time
+import json
 from flask import (
     Flask,
     request,
@@ -9,6 +10,7 @@ from flask import (
 )
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
+from werkzeug.exceptions import HTTPException
 
 try:
     from .db.database import (
@@ -41,6 +43,7 @@ except ImportError:
 
 
 app = Flask(__name__)
+
 limiter = Limiter(
     app,
     key_func=get_remote_address,
@@ -69,25 +72,37 @@ def app_details(app_id):
     return app
 
 
-@app.route("/GetAppList")
+@app.route("/GetAppList", methods=['GET'])
 @sql_limit
 def app_list():
-    BATCH_SIZE = 20
+    args = request.args
+    print("\n", request.args.keys())
 
-    if request.json:
-        query = request.json
-    else:
-        return abort(400, "JSON filed is empty!")
+    tags = get_as_list(args.get("tags", default=""))
+    genres = get_as_list(args.get("genres", default=""))
+    categories = get_as_list(args.get("categories", default=""))
 
-    filters = query["filters"]
-    order = query["order"]
-    index = query["index"]
+    filters = {
+        "tags": tags,
+        "genres": genres,
+        "categories": categories
+    }
+    order_params = args.get("order", default="owner_count,DESC").split(",")
+    order = {order_params[0]: order_params[1]}
+    index = int(args["index"])
+    limit = int(args.get("limit", default=20))
+
+    if limit > 20:
+        e = f"Error: limit={limit} cannot be greater than 20"
+        abort(400, e)
+
+    print("filters: ", filters, "\norder: ", order, "\nindex: ", index, "\nlimit: ", limit)
 
     start = time.perf_counter()
 
     with Connection(APPS_DB_PATH) as db:
         try:
-            app_list = get_applist(filters, order, BATCH_SIZE, index, db)
+            app_list = get_applist(filters, order, index, limit, db)
         except (ValueError, TypeError) as e:
             abort(400, e)
 
@@ -95,21 +110,38 @@ def app_list():
         print("<==============>")
         print(f"Time took: {stop - start:.1f} secs.")
         print("<==============>")
-        return jsonify(app_list)
+    return jsonify(app_list)
 
-@app.route("/", methods=["GET"])
+
+@app.route("/")
 @sql_limit
-def api_doc():
+def index():
     return render_template("api.md")
 
 
-# Server failed requests
+@app.route("/GetHighlights")
+def higlights():
+    # get: most owned, best rated, most recent
+    order = {
+        "owner_count": "DESC",
+        "(positive_reviews / negative_reviews)": "DESC",
+        "release_date": "DESC"
+    }
+    offset = 0
+
+    with Connection(APPS_DB_PATH) as db:
+        try:
+            highlights = get_applist(None, order, offset, 10, db)
+        except (ValueError, TypeError) as e:
+            abort(400, e)
+    return jsonify(highlights)
+
+
 @app.route("/GetFailedRequests")
 @sql_limit
 def failed_requests():
     with Connection(APPS_DB_PATH) as db:
         failed_requests = get_failed_requests(None, db)
-
     return jsonify(failed_requests)
 
 
@@ -118,5 +150,25 @@ def failed_requests():
 def non_game_apps():
     with Connection(APPS_DB_PATH) as db:
         non_game_apps = get_non_game_apps(db)
-
     return jsonify(non_game_apps)
+
+
+@app.errorhandler(HTTPException)
+def handle_exception(e):
+    print()
+    print(e.name, e.description)
+    response = e.get_response()
+    response.data = json.dumps({
+        "code": e.code,
+        "name": e.name,
+        "description": e.description
+    })
+    response.content_type = "application/json"
+    return response
+
+
+def get_as_list(param: str):
+    if param:
+        return [int(i) for i in param.split(",")]
+    else:
+        return []

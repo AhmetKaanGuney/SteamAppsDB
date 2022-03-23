@@ -392,7 +392,6 @@ def get_apps_to_ignore() -> list:
     return apps_to_ignore
 
 
-
 def map_steam_data(steam_data: dict) -> dict:
     """Parses Steam data and returns it in a better format
     returns: {

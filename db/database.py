@@ -9,15 +9,15 @@ except ImportError:
     from .appdata import AppDetails, AppSnippet
 
 
-logging.basicConfig(level=logging.CRITICAL)
+logging.basicConfig(level=logging.DEBUG)
 
 current_dir = os.path.dirname(__file__)
 APPS_DB_PATH = os.path.join(current_dir, "apps.db")
 
-APP_DETAILS_FIELDS = AppDetails().__attributes__
+APP_SNIPPET_FIELDS = AppDetails().__attributes__
 APP_SNIPPET_FIELDS = AppSnippet().__attributes__
 
-JSON_FILEDS = ("developers", "publishers", "screenshots")
+JSON_FIELDS = ("developers", "publishers", "screenshots")
 
 
 def insert_app(app_dets: AppDetails, db):
@@ -26,7 +26,7 @@ def insert_app(app_dets: AppDetails, db):
     # Covert fields that are dictionary to json
     # and store them
     for k, v in app_dets.items():
-        if k in JSON_FILEDS:
+        if k in JSON_FIELDS:
             data[k] = json.dumps(v)
         else:
             data[k] = v
@@ -87,7 +87,7 @@ def insert_failed_request(app_id: int, api_provider: str, error: str,  status_co
     )
 
 
-def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
+def get_applist(filters: dict, order: dict, offset, limit, db) -> list[dict]:
     """
     Returns list of app snippets as dict objects.
     ordery_by: {
@@ -142,12 +142,12 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
     # Check ORDER #
     if not order:
         order = {}
-    elif not isinstance(order, dict):
+
+    if not isinstance(order, dict):
         raise TypeError("Order must be type of dict.")
 
     for col, direction in order.items():
-        if col not in APP_DETAILS_FIELDS:
-            raise ValueError(f"{col} is not a valid column to order by.")
+        check_column(col)
         if direction not in ("ASC", "DESC"):
             raise ValueError(f"{direction} is not a valid direction. Direction can only be ASC or DESC.")
 
@@ -161,7 +161,7 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
     category_sql = ""
 
     if filters["tags"]:
-       tag_sql = f"SELECT DISTINCT app_id FROM apps_tags WHERE tag_id IN ({tags})"
+        tag_sql = f"SELECT DISTINCT app_id FROM apps_tags WHERE tag_id IN ({tags})"
 
     if filters["genres"]:
         genre_sql = f"SELECT DISTINCT app_id FROM apps_genres WHERE genre_id IN ({genres})"
@@ -173,7 +173,7 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
     filter_columns = " INTERSECT ".join([s for s in [tag_sql, genre_sql, category_sql] if s])
 
     if filter_columns:
-        filter_sql = f"WHERE app_id IN ({filter_columns})"
+        filter_sql = f"WHERE app_id IN ({filter_columns}) and coming_soon == 0"
     else:
         filter_sql = ""
 
@@ -207,6 +207,7 @@ def get_applist(filters: dict, order: dict, limit, offset, db) -> list[dict]:
     for app in ordered_apps:
         snippet = {col: app[i] for i, col in enumerate(APP_SNIPPET_FIELDS)}
         # There'll be an app_id field in the snippet
+        # logging.critical("\033[1;31;40m" + "Skipping tags.." + "\033[0;37;40m")
         snippet["tags"] = get_tags(snippet["app_id"], db)
         applist.append(snippet)
 
@@ -224,7 +225,7 @@ def get_app_details(app_id: int, db) -> AppDetails:
 
     app_data = {}
     for i, col in enumerate(columns):
-        if col in JSON_FILEDS:
+        if col in JSON_FIELDS:
             app_data[col] = json.loads(query[i])
         else:
             app_data[col] = query[i]
@@ -309,14 +310,59 @@ def get_failed_requests(where: str, db) -> list[dict]:
     return failed_requests
 
 
+def check_column(col: str):
+    if col.startswith("(") and col.endswith(")"):
+        print(col)
+        operators = ("+", "-", "/", "*")
+        content: str = col[1:-1]
+        cols = [content]
+
+        #  Check each string for operators
+        #  if it constains an operator split string in half
+        #  then restart checking
+        for op in operators:
+            i = 0
+            op_detected = False
+            while True:
+                if i >= len(cols):
+                    break
+                ("i: ", i, " | op: ", op)
+                col = cols[i]
+
+                for index, char in enumerate(col):
+                    if char == op:
+                        left = cols[i][:index]
+                        right = cols[i][index + 1:]
+                        cols[i] = left
+                        cols.insert(i + 1, right)
+                        op_detected = True
+
+                if op_detected:
+                    # start checking for operator from the beginning
+                    i = 0
+                    op_detected = False
+                else:
+                    i += 1
+
+        column_names = [i.strip() for i in cols]
+        for i in column_names:
+            if i not in APP_SNIPPET_FIELDS:
+                raise ValueError(f"{i} is not a valid column to order by.")
+    else:
+        if col not in APP_SNIPPET_FIELDS:
+            raise ValueError(f"{col} is not a valid column to order by.")
+
+
+def init_db(db):
+    with open("init.sql") as f:
+        db.executescript(f.read())
+
+
 def print_table(table: str, db):
         table = db.execute(f"SELECT * FROM {table}")
         for row in table.fetchall():
             print(row)
 
-def init_db(db):
-    with open("init.sql") as f:
-        db.executescript(f.read())
 
 def print_columns():
     print("Columns: ")
