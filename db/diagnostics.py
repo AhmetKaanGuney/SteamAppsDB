@@ -1,4 +1,4 @@
-"""
+"""\
 Diagnostics tool for apps database
 Usage: diagnostics.py [action]
 Actions:
@@ -168,10 +168,6 @@ def status():
 
 
 def freeze():
-    # Create dir if it doesnt exists
-    if not os.path.exists(DIAGNOSIS_DIR):
-        os.mkdir(DIAGNOSIS_DIR)
-
     with Connection(APPS_DB_PATH) as db:
         print("Loading failed requests...")
         failed_requests: list[dict] = get_failed_requests("", db)
@@ -283,10 +279,11 @@ def delete_duplicates(duplication_log, db):
     total_genres_deleted = 0
     total_categories_deleted = 0
 
+    print("Deleting duplicates...")
     print("Starting from index: ", duplication_log["index"])
 
-    for iteration, app_id in enumerate(applist):
-        print(f"Progress: {iteration + 1:,} / {total_iteration:,} | Apps With Duplication: {len(duplication_log['applist']):,}", end="\r")
+    for i, app_id in enumerate(applist):
+        print(f"Progress: {i + 1:,} / {total_iteration:,} | Apps With Duplication: {len(duplication_log['applist']):,}", end="\r")
         duplication_log["index"] += 1
 
         tags_deleted = delete_duplicate_rows(app_id, "tag_id", "apps_tags", db, duplication_log)
@@ -397,4 +394,7 @@ def update_apps(applist, updated_list):
 
 
 if __name__ == "__main__":
+    # Create dir if it doesnt exists
+    if not os.path.exists(DIAGNOSIS_DIR):
+        os.mkdir(DIAGNOSIS_DIR)
     main()
