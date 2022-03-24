@@ -11,6 +11,7 @@ DEFAULT_LOG = {
     "steam_request_count": 0,
     "updated_apps": 0,
     "non_game_apps": 0,
+    "ignored_apps": 0,
     "failed_requests": 0,
     "apps_over_million": 0
 }

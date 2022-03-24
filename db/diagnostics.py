@@ -18,17 +18,18 @@ from update_logger import UpdateLogger
 from errors import FetchError, RequestTimeoutError
 from appdata import AppDetails
 from update import (
-    fetch, RATE_LIMIT, UPDATE_LOG_PATH,
+    fetch, fetchProxy, RATE_LIMIT, UPDATE_LOG_PATH,
     STEAM_APP_DETAILS_API_BASE, STEAMSPY_APP_DETAILS_API_BASE,
-    map_steam_data, map_steamspy_data, get_min_owner_count,
-    MAX_OWNERS, get_datetime_str, debug_log
+    map_steam_data, map_steamspy_response, get_min_owner_count,
+    OWNER_LIMIT, get_datetime_str, debug_log
 
 )
 from database import (
     APPS_DB_PATH, Connection,
     get_failed_requests, get_non_game_apps,
     insert_failed_request, insert_non_game_app,
-    insert_app_over_million, insert_app
+    insert_app_over_million, insert_app,
+    get_applist, handle_steam_response
 )
 
 ARGS = sys.argv
@@ -70,14 +71,18 @@ def main():
             pull()
             exit(0)
         elif ARGS[1] == "fix":
-            fix()
+            try:
+                fix()
+            except KeyboardInterrupt:
+                print("\n")
+
         elif ARGS[1] == "fix-duplicate":
             # Create log file if it doesnt exists
             if not os.path.exists(DUPLICATION_PATH):
                 default_log = {"index": 0, "applist": []}
-                save(default_log, DUPLICATION_PATH)
+                save_json(default_log, DUPLICATION_PATH)
 
-            duplication_log = load(DUPLICATION_PATH)
+            duplication_log = load_json(DUPLICATION_PATH)
             duplication_log["applist"] = set(duplication_log["applist"])
             try:
                 with Connection(APPS_DB_PATH) as db:
@@ -89,7 +94,7 @@ def main():
 
             print(f"Saving apps with duplication at: '{DUPLICATION_PATH}'")
             duplication_log["applist"] = list(duplication_log["applist"])
-            save(duplication_log, DUPLICATION_PATH)
+            save_json(duplication_log, DUPLICATION_PATH)
             print("Total Apps with Duplication: ", len(duplication_log["applist"]))
             print("Finished!\n")
 
@@ -130,38 +135,36 @@ def freeze():
         print("Loading non-game apps...")
         non_game_apps: list[int] = get_non_game_apps(db)
 
-    print("Writing failed requests...")
-    with open(FAILED_REQUESTS_PATH, "w") as failed_file:
-        json.dump(failed_requests, failed_file)
+    print("Saving failed requests...")
+    save_json(failed_requests, FAILED_REQUESTS_PATH)
 
-    print("Writing non-game apps...")
-    with open(NON_GAME_APPS_PATH, "w") as non_game_file:
-        json.dump(non_game_apps, non_game_file)
+    print("Saving non-game apps...")
+    save_json(non_game_apps, NON_GAME_APPS_API)
 
 
 def merge():
     print("Reading failed requests...")
-    if os.path.exists(FAILED_REQUESTS_PATH):
-        failed_size = os.path.getsize(FAILED_REQUESTS_PATH)
-        if failed_size == 0:
-            print(f"{FAILED_REQUESTS_PATH} is empty!\nSkipping...")
-        else:
-            with open(FAILED_REQUESTS_PATH, "r") as failed_file:
-                failed_requests = json.load(failed_file)
 
-            print("Saving failed requests:")
-            with Connection(APPS_DB_PATH) as db:
-                for i, request in enumerate(failed_requests):
-                    print(f"Progress: {i:,}", end="\r")
-                    try:
-                        insert_failed_request(request["app_id"], request["api_provider"], request["error"], request["status_code"], db)
-                    except KeyError:
-                        insert_failed_request(request["app_id"], request["api_provider"], request["cause"], request["status_code"], db)
-
-            print("\nCompleted!")
-    else:
+    if not os.path.exists(FAILED_REQUESTS_PATH):
         print("File not found! Skipping failed requests...")
+        return
 
+    failed_size = os.path.getsize(FAILED_REQUESTS_PATH)
+    if failed_size == 0:
+        print(f"{FAILED_REQUESTS_PATH} is empty!\nSkipping...")
+    else:
+        failed_requests = load_json(FAILED_REQUESTS_PATH)
+
+        print("Saving failed requests:")
+        with Connection(APPS_DB_PATH) as db:
+            for i, request in enumerate(failed_requests):
+                print(f"Progress: {i:,}", end="\r")
+                try:
+                    insert_failed_request(request["app_id"], request["api_provider"], request["error"], request["status_code"], db)
+                except KeyError:
+                    insert_failed_request(request["app_id"], request["api_provider"], request["cause"], request["status_code"], db)
+
+        print("\nCompleted!")
 
     print("Reading non-game apps...")
     if os.path.exists(NON_GAME_APPS_PATH):
@@ -169,8 +172,7 @@ def merge():
         if non_game_size == 0:
             print(f"{NON_GAME_APPS_PATH} is empty!\nSkipping...")
         else:
-            with open(NON_GAME_APPS_PATH, "r") as non_game_file:
-                non_game_apps = json.load(non_game_file)
+            non_game_apps = load_json(NON_GAME_APPS_PATH)
 
             print("Saving non-game apps:")
             with Connection(APPS_DB_PATH) as db:
@@ -242,15 +244,12 @@ def fix_duplicate(duplication_log, db):
     print(f"\nDeleted {duplication:,} tag sections.")
 
 
-
-
-
-def save(data, path):
+def save_json(data, path):
     with open(path, "w") as f:
         json.dump(data, f)
 
 
-def load(path):
+def load_json(path):
     with open(path, "r") as f:
         return json.load(f)
 
@@ -261,9 +260,10 @@ def fix():
 
     failed_length = len(failed_requests)
     fixed_apps = 0
+
     print("Refetching Failed Requests...")
     for i, row in enumerate(failed_requests):
-        print(f"Progress: {i:,} / {failed_length}", end="\r")
+        print(f"Progress: {i + 1:,} / {failed_length} | Fixed: {fixed_apps}", end="\r")
 
         app_id = row["app_id"]
 
@@ -272,107 +272,37 @@ def fix():
         # Create Appdetails
         app_details = AppDetails({"app_id": app_id})
 
-        # API's
-        steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(app_id)
-        steam_api = STEAM_APP_DETAILS_API_BASE + str(app_id)
-
-        # ====================== #
-        #  FETCH FROM STEAMSPY   #
-        # ====================== #
-        try:
-            steamspy_data = fetch(steamspy_api)
-        except Exception as e:
-            error_name = type(e).__name__
-            with Connection(APPS_DB_PATH) as db:
-                # If Exception is not a type of FecthError
-                # there might not be a response object
-                # So record the unexpected exception without referring to the response obj.
-
-                if issubclass(type(e), FetchError) and not isinstance(e, RequestTimeoutError):
-                    print(f"\n{error_name}: {e.response.status_code} | URL: {steamspy_api}\nSkipping...")
-                    insert_failed_request(app_id, "steamspy", error_name, e.response.status_code, db)
-                else:
-                    print(f"\nError : {error_name} | URL: {steam_api}\nSkipping...")
-                    msg = {
-                        "error": error_name,
-                        "url": steamspy_api,
-                        "traceback": traceback.format_exc()
-                    }
-                    insert_failed_request(app_id, "steamspy", error_name, None, db)
-                    debug_log(msg)
+        # FETCH FROM STEAMSPY
+        steamspy_data = fetchProxy("steamspy", app_id)
+        if steamspy_data is None:
             continue
 
         # Check minimum owner count to eliminate games over a million owners
         min_owner_count = get_min_owner_count(steamspy_data)
 
-        if min_owner_count > MAX_OWNERS:
+        if min_owner_count > OWNER_LIMIT:
             with Connection(APPS_DB_PATH) as db:
                 insert_app_over_million(app_id, db)
                 update_log["apps_over_million"] += 1
             continue
 
         # Update app info
-        app_details_from_steamspy = map_steamspy_data(steamspy_data)
+        app_details_from_steamspy = map_steamspy_response(steamspy_data)
         app_details.update(app_details_from_steamspy)
         app_details.update({"name": steamspy_data["name"]})
 
-        # =================== #
-        #  FETCH FROM STEAM   #
-        # =================== #
-        try:
-            # Steam Response Format : {"000000": {"success": true, "data": {...}}}
-            steam_response = fetch(steam_api)[str(app_id)]
-        except Exception as e:
-            error_name = type(e).__name__
-
-            with Connection(APPS_DB_PATH) as db:
-                if issubclass(type(e), FetchError) and not isinstance(e, RequestTimeoutError):
-                    print(f"\n{error_name}: {e.response.status_code} | URL: {steam_api}\nSkipping...")
-                    insert_failed_request(app_id, "steam", error_name, e.response.status_code, db)
-                else:
-                    print(f"\nError : {error_name} | URL: {steam_api}\nSkipping...")
-                    msg = {
-                        "error": error_name,
-                        "url": steam_api,
-                        "traceback": traceback.format_exc()
-                    }
-                    insert_failed_request(app_id, "steam", error_name, None, db)
-                    debug_log(msg)
-
-            update_log["last_request_to_steam"] = get_datetime_str()
-            continue
-
+        # FETCH FROM STEAM
+        steam_response = fetchProxy("steam", app_id)
         update_log["last_request_to_steam"] = get_datetime_str()
-
-        if steam_response["success"]:
-            steam_data = steam_response["data"]
-            # Check if app is a game
-            if steam_data["type"] != "game":
-                # Record non-game_apps so they aren't requested for in the future
-                with Connection(APPS_DB_PATH) as db:
-                    insert_non_game_app(app_id, db)
-
-                update_log["non_game_apps"] += 1
-                continue
-            else:
-                app_details_from_steam = map_steam_data(steam_data)
-
-                # Update the app info
-                app_details.update(app_details_from_steam)
-
-                # Save to db
-                with Connection(APPS_DB_PATH) as db:
-                    insert_app(app_details, db)
-                    db.execute("DELETE FROM failed_requests WHERE app_id == ?", (app_id, ))
-
-                fixed_apps += 1
-        else:
-            with Connection(APPS_DB_PATH) as db:
-                insert_failed_request(app_id, "steam", "failed", None, db)
+        if steam_response is None:
             continue
+
+        result = handle_steam_response(app_id, steam_response, app_details)
+        if result == "updated":
+            fixed_apps += 1
 
     print("\nFinished...")
-    print(f"Fixed Apps : {fixed_apps}")
+    print(f"Fixed Apps : {fixed_apps}\n")
     update_logger.save()
 
 

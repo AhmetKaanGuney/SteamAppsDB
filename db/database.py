@@ -87,7 +87,7 @@ def insert_failed_request(app_id: int, api_provider: str, error: str,  status_co
     )
 
 
-def get_applist(filters: dict, order: dict, offset, limit, db) -> list[dict]:
+def get_applist(filters: [dict, None], order: [dict, None], offset, limit, db) -> list[dict]:
     """
     Returns list of app snippets as dict objects.
     ordery_by: {

@@ -6,11 +6,8 @@ import datetime
 import traceback
 import json
 import logging
-import smtplib
-import ssl
 
 import requests
-from dotenv import dotenv_values
 
 try:
     from errors import (
@@ -49,7 +46,7 @@ current_dir = os.path.dirname(__file__)
 parent_dir = os.path.dirname(current_dir)
 DEBUG_LOG = "./debug.log"
 UPDATE_LOG_PATH = os.path.join(current_dir, "update_log.json")
-
+UPDATE_HISTORY_LOG_PATH = os.path.join(current_dir, "update_history.log")
 
 # Init Loggers
 logging.basicConfig(level=logging.DEBUG)
@@ -57,14 +54,7 @@ logging.basicConfig(level=logging.DEBUG)
 update_logger = UpdateLogger(UPDATE_LOG_PATH)
 update_log = update_logger.log
 
-# Config
-env = dotenv_values(os.path.join(parent_dir, ".env"))
-
-# Max owner limit
-# if an app's owner count breaks this limit
-# that app will not be stored into the database
-MAX_OWNERS = 1_000_000
-
+OWNER_LIMIT = 1_000_000
 REQUEST_TIMEOUT = 15
 # Time to wait in between request in seconds
 RATE_LIMIT = 1
@@ -73,7 +63,6 @@ STEAM_REQUEST_LIMIT = 100_000
 # File paths
 APPLIST_FILE = os.path.join(current_dir, "applist.json")
 APPLIST_FILTERED_FILE = os.path.join(current_dir, "applist_filtered.json")
-
 
 # API's
 # Append appid to app details API to get app details
@@ -84,19 +73,30 @@ STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails
 # Format
 DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 
-# TODO email weekly report
-
-
 def main():
     print("||===            UPDATE             ===||")
     print(f"||=== Start Date : {get_datetime_str()} ===||")
 
-    # ========================= #
-    #  Get App List from Steam  #
-    # ========================= #
+    global LAST_INDEX
+    global STEAM_REQUEST_COUNT
+    global UPDATED_APPS
+    global NON_GAME_APPS
+    global IGNORED_APPS
+    global FAILED_REQUESTS
+    global APPS_OVER_MILLION
+    # Init globals
+    LAST_INDEX = 0
+    STEAM_REQUEST_COUNT = 0
+    UPDATED_APPS = 0
+    NON_GAME_APPS = 0
+    IGNORED_APPS = 0
+    FAILED_REQUESTS = 0
+    APPS_OVER_MILLION = 0
+
+    # Get App List from Steam
     applist = get_applist()
     applist_index = update_log["applist_index"]
-    remaining_apps = applist[applist_index : applist_index + STEAM_REQUEST_LIMIT]
+    remaining_apps = applist[applist_index:]
 
     applist_length = len(applist)
     remaining_length = len(remaining_apps)
@@ -104,31 +104,23 @@ def main():
     update_log["applist_length"] = applist_length
     update_log["remaining_length"] = remaining_length
 
-    print(f"Applist Length: {applist_length:,}")
-    print(f"Starting From Index: {applist_index}")
-    print(f"Current Steam Request Count: {update_log['steam_request_count']}")
-
-    # =============================== #
-    #     Get Apps to be Ignored      #
-    # =============================== #
     apps_to_ignore = get_apps_to_ignore()
-    print(f"Apps to be ignored: {len(apps_to_ignore):,}")
 
-    # =============================== #
-    #  Get App Details for each App   #
-    # =============================== #
+    print(f"Applist: {applist_length:,} items")
+    print(f"Starting from: {applist_index}")
+    print(f"Apps to be ignored: {len(apps_to_ignore):,} items")
     print("Fetching apps:")
-    global LAST_INDEX
 
     for i, app in enumerate(remaining_apps):
-        print(f"Progress: {i:,} / {remaining_length:,}", end="\r")
+        print(f"Progress: {i + 1:,} / {remaining_length:,}", end="\r")
 
         LAST_INDEX = i
-
         app_id = app["app_id"]
 
         # If app is not a game skip
         if app_id in apps_to_ignore:
+            update_log["ignored_apps"] += 1
+            IGNORED_APPS += 1
             continue
 
         # Save log every 100th iteration
@@ -141,111 +133,92 @@ def main():
         # Create Appdetails
         app_details = AppDetails({"name": app["name"], "app_id": app_id})
 
-        # API's
-        steamspy_api = STEAMSPY_APP_DETAILS_API_BASE + str(app_id)
-        steam_api = STEAM_APP_DETAILS_API_BASE + str(app_id)
-
-        # ====================== #
-        #  FETCH FROM STEAMSPY   #
-        # ====================== #
-        try:
-            steamspy_data = fetch(steamspy_api)
-        except Exception as e:
-            error_name = type(e).__name__
-            with Connection(APPS_DB_PATH) as db:
-                # If Exception is not a type of FecthError
-                # there might not be a response object
-                # So record the unexpected exception without referring to the response obj.
-
-                if issubclass(type(e), FetchError) and not isinstance(e, RequestTimeoutError):
-                    print(f"\n{error_name}: {e.response.status_code} | URL: {steamspy_api}\nSkipping...")
-                    insert_failed_request(app_id, "steamspy", error_name, e.response.status_code, db)
-                else:
-                    print(f"\nError : {error_name} | URL: {steam_api}\nSkipping...")
-                    msg = {
-                        "error": error_name,
-                        "url": steamspy_api,
-                        "traceback": traceback.format_exc()
-                    }
-                    insert_failed_request(app_id, "steamspy", error_name, None, db)
-                    debug_log(msg)
-
+        # FETCH FROM STEAMSPY
+        steamspy_response = fetchProxy("steamspy", app_id)
+        if steamspy_response is None:
             update_log["failed_requests"] += 1
+            FAILED_REQUESTS += 1
             continue
 
-        # Check minimum owner count to eliminate games over a million owners
-        min_owner_count = get_min_owner_count(steamspy_data)
+        # Check minimum owner
+        min_owner_count = get_min_owner_count(steamspy_response)
 
-        if min_owner_count > MAX_OWNERS:
+        if min_owner_count > OWNER_LIMIT:
             with Connection(APPS_DB_PATH) as db:
                 insert_app_over_million(app_id, db)
                 update_log["apps_over_million"] += 1
+                APPS_OVER_MILLION += 1
             continue
 
         # Update app info
-        app_details_from_steamspy = map_steamspy_data(steamspy_data)
+        app_details_from_steamspy = map_steamspy_response(steamspy_response)
         app_details.update(app_details_from_steamspy)
 
-        # =================== #
-        #  FETCH FROM STEAM   #
-        # =================== #
-        try:
-            # Steam Response Format : {"000000": {"success": true, "data": {...}}}
-            steam_response = fetch(steam_api)[str(app_id)]
-        except Exception as e:
-            error_name = type(e).__name__
+        # FETCH FROM STEAM
+        if STEAM_REQUEST_COUNT + 1 > STEAM_REQUEST_LIMIT:
+            print("\nSteam request limit reached!")
+            break
 
-            with Connection(APPS_DB_PATH) as db:
-                if issubclass(type(e), FetchError) and not isinstance(e, RequestTimeoutError):
-                    print(f"\n{error_name}: {e.response.status_code} | URL: {steam_api}\nSkipping...")
-                    insert_failed_request(app_id, "steam", error_name, e.response.status_code, db)
-                else:
-                    print(f"\nError : {error_name} | URL: {steam_api}\nSkipping...")
-                    msg = {
-                        "error": error_name,
-                        "url": steam_api,
-                        "traceback": traceback.format_exc()
-                    }
-                    insert_failed_request(app_id, "steam", error_name, None, db)
-                    debug_log(msg)
-
-            update_log["last_request_to_steam"] = get_datetime_str()
-            update_log["steam_request_count"] += 1
-            update_log["failed_requests"] += 1
-            continue
+        steam_response = fetchProxy("steam", app_id)
 
         update_log["last_request_to_steam"] = get_datetime_str()
         update_log["steam_request_count"] += 1
+        STEAM_REQUEST_COUNT += 1
 
-        if steam_response["success"]:
-            steam_data = steam_response["data"]
-            # Check if app is a game
-            if steam_data["type"] != "game":
-                logging.debug(f"App '{app_id}' is not a game. Recording app_id then skipping...")
-
-                # Record non-game_apps so they aren't requested for in the future
-                with Connection(APPS_DB_PATH) as db:
-                    insert_non_game_app(app_id, db)
-
-                update_log["non_game_apps"] += 1
-                continue
-            else:
-                app_details_from_steam = map_steam_data(steam_data)
-
-                # Update the app info
-                app_details.update(app_details_from_steam)
-
-                # Save to db
-                with Connection(APPS_DB_PATH) as db:
-                    insert_app(app_details, db)
-
-                update_log["updated_apps"] += 1
-        else:
-            with Connection(APPS_DB_PATH) as db:
-                insert_failed_request(app_id, "steam", "failed", None, db)
-
+        if steam_response is None:
             update_log["failed_requests"] += 1
+            FAILED_REQUESTS += 1
             continue
+
+        result = handle_steam_response(app_id, steam_response, app_details)
+        if result == "non_game_app":
+            update_log["non_game_apps"] += 1
+            NON_GAME_APPS += 1
+        elif result == "failed_request":
+            update_log["failed_requests"] += 1
+            FAILED_REQUESTS += 1
+        elif result == "updated":
+            update_log["updated_apps"] += 1
+            UPDATED_APPS += 1
+        else:
+            raise ValueError(f"Unexpected return value {result}, from handle_steam_response")
+
+
+def fetchProxy(api_provider: str, app_id: int) -> dict:
+    if api_provider == "steam":
+        api_base = STEAM_APP_DETAILS_API_BASE
+    elif api_provider == "steamspy":
+        api_base = STEAMSPY_APP_DETAILS_API_BASE
+    else:
+        raise ValueError(f"{api_provider} isn't a valid api provider.")
+
+    api = api_base + str(app_id)
+
+    try:
+        response = fetch(api)
+        if api_provider == "steam":
+            return response[str(app_id)]
+
+        return response
+
+    except Exception as e:
+        error_name = type(e).__name__
+
+        with Connection(APPS_DB_PATH) as db:
+            if issubclass(type(e), FetchError) and not isinstance(e, RequestTimeoutError):
+                status_code = e.response.status_code
+            else:
+                status_code = None
+                debug_log({
+                    "error": error_name,
+                    "url": api,
+                    "traceback": traceback.format_exc()
+                })
+
+            insert_failed_request(app_id, api_provider, error_name, status_code, db)
+
+        print(f"\nError: {error_name} | Code: {status_code} | URL: {api}\nSkipping...")
+        return None
 
 
 def fetch(api: str) -> dict:
@@ -253,7 +226,6 @@ def fetch(api: str) -> dict:
     attempt = 0
     while attempt < 2:
         response = attempt_request(api)
-
         msg = {
             "status_code": response.status_code,
             "url": response.url,
@@ -326,6 +298,31 @@ def attempt_request(api: str):
                 continue
     # If reached attempt limit
     raise RequestTimeoutError(update_log)
+
+
+def handle_steam_response(app_id, steam_response, app_details):
+    if steam_response["success"]:
+        steam_data = steam_response["data"]
+        # Check if app is a game
+        if steam_data["type"] != "game":
+            with Connection(APPS_DB_PATH) as db:
+                insert_non_game_app(app_id, db)
+            return "non_game_app"
+        else:
+            app_details_from_steam = map_steam_data(steam_data)
+            # Update the app info
+            app_details.update(app_details_from_steam)
+
+            # Save to db
+            with Connection(APPS_DB_PATH) as db:
+                insert_app(app_details, db)
+                db.execute("DELETE FROM failed_requests WHERE app_id == ?", (app_id, ))
+            update_log["updated_apps"] += 1
+            return "updated"
+    else:
+        with Connection(APPS_DB_PATH) as db:
+            insert_failed_request(app_id, "steam", "failed", None, db)
+        return "failed_request"
 
 
 def fetch_applist(api: str):
@@ -475,8 +472,8 @@ def map_steam_data(steam_data: dict) -> dict:
     return app_details
 
 
-def map_steamspy_data(steamspy_data: dict) -> dict:
-    """Parses SteamSpy data and returns it in a better format
+def map_steamspy_response(response: dict) -> dict:
+    """Parses SteamSpy response and returns it in a better format
     returns: {
         'price': [int, None],
         'owner_count: int',
@@ -484,15 +481,15 @@ def map_steamspy_data(steamspy_data: dict) -> dict:
         'negative_reviews': int
         'tags': list,
     }"""
-    if steamspy_data["price"]:
-        steamspy_data["price"] = int(steamspy_data["price"])
+    if response["price"]:
+        response["price"] = int(response["price"])
 
     app_details = {
-        "price": steamspy_data["price"],
-        "owner_count": get_average(steamspy_data["owners"]),
-        "positive_reviews": steamspy_data["positive"],
-        "negative_reviews": steamspy_data["negative"],
-        "tags": steamspy_data["tags"]
+        "price": response["price"],
+        "owner_count": get_average(response["owners"]),
+        "positive_reviews": response["positive"],
+        "negative_reviews": response["negative"],
+        "tags": response["tags"]
     }
     return app_details
 
@@ -567,7 +564,6 @@ def subtract_times(end, start) -> float:
 
 def debug_log(msg: dict):
     """Append to log"""
-
     try:
         if "<!DOCTYPE html>" in msg["text"]:
             msg["taxt"] = "<--- HTML Error Response --->"
@@ -579,49 +575,47 @@ def debug_log(msg: dict):
         f.write("\n||======================================================||\n")
 
 
-def email(msg):
-    context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(
-        env["SMTP_SERVER"], env["PORT"], context=context) as server:
-        server.login(env["SENDER_EMAIL"], env["PASSWORD"])
-        server.sendmail(env["SENDER_EMAIL"], env["RECEIVER_EMAIL"], msg)
+def update_history(msg: str):
+    with open(UPDATE_HISTORY_LOG_PATH, "a") as f:
+        f.write(msg)
+        f.write("\n||======================================================||\n")
 
 
-def create_msg(update_log, run_time, traceback=None):
+def create_output(update_log, run_time, traceback=None):
     ul = update_log
-    steam_request_count = ul["steam_request_count"]
     applist_length = ul["applist_length"]
     remaining_length = ul["remaining_length"]
-    updated_apps = ul["updated_apps"]
-    failed_requests = ul["failed_requests"]
-    non_game_apps = ul["non_game_apps"]
-    apps_over_million = ul["apps_over_million"]
-    applist_index = ul["applist_index"] + LAST_INDEX
 
     if traceback:
-        subject = "Update Failed"
+        state = "Update Failed"
         traceback_section = f"\nUpdate failed due to an error:\n{traceback.format_exc()}"
     else:
-        subject = "Update Successful"
+        state = "Update Successful"
         traceback_section = ""
 
     return f"""\
-Subject: {subject}
-
+State: {state}
 Run Time          : {run_time:.1f} hours
-Steam Requests    : {steam_request_count:,}
 All Apps          : {applist_length:,}
+Steam Requests    : {STEAM_REQUEST_COUNT:,}
 ---
-Updated Apps      : {updated_apps:,} / {remaining_length:,}
-Non-Game Apps     : {non_game_apps:,}
-Failed Requests   : {failed_requests:,}
-Apps Over Million : {apps_over_million:,}
+Updated Apps      : {UPDATED_APPS:,} / {remaining_length:,}
+Non-Game Apps     : {NON_GAME_APPS:,}
+Ignored Apps      : {IGNORED_APPS:,}
+Failed Requests   : {FAILED_REQUESTS:,}
+Apps Over Million : {APPS_OVER_MILLION:,}
 ---------------------------------------------
-Total: {updated_apps + non_game_apps + failed_requests + apps_over_million:,}
-
-Note: total should be equal to applist index ({applist_index:,})
+Total Iterations: {UPDATED_APPS + NON_GAME_APPS + FAILED_REQUESTS + APPS_OVER_MILLION + IGNORED_APPS:,}
 
 {traceback_section}"""
+
+
+def remove_apps_to_ignored(applist, apps_to_ignore):
+    result = []
+    for i in applist:
+        if i["app_id"] not in apps_to_ignore:
+            result.append(i)
+    return result
 
 
 if __name__ == "__main__":
@@ -633,11 +627,12 @@ if __name__ == "__main__":
 
     ignore_timer = False
     if len(sys.argv) == 2:
-        if sys.argv[1] == "--ignore-timer":
+        if sys.argv[1] == "-h":
+            print("Use '--ignore-timer' to skip safety check for last request to Steam.\n")
+            exit(0)
+        elif sys.argv[1] == "--ignore-timer":
             ignore_timer = True
-    if sys.argv[1] == "-h":
-        print("Use '--ignore-timer' to skip safety check for last request to Steam.\n")
-        exit(0)
+
 
     if not ignore_timer:
         if time_passed.days < 1:
@@ -656,43 +651,38 @@ if __name__ == "__main__":
     # =================== #
     ul = update_log
     start_time = time.time()
+    output = ""
 
     try:
         main()
-
         run_time = subtract_times(time.time(), start_time)
-        success_msg = create_msg(ul, run_time)
-
-        print(f"\n{success_msg}")
-        email(success_msg)
-
+        output = create_output(ul, run_time)
         ul["reset_log"] = True
 
     except Exception as e:
         run_time = subtract_times(time.time(), start_time)
-        fail_msg = create_msg(ul, run_time, traceback=traceback)
-        print("")
-
-        # Don't email if there is a connection error
-        if not isinstance(e, requests.exceptions.ConnectionError):
-            email(fail_msg)
+        output = create_output(ul, run_time, traceback=traceback)
         raise e
 
     except KeyboardInterrupt:
-        print()
-        print(create_msg(ul,  subtract_times(time.time(), start_time)))
+        run_time = subtract_times(time.time(), start_time)
+        output = create_output(ul,  run_time)
         exit(0)
 
     finally:
+        update_history(output)
+        print(f"\n\n{output}")
+
         run_time = subtract_times(time.time(), start_time)
         print(f"||=== End Date  : {get_datetime_str()} ===||")
 
         print(f"Run Time: {run_time:.1f} hours")
-
         ul["applist_index"] += LAST_INDEX
         ul["remaining_length"] = ul["applist_length"] - ul["remaining_length"]
 
-        print(f"--> Current Steam Request Count: {ul['steam_request_count']}")
+        print(f"--> Total Steam Requests: {ul['steam_request_count']}")
+        print(f"--> Total Apps Ignored: {ul['ignored_apps']}")
         print(f"--> Recording applist_index as : {ul['applist_index']}")
         update_logger.save()
         print("\nUpdate logger saved.\n")
+
