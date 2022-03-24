@@ -242,6 +242,7 @@ def get_app_details(app_id: int, db) -> AppDetails:
 
 
 def get_tags(app_id: int, db) -> list[dict]:
+    """returns -> [{'id': value, 'votes': value, 'name': value}, ...]"""
     tags = []
     ids_votes = db.execute("SELECT DISTINCT tag_id, votes FROM apps_tags WHERE app_id = ?", (app_id, )).fetchall()
 
@@ -258,11 +259,12 @@ def get_tags(app_id: int, db) -> list[dict]:
         tag["name"] = db.execute("SELECT name FROM tags WHERE tag_id = ?", (_id,)).fetchone()[0]
 
         tags.append(tag)
-
+    # id, votes, name
     return tags
 
 
-def get_genres(app_id: int, db):
+def get_genres(app_id: int, db) -> dict:
+    """returns -> {name: id}"""
     genres = db.execute("""
         SELECT name, genre_id FROM genres
         WHERE genre_id IN (
@@ -270,11 +272,12 @@ def get_genres(app_id: int, db):
             WHERE app_id = :app_id
         )""", {"app_id": app_id}
     ).fetchall()
-
+    # name : id
     return {i[0]: i[1] for i in genres}
 
 
-def get_categories(app_id: int, db):
+def get_categories(app_id: int, db) -> dict:
+    """returns -> {name: id}"""
     categories = db.execute("""
         SELECT name, category_id FROM categories
         WHERE category_id IN (
@@ -282,7 +285,7 @@ def get_categories(app_id: int, db):
             WHERE app_id = :app_id
         )""", {"app_id": app_id}
     ).fetchall()
-
+    #  name : id
     return {i[0]: i[1] for i in categories}
 
 

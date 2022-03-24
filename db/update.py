@@ -94,7 +94,7 @@ def main():
     APPS_OVER_MILLION = 0
 
     # Get App List from Steam
-    applist = get_applist()
+    applist = load_applist()
     applist_index = update_log["applist_index"]
     remaining_apps = applist[applist_index:]
 
@@ -112,7 +112,7 @@ def main():
     print("Fetching apps:")
 
     for i, app in enumerate(remaining_apps):
-        print(f"Progress: {i + 1:,} / {remaining_length:,}", end="\r")
+        print(f"Progress: {i:,} / {remaining_length:,}", end="\r")
 
         LAST_INDEX = i
         app_id = app["app_id"]
@@ -317,7 +317,6 @@ def handle_steam_response(app_id, steam_response, app_details):
             with Connection(APPS_DB_PATH) as db:
                 insert_app(app_details, db)
                 db.execute("DELETE FROM failed_requests WHERE app_id == ?", (app_id, ))
-            update_log["updated_apps"] += 1
             return "updated"
     else:
         with Connection(APPS_DB_PATH) as db:
@@ -349,7 +348,7 @@ def fetch_applist(api: str):
     return applist
 
 
-def get_applist() -> dict:
+def load_applist() -> dict:
     print("Checking if applist already fetched...")
     if update_log["applist_fetched"]:
         print("Applist alredy fetched!")
@@ -360,7 +359,7 @@ def get_applist() -> dict:
 
         # Save to File
         print("Saving applist...")
-        write_to_json(applist, APPLIST_FILE)
+        save_json(applist, APPLIST_FILE)
         update_log["applist_fetched"] = True
 
     with open(APPLIST_FILE, "r") as f:
@@ -549,7 +548,7 @@ def get_id_from_url(url: str):
     return int(_id)
 
 
-def write_to_json(data: any, file_path: str, indent=None):
+def save_json(data: any, file_path: str, indent=None):
     with open(file_path, "w") as f:
         json.dump(data, f, indent=indent)
 
@@ -610,14 +609,6 @@ Total Iterations: {UPDATED_APPS + NON_GAME_APPS + FAILED_REQUESTS + APPS_OVER_MI
 {traceback_section}"""
 
 
-def remove_apps_to_ignored(applist, apps_to_ignore):
-    result = []
-    for i in applist:
-        if i["app_id"] not in apps_to_ignore:
-            result.append(i)
-    return result
-
-
 if __name__ == "__main__":
     # Check time passed since last request
     now = datetime.datetime.utcnow()
@@ -632,7 +623,9 @@ if __name__ == "__main__":
             exit(0)
         elif sys.argv[1] == "--ignore-timer":
             ignore_timer = True
-
+        else:
+            print("Use '--ignore-timer' to skip safety check for last request to Steam.\n")
+            exit(0)
 
     if not ignore_timer:
         if time_passed.days < 1:
@@ -640,8 +633,7 @@ if __name__ == "__main__":
             print(f"Now                    : {now.strftime(DATETIME_FORMAT)}")
             print(f"Last Request to Steam  : {last_request_to_steam.strftime(DATETIME_FORMAT)}")
             print(f"Time Passed            : {str(time_passed).split('.')[0]}")
-            print(f"Retry After            : {str(a_day - time_passed).split('.')[0]}")
-            print("")
+            print(f"Retry After            : {str(a_day - time_passed).split('.')[0]}\n")
             exit(0)
     else:
         print("Ignoring timer!")
@@ -652,7 +644,6 @@ if __name__ == "__main__":
     ul = update_log
     start_time = time.time()
     output = ""
-
     try:
         main()
         run_time = subtract_times(time.time(), start_time)
