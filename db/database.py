@@ -241,6 +241,11 @@ def get_app_details(app_id: int, db) -> AppDetails:
     return AppDetails(app_data)
 
 
+def get_app_ids(db) -> list[int]:
+    applist_query = db.execute("SELECT app_id FROM apps").fetchall()
+    return [i[0] for i in applist_query]
+
+
 def get_tags(app_id: int, db) -> list[dict]:
     """returns -> [{'id': value, 'votes': value, 'name': value}, ...]"""
     tags = []

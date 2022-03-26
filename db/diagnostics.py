@@ -33,7 +33,8 @@ from database import (
     get_failed_requests, get_non_game_apps,
     insert_failed_request, insert_non_game_app,
     insert_app_over_million, insert_app,
-    get_applist, get_tags, get_genres, get_categories
+    get_applist, get_tags, get_genres, get_categories,
+    get_app_ids
 )
 
 args = sys.argv
@@ -51,9 +52,15 @@ FAILED_REQUESTS_PATH = os.path.join(current_dir, "diagnosis/failed_requests.json
 NON_GAME_APPS_PATH = os.path.join(current_dir, "diagnosis/non_game_apps.json")
 APPS_WITH_DUPLICATION_PATH = os.path.join(DIAGNOSIS_DIR + "/apps_with_duplication.json")
 
+# Logs
 update_logger = UpdateLogger(UPDATE_LOG_PATH)
 update_log = update_logger.log
 
+deleted = {
+    "tags": 0,
+    "genres": 0,
+    "categories": 0
+}
 
 def main():
     if len(args) == 2:
@@ -83,14 +90,18 @@ def main():
                 print("\n")
             except Exception as e:
                 print("\n\n", traceback.format_exc())
+            finally:
+                print(f"Total tags deleted       : {deleted['tags']:,}")
+                print(f"Total genres deleted     : {deleted['genres']:,}")
+                print(f"Total categories deleted : {deleted['categories']:,}")
+                print("Total Apps with Duplication : ", len(duplication_log["applist"]))
 
-            print(f"Saving duplication_log...")
-            duplication_log["applist"] = list(duplication_log["applist"])
-            save_json(duplication_log, APPS_WITH_DUPLICATION_PATH)
+                print(f"Saving duplication_log...")
+                duplication_log["applist"] = list(duplication_log["applist"])
+                save_json(duplication_log, APPS_WITH_DUPLICATION_PATH)
 
-            print("Total Apps with Duplication: ", len(duplication_log["applist"]))
-            print("Finished!\n")
-            exit(0)
+                print("Finished!\n")
+                exit(0)
         else:
             print(__doc__)
             exit(0)
@@ -270,30 +281,23 @@ def get_app(app_id):
 
 def delete_duplicates(duplication_log, db):
     # duplication["applist"] is a set
-    applist_query = db.execute("SELECT app_id FROM apps").fetchall()
-    applist = [i[0] for i in applist_query]
-    applist = applist[duplication_log["index"]:]
-    total_iteration = len(applist)
+    with Connection(APPS_DB_PATH) as db:
+        applist = get_app_ids(db)
+        applist = applist[duplication_log["index"]:]
 
-    total_tags_deleted = 0
-    total_genres_deleted = 0
-    total_categories_deleted = 0
+    total_iterations = len(applist)
 
     print("Deleting duplicates...")
     print("Starting from index: ", duplication_log["index"])
 
-    for i, app_id in enumerate(applist):
-        print(f"Progress: {i + 1:,} / {total_iteration:,} | Apps With Duplication: {len(duplication_log['applist']):,}", end="\r")
-        duplication_log["index"] += 1
+    with Connection(APPS_DB_PATH) as db:
+        for i, app_id in enumerate(applist):
+            print(f"Progress: {i + 1:,} / {total_iterations:,} | Apps with Duplication: {len(duplication_log['applist']):,}", end="\r")
+            duplication_log["index"] += 1
 
-        tags_deleted = delete_duplicate_rows(app_id, "tag_id", "apps_tags", db, duplication_log)
-        total_tags_deleted += tags_deleted
-
-        genres_deleted = delete_duplicate_rows(app_id, "genre_id", "apps_genres", db, duplication_log)
-        total_genres_deleted += genres_deleted
-
-        categories_deleted = delete_duplicate_rows(app_id, "category_id", "apps_categories", db, duplication_log)
-        total_categories_deleted += categories_deleted
+            deleted["tags"] += delete_duplicate_rows(app_id, "tag_id", "apps_tags", db, duplication_log)
+            deleted["genres"] = delete_duplicate_rows(app_id, "genre_id", "apps_genres", db, duplication_log)
+            deleted["categories"] = delete_duplicate_rows(app_id, "category_id", "apps_categories", db, duplication_log)
 
 
 def delete_duplicate_rows(app_id, column, table, db, duplication_log):
@@ -308,19 +312,7 @@ def delete_duplicate_rows(app_id, column, table, db, duplication_log):
         deleted_items += 1
 
     duplication_log["applist"].add(app_id)
-
     return deleted_items
-
-
-def get_duplicates(app_id, column, table, db):
-    query = db.execute(f"""
-        SELECT {column}
-        FROM {table}
-        WHERE app_id = {app_id}
-        GROUP BY {column}
-        HAVING COUNT(*) > 1
-        """).fetchall()
-    return [i[0] for i in query]
 
 
 def delete_row(app_id, item_id, column, table, db):
@@ -332,6 +324,17 @@ def delete_row(app_id, item_id, column, table, db):
         DELETE FROM {table}
         WHERE app_id = {app_id} {condition}
     """)
+
+
+def get_duplicates(app_id, column, table, db):
+    query = db.execute(f"""
+        SELECT {column}
+        FROM {table}
+        WHERE app_id = {app_id}
+        GROUP BY {column}
+        HAVING COUNT(*) > 1
+        """).fetchall()
+    return [i[0] for i in query]
 
 
 def save_json(data, path):

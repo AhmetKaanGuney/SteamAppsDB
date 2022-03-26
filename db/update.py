@@ -8,6 +8,7 @@ import json
 import logging
 
 import requests
+from colorama import (init as init_colorama, Fore as color)
 
 try:
     from errors import (
@@ -38,6 +39,7 @@ except ImportError:
         get_non_game_apps, get_failed_requests
     )
 
+init_colorama(autoreset=True)
 
 logging.debug(f"Apps Database Path: {APPS_DB_PATH}")
 
@@ -73,25 +75,20 @@ STEAMSPY_APP_DETAILS_API_BASE = "https://steamspy.com/api.php?request=appdetails
 # Format
 DATETIME_FORMAT = "%Y-%m-%d %H:%M"
 
+tracker = {
+    "last_index": 0,
+    "steam_request_count": 0,
+    "updated_apps": 0,
+    "non_game_apps": 0,
+    "ignored_apps": 0,
+    "failed_requests": 0,
+    "apps_over_million": 0
+}
+
+
 def main():
     print("||===            UPDATE             ===||")
     print(f"||=== Start Date : {get_datetime_str()} ===||")
-
-    global LAST_INDEX
-    global STEAM_REQUEST_COUNT
-    global UPDATED_APPS
-    global NON_GAME_APPS
-    global IGNORED_APPS
-    global FAILED_REQUESTS
-    global APPS_OVER_MILLION
-    # Init globals
-    LAST_INDEX = 0
-    STEAM_REQUEST_COUNT = 0
-    UPDATED_APPS = 0
-    NON_GAME_APPS = 0
-    IGNORED_APPS = 0
-    FAILED_REQUESTS = 0
-    APPS_OVER_MILLION = 0
 
     # Get App List from Steam
     applist = load_applist()
@@ -114,13 +111,13 @@ def main():
     for i, app in enumerate(remaining_apps):
         print(f"Progress: {i:,} / {remaining_length:,}", end="\r")
 
-        LAST_INDEX = i
+        tracker["last_index"] = i
         app_id = app["app_id"]
 
         # If app is not a game skip
         if app_id in apps_to_ignore:
             update_log["ignored_apps"] += 1
-            IGNORED_APPS += 1
+            tracker["ignored_apps"] += 1
             continue
 
         # Save log every 100th iteration
@@ -137,7 +134,7 @@ def main():
         steamspy_response = fetchProxy("steamspy", app_id)
         if steamspy_response is None:
             update_log["failed_requests"] += 1
-            FAILED_REQUESTS += 1
+            tracker["failed_requests"] += 1
             continue
 
         # Check minimum owner
@@ -147,7 +144,7 @@ def main():
             with Connection(APPS_DB_PATH) as db:
                 insert_app_over_million(app_id, db)
                 update_log["apps_over_million"] += 1
-                APPS_OVER_MILLION += 1
+                tracker["apps_over_million"] += 1
             continue
 
         # Update app info
@@ -155,7 +152,7 @@ def main():
         app_details.update(app_details_from_steamspy)
 
         # FETCH FROM STEAM
-        if STEAM_REQUEST_COUNT + 1 > STEAM_REQUEST_LIMIT:
+        if tracker["steam_request_count"] + 1 > STEAM_REQUEST_LIMIT:
             print("\nSteam request limit reached!")
             break
 
@@ -163,23 +160,23 @@ def main():
 
         update_log["last_request_to_steam"] = get_datetime_str()
         update_log["steam_request_count"] += 1
-        STEAM_REQUEST_COUNT += 1
+        tracker["steam_request_count"] += 1
 
         if steam_response is None:
             update_log["failed_requests"] += 1
-            FAILED_REQUESTS += 1
+            tracker["failed_requests"] += 1
             continue
 
         result = handle_steam_response(app_id, steam_response, app_details)
         if result == "non_game_app":
             update_log["non_game_apps"] += 1
-            NON_GAME_APPS += 1
+            tracker["non_game_apps"] += 1
         elif result == "failed_request":
             update_log["failed_requests"] += 1
-            FAILED_REQUESTS += 1
+            tracker["failed_requests"] += 1
         elif result == "updated":
             update_log["updated_apps"] += 1
-            UPDATED_APPS += 1
+            tracker["updated_apps"] += 1
         else:
             raise ValueError(f"Unexpected return value {result}, from handle_steam_response")
 
@@ -596,17 +593,16 @@ def create_output(update_log, run_time, traceback=None):
 State: {state}
 Run Time          : {run_time:.1f} hours
 All Apps          : {applist_length:,}
-Steam Requests    : {STEAM_REQUEST_COUNT:,}
+Steam Requests    : {tracker["steam_request_count"]:,}
 ---
-Updated Apps      : {UPDATED_APPS:,} / {remaining_length:,}
-Non-Game Apps     : {NON_GAME_APPS:,}
-Ignored Apps      : {IGNORED_APPS:,}
-Failed Requests   : {FAILED_REQUESTS:,}
-Apps Over Million : {APPS_OVER_MILLION:,}
+Updated Apps      : {tracker["updated_apps"]:,} / {remaining_length:,}
+Non-Game Apps     : {tracker["non_game_apps"]:,}
+Ignored Apps      : {tracker["ignored_apps"]:,}
+Failed Requests   : {tracker["failed_requests"]:,}
+Apps Over Million : {tracker["apps_over_million"]:,}
 ---------------------------------------------
-Total Iterations: {UPDATED_APPS + NON_GAME_APPS + FAILED_REQUESTS + APPS_OVER_MILLION + IGNORED_APPS:,}
-
-{traceback_section}"""
+Total Iterations: {tracker["updated_apps"] + tracker["non_game_apps"] + tracker["failed_requests"] + tracker["apps_over_million"] + tracker["ignored_apps"]:,}
+{color.RED + traceback_section}"""
 
 
 if __name__ == "__main__":
@@ -653,27 +649,25 @@ if __name__ == "__main__":
     except Exception as e:
         run_time = subtract_times(time.time(), start_time)
         output = create_output(ul, run_time, traceback=traceback)
-        raise e
 
     except KeyboardInterrupt:
         run_time = subtract_times(time.time(), start_time)
         output = create_output(ul,  run_time)
-        exit(0)
 
     finally:
         update_history(output)
         print(f"\n\n{output}")
 
         run_time = subtract_times(time.time(), start_time)
-        print(f"||=== End Date  : {get_datetime_str()} ===||")
-
-        print(f"Run Time: {run_time:.1f} hours")
-        ul["applist_index"] += LAST_INDEX
+        ul["applist_index"] += tracker["last_index"]
         ul["remaining_length"] = ul["applist_length"] - ul["remaining_length"]
-
-        print(f"--> Total Steam Requests: {ul['steam_request_count']}")
-        print(f"--> Total Apps Ignored: {ul['ignored_apps']}")
-        print(f"--> Recording applist_index as : {ul['applist_index']}")
         update_logger.save()
-        print("\nUpdate logger saved.\n")
+
+        print(f"||=== End Date  : {get_datetime_str()} ===||")
+        print(f"--> Run Time            : {run_time:.1f} hours")
+        print(f"--> Total Steam Requests: {ul['steam_request_count']}")
+        print(f"--> Total Apps Ignored  : {ul['ignored_apps']}")
+        print(f"--> Recording applist_index as : {ul['applist_index']}")
+        print()
+
 
