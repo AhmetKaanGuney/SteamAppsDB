@@ -43,6 +43,7 @@ except ImportError:
         AppSnippet
     )
 
+
 def get_duplicates(array):
     duplicates = set()
     for x, item1 in enumerate(array):
@@ -62,10 +63,12 @@ init_colorama(autoreset=True)
 app = Flask(__name__)
 CORS(app)
 
+daily_limit = app.debug if 200_000 else 5000
+
 limiter = Limiter(
     app,
     key_func=get_remote_address,
-    default_limits=["200 per day", "1 per second"])
+    default_limits=[f"{daily_limit} per day", "1 per second"])
 
 sql_limit = limiter.shared_limit("200/day, 10/second", "sql")
 
@@ -93,17 +96,22 @@ def app_details(app_id):
 def app_list():
     args = request.args
 
+    # Filters
     tags = get_as_list(args.get("tags", default=""))
     genres = get_as_list(args.get("genres", default=""))
     categories = get_as_list(args.get("categories", default=""))
-
     filters = {
         "tags": tags,
         "genres": genres,
         "categories": categories
     }
+
     order_params = args.get("order", default="owner_count,DESC").split(",")
     order = parse_order_params(order_params)
+
+    coming_soon = args.get("coming_soon", default=None)
+    release_date = args.get("release_date", default=None)
+
     index = int(args.get("index", default=0))
     limit = int(args.get("limit", default=20))
 
@@ -117,7 +125,9 @@ def app_list():
 
     with Connection(APPS_DB_PATH) as db:
         try:
-            app_list = get_applist(filters, order, index, limit, db)
+            app_list = get_applist(
+                filters, order, coming_soon, release_date, index, limit, db
+                )
         except (ValueError, TypeError) as e:
             abort(400, e)
 

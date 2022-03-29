@@ -12,7 +12,9 @@ except ImportError:
 logging.basicConfig(level=logging.CRITICAL)
 
 current_dir = os.path.dirname(__file__)
+parent_dir = os.path.dirname(current_dir)
 APPS_DB_PATH = os.path.join(current_dir, "apps.db")
+INIT_FILE = os.path.join(current_dir, "init_apps.sql")
 
 APP_SNIPPET_FIELDS = AppDetails().__attributes__
 APP_SNIPPET_FIELDS = AppSnippet().__attributes__
@@ -87,17 +89,23 @@ def insert_failed_request(app_id: int, api_provider: str, error: str,  status_co
     )
 
 
-def get_applist(filters: [dict, None], order: [dict, None], offset, limit, db) -> list[dict]:
+def get_applist(
+        filters: [dict, None], order: [dict, None],
+        coming_soon: bool, release_date: [list, None],
+        offset: int, limit: int, db
+        ) -> list[dict]:
     """
     Returns list of app snippets as dict objects.
-    ordery_by: {
-        column_name: order (only 'ASC' or 'DESC')
-        }
     filters: {
         tags: list of tag ids,
         genres: list of genre ids,
         categories: list of category ids
         }
+    ordery: {
+        column_name: order (only 'ASC' or 'DESC')
+        }
+    coming_soon = ['true', 'false']
+    release_date = [operator: str, value: str]
     limit: number of rows to return
     offset: row number to start from
     """
@@ -139,10 +147,9 @@ def get_applist(filters: [dict, None], order: [dict, None], offset, limit, db) -
             if k not in filter_keys:
                 filters[k] = []
 
-    # Check ORDER #
+    # Check ORDER
     if not order:
         order = {}
-
     if not isinstance(order, dict):
         raise TypeError("Order must be type of dict.")
 
@@ -151,14 +158,33 @@ def get_applist(filters: [dict, None], order: [dict, None], offset, limit, db) -
         if direction not in ("ASC", "DESC"):
             raise ValueError(f"{direction} is not a valid direction. Direction can only be ASC or DESC.")
 
-    tags = ",".join([str(i) for i in filters["tags"]])
-    genres = ",".join([str(i) for i in filters["genres"]])
-    categories = ",".join([str(i) for i in filters["categories"]])
+    # Check release_date
+    if coming_soon is not None:
+        if not isinstance(coming_soon, bool):
+            raise ValueError(f"{coming_soon} is not a valid value for coming_soon.")
+
+    if not release_date:
+        release_date = []
+    else:
+        comp_sign = release_date[0]
+        date_str = release_date[1]
+        valid_comp_signs = ['<', '<=', '>', '>=', '=', '!=']
+
+        if comp_sign not in valid_comp_signs:
+            raise ValueError(f"{comp_sign} is not a valid comparison sign for relase_date.")
+        for s in date_str.split('-'):
+            if not s.isnumeric():
+                raise ValueError(f"{s} is not a valid release_date string.")
 
     # Build sql
     tag_sql = ""
     genre_sql = ""
     category_sql = ""
+
+    tags = ",".join([str(i) for i in filters["tags"]])
+    genres = ",".join([str(i) for i in filters["genres"]])
+    categories = ",".join([str(i) for i in filters["categories"]])
+
 
     if filters["tags"]:
         tag_sql = f"SELECT DISTINCT app_id FROM apps_tags WHERE tag_id IN ({tags})"
@@ -173,7 +199,7 @@ def get_applist(filters: [dict, None], order: [dict, None], offset, limit, db) -
     filter_columns = " INTERSECT ".join([s for s in [tag_sql, genre_sql, category_sql] if s])
 
     if filter_columns:
-        filter_sql = f"WHERE app_id IN ({filter_columns})"
+        filter_sql = f"app_id IN ({filter_columns})"
     else:
         filter_sql = ""
 
@@ -187,15 +213,30 @@ def get_applist(filters: [dict, None], order: [dict, None], offset, limit, db) -
 
     logging.debug(f"Order Sql : {order_sql}")
 
-    # Since we use the same list (APP_SNIPPET_FILEDS) to query and
-    # to turn the data into a dictionary
-    # It's safe to query fields like this becuese the order of the items
-    # doesn't change.
+    if release_date:
+        comp_sign = release_date[0]
+        date_str = release_date[1]
+        release_date_sql = f"release_date {comp_sign} {date_str}"
+    else:
+        release_date_sql = ""
+
+    if coming_soon is None:
+        coming_soon_sql = ""
+    else:
+        coming_soon_sql = f"coming_soon = {coming_soon}"
+
+    where = ""
+    where_items = enumerate([release_date_sql, coming_soon_sql, filter_sql])
+    for i, s in where_items:
+        if s and i < len(where_items) - 1:
+            where += s + " AND "
+        else:
+            where += s
+
     combined_sql = f"""
     SELECT {",".join(APP_SNIPPET_FIELDS)}
     FROM apps
-    WHERE coming_soon = false
-    {filter_sql}
+    {'WHERE ' + where if where else ''}
     {order_sql}
     LIMIT {limit} OFFSET {offset}"""
 
@@ -213,6 +254,29 @@ def get_applist(filters: [dict, None], order: [dict, None], offset, limit, db) -
         applist.append(snippet)
 
     return applist
+
+
+def check_filters(filters):
+    if not isinstance(filters, dict):
+        raise TypeError("Filters must be type of dict.")
+
+    expected_keys = ("tags", "genres", "categories")
+    filter_keys = [k for k in filters]
+
+    for f in filters:
+        # Check key names
+        if f not in expected_keys:
+            raise ValueError(f"{f} is not a valid filter.")
+        # Check values
+        elif not isinstance(filters[f], list):
+            raise TypeError(f"Error: Invalid value for {f}: {filters[f]}, filter values must be type list.")
+        # Check value content to protect againsts injection
+        for _id in filters[f]:
+            if not isinstance(_id, int):
+                raise TypeError(f"{_id} is not an int. To filter by {f},  use type int for ids.")
+
+    return filters
+
 
 
 def get_app_details(app_id: int, db) -> AppDetails:
@@ -362,7 +426,7 @@ def check_column(col: str):
 
 
 def init_db(db):
-    with open("init.sql") as f:
+    with open(INIT_FILE) as f:
         db.executescript(f.read())
 
 
@@ -393,7 +457,7 @@ class Connection:
 
 if __name__ == "__main__":
     print("Using Mock Data...")
-    mock_data = os.path.join(current_dir, "test/mock_data.json")
+    mock_data = os.path.join(parent_dir, "test/mock_data.json")
     with open(mock_data, "r") as f:
         app_data = json.load(f)
 

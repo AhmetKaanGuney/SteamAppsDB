@@ -1,7 +1,6 @@
 venv/
 .vscode/
 __pycache__/
-db/__pycache__/
 db/applist.json
 db/apps.db
 db/debug.log

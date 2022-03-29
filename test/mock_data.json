@@ -18,16 +18,7 @@
 
         "website": "website_link",
         "header_image": "header_img",
-        "screenshots": [
-        {
-            "id": 0,
-            "path_thumbnail": "ss_img"
-        },
-        {
-            "id": 1,
-            "path_thumbnail": "ss_img"
-        }
-        ],
+        "screenshots": [],
         "languages": "English",
         "windows": true,
         "mac": true,
@@ -58,22 +49,9 @@
         "positive_reviews": 2,
         "negative_reviews": 0,
 
-        "about_the_game": "about the game...",
-        "short_description": "short description..",
-        "detailed_description": "detailed description...",
-
         "website": "website_link",
         "header_image": "header_img",
-        "screenshots": [
-        {
-            "id": 0,
-            "path_thumbnail": "ss_img"
-        },
-        {
-            "id": 1,
-            "path_thumbnail": "ss_img"
-        }
-        ],
+        "screenshots": [],
         "languages": "English",
         "windows": true,
         "mac": false,
@@ -104,22 +82,9 @@
         "positive_reviews": 0,
         "negative_reviews": 3,
 
-        "about_the_game": "about the game...",
-        "short_description": "short description..",
-        "detailed_description": "detailed description...",
-
         "website": "website_link",
         "header_image": "header_img",
-        "screenshots": [
-        {
-            "id": 0,
-            "path_thumbnail": "ss_img"
-        },
-        {
-            "id": 1,
-            "path_thumbnail": "ss_img"
-        }
-        ],
+        "screenshots": [],
         "languages": "English",
         "windows": true,
         "mac": false,
