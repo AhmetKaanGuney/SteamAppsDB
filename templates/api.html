@@ -1,21 +1,36 @@
-<h1>API DOCUMENTATION</h1>
-<br>
+<!DOCTYPE html>
+<body>
+<main>
+<h3>API DOCUMENTATION</h3>
 <pre>
-GET /GetAppList:
-    json body:
+<strong>GET /GetAppList : returns -> list[dict]:</strong>
+parameters:
+    *tags       : [comma seperated tag ids] or None,
+    *genres     : [comma seperated genre ids] or None,
+    *categories : [comma seperated category ids] or None,
+    *order      : [comma seperated column_name,direction] or None,
+    *coming_soon: 0, 1 or None
+    *index      : int
+    *limit      : int
+(Note: * means optional)
+
+example :
+
+Tags Example :
+[
     {
-        "filters": {
-            "tags": [],
-            "genres": [],
-            "categories": []
-        },
-        "order": {
-            "column_name": "ASC" or "DESC",
-        },
-        "index": current index
-    }
-Return format:
-Applist is list of AppSnippet objects.
+        id    : 10,
+        name  : "example",
+        votes : 300
+    },
+]
+Genres And Categories Example:
+[
+    {id: name},
+]
+</pre>
+<h4>Interfaces</h4>
+<pre>
 AppSnippet():
     app_id  : int
     name    : str
@@ -34,21 +49,10 @@ AppSnippet():
     mac     : bool
     linux   : bool
 
-    tags    : list[dict]
+    tags        : list[dict]
+    genres      : list[dict]
+    categories  : list[dict]
 
-Tags Example :
-[
-    {
-        "id"    : 10,
-        "name"  : "example",
-        "votes" : 300
-    },
-    {
-        "id"    : 56,
-        "name"  : "example2",
-        "votes" : 26
-    }
-]
 
 AppDetails():
     app_id  : int
@@ -85,3 +89,5 @@ AppDetails():
 
 </pre>
 
+</main>
+</body>

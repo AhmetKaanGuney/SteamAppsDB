@@ -23,6 +23,7 @@ JSON_FIELDS = ("developers", "publishers", "screenshots")
 
 
 def insert_app(app_dets: AppDetails, db):
+    """Inserts AppDetails object to database"""
     app_id = app_dets.app_id
     data = {}
     # Covert fields that are dictionary to json
@@ -81,7 +82,7 @@ def insert_non_game_app(app_id: int, db):
     db.execute("REPLACE INTO non_game_apps VALUES (?)", (app_id, ))
 
 
-def insert_failed_request(app_id: int, api_provider: str, error: str,  status_code: int, db):
+def insert_failed_request(app_id: int, api_provider: str, error: str,  status_code: [int, None], db):
     db.execute("""\
         REPLACE INTO failed_requests
         VALUES (:app_id, :api_provider, :error, :status_code)
@@ -96,15 +97,16 @@ def get_applist(
         ) -> list[dict]:
     """
     Returns list of app snippets as dict objects.
+    Inputs:
     filters: {
         tags: list of tag ids,
         genres: list of genre ids,
         categories: list of category ids
         }
     ordery: {
-        column_name: order (only 'ASC' or 'DESC')
+        column_name: 'ASC' or 'DESC'
         }
-    coming_soon = ['true', 'false']
+    coming_soon = 0 or 1
     release_date = [operator: str, value: str]
     limit: number of rows to return
     offset: row number to start from
@@ -115,148 +117,34 @@ def get_applist(
     if not isinstance(offset, int):
         raise TypeError(f"{offset} is not an int. Offset parameter should be an int.")
 
-    # CHECK FILTER #
-    # Use default if arg is None
-    if not filters:
-        filters = {
-            "tags": [],
-            "genres": [],
-            "categories": []
-        }
-    elif not isinstance(filters, dict):
-        raise TypeError("Filters must be type of dict.")
-    else:
-        # If FILTERS is a dict
-        expected_keys = ["tags", "genres", "categories"]
-        filter_keys = [k for k in filters]
+    check_filters(filters)
+    check_order(order)
+    check_release_date(release_date)
 
-        for f in filters:
-            # Check key names
-            if f not in ("tags", "genres", "categories"):
-                raise ValueError(f"{f} is not a valid filter.")
-            # Check values
-            elif not isinstance(filters[f], list):
-                raise TypeError(f"Error: Invalid value for {f}: {filters[f]}, filter values must be type list.")
-            # Check value content to protect againsts injection
-            for _id in filters[f]:
-                if not isinstance(_id, int):
-                    raise TypeError(f"{_id} is not an int. To filter by {f},  use type int for ids.")
+    filters_sql = build_filters_sql(filters)
+    order_sql = build_order_sql(order)
+    release_date_sql = build_release_date_sql(release_date)
+    coming_soon_sql = build_coming_soon_sql(coming_soon)
 
-        # Fill missing values
-        for k in expected_keys:
-            if k not in filter_keys:
-                filters[k] = []
-
-    # Check ORDER
-    if not order:
-        order = {}
-    if not isinstance(order, dict):
-        raise TypeError("Order must be type of dict.")
-
-    for col, direction in order.items():
-        check_column(col)
-        if direction not in ("ASC", "DESC"):
-            raise ValueError(f"{direction} is not a valid direction. Direction can only be ASC or DESC.")
-
-    # Check release_date
-    if coming_soon is not None:
-        if not isinstance(coming_soon, bool):
-            raise ValueError(f"{coming_soon} is not a valid value for coming_soon.")
-
-    if not release_date:
-        release_date = []
-    else:
-        comp_sign = release_date[0]
-        date_str = release_date[1]
-        valid_comp_signs = ['<', '<=', '>', '>=', '=', '!=']
-
-        if comp_sign not in valid_comp_signs:
-            raise ValueError(f"{comp_sign} is not a valid comparison sign for relase_date.")
-        for s in date_str.split('-'):
-            if not s.isnumeric():
-                raise ValueError(f"{s} is not a valid release_date string.")
-
-    # Build sql
-    tag_sql = ""
-    genre_sql = ""
-    category_sql = ""
-
-    tags = ",".join([str(i) for i in filters["tags"]])
-    genres = ",".join([str(i) for i in filters["genres"]])
-    categories = ",".join([str(i) for i in filters["categories"]])
-
-
-    if filters["tags"]:
-        tag_sql = f"SELECT DISTINCT app_id FROM apps_tags WHERE tag_id IN ({tags})"
-
-    if filters["genres"]:
-        genre_sql = f"SELECT DISTINCT app_id FROM apps_genres WHERE genre_id IN ({genres})"
-
-    if filters["categories"]:
-        category_sql = f"SELECT DISTINCT app_id FROM apps_categories WHERE category_id IN ({categories})"
-
-    # Filter empty sql strings and join them
-    filter_columns = " INTERSECT ".join([s for s in [tag_sql, genre_sql, category_sql] if s])
-
-    if filter_columns:
-        filter_sql = f"app_id IN ({filter_columns})"
-    else:
-        filter_sql = ""
-
-    logging.debug(f"Filter Columns String: '{filter_columns}'")
-    logging.debug(f"Filter Sql : '{filter_sql}'")
-
-    if order:
-        order_sql = "ORDER BY " + ", ".join((f"{col} {direction}" for col, direction in order.items()))
-    else:
-        order_sql = ""
-
-    logging.debug(f"Order Sql : {order_sql}")
-
-    if release_date:
-        comp_sign = release_date[0]
-        date_str = release_date[1]
-        release_date_sql = f"release_date {comp_sign} {date_str}"
-    else:
-        release_date_sql = ""
-
-    if coming_soon is None:
-        coming_soon_sql = ""
-    else:
-        coming_soon_sql = f"coming_soon = {coming_soon}"
-
-    where = ""
-    where_items = enumerate([release_date_sql, coming_soon_sql, filter_sql])
-    for i, s in where_items:
-        if s and i < len(where_items) - 1:
-            where += s + " AND "
-        else:
-            where += s
-
-    combined_sql = f"""
-    SELECT {",".join(APP_SNIPPET_FIELDS)}
-    FROM apps
-    {'WHERE ' + where if where else ''}
-    {order_sql}
-    LIMIT {limit} OFFSET {offset}"""
-
-    logging.debug(f"Combined SQL : {combined_sql}")
-
+    combined_sql = build_combined_sql(filters_sql, order_sql, coming_soon_sql, release_date_sql, offset, limit)
     ordered_apps = db.execute(combined_sql).fetchall()
 
-    # Match queried columns with fetched values
     applist = []
     for app in ordered_apps:
         snippet = {col: app[i] for i, col in enumerate(APP_SNIPPET_FIELDS)}
-        # There'll be an app_id field in the snippet
-        # logging.critical("\033[1;31;40m" + "Skipping tags.." + "\033[0;37;40m")
         snippet["tags"] = get_tags(snippet["app_id"], db)
+        snippet["genres"] = get_genres(snippet["app_id"], db)
+        snippet["categories"] = get_categories(snippet["app_id"], db)
         applist.append(snippet)
 
     return applist
 
 
-def check_filters(filters):
+def check_filters(filters: dict):
+    """Raises error if:
+    1. Keys aren't in tags, genres or categories.
+    2. Values aren't list of integers.
+    """
     if not isinstance(filters, dict):
         raise TypeError("Filters must be type of dict.")
 
@@ -275,8 +163,105 @@ def check_filters(filters):
             if not isinstance(_id, int):
                 raise TypeError(f"{_id} is not an int. To filter by {f},  use type int for ids.")
 
-    return filters
 
+def check_order(order: dict):
+    """Raises error if:
+    1. Key isn't a colmun name in apps table.
+    2. Value isn't a valid direction string.
+    """
+    if not isinstance(order, dict):
+        raise TypeError("Order must be type of dict.")
+
+    for col, direction in order.items():
+        check_column(col)
+        if direction not in ("ASC", "DESC"):
+            raise ValueError(f"{direction} is not a valid direction. Direction can only be ASC or DESC.")
+
+
+def check_release_date(release_date: [list, tuple]):
+    """Raises error if:
+    1. First item isn't a valid comparison operator.
+    2. Second item doesn't have numeric values when
+    seperated by '-' character.
+    """
+    if not release_date:
+        return
+    comp_sign = release_date[0]
+    date_str = release_date[1]
+    valid_comp_signs = ['<', '<=', '>', '>=', '=', '!=']
+
+    if comp_sign not in valid_comp_signs:
+        raise ValueError(f"{comp_sign} is not a valid comparison sign for release_date.")
+    for s in date_str.split('-'):
+        if not s.isnumeric():
+            raise ValueError(f"{s} is not a valid release_date string.")
+
+
+def build_combined_sql(filters, order, coming_soon, release_date, offset, limit) -> str:
+    """Returns executable sql string."""
+    where = " AND ".join([s for s in (filters, coming_soon, release_date) if s])
+    if where:
+        where = f"WHERE {where}"
+
+    return (
+        f"SELECT {','.join(APP_SNIPPET_FIELDS)} "
+        + f"FROM apps "
+        + f"{where} "
+        + f"{order} "
+        + f"LIMIT {limit} OFFSET {offset}"
+    )
+
+
+def build_filters_sql(filters: [dict, None]) -> str:
+    """Constructs sql statement from each key. Then merges them
+    with INTERSECT string."""
+    if not filters:
+        return ""
+    tag_sql = ""
+    genre_sql = ""
+    category_sql = ""
+
+    tags = ",".join([str(i) for i in filters["tags"]])
+    genres = ",".join([str(i) for i in filters["genres"]])
+    categories = ",".join([str(i) for i in filters["categories"]])
+
+    if filters["tags"]:
+        tag_sql = f"SELECT DISTINCT app_id FROM apps_tags WHERE tag_id IN ({tags})"
+
+    if filters["genres"]:
+        genre_sql = f"SELECT DISTINCT app_id FROM apps_genres WHERE genre_id IN ({genres})"
+
+    if filters["categories"]:
+        category_sql = f"SELECT DISTINCT app_id FROM apps_categories WHERE category_id IN ({categories})"
+
+    # Filter empty sql strings and join them
+    combined_tables = " INTERSECT ".join([s for s in [tag_sql, genre_sql, category_sql] if s])
+    if combined_tables:
+        return f"app_id IN ({combined_tables})"
+    else:
+        return ""
+
+
+def build_order_sql(order: dict) -> str:
+    if not order:
+        return ""
+    else:
+        return "ORDER BY " + ", ".join((f"{col} {direction}" for col, direction in order.items()))
+
+
+def build_release_date_sql(release_date: [list, tuple]) -> str:
+    if not release_date:
+        return ""
+    comp_sign = release_date[0]
+    date_str = release_date[1]
+    return f"release_date {comp_sign} {date_str}"
+
+
+def build_coming_soon_sql(coming_soon: [int, None]) -> str:
+    """If input is None return empty string."""
+    if coming_soon is None:
+        return ""
+    return f"coming_soon = {coming_soon}"
 
 
 def get_app_details(app_id: int, db) -> AppDetails:
@@ -306,12 +291,13 @@ def get_app_details(app_id: int, db) -> AppDetails:
 
 
 def get_app_ids(db) -> list[int]:
+    """Returns all app_ids in apps table"""
     applist_query = db.execute("SELECT app_id FROM apps").fetchall()
     return [i[0] for i in applist_query]
 
 
 def get_tags(app_id: int, db) -> list[dict]:
-    """returns -> [{'id': value, 'votes': value, 'name': value}, ...]"""
+    """returns -> [{'id': value, 'name': value, 'votes': value}, ...]"""
     tags = []
     ids_votes = db.execute("SELECT DISTINCT tag_id, votes FROM apps_tags WHERE app_id = ?", (app_id, )).fetchall()
 
@@ -324,8 +310,8 @@ def get_tags(app_id: int, db) -> list[dict]:
 
         tag = {}
         tag["id"] = _id
-        tag["votes"] = votes
         tag["name"] = db.execute("SELECT name FROM tags WHERE tag_id = ?", (_id,)).fetchone()[0]
+        tag["votes"] = votes
 
         tags.append(tag)
     # id, votes, name
@@ -359,11 +345,13 @@ def get_categories(app_id: int, db) -> dict:
 
 
 def get_non_game_apps(db) -> list[int]:
-    result = db.execute("SELECT * FROM non_game_apps").fetchall()
+    """Returns list of app_ids"""
+    result = db.execute("SELECT app_id FROM non_game_apps").fetchall()
     return [i[0] for i in result]
 
 
 def get_failed_requests(where: str, db) -> list[dict]:
+    """returns -> [{app_id: int, api_provider: str, error: str, status_code: [int, None]}, ...]"""
     sql = f"SELECT app_id, api_provider, error, status_code FROM failed_requests {where}"
 
     results = db.execute(sql).fetchall()
@@ -384,33 +372,38 @@ def get_failed_requests(where: str, db) -> list[dict]:
 
 
 def check_column(col: str):
+    """Takes input in two forms.
+    1. With parentheses:
+        Checks each column name in the left and right of the operator
+        If column name isn't in AppSnippet fields raises error.
+    2. Without parentheses:
+        Checks if column's name is in AppSnippet fields.
+    """
     if col.startswith("(") and col.endswith(")"):
         operators = ("+", "-", "/", "*")
         content: str = col[1:-1]
         cols = [content]
 
-        #  Check each string for operators
-        #  if it constains an operator split string in half
-        #  then restart checking
         for op in operators:
             i = 0
             op_detected = False
             while True:
                 if i >= len(cols):
                     break
-                ("i: ", i, " | op: ", op)
                 col = cols[i]
 
                 for index, char in enumerate(col):
                     if char == op:
+                        # Split str in half from the operator
                         left = cols[i][:index]
                         right = cols[i][index + 1:]
+                        # Insert items inplace
                         cols[i] = left
                         cols.insert(i + 1, right)
                         op_detected = True
 
                 if op_detected:
-                    # start checking for operator from the beginning
+                    # reset checking
                     i = 0
                     op_detected = False
                 else:
@@ -426,17 +419,20 @@ def check_column(col: str):
 
 
 def init_db(db):
+    """Executes init script"""
     with open(INIT_FILE) as f:
         db.executescript(f.read())
 
 
 def print_table(table: str, db):
-        table = db.execute(f"SELECT * FROM {table}")
-        for row in table.fetchall():
-            print(row)
+    """Prints each row in the table"""
+    table = db.execute(f"SELECT * FROM {table}")
+    for row in table.fetchall():
+        print(row)
 
 
 def print_columns():
+    """Prints every column name in the apps table"""
     print("Columns: ")
     columns = db.execute("PRAGMA table_info(apps)").fetchall()
     print(columns)

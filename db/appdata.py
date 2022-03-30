@@ -91,7 +91,15 @@ class AppDetails(DataContainer):
 
 
 class AppSnippet(DataContainer):
-    """An interface for holding app snippet data"""
+    """An interface for holding app snippet data
+    This interface's fields are based of database columns.
+    Why there are no 'tags', 'genres' or 'categories' fields?
+    These fields are intentionally omitted by default.
+    Because AppSnippet().__attributes__ is designed to be called for specifying
+    the column names while querying. So having these field would cause an errors
+    because these columns don't exists in the 'apps' table.
+    The need to be called seperately.
+    """
     app_id: int = None
     name: str = ""
     price: int = None

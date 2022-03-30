@@ -12,28 +12,18 @@
         "positive_reviews": 1,
         "negative_reviews": 0,
 
-        "about_the_game": "about the game...",
-        "short_description": "short description..",
-        "detailed_description": "detailed description...",
-
-        "website": "website_link",
-        "header_image": "header_img",
-        "screenshots": [],
         "languages": "English",
         "windows": true,
         "mac": true,
         "linux": false,
         "categories": {
-            "C1": 1,
-            "C2": 2
+            "C1": 1
         },
         "genres":{
-            "G1": 1,
-            "G2": 2
+            "G1": 1
         },
         "tags": {
-            "T1": 10,
-            "T2": 20
+            "T1": 10
         }
     },
     {
@@ -49,24 +39,21 @@
         "positive_reviews": 2,
         "negative_reviews": 0,
 
-        "website": "website_link",
-        "header_image": "header_img",
-        "screenshots": [],
         "languages": "English",
         "windows": true,
         "mac": false,
         "linux": false,
         "categories": {
-            "C2": 2,
-            "C3": 3
+            "C1": 1,
+            "C2": 2
         },
         "genres":{
-            "G2": 2,
-            "G3": 3
+            "G1": 1,
+            "G2": 2
         },
         "tags": {
-            "T2": 20,
-            "T3": 30
+            "T1": 20,
+            "T2": 30
         }
     },
     {
@@ -90,16 +77,13 @@
         "mac": false,
         "linux": true,
         "categories": {
-            "C3": 3,
-            "C4": 4
+            "C2": 2
         },
         "genres":{
-            "G3": 3,
-            "G4": 4
+            "G2": 3
         },
         "tags": {
-            "T3": 30,
-            "T4": 40
+            "T2": 30
         }
     }
 ]

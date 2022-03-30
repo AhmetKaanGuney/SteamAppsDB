@@ -97,9 +97,9 @@ def app_list():
     args = request.args
 
     # Filters
-    tags = get_as_list(args.get("tags", default=""))
-    genres = get_as_list(args.get("genres", default=""))
-    categories = get_as_list(args.get("categories", default=""))
+    tags = str_to_list(args.get("tags", default=""))
+    genres = str_to_list(args.get("genres", default=""))
+    categories = str_to_list(args.get("categories", default=""))
     filters = {
         "tags": tags,
         "genres": genres,
@@ -118,8 +118,6 @@ def app_list():
     if limit > 20:
         e = f"Error: limit={limit} cannot be greater than 20"
         abort(400, e)
-
-    # print("filters: ", filters, "\norder: ", order, "\nindex: ", index, "\nlimit: ", limit)
 
     start = time.perf_counter()
 
@@ -200,7 +198,7 @@ def handle_exception(e):
     return response
 
 
-def get_as_list(param: str):
+def str_to_list(param: str):
     if param:
         return [int(i) for i in param.split(",")]
     else:
