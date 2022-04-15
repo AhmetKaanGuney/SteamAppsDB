@@ -43,34 +43,21 @@ except ImportError:
         AppSnippet
     )
 
-
-def get_duplicates(array):
-    duplicates = set()
-    for x, item1 in enumerate(array):
-        for y, item2 in enumerate(array):
-            # skip same index
-            if x == y:
-                continue
-
-            # Check duplication
-            if item1 == item2:
-                duplicates.add(item1)
-
-    return [i for i in duplicates]
-
 init_colorama(autoreset=True)
 
 app = Flask(__name__)
 CORS(app)
 
-daily_limit = app.debug if 200_000 else 5000
+daily_limit = 5000
+if app.debug:
+    daily_limit = 200_000
 
 limiter = Limiter(
     app,
     key_func=get_remote_address,
     default_limits=[f"{daily_limit} per day", "1 per second"])
 
-sql_limit = limiter.shared_limit("200/day, 10/second", "sql")
+sql_limit = limiter.shared_limit(f"{daily_limit}/day, 10/second", "sql")
 
 
 @app.route("/GetAppDetails/<int:app_id>")
@@ -111,13 +98,19 @@ def app_list():
 
     coming_soon = args.get("coming_soon", default=None)
     release_date = args.get("release_date", default=None)
+    if release_date:
+        release_date = [i.strip() for i in release_date.split(',')]
 
     index = int(args.get("index", default=0))
     limit = int(args.get("limit", default=20))
 
     if limit > 20:
-        e = f"Error: limit={limit} cannot be greater than 20"
-        abort(400, e)
+        e = {
+            "name": "Batch Limit Error",
+            "description": f"Error: limit={limit} cannot be greater than 20",
+        }
+        print(color.RED + e.name + ": " + e.description)
+        abort(400)
 
     start = time.perf_counter()
 
@@ -125,9 +118,10 @@ def app_list():
         try:
             app_list = get_applist(
                 filters, order, coming_soon, release_date, index, limit, db
-                )
+            )
         except (ValueError, TypeError) as e:
-            abort(400, e)
+            print(color.RED + type(e).__name__ + ": " + str(e))
+            abort(400)
 
         stop = time.perf_counter()
         print(color.YELLOW + f"Time took: {stop - start:.1f} secs.")
@@ -137,9 +131,6 @@ def app_list():
             if not tag_list:
                 continue
             tags = [i["id"] for i in tag_list]
-            duplicates = get_duplicates(tags)
-            if len(duplicates) != 0:
-                print(color.CYAN + f"APPID: {i['app_id']} | NAME: {i['name']} | TAGS: ", duplicates)
 
     return jsonify(app_list)
 
@@ -147,7 +138,7 @@ def app_list():
 @app.route("/")
 @sql_limit
 def index():
-    return render_template("api.md")
+    return render_template("api.html")
 
 
 @app.route("/GetHighlights")
@@ -164,7 +155,7 @@ def higlights():
         try:
             highlights = get_applist(None, order, offset, 10, db)
         except (ValueError, TypeError) as e:
-            abort(400, e)
+            abort(400)
     return jsonify(highlights)
 
 
@@ -187,7 +178,6 @@ def non_game_apps():
 @app.errorhandler(HTTPException)
 def handle_exception(e):
     print()
-    print(color.RED, e.name, e.description)
     response = e.get_response()
     response.data = json.dumps({
         "code": e.code,

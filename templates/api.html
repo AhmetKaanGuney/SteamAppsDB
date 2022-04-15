@@ -5,13 +5,14 @@
 <pre>
 <strong>GET /GetAppList : returns -> list[dict]:</strong>
 parameters:
-    *tags       : [comma seperated tag ids] or None,
-    *genres     : [comma seperated genre ids] or None,
-    *categories : [comma seperated category ids] or None,
-    *order      : [comma seperated column_name,direction] or None,
-    *coming_soon: 0, 1 or None
-    *index      : int
-    *limit      : int
+    *tags         : [comma seperated tag ids] or None,
+    *genres       : [comma seperated genre ids] or None,
+    *categories   : [comma seperated category ids] or None,
+    *order        : [comma seperated column_name,direction] or None,
+    *release_date : [comparison-operator, value] || None,
+    *coming_soon  : 0, 1 or None
+    *index        : int
+    *limit        : int
 (Note: * means optional)
 
 example :

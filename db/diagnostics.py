@@ -34,7 +34,7 @@ from database import (
     insert_failed_request, insert_non_game_app,
     insert_app_over_million, insert_app,
     get_applist, get_tags, get_genres, get_categories,
-    get_app_ids
+    get_app_ids, get_app_details
 )
 
 args = sys.argv
@@ -118,6 +118,7 @@ def main():
                     applist = [i["app_id"] for i in failed_requests]
 
             elif args[2] == "duplication":
+                # Get applist from duplication log
                 duplication_log = load_json(APPS_WITH_DUPLICATION_PATH)
 
                 if not duplication_log:
@@ -125,9 +126,15 @@ def main():
                     exit(0)
 
                 applist = duplication_log["applist"]
+
+            elif args[2] == "missing":
+                with Connection(APPS_DB_PATH) as db:
+                    result = db.execute("SELECT app_id, release_date FROM apps WHERE release_date = '' AND coming_soon = 0").fetchall()
+                    applist = [i[0] for i in result]
             else:
                 print("Try: [update failed-requests], [update duplication]")
                 exit(0)
+
             try:
                 update_apps(applist, updated_list)
             except KeyboardInterrupt:
@@ -267,15 +274,18 @@ def get_app(app_id):
         tags = get_tags(app_id, db)
         genres = get_genres(app_id, db)
         categories = get_categories(app_id, db)
+        details = get_app_details(app_id, db)
 
     for i, value in enumerate(app):
         print(f"{columns[i]}: {value}")
         if not tags:
             tags = {}
-        print(f"Tags        : ", [i["name"] for i in tags])
-        print(f"Genres      : ", [i for i in genres])
-        print(f"Categories  : ", [i for i in categories])
-        print()
+
+    print(f"Tags        : ", [i["name"] for i in tags])
+    print(f"Genres      : ", [i for i in genres])
+    print(f"Categories  : ", [i for i in categories])
+    print(f"Release Date: '{details.release_date}'")
+    print()
     exit(0)
 
 

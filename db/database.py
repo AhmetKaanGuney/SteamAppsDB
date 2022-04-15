@@ -120,7 +120,6 @@ def get_applist(
     check_filters(filters)
     check_order(order)
     check_release_date(release_date)
-
     filters_sql = build_filters_sql(filters)
     order_sql = build_order_sql(order)
     release_date_sql = build_release_date_sql(release_date)
@@ -189,12 +188,15 @@ def check_release_date(release_date: [list, tuple]):
     comp_sign = release_date[0]
     date_str = release_date[1]
     valid_comp_signs = ['<', '<=', '>', '>=', '=', '!=']
+    print(f"Datestr: '{date_str}'")
 
     if comp_sign not in valid_comp_signs:
         raise ValueError(f"{comp_sign} is not a valid comparison sign for release_date.")
-    for s in date_str.split('-'):
-        if not s.isnumeric():
-            raise ValueError(f"{s} is not a valid release_date string.")
+
+    if date_str not in ("''", '""'):
+        for s in date_str.split('-'):
+            if not s.isnumeric():
+                raise ValueError(f"{s} is not a valid release_date string.")
 
 
 def build_combined_sql(filters, order, coming_soon, release_date, offset, limit) -> str:
