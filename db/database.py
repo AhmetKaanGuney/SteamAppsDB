@@ -188,7 +188,6 @@ def check_release_date(release_date: [list, tuple]):
     comp_sign = release_date[0]
     date_str = release_date[1]
     valid_comp_signs = ['<', '<=', '>', '>=', '=', '!=']
-    print(f"Datestr: '{date_str}'")
 
     if comp_sign not in valid_comp_signs:
         raise ValueError(f"{comp_sign} is not a valid comparison sign for release_date.")
