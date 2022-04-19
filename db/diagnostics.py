@@ -11,12 +11,14 @@ update [failed-requests || duplication] : updates specified apps
 delete-duplicates:  detects duplicate rows for tags, genres and categories
                     then deletes all duplicate rows in apps_tags, apps_genres,
                     apps_categories
+execute : Fill your script here
 """
 import os
 import sys
 import json
 import time
 import traceback
+import math
 
 from update_logger import UpdateLogger
 from errors import FetchError, RequestTimeoutError
@@ -75,6 +77,8 @@ def main():
             merge()
         elif args[1] == "pull":
             pull()
+        elif args[1] == "execute":
+            execute()
         elif args[1] == "delete-duplicates":
             # Create log file if it doesnt exists
             if not os.path.exists(APPS_WITH_DUPLICATION_PATH):
@@ -165,6 +169,11 @@ def main():
         print(__doc__)
         exit(0)
 
+
+
+
+def execute():
+    pass
 
 def status():
     where = "WHERE error != 'failed'"

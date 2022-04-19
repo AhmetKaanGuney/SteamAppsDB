@@ -132,6 +132,7 @@ def app_list():
                 continue
             tags = [i["id"] for i in tag_list]
 
+
     return jsonify(app_list)
 
 

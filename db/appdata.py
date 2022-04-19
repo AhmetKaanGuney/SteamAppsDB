@@ -72,6 +72,7 @@ class AppDetails(DataContainer):
     categories: dict = None
 
     owner_count: int = 0
+    rating: int = 0
     positive_reviews: int = 0
     negative_reviews: int = 0
 
@@ -107,6 +108,7 @@ class AppSnippet(DataContainer):
     release_date: str = ""
     coming_soon: bool = False
 
+    rating: int = 0
     positive_reviews: int = 0
     negative_reviews: int = 0
     owner_count: int = 0

@@ -40,7 +40,7 @@ def insert_app(app_dets: AppDetails, db):
             :app_id, :name, :price,
             :release_date, :coming_soon,
             :developers, :publishers,
-            :owner_count, :positive_reviews, :negative_reviews,
+            :owner_count, :rating, :positive_reviews, :negative_reviews,
             :about_the_game, :short_description, :detailed_description,
             :website, :header_image, :screenshots,
             :languages, :windows, :mac, :linux
@@ -103,9 +103,9 @@ def get_applist(
         genres: list of genre ids,
         categories: list of category ids
         }
-    ordery: {
+    order: (
         column_name: 'ASC' or 'DESC'
-        }
+        )
     coming_soon = 0 or 1
     release_date = [operator: str, value: str]
     limit: number of rows to return

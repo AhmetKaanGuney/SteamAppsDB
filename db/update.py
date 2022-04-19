@@ -483,6 +483,7 @@ def map_steamspy_response(response: dict) -> dict:
     app_details = {
         "price": response["price"],
         "owner_count": get_average(response["owners"]),
+        "rating": calculate_reviews(response["positive"], response["negative"]),
         "positive_reviews": response["positive"],
         "negative_reviews": response["negative"],
         "tags": response["tags"]
@@ -538,6 +539,19 @@ def get_min_owner_count(app_details: dict) -> int:
         min_owners_str += i
 
     return int(min_owners_str)
+
+
+def calculate_reviews(positive, negative) -> [int, None]:
+    rating = 0
+    if positive == 0:
+        if negative != 0:
+            return rating
+        return None
+
+    total = positive + negative
+    positive_percentage = positive / total * 100
+    rating = round(positive_percentage)
+    return rating
 
 
 def get_id_from_url(url: str):

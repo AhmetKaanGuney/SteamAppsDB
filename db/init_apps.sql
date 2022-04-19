@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS apps (
     developers TEXT,
     publishers TEXT,
     owner_count INTEGER,
+    rating INTEGER,
     positive_reviews INTEGER,
     negative_reviews INTEGER,
     about_the_game TEXT,
