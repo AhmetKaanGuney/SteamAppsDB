@@ -12,7 +12,7 @@ It consists of two parts:
 ### How the API works
 
 https://steamappsdb.pythonanywhere.com/ -> API documentation<br>
-https://steamappsdb.pythonanywhere.com/GetAppList? -> Will return 20 apps sorted by owner count as default
+https://steamappsdb.pythonanywhere.com/GetAppList -> Will return 20 apps sorted by owner count as default
 
 <ins>API Parameters:</ins>
 - tags (tag id's to filter by)
@@ -48,7 +48,12 @@ query = /GetAppList?tags=18&genres=23%2C1
 
 ## Project Overview:
 
-### /db :
+### SteamAppsDB/ :
+- main.py: Flask Web API for the apps.db
+- setup.py: Sets up the project
+- test.py: Unittest for API
+
+### SteamAppsDB/db :
 - \__init__.py : Creates apps.db and executes init.sql
 - appdata.py : Has AppDetails and AppSnippet classes for intefacing between functions
 - applist.json : Raw applist data straight from steam api

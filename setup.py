@@ -7,17 +7,8 @@ from db.update_logger import DEFAULT_LOG
 from db.database import APPS_DB_PATH
 
 current_dir = os.path.dirname(__file__)
-env_path = os.path.join(current_dir, ".env")
 update_log_path = os.path.join(current_dir, "db/update_log.json")
 venv_path = os.path.join(current_dir, "venv")
-
-env_content = """\
-SECRET_KEY =
-SENDER_EMAIL =
-PASSWORD =
-RECEIVER_EMAIL =
-SMTP_SERVER = "smtp.gmail.com"
-PORT = 465"""
 
 if __name__ == "__main__":
     reset = False
@@ -25,15 +16,6 @@ if __name__ == "__main__":
     if len(args) == 2:
         if args[1] == "-r":
             reset = True
-             
-	# Create .env file
-    print("Checking if env file exists...")
-    if os.path.exists(env_path):
-        print("env file found! Resuming...")
-    else:
-        with open(env_path, "w") as env_file:
-            print("Creating env file...")
-            env_file.write(env_content)
 
     print("---")
 
@@ -42,11 +24,11 @@ if __name__ == "__main__":
         os.remove(APPS_DB_PATH)
         print(f"Deleting {update_log_path} ...")
         os.remove(update_log_path)
-	
+
     # Execute db/__init__.py script
     init_file = os.path.join(current_dir, "db/__init__.py")
     print(f"Executing {init_file}")
-    
+
     os.system("python " + init_file)
 
     print("---")
