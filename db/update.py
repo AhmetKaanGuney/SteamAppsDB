@@ -6,6 +6,7 @@ import datetime
 import traceback
 import json
 import logging
+import re
 
 import requests
 from colorama import (init as init_colorama, Fore as color)
@@ -424,16 +425,15 @@ def map_steam_data(steam_data: dict) -> dict:
             genres_categs[key].update({obj["description"]: obj["id"]})
 
     # Release Date
-    try:
-        release_date = steam_data["release_date"]["date"]
-        coming_soon = steam_data["release_date"]["coming_soon"]
-        try:
-            release_date = format_date(release_date)
-        except IndexError:
-            pass
-    except KeyError:
-        release_date = ""
-        coming_soon = False
+    release_info = steam_data.get("release_date", None)
+    release_date = None
+    coming_soon = False
+
+    if release_info:
+        date = release_info.get("date", None)
+        coming_soon = release_info.get("coming_soon", False)
+        if date:
+            release_date = format_date(date)
 
     # Languages
     try:
@@ -493,6 +493,13 @@ def map_steamspy_response(response: dict) -> dict:
 
 def format_date(date: str) -> str:
     """Returns formatted date: YYYY-MM-DD"""
+    # input pattern example "8 Feb, 2022"
+    pattern = r"\d{1,2} (Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec), \d{4}"
+    test = re.match(pattern, date)
+
+    if test is None:
+        return None
+
     date = date.replace(",", "")
     date = date.split(" ")
     months = {

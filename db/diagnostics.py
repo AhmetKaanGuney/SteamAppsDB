@@ -27,7 +27,8 @@ from update import (
     fetch, fetchProxy, RATE_LIMIT, UPDATE_LOG_PATH,
     STEAM_APP_DETAILS_API_BASE, STEAMSPY_APP_DETAILS_API_BASE,
     map_steam_data, map_steamspy_response, get_min_owner_count,
-    OWNER_LIMIT, get_datetime_str, debug_log, handle_steam_response
+    OWNER_LIMIT, get_datetime_str, debug_log, handle_steam_response,
+    format_date
 
 )
 from database import (
@@ -173,7 +174,17 @@ def main():
 
 
 def execute():
-    pass
+    for day in range(1, 32):
+        for m in ("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"):
+            result = format_date(f"{day} {m}, 2000")
+            if result is not None:
+                print(result)
+    # with Connection(APPS_DB_PATH) as db:
+    #     apps = db.execute("SELECT app_id, release_date, rating, owner_count FROM apps ORDER BY release_date DESC").fetchall()
+    # with open("release_date.txt", "w", encoding="utf-8") as f:
+    #     for i in apps:
+    #         string = f"app_id: {i[0]}\t| release_date: {i[1]:<10}\t| rating: {i[2]}\t| owner_count: {i[3]}\n"
+    #         f.write(string)
 
 def status():
     where = "WHERE error != 'failed'"
