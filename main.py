@@ -82,6 +82,12 @@ def app_details(app_id):
 @sql_limit
 def app_list():
     args = request.args
+    try:
+        index = int(args.get("index", default=0))
+        limit = int(args.get("limit", default=20))
+    except ValueError as e:
+        print(color.RED + type(e).__name__ + ": " + str(e))
+        abort(400)
 
     # Filters
     tags = str_to_list(args.get("tags", default=""))
@@ -98,11 +104,12 @@ def app_list():
 
     coming_soon = args.get("coming_soon", default=None)
     release_date = args.get("release_date", default=None)
+    rating = args.get("rating", default=None)
+
     if release_date:
         release_date = [i.strip() for i in release_date.split(',')]
-
-    index = int(args.get("index", default=0))
-    limit = int(args.get("limit", default=20))
+    if rating:
+        rating = [i.strip() for i in rating.split(',')]
 
     if limit > 20:
         e = {
@@ -117,7 +124,7 @@ def app_list():
     with Connection(APPS_DB_PATH) as db:
         try:
             app_list = get_applist(
-                filters, order, coming_soon, release_date, index, limit, db
+                filters, order, coming_soon, release_date, rating, index, limit, db
             )
         except (ValueError, TypeError) as e:
             print(color.RED + type(e).__name__ + ": " + str(e))

@@ -19,6 +19,7 @@ import json
 import time
 import traceback
 import math
+import re
 
 from update_logger import UpdateLogger
 from errors import FetchError, RequestTimeoutError
@@ -171,20 +172,9 @@ def main():
         exit(0)
 
 
-
-
 def execute():
-    for day in range(1, 32):
-        for m in ("Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"):
-            result = format_date(f"{day} {m}, 2000")
-            if result is not None:
-                print(result)
-    # with Connection(APPS_DB_PATH) as db:
-    #     apps = db.execute("SELECT app_id, release_date, rating, owner_count FROM apps ORDER BY release_date DESC").fetchall()
-    # with open("release_date.txt", "w", encoding="utf-8") as f:
-    #     for i in apps:
-    #         string = f"app_id: {i[0]}\t| release_date: {i[1]:<10}\t| rating: {i[2]}\t| owner_count: {i[3]}\n"
-    #         f.write(string)
+    pass
+
 
 def status():
     where = "WHERE error != 'failed'"

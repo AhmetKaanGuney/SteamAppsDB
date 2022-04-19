@@ -82,13 +82,15 @@ class TestBuildFunctions(unittest.TestCase):
             "SELECT DISTINCT app_id FROM apps_categories WHERE category_id IN (5, 6)"
             ")"
         )
-        release_date_sql = "release_date != ''"
+        release_date_sql = "release_date IS NOT NULL"
         coming_soon_sql = "coming_soon = 0"
+        rating_sql = "rating IS NOT NULL"
         order_sql = "ORDER BY price ASC, release_date DESC"
         limit = 10
         offset = 0
         columns = ",".join(AppSnippet().__attributes__)
-        combined = build_combined_sql(filters_sql, order_sql, coming_soon_sql, release_date_sql, offset, limit)
+        combined = build_combined_sql(filters_sql, order_sql, coming_soon_sql, release_date_sql, rating_sql, offset, limit)
+        print(combined)
         expected_str = (
             f"SELECT {columns} FROM apps "
             + f"WHERE {filters_sql} "

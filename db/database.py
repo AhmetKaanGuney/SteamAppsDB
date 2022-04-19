@@ -91,8 +91,9 @@ def insert_failed_request(app_id: int, api_provider: str, error: str,  status_co
 
 
 def get_applist(
-        filters: [dict, None], order: [dict, None],
-        coming_soon: bool, release_date: [list, None],
+        filters: dict, order: dict,
+        coming_soon: bool, release_date: list,
+        rating: int,
         offset: int, limit: int, db
         ) -> list[dict]:
     """
@@ -111,21 +112,18 @@ def get_applist(
     limit: number of rows to return
     offset: row number to start from
     """
-    # Check LIMIT, OFFSET
-    if not isinstance(limit, int):
-        raise TypeError(f"{limit} is not an int. Limit parameter should be an int.")
-    if not isinstance(offset, int):
-        raise TypeError(f"{offset} is not an int. Offset parameter should be an int.")
-
     check_filters(filters)
     check_order(order)
     check_release_date(release_date)
+    check_rating(rating)
+
     filters_sql = build_filters_sql(filters)
     order_sql = build_order_sql(order)
     release_date_sql = build_release_date_sql(release_date)
     coming_soon_sql = build_coming_soon_sql(coming_soon)
+    rating_sql = build_rating_sql(rating)
 
-    combined_sql = build_combined_sql(filters_sql, order_sql, coming_soon_sql, release_date_sql, offset, limit)
+    combined_sql = build_combined_sql(filters_sql, order_sql, coming_soon_sql, release_date_sql, rating_sql, offset, limit)
     ordered_apps = db.execute(combined_sql).fetchall()
 
     applist = []
@@ -187,23 +185,42 @@ def check_release_date(release_date: [list, tuple]):
         return
     comp_sign = release_date[0]
     date_str = release_date[1]
-    valid_comp_signs = ['<', '<=', '>', '>=', '=', '!=']
+    valid_comp_signs = ['<', '<=', '>', '>=', '=', '!=', "IS", "IS NOT"]
 
     if comp_sign not in valid_comp_signs:
         raise ValueError(f"{comp_sign} is not a valid comparison sign for release_date.")
 
-    if date_str not in ("''", '""'):
+    if date_str != "NULL":
         for s in date_str.split('-'):
             if not s.isnumeric():
                 raise ValueError(f"{s} is not a valid release_date string.")
 
 
-def build_combined_sql(filters, order, coming_soon, release_date, offset, limit) -> str:
+def check_rating(rating: list):
+    """Raises error if:
+    1. First item isn't a valid comparison operator.
+    2. Second value isn't numeric
+    """
+    if not rating:
+        return
+    comp_sign = rating[0]
+    value = rating[1]
+    valid_comp_signs = ['<', '<=', '>', '>=', '=', '!=', "IS", "IS NOT"]
+
+    if comp_sign not in valid_comp_signs:
+        raise ValueError(f"{comp_sign} is not a valid comparison sign for rating.")
+
+    if value != "NULL":
+        if not value.isnumeric():
+            raise ValueError(f"{s} is not a valid rating value.")
+
+
+def build_combined_sql(filters, order, coming_soon, release_date, rating, offset, limit) -> str:
     """Returns executable sql string."""
-    where = " AND ".join([s for s in (filters, coming_soon, release_date) if s])
+    where = " AND ".join([s for s in (filters, coming_soon, release_date, rating) if s])
     if where:
         where = f"WHERE {where}"
-
+    print("SQL:", where)
     return (
         f"SELECT {','.join(APP_SNIPPET_FIELDS)} "
         + f"FROM apps "
@@ -214,8 +231,7 @@ def build_combined_sql(filters, order, coming_soon, release_date, offset, limit)
 
 
 def build_filters_sql(filters: [dict, None]) -> str:
-    """Constructs sql statement from each key. Then merges them
-    with INTERSECT string."""
+    """Constructs sql statement from each key. Then merges them with INTERSECT string."""
     if not filters:
         return ""
     tag_sql = ""
@@ -256,6 +272,14 @@ def build_release_date_sql(release_date: [list, tuple]) -> str:
     comp_sign = release_date[0]
     date_str = release_date[1]
     return f"release_date {comp_sign} {date_str}"
+
+
+def build_rating_sql(rating: list) -> str:
+    if not rating:
+        return ""
+    comp_sign = rating[0]
+    value = rating[1]
+    return f"rating {comp_sign} {value}"
 
 
 def build_coming_soon_sql(coming_soon: [int, None]) -> str:

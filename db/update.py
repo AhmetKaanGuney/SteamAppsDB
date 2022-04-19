@@ -404,7 +404,7 @@ def map_steam_data(steam_data: dict) -> dict:
         "website", "header_image", "screenshots"
         ]
     available_keys = [k for k in keys if k in steam_data.keys()]
-    app_details = {k:v for k, v in steam_data.items() if k in available_keys}
+    app_details = {k: v for k, v in steam_data.items() if k in available_keys}
 
     # SPECIAL CASES
 
@@ -436,17 +436,14 @@ def map_steam_data(steam_data: dict) -> dict:
             release_date = format_date(date)
 
     # Languages
-    try:
-        languages = steam_data["supported_languages"]
-        # if string is in HTML format
-        # check if it contains English then don't bother with parsing it
-        if "<" in languages:
-            if "English" in languages:
-                languages = "English"
-            else:
-                languages = ""
-    except KeyError:
-        languages = ""
+    languages = steam_data.get("supported_languages", "")
+    # if string is in HTML format
+    # check if it contains English then don't bother with parsing it
+    if languages and ("<" in languages):
+        if "English" in languages:
+            languages = "English"
+        else:
+            languages = ""
 
     # Platforms
     try:
