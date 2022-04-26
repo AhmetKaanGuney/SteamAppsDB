@@ -220,7 +220,6 @@ def build_combined_sql(filters, order, coming_soon, release_date, rating, offset
     where = " AND ".join([s for s in (filters, coming_soon, release_date, rating) if s])
     if where:
         where = f"WHERE {where}"
-    print("SQL:", where)
     return (
         f"SELECT {','.join(APP_SNIPPET_FIELDS)} "
         + f"FROM apps "
