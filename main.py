@@ -1,6 +1,7 @@
 """Web API for Steam apps database"""
 import time
 import json
+import sqlite3
 from flask import (
     Flask,
     request,
@@ -42,6 +43,12 @@ except ImportError:
         AppDetails,
         AppSnippet
     )
+
+# Load db into memory
+source = sqlite3.connect(APPS_DB_PATH, check_same_thread=False, uri=True)
+MEMORY_CON = sqlite3.connect(':memory:', check_same_thread=False)
+source.backup(MEMORY_CON)
+source.close()
 
 init_colorama(autoreset=True)
 
@@ -121,14 +128,13 @@ def app_list():
 
     start = time.perf_counter()
 
-    with Connection(APPS_DB_PATH) as db:
-        try:
-            app_list = get_applist(
-                filters, order, coming_soon, release_date, rating, index, limit, db
-            )
-        except (ValueError, TypeError) as e:
-            print(color.RED + type(e).__name__ + ": " + str(e))
-            abort(400)
+    try:
+        app_list = get_applist(
+            filters, order, coming_soon, release_date, rating, index, limit, MEMORY_CON.cursor()
+        )
+    except (ValueError, TypeError) as e:
+        print(color.RED + type(e).__name__ + ": " + str(e))
+        abort(400)
 
         stop = time.perf_counter()
         print(color.YELLOW + f"Time took: {stop - start:.1f} secs.")
@@ -167,20 +173,20 @@ def higlights():
     return jsonify(highlights)
 
 
-@app.route("/GetFailedRequests")
-@sql_limit
-def failed_requests():
-    with Connection(APPS_DB_PATH) as db:
-        failed_requests = get_failed_requests(None, db)
-    return jsonify(failed_requests)
+# @app.route("/GetFailedRequests")
+# @sql_limit
+# def failed_requests():
+#     with Connection(APPS_DB_PATH) as db:
+#         failed_requests = get_failed_requests(None, db)
+#     return jsonify(failed_requests)
 
 
-@app.route("/GetNonGameApps")
-@sql_limit
-def non_game_apps():
-    with Connection(APPS_DB_PATH) as db:
-        non_game_apps = get_non_game_apps(db)
-    return jsonify(non_game_apps)
+# @app.route("/GetNonGameApps")
+# @sql_limit
+# def non_game_apps():
+#     with Connection(APPS_DB_PATH) as db:
+#         non_game_apps = get_non_game_apps(db)
+#     return jsonify(non_game_apps)
 
 
 @app.errorhandler(HTTPException)
