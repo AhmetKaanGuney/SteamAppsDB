@@ -1,5 +1,7 @@
 *Python Version == 3.10.1*
 
+<img src="./github-banner.png" alt="SteamAppsDB-banner" width="800">
+
 ## Introduction
 
 SteamAppsDB is a public Web API made with Python.<br>
