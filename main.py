@@ -50,21 +50,21 @@ MEMORY_CON = sqlite3.connect(':memory:', check_same_thread=False)
 source.backup(MEMORY_CON)
 source.close()
 
+APP_COUNT = MEMORY_CON.cursor().execute("SELECT COUNT(*) from apps").fetchone()[0]
+
 init_colorama(autoreset=True)
 
 app = Flask(__name__)
 CORS(app)
 
 daily_limit = 5000
-if app.debug:
-    daily_limit = 200_000
 
 limiter = Limiter(
     app,
     key_func=get_remote_address,
-    default_limits=[f"{daily_limit} per day", "1 per second"])
+    default_limits=[f"{daily_limit}/day", "1/second"])
 
-sql_limit = limiter.shared_limit(f"{daily_limit}/day, 10/second", "sql")
+sql_limit = limiter.shared_limit(f"{daily_limit}/day, 1/second", "sql")
 
 
 @app.route("/GetAppDetails/<int:app_id>")
@@ -155,38 +155,10 @@ def index():
     return render_template("api.html")
 
 
-@app.route("/GetHighlights")
-def higlights():
-    # get: most owned, best rated, most recent
-    order = {
-        "owner_count": "DESC",
-        "(positive_reviews / negative_reviews)": "DESC",
-        "release_date": "DESC"
-    }
-    offset = 0
-
-    with Connection(APPS_DB_PATH) as db:
-        try:
-            highlights = get_applist(None, order, offset, 10, db)
-        except (ValueError, TypeError) as e:
-            abort(400)
-    return jsonify(highlights)
-
-
-# @app.route("/GetFailedRequests")
-# @sql_limit
-# def failed_requests():
-#     with Connection(APPS_DB_PATH) as db:
-#         failed_requests = get_failed_requests(None, db)
-#     return jsonify(failed_requests)
-
-
-# @app.route("/GetNonGameApps")
-# @sql_limit
-# def non_game_apps():
-#     with Connection(APPS_DB_PATH) as db:
-#         non_game_apps = get_non_game_apps(db)
-#     return jsonify(non_game_apps)
+@app.route("/GetAppCount")
+@sql_limit
+def app_count():
+    return jsonify(APP_COUNT)
 
 
 @app.errorhandler(HTTPException)
@@ -216,3 +188,20 @@ def parse_order_params(order_params) -> dict:
         order[order_params[i]] = order_params[i+1]
         i += 2
     return order
+
+
+# Utilities
+# @app.route("/GetFailedRequests")
+# @sql_limit
+# def failed_requests():
+#     with Connection(APPS_DB_PATH) as db:
+#         failed_requests = get_failed_requests(None, db)
+#     return jsonify(failed_requests)
+
+
+# @app.route("/GetNonGameApps")
+# @sql_limit
+# def non_game_apps():
+#     with Connection(APPS_DB_PATH) as db:
+#         non_game_apps = get_non_game_apps(db)
+#     return jsonify(non_game_apps)

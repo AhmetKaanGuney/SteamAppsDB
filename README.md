@@ -1,6 +1,6 @@
-*Python Version == 3.10.1*
-
 <img src="./github-banner.png" alt="SteamAppsDB-banner" width="800">
+
+*Python Version == 3.10.1*
 
 ## Introduction
 
@@ -15,6 +15,9 @@ It consists of two parts:
 
 https://steamappsdb.pythonanywhere.com/ -> API documentation<br>
 https://steamappsdb.pythonanywhere.com/GetAppList -> Will return 20 apps sorted by owner count as default
+
+<ins>API Format:</ins><br>
+/GetApplist?parameter=list,of,comma,seperated,values&another_parameter=...
 
 <ins>API Parameters:</ins>
 - tags (tag id's to filter by)
