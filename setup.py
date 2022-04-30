@@ -10,6 +10,12 @@ current_dir = os.path.dirname(__file__)
 update_log_path = os.path.join(current_dir, "db/update_log.json")
 venv_path = os.path.join(current_dir, "venv")
 
+def init_update_log():
+    with open(update_log_path, "w") as log_file:
+        print("Initialising update_log file...")
+        json.dump(DEFAULT_LOG, log_file, indent=2)
+
+
 if __name__ == "__main__":
     reset = False
     args = sys.argv
@@ -36,11 +42,22 @@ if __name__ == "__main__":
     # Create update_log
     print("Checking if update_log exists...")
     if os.path.exists(update_log_path):
-        print("update_log found! Resuming...")
+        print("update_log found!")
+
+        with open(update_log_path) as f:
+            ulog = json.load(f)
+
+        default_keys = DEFAULT_LOG.keys()
+        ulog_keys = ulog.keys()
+
+        for i in default_keys:
+            if i not in ulog_keys:
+                print("update_log is not up to date.")
+                init_update_log()
+                break
     else:
-        with open(update_log_path, "w") as log_file:
-            print("Creating update_log file...")
-            json.dump(DEFAULT_LOG, log_file, indent=2)
+        init_update_log()
     print("---")
 
     print("Setup succesfull!")
+

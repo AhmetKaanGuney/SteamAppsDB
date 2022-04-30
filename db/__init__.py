@@ -9,7 +9,6 @@ def main():
 
     # Initialize databa with init.sql file
     init_apps_script = os.path.join(current_dir, "init_apps.sql")
-    init_update_script = os.path.join(current_dir, "init_update.sql")
 
     print(f"Initializing database at '{current_dir}'")
 

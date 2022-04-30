@@ -91,9 +91,10 @@ When you run update.py:
 *Disclaimer:*
 
 *This project is a hobby project and is not affiliated with Valve or Steam.*<br>
-*Steam and the Steam logo are trademarks of Valve Corporation.*<br>
-*All other trademarks are property of their respective owners.*<br>
-
-*The app only stores apps that have up to 1 million owners.*<br>
+*The API provides various information and statistics about Steam applications and*<br>
+*these informations and statistics aren't 100% accurate and not always up to date.*<br>
+*Use it at your own risk.* <br>
+*The app only stores apps that have up to one million owners (approximately).*<br>
 *Owner data is gathered from SteamSpy, which is not an official Steam API.*<br>
-*So it's not super relaible but it helps to filter out popular games.*
+*Steam and the Steam logo are trademarks of Valve Corporation.*<br>
+*All other trademarks are property of their respective owners.*
