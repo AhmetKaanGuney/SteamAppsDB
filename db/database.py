@@ -11,7 +11,7 @@ except ImportError:
 
 logging.basicConfig(level=logging.CRITICAL)
 
-current_dir = os.path.dirname(__file__)
+current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
 APPS_DB_PATH = os.path.join(current_dir, "apps.db")
 INIT_FILE = os.path.join(current_dir, "init_apps.sql")

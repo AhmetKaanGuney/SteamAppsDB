@@ -18,38 +18,31 @@ import sys
 import json
 import time
 import traceback
-import math
-import re
 
 from update_logger import UpdateLogger
-from errors import FetchError, RequestTimeoutError
-from appdata import AppDetails, AppSnippet
+from appdata import AppDetails
 from update import (
     fetch, fetchProxy, RATE_LIMIT, UPDATE_LOG_PATH,
-    STEAM_APP_DETAILS_API_BASE, STEAMSPY_APP_DETAILS_API_BASE,
-    map_steam_data, map_steamspy_response, get_min_owner_count,
-    OWNER_LIMIT, get_datetime_str, debug_log, handle_steam_response,
-    format_date
-
+    map_steamspy_response, get_min_owner_count,
+    OWNER_LIMIT, get_datetime_str, handle_steam_response,
 )
 from database import (
     APPS_DB_PATH, Connection,
     get_failed_requests, get_non_game_apps,
     insert_failed_request, insert_non_game_app,
-    insert_app_over_million, insert_app,
-    get_applist, get_tags, get_genres, get_categories,
+    insert_app_over_million,
+    get_tags, get_genres, get_categories,
     get_app_ids, get_app_details
 )
 
 args = sys.argv
 
-current_dir = os.path.dirname(__file__)
+current_dir = os.path.dirname(os.path.abspath(__file__))
 write_to_json = False
 
-SERVER_IP = "192.168.1.119"
-PORT = "5000"
-NON_GAME_APPS_API = f"http://{SERVER_IP}:{PORT}/GetNonGameApps"
-FAILED_REQUESTS_API = f"http://{SERVER_IP}:{PORT}/GetFailedRequests"
+SERVER = "steamappsdb.pythonanywhere.com"
+NON_GAME_APPS_API = f"http://{SERVER}/GetNonGameApps"
+FAILED_REQUESTS_API = f"http://{SERVER}/GetFailedRequests"
 
 DIAGNOSIS_DIR = os.path.join(current_dir, "diagnosis")
 FAILED_REQUESTS_PATH = os.path.join(current_dir, "diagnosis/failed_requests.json")
@@ -65,6 +58,7 @@ deleted = {
     "genres": 0,
     "categories": 0
 }
+
 
 def main():
     if len(args) == 2:
@@ -94,7 +88,7 @@ def main():
                     delete_duplicates(duplication_log, db)
             except KeyboardInterrupt:
                 print("\n")
-            except Exception as e:
+            except Exception:
                 print("\n\n", traceback.format_exc())
             finally:
                 print(f"Total tags deleted       : {deleted['tags']:,}")
@@ -151,7 +145,7 @@ def main():
                     print("Deleting updated apps from failed_requests...")
                     updated_length = len(updated_list)
                     for i, app_id in enumerate(updated_list):
-                        print(f"Progress: {i:,} / {updated_length:,}", end="\r")
+                        print(f"Progress: {i+1:,} / {updated_length:,}", end="\r")
                         with Connection(APPS_DB_PATH) as db:
                             delete_row(app_id, "", "", "failed_requests", db)
                     print()

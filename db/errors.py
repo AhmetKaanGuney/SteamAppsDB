@@ -7,7 +7,7 @@ except ImportError:
     from .update_logger import UpdateLogger
 
 
-current_dir = os.path.dirname(__file__)
+current_dir = os.path.dirname(os.path.abspath(__file__))
 
 ulogger = UpdateLogger(os.path.join(current_dir, "update_log.json"))
 

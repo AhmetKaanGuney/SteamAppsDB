@@ -9,7 +9,6 @@ import logging
 import re
 
 import requests
-from colorama import (init as init_colorama, Fore as color)
 
 try:
     from errors import (
@@ -40,14 +39,12 @@ except ImportError:
         get_non_game_apps, get_failed_requests
     )
 
-init_colorama(autoreset=True)
-
 logging.debug(f"Apps Database Path: {APPS_DB_PATH}")
 
 # Dirs
-current_dir = os.path.dirname(__file__)
+current_dir = os.path.dirname(os.path.abspath(__file__))
 parent_dir = os.path.dirname(current_dir)
-DEBUG_LOG = "./debug.log"
+DEBUG_LOG = os.path.join(current_dir, "./debug.log")
 UPDATE_LOG_PATH = os.path.join(current_dir, "update_log.json")
 UPDATE_HISTORY_LOG_PATH = os.path.join(current_dir, "update_history.log")
 
@@ -299,6 +296,7 @@ def attempt_request(api: str):
 
 
 def handle_steam_response(app_id, steam_response, app_details):
+    """Handles Steam Response and inserts app"""
     if steam_response["success"]:
         steam_data = steam_response["data"]
         # Check if app is a game
@@ -573,14 +571,14 @@ def get_datetime_str():
 
 
 def subtract_times(end, start) -> float:
-    return (end - start) // (60 * 60)
+    return (end - start) / (60 * 60)
 
 
 def debug_log(msg: dict):
     """Append to log"""
     try:
         if "<!DOCTYPE html>" in msg["text"]:
-            msg["taxt"] = "<--- HTML Error Response --->"
+            msg["text"] = "<--- HTML Error Response --->"
     except KeyError:
         pass
 
@@ -609,6 +607,7 @@ def create_output(update_log, run_time, traceback=None):
 
     return f"""\
 State: {state}
+Date : {get_datetime_str()} UTC
 Run Time          : {run_time:.1f} hours
 All Apps          : {applist_length:,}
 Steam Requests    : {tracker["steam_request_count"]:,}
@@ -620,7 +619,7 @@ Failed Requests   : {tracker["failed_requests"]:,}
 Apps Over Million : {tracker["apps_over_million"]:,}
 ---------------------------------------------
 Total Iterations: {tracker["updated_apps"] + tracker["non_game_apps"] + tracker["failed_requests"] + tracker["apps_over_million"] + tracker["ignored_apps"]:,}
-{color.RED + traceback_section}"""
+{traceback_section}"""
 
 
 if __name__ == "__main__":
@@ -687,5 +686,3 @@ if __name__ == "__main__":
         print(f"--> Total Apps Ignored  : {ul['ignored_apps']}")
         print(f"--> Recording applist_index as : {ul['applist_index']}")
         print()
-
-
