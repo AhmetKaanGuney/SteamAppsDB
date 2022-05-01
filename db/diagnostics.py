@@ -20,7 +20,7 @@ import time
 import traceback
 
 from update_logger import UpdateLogger
-from appdata import AppDetails
+from appdata import App
 from update import (
     fetch, fetchProxy, RATE_LIMIT, UPDATE_LOG_PATH,
     map_steamspy_response, get_min_owner_count,
@@ -32,7 +32,8 @@ from database import (
     insert_failed_request, insert_non_game_app,
     insert_app_over_million,
     get_tags, get_genres, get_categories,
-    get_app_ids, get_app_details
+    get_app_ids, insert_app,
+    get_app as database_get_app
 )
 
 args = sys.argv
@@ -273,12 +274,16 @@ def get_app(app_id):
     with Connection(APPS_DB_PATH) as db:
         app = db.execute(f"""
         SELECT {",".join(columns)}
-        FROM apps WHERE app_id = ?""", (app_id, )).fetchall()[0]
-
+        FROM apps WHERE app_id = ?""", (app_id, )).fetchall()
+        if len(app) > 0:
+            app = app[0]
+        else:
+            print("App doesn't exist.\n")
+            exit(0)
         tags = get_tags(app_id, db)
         genres = get_genres(app_id, db)
         categories = get_categories(app_id, db)
-        details = get_app_details(app_id, db)
+        details = database_get_app(app_id, db)
 
     for i, value in enumerate(app):
         print(f"{columns[i]}: {value}")
@@ -372,7 +377,7 @@ def update_apps(applist, updated_list):
         time.sleep(RATE_LIMIT)
 
         # Create Appdetails
-        app_details = AppDetails({"app_id": app_id})
+        app_details = App({"app_id": app_id})
 
         # FETCH FROM STEAMSPY
         steamspy_data = fetchProxy("steamspy", app_id)
@@ -399,10 +404,15 @@ def update_apps(applist, updated_list):
         if steam_response is None:
             continue
 
-        result = handle_steam_response(app_id, steam_response, app_details)
-        if result == "updated":
+        state, app_details_from_steam = handle_steam_response(app_id, steam_response, app_details)
+        if state == "updated":
             # Remove app from failed requests
             updated_list.append(app_id)
+
+            app_details.update(app_details_from_steam)
+
+            with Connection(APPS_DB_PATH) as db:
+                insert_app(app_details, db)
 
             updated_apps += 1
 

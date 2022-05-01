@@ -4,9 +4,9 @@ import json
 import logging
 
 try:
-    from appdata import AppDetails, AppSnippet
+    from appdata import App, AppSnippet
 except ImportError:
-    from .appdata import AppDetails, AppSnippet
+    from .appdata import App, AppSnippet
 
 
 logging.basicConfig(level=logging.CRITICAL)
@@ -16,53 +16,49 @@ parent_dir = os.path.dirname(current_dir)
 APPS_DB_PATH = os.path.join(current_dir, "apps.db")
 INIT_FILE = os.path.join(current_dir, "init_apps.sql")
 
-APP_SNIPPET_FIELDS = AppDetails().__attributes__
-APP_SNIPPET_FIELDS = AppSnippet().__attributes__
+APP_FIELDS = App.get_fields()
+APP_SNIPPET_FIELDS = AppSnippet.get_fields()
 
 JSON_FIELDS = ("developers", "publishers", "screenshots")
 
 
-def insert_app(app_dets: AppDetails, db):
-    """Inserts AppDetails object to database"""
-    app_id = app_dets.app_id
+def insert_app(app: App, db):
+    """Inserts App object to database"""
+    app_id = app.app_id
     data = {}
     # Covert fields that are dictionary to json
     # and store them
-    for k, v in app_dets.items():
+    for k, v in app.items():
         if k in JSON_FIELDS:
             data[k] = json.dumps(v)
         else:
             data[k] = v
 
-    db.execute("""
+    # APP_FIELDS contains all sql column in order
+    # columns example (:app_id, :name, :price, ...)
+    ignore = ("tags", "genres", "categories")
+    columns = [':' + i for i in APP_FIELDS if i not in ignore]
+    db.execute(f"""
         REPLACE INTO apps
-        VALUES (
-            :app_id, :name, :price,
-            :release_date, :coming_soon,
-            :developers, :publishers,
-            :owner_count, :rating, :positive_reviews, :negative_reviews,
-            :about_the_game, :short_description, :detailed_description,
-            :website, :header_image, :screenshots,
-            :languages, :windows, :mac, :linux
-        )""", data)
+        VALUES ({','.join(columns)})""", data)
 
-    if app_dets.genres:
-        for name, _id in app_dets.genres.items():
+    if app.genres:
+        for name, _id in app.genres.items():
             db.execute("REPLACE INTO genres VALUES (:genre_id, :name)",
                                             {"genre_id": _id, "name": name})
             db.execute("REPLACE INTO apps_genres VALUES (:app_id, :genre_id)",
                                                 {"app_id": app_id, "genre_id": _id})
 
-    if app_dets.categories:
-        for name, _id in app_dets.categories.items():
+    if app.categories:
+        for name, _id in app.categories.items():
             db.execute("REPLACE INTO categories VALUES (:category_id, :name)",
                                                 {"category_id": _id, "name": name})
             db.execute("REPLACE INTO apps_categories VALUES (:app_id, :category_id)",
                                                     {"app_id": app_id, "category_id": _id})
 
     # Tags don't come with ids. they come with vote count for that tag
-    if app_dets.tags:
-        for name, votes in app_dets.tags.items():
+    if app.tags:
+        for name, votes in app.tags.items():
             # Check tag name
             tag_id = db.execute("SELECT tag_id FROM tags WHERE name = :name", {"name": name}).fetchone()
             if tag_id:
@@ -288,14 +284,12 @@ def build_coming_soon_sql(coming_soon: [int, None]) -> str:
     return f"coming_soon = {coming_soon}"
 
 
-def get_app_details(app_id: int, db) -> AppDetails:
-    query = db.execute("SELECT * FROM apps WHERE app_id=?", (app_id, )).fetchone()
+def get_app(app_id: int, db) -> App:
+    columns = [i for i in APP_FIELDS if i not in ("tags", "genres", "categories")]
+
+    query = db.execute(f"SELECT {','.join(columns)} FROM apps WHERE app_id=?", (app_id, )).fetchone()
     if not query:
         return None
-
-    table_info = db.execute("PRAGMA table_info(apps)").fetchall()
-    # Get column names
-    columns = (i[1] for i in table_info)
 
     app_data = {}
     for i, col in enumerate(columns):
@@ -311,7 +305,7 @@ def get_app_details(app_id: int, db) -> AppDetails:
     for i in (("tags", tags), ("genres", genres), ("categories", categories)):
         app_data.update({i[0]: i[1]})
 
-    return AppDetails(app_data)
+    return App(app_data)
 
 
 def get_app_ids(db) -> list[int]:
@@ -396,50 +390,9 @@ def get_failed_requests(where: str, db) -> list[dict]:
 
 
 def check_column(col: str):
-    """Takes input in two forms.
-    1. With parentheses:
-        Checks each column name in the left and right of the operator
-        If column name isn't in AppSnippet fields raises error.
-    2. Without parentheses:
-        Checks if column's name is in AppSnippet fields.
-    """
-    if col.startswith("(") and col.endswith(")"):
-        operators = ("+", "-", "/", "*")
-        content: str = col[1:-1]
-        cols = [content]
-
-        for op in operators:
-            i = 0
-            op_detected = False
-            while True:
-                if i >= len(cols):
-                    break
-                col = cols[i]
-
-                for index, char in enumerate(col):
-                    if char == op:
-                        # Split str in half from the operator
-                        left = cols[i][:index]
-                        right = cols[i][index + 1:]
-                        # Insert items inplace
-                        cols[i] = left
-                        cols.insert(i + 1, right)
-                        op_detected = True
-
-                if op_detected:
-                    # reset checking
-                    i = 0
-                    op_detected = False
-                else:
-                    i += 1
-
-        column_names = [i.strip() for i in cols]
-        for i in column_names:
-            if i not in APP_SNIPPET_FIELDS:
-                raise ValueError(f"{i} is not a valid column to order by.")
-    else:
-        if col not in APP_SNIPPET_FIELDS:
-            raise ValueError(f"{col} is not a valid column to order by.")
+    """Checks if column's name is in AppSnippet fields."""
+    if col not in APP_SNIPPET_FIELDS:
+        raise ValueError(f"{col} is not a valid column to order by.")
 
 
 def init_db(db):
@@ -455,11 +408,12 @@ def print_table(table: str, db):
         print(row)
 
 
-def print_columns():
+def print_columns(table, db):
     """Prints every column name in the apps table"""
     print("Columns: ")
-    columns = db.execute("PRAGMA table_info(apps)").fetchall()
-    print(columns)
+    columns = db.execute(f"PRAGMA table_info({table})").fetchall()
+    for i in columns:
+        print(i)
 
 
 class Connection:
@@ -473,54 +427,3 @@ class Connection:
     def __exit__(self, exc_type, exc_value, exc_tb):
         self.con.commit()
         self.con.close()
-
-
-if __name__ == "__main__":
-    print("Using Mock Data...")
-    mock_data = os.path.join(parent_dir, "test/mock_data.json")
-    with open(mock_data, "r") as f:
-        app_data = json.load(f)
-
-    app_data1 = app_data[0]
-    app_data2 = app_data[1]
-    app_data3 = app_data[2]
-
-    with Connection(":memory:") as db:
-        # Init Database
-        print("Initialising database at memory...")
-        init_db(db)
-        print("Inserting Apps...")
-        insert_app(AppDetails(app_data1), db)
-        insert_app(AppDetails(app_data2), db)
-        insert_app(AppDetails(app_data3), db)
-        print("---")
-        app_details = get_app_details(app_data1["app_id"], db)
-        print("APP DETAILS : \n", app_details)
-        print("---")
-
-        # Get Applist
-        filters = {
-            "tags": [],
-            "genres": [],
-            "categories": []
-        }
-        order = {
-            "price": "ASC",
-            "release_date": "DESC"
-        }
-        limit = 20
-        offset = 0
-        applist = get_applist(filters, order, limit, offset, db)
-        print("APPLIST: \n", applist)
-
-        for i in range(5):
-            insert_non_game_app(i, db)
-
-        print("Insert non-game-app")
-        print_table("non_game_apps", db)
-
-        print("Insert rejected-app")
-        print_table("rejected_apps", db)
-
-        non_game_apps = get_non_game_apps(db)
-        print("Non game apps: ", non_game_apps)

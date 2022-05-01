@@ -55,7 +55,7 @@ class DataContainer:
         return str(self.json(indent=2))
 
 
-class AppDetails(DataContainer):
+class App(DataContainer):
     """An interface for app details"""
     app_id: int = 0
     name: str = ""
@@ -90,6 +90,23 @@ class AppDetails(DataContainer):
     mac: bool = False
     linux: bool = False
 
+    @staticmethod
+    def get_fields():
+        """Returns all sql columns"""
+        return (
+            "app_id", "name", "price",
+            "release_date", "coming_soon",
+            "developers", "publishers",
+            "tags", "genres", "categories",
+            "owner_count", "rating",
+            "positive_reviews", "negative_reviews",
+            "about_the_game", "short_description", "detailed_description",
+            "website", "header_image", "screenshots",
+            "languages",
+            "windows", "mac", "linux"
+        )
+
+
 
 class AppSnippet(DataContainer):
     """An interface for holding app snippet data
@@ -108,16 +125,27 @@ class AppSnippet(DataContainer):
     release_date: str = ""
     coming_soon: bool = False
 
+    owner_count: int = 0
     rating: int = 0
     positive_reviews: int = 0
     negative_reviews: int = 0
-    owner_count: int = 0
 
     header_image: str = ""
 
     windows: bool = False
     mac: bool = False
     linux: bool = False
+
+    @staticmethod
+    def get_fields():
+        return (
+            "app_id", "name", "price",
+            "release_date", "coming_soon",
+            "owner_count", "rating",
+            "positive_reviews", "negative_reviews",
+            "header_image",
+            "windows", "mac", "linux"
+        )
 
 
 if __name__ == "__main__":
@@ -165,7 +193,7 @@ if __name__ == "__main__":
         "mac": False,
         "linux": False
     }
-    app1 = AppDetails()
+    app1 = App()
     app1.update(app1_dict)
     app1.update({"about_the_game": "TEST"})
     app1.update({"languages": ["lila", "lele", "lolo"]})

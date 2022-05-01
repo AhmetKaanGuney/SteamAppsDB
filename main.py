@@ -17,7 +17,7 @@ from colorama import (init as init_colorama, Fore as color)
 
 try:
     from .db.database import (
-        get_app_details,
+        get_app,
         get_applist,
         Connection,
         APPS_DB_PATH,
@@ -26,12 +26,12 @@ try:
     )
 
     from .db.appdata import (
-        AppDetails,
+        App,
         AppSnippet
     )
 except ImportError:
     from db.database import (
-        get_app_details,
+        get_app,
         get_applist,
         Connection,
         APPS_DB_PATH,
@@ -40,7 +40,7 @@ except ImportError:
     )
 
     from db.appdata import (
-        AppDetails,
+        App,
         AppSnippet
     )
 
@@ -73,7 +73,7 @@ def app_details(app_id):
     start = time.perf_counter()
 
     with Connection(APPS_DB_PATH) as db:
-        app = get_app_details(app_id, db)
+        app = get_app(app_id, db)
         if app:
             return app.json(indent=None)
         else:

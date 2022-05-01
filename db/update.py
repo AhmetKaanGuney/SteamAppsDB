@@ -17,7 +17,7 @@ try:
         ServerError, RequestFailedWithUnknownError
     )
     from update_logger import UpdateLogger
-    from appdata import AppDetails
+    from appdata import App
     from database import (
         APPS_DB_PATH, Connection,
         insert_app, insert_non_game_app,
@@ -31,7 +31,7 @@ except ImportError:
         ServerError, RequestFailedWithUnknownError
     )
     from .update_logger import UpdateLogger
-    from .appdata import AppDetails
+    from .appdata import App
     from .database import (
         APPS_DB_PATH, Connection,
         insert_app, insert_non_game_app,
@@ -106,11 +106,12 @@ def main():
     print(f"Apps to be ignored: {len(apps_to_ignore):,} items")
     print("Fetching apps:")
 
-    for i, app in enumerate(remaining_apps):
+    for i, app_data in enumerate(remaining_apps):
         print(f"Progress: {i:,} / {remaining_length:,}", end="\r")
 
         tracker["last_index"] = i
-        app_id = app["app_id"]
+        app_id = app_data["app_id"]
+        name = app_data["name"]
 
         # If app is not a game skip
         if app_id in apps_to_ignore:
@@ -125,8 +126,8 @@ def main():
         # Wait Before Making Any Request
         time.sleep(RATE_LIMIT)
 
-        # Create Appdetails
-        app_details = AppDetails({"name": app["name"], "app_id": app_id})
+        # Create App
+        app = App({"app_id": app_id, "name": name})
 
         # FETCH FROM STEAMSPY
         steamspy_response = fetchProxy("steamspy", app_id)
@@ -146,8 +147,8 @@ def main():
             continue
 
         # Update app info
-        app_details_from_steamspy = map_steamspy_response(steamspy_response)
-        app_details.update(app_details_from_steamspy)
+        data_from_steamspy = map_steamspy_response(steamspy_response)
+        app.update(data_from_steamspy)
 
         # FETCH FROM STEAM
         if tracker["steam_request_count"] + 1 > STEAM_REQUEST_LIMIT:
@@ -165,18 +166,24 @@ def main():
             tracker["failed_requests"] += 1
             continue
 
-        result = handle_steam_response(app_id, steam_response, app_details)
-        if result == "non_game_app":
+        status, data_from_steam = handle_steam_response(app_id, steam_response, app)
+        if status == "non_game_app":
             update_log["non_game_apps"] += 1
             tracker["non_game_apps"] += 1
-        elif result == "failed_request":
+        elif status == "failed_request":
             update_log["failed_requests"] += 1
             tracker["failed_requests"] += 1
-        elif result == "updated":
+        elif status == "updated":
+            app.update(data_from_steam)
+
+            with Connection(APPS_DB_PATH) as db:
+                insert_app(app, db)
+                db.execute("DELETE FROM failed_requests WHERE app_id == ?", (app_id, ))
+
             update_log["updated_apps"] += 1
             tracker["updated_apps"] += 1
         else:
-            raise ValueError(f"Unexpected return value {result}, from handle_steam_response")
+            raise ValueError(f"Unexpected status value {status}, from handle_steam_response")
 
 
 def fetchProxy(api_provider: str, app_id: int) -> dict:
@@ -303,21 +310,14 @@ def handle_steam_response(app_id, steam_response, app_details):
         if steam_data["type"] != "game":
             with Connection(APPS_DB_PATH) as db:
                 insert_non_game_app(app_id, db)
-            return "non_game_app"
+            return "non_game_app", None
         else:
             app_details_from_steam = map_steam_data(steam_data)
-            # Update the app info
-            app_details.update(app_details_from_steam)
-
-            # Save to db
-            with Connection(APPS_DB_PATH) as db:
-                insert_app(app_details, db)
-                db.execute("DELETE FROM failed_requests WHERE app_id == ?", (app_id, ))
-            return "updated"
+            return "updated", app_details_from_steam
     else:
         with Connection(APPS_DB_PATH) as db:
             insert_failed_request(app_id, "steam", "failed", None, db)
-        return "failed_request"
+        return "failed_request", None
 
 
 def fetch_applist(api: str):
@@ -468,6 +468,7 @@ def map_steamspy_response(response: dict) -> dict:
     returns: {
         'price': [int, None],
         'owner_count: int',
+        'rating': int,
         'positive_reviews: int',
         'negative_reviews': int
         'tags': list,
