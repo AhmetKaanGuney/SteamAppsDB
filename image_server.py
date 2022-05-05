@@ -1,6 +1,5 @@
 import os
 import io
-import json
 import time
 
 from PIL import Image
@@ -35,13 +34,13 @@ def yield_image(images_obj):
 
 
 def gen_frames():
+    img_list = images['list']
+    index = images['index']
     while True:
-        img_list = images['list']
-        images['index'] += 1
-        if images['index'] >= len(img_list):
-            images['index'] = 0
+        index += 1
+        if index >= len(img_list):
+            index = 0
 
-        index = images['index']
         frame = img_list[index]
         yield (
             b'--frame\r\n'
