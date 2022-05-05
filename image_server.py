@@ -18,6 +18,10 @@ def load_images():
         images.append(buffer.getvalue())
     return images
 
+images = {
+    "index": 0,
+    "list": load_images(),
+}
 
 def yield_image(images_obj):
     img_list = images_obj['list']
@@ -28,3 +32,19 @@ def yield_image(images_obj):
     index = images_obj['index']
 
     return img_list[index]
+
+
+def gen_frames():
+    while True:
+        img_list = images['list']
+        images['index'] += 1
+        if images['index'] >= len(img_list):
+            images['index'] = 0
+
+        index = images['index']
+        frame = img_list[index]
+        yield (
+            b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n'
+        )
+        time.sleep(1 / 20)

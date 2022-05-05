@@ -8,7 +8,7 @@ from flask import (
     render_template,
     jsonify,
     abort,
-    make_response
+    Response
 )
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -30,7 +30,7 @@ try:
         App,
         AppSnippet
     )
-    from .image_server import (load_images, yield_image)
+    from .image_server import (load_images, gen_frames)
 except ImportError:
     from db.database import (
         get_app,
@@ -45,7 +45,7 @@ except ImportError:
         App,
         AppSnippet
     )
-    from image_server import (load_images, yield_image)
+    from image_server import (load_images, gen_frames)
 
 # Load db into memory
 source = sqlite3.connect(APPS_DB_PATH, check_same_thread=False, uri=True)
@@ -69,17 +69,13 @@ daily_limit = 5000
 
 # sql_limit = limiter.shared_limit(f"{daily_limit}/day, 1/second", "sql")
 
-images = {
-    "index": 0,
-    "list": load_images()
-}
 
-@app.route("/image")
-def get_image():
-    img_binary = yield_image(images)
-    response = make_response(img_binary)
-    response.headers.set('Content-Type', 'image/jpeg')
-    return response
+@app.route("/imageFeed")
+def image_feed():
+    return Response(
+        gen_frames(),
+        mimetype='multipart/x-mixed-replace;boundary=frame'
+    )
 
 
 @app.route("/GetAppDetails/<int:app_id>")
