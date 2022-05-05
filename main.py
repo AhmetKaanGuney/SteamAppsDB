@@ -7,7 +7,8 @@ from flask import (
     request,
     render_template,
     jsonify,
-    abort
+    abort,
+    make_response
 )
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -29,6 +30,7 @@ try:
         App,
         AppSnippet
     )
+    from .image_server import (load_images, yield_image)
 except ImportError:
     from db.database import (
         get_app,
@@ -43,6 +45,7 @@ except ImportError:
         App,
         AppSnippet
     )
+    from image_server import (load_images, yield_image)
 
 # Load db into memory
 source = sqlite3.connect(APPS_DB_PATH, check_same_thread=False, uri=True)
@@ -59,16 +62,28 @@ CORS(app)
 
 daily_limit = 5000
 
-limiter = Limiter(
-    app,
-    key_func=get_remote_address,
-    default_limits=[f"{daily_limit}/day", "1/second"])
+# limiter = Limiter(
+#     app,
+#     key_func=get_remote_address,
+#     default_limits=[f"{daily_limit}/day", "1/second"])
 
-sql_limit = limiter.shared_limit(f"{daily_limit}/day, 1/second", "sql")
+# sql_limit = limiter.shared_limit(f"{daily_limit}/day, 1/second", "sql")
+
+images = {
+    "index": 0,
+    "list": load_images()
+}
+
+@app.route("/image")
+def get_image():
+    img_binary = yield_image(images)
+    response = make_response(img_binary)
+    response.headers.set('Content-Type', 'image/jpeg')
+    return response
 
 
 @app.route("/GetAppDetails/<int:app_id>")
-@sql_limit
+# @sql_limit
 def app_details(app_id):
     start = time.perf_counter()
 
@@ -86,7 +101,7 @@ def app_details(app_id):
 
 
 @app.route("/GetAppList", methods=['GET'])
-@sql_limit
+# @sql_limit
 def app_list():
     args = request.args
     try:
@@ -150,13 +165,13 @@ def app_list():
 
 
 @app.route("/")
-@sql_limit
+# @sql_limit
 def index():
     return render_template("api.html")
 
 
 @app.route("/GetAppCount")
-@sql_limit
+# @sql_limit
 def app_count():
     return jsonify(APP_COUNT)
 

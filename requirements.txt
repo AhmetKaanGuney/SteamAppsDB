@@ -15,6 +15,7 @@ lazy-object-proxy==1.7.1
 limits==2.3.3
 MarkupSafe==2.0.1
 mccabe==0.6.1
+Pillow==9.1.0
 platformdirs==2.5.0
 pycodestyle==2.8.0
 pydocstyle==6.1.1
