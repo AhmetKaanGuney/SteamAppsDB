@@ -8,7 +8,8 @@ from flask import (
     render_template,
     jsonify,
     abort,
-    Response
+    Response,
+    make_response
 )
 from flask_limiter import Limiter
 from flask_limiter.util import get_remote_address
@@ -30,7 +31,10 @@ try:
         App,
         AppSnippet
     )
-    from .image_server import (load_images, gen_frames)
+    from .image_server import (
+        IMAGES_PATH, DEBUG_IMAGES_PATH,
+        load_images, gen_frames_v1, gen_frames_v2,
+    )
 except ImportError:
     from db.database import (
         get_app,
@@ -45,7 +49,10 @@ except ImportError:
         App,
         AppSnippet
     )
-    from image_server import (load_images, gen_frames)
+    from image_server import (
+        IMAGES_PATH, DEBUG_IMAGES_PATH,
+        load_images, gen_frames_v1, gen_frames_v2,
+    )
 
 # Load db into memory
 source = sqlite3.connect(APPS_DB_PATH, check_same_thread=False, uri=True)
@@ -69,11 +76,37 @@ daily_limit = 5000
 
 # sql_limit = limiter.shared_limit(f"{daily_limit}/day, 1/second", "sql")
 
+images_obj = {
+    'index': 0,
+    'list': load_images(IMAGES_PATH)
+}
+debug_images_obj = {
+    'index': 0,
+    'list': load_images(DEBUG_IMAGES_PATH)
+}
 
-@app.route("/imageFeed")
-def image_feed():
+@app.route("/imageFeed/v1")
+def image_feed_v1():
+    args = request.args
+    debug = int(args.get('debug', default=0, type=int))
+    if debug:
+        img_bin = gen_frames_v1(debug_images_obj)
+    else:
+        img_bin = gen_frames_v1(images_obj)
+
+    response = make_response(img_bin)
+    response.headers.set('Content-Type', 'image/jpeg')
+    return response
+
+
+@app.route("/imageFeed/v2")
+def image_feed_v2():
+    args = request.args
+    fps = args.get('fps', default=20, type=int)
+    debug = int(args.get('debug', default=0, type=int))
+
     return Response(
-        gen_frames(),
+        gen_frames_v2(fps, debug),
         mimetype='multipart/x-mixed-replace;boundary=frame'
     )
 
