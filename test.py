@@ -8,13 +8,15 @@ from db.database import (
     build_filters_sql, build_order_sql, build_release_date_sql,
     build_coming_soon_sql, build_combined_sql, get_tags, get_app_ids
     )
-from db.appdata import AppDetails, AppSnippet
+from db.appdata import App, AppSnippet
+
+from db.update import format_date
 
 
 with open("./test/mock_data.json", "r") as f:
     mock_data = json.load(f)
 
-class TestCheckFunctions(unittest.TestCase):
+class TestCheckFunctions():
     def test_filters_input_type(self):
         for i in ([], "", 1):
             with self.assertRaises(TypeError):
@@ -54,7 +56,7 @@ class TestCheckFunctions(unittest.TestCase):
                 check_release_date(i)
 
 
-class TestBuildFunctions(unittest.TestCase):
+class TestBuildFunctions():
     """
     filters = {
         tags: 1, 2
@@ -90,7 +92,6 @@ class TestBuildFunctions(unittest.TestCase):
         offset = 0
         columns = ",".join(AppSnippet().__attributes__)
         combined = build_combined_sql(filters_sql, order_sql, coming_soon_sql, release_date_sql, rating_sql, offset, limit)
-        print(combined)
         expected_str = (
             f"SELECT {columns} FROM apps "
             + f"WHERE {filters_sql} "
@@ -176,6 +177,21 @@ class TestBuildFunctions(unittest.TestCase):
     #     self.assertEqual(build_coming_soon_sql(1), "coming_soon = 1")
 
 
+class TestUpdateFunctions(unittest.TestCase):
+    def test_format_date(self):
+        valid_dates = [
+            #   input     ,  output
+            ("1 Dec, 1960", "1960-12-01"),
+            ("31 Dec, 1960", "1960-12-31"),
+            ("31 Jan, 2100", "2100-01-31"),
+            ("31 Dec, 2100", "2100-12-31"),
+        ]
+        invalid_date = "8 February 2022"
+        self.assertEqual(None, format_date(invalid_date))
+        for i in valid_dates:
+            self.assertEqual(format_date(i[0]), i[1])
+
+
 
 # class TestGetAppList():
 #     def setUp(self):
@@ -184,7 +200,7 @@ class TestBuildFunctions(unittest.TestCase):
 
 #         init_db(self.db)
 #         for app in mock_data:
-#             insert_app(AppDetails(app), self.db)
+#             insert_app(App(app), self.db)
 
 #         self.app_ids = get_app_ids(self.db)
 #         self.tags = [

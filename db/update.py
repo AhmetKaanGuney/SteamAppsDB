@@ -512,7 +512,10 @@ def format_date(date: str) -> str:
         "Nov": "11",
         "Dec": "12",
     }
-    formatted_date = date[2] + "-" + months[date[1]] + "-" + date[0]
+    year, month, day = date[2], months[date[1]], date[0]
+    if len(day) < 2:
+        day = "0" + day
+    formatted_date = year + "-" + month + "-" + day
     return formatted_date
 
 

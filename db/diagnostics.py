@@ -201,7 +201,7 @@ def freeze():
     save_json(failed_requests, FAILED_REQUESTS_PATH)
 
     print("Saving non-game apps...")
-    save_json(non_game_apps, NON_GAME_APPS_API)
+    save_json(non_game_apps, NON_GAME_APPS_PATH)
     exit(0)
 
 
