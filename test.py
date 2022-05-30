@@ -195,6 +195,7 @@ class TestUpdateFunctions(unittest.TestCase):
         print(format_date("1 Apr, 1999"))
         print(format_date("29 Mar, 2007"))
 
+
 # class TestGetAppList():
 #     def setUp(self):
 #         con = sqlite3.connect(":memory:")

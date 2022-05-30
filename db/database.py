@@ -390,6 +390,46 @@ def get_failed_requests(where: str, db) -> list[dict]:
     return failed_requests
 
 
+def _load_filter_list(filter_name, db):
+    filters = ('tag', 'genre', 'category')
+    if filter_name not in filters:
+        raise ValueError(f"'{filter_name}' is not a valid input.")
+
+    plural = {
+        'tag': 'tags',
+        'genre': 'genres',
+        'category': 'categories',
+    }
+    filter_name_plural = plural[filter_name]
+
+    result = []
+    rows = db.cursor().execute(f"SELECT {filter_name}_id, name from {filter_name_plural}").fetchall()
+    for r in rows:
+        _id, name = r[0], r[1]
+        app_count = db.cursor().execute(f"SELECT COUNT(*) FROM apps_{filter_name_plural} WHERE {filter_name}_id = {_id}").fetchone()[0]
+        item = {
+            'id': _id,
+            'name': name,
+            'app_count': app_count
+        }
+        result.append(item)
+
+    result.sort(key=lambda x: x['app_count'], reverse=True)
+    return result
+
+
+def load_tag_list(db):
+    return _load_filter_list('tag', db)
+
+
+def load_genre_list(db):
+    return _load_filter_list('genre', db)
+
+
+def load_category_list(db):
+    return _load_filter_list('category', db)
+
+
 def check_column(col: str):
     """Checks if column's name is in AppSnippet fields."""
     if col not in APP_SNIPPET_FIELDS:
