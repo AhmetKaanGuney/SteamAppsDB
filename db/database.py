@@ -294,6 +294,7 @@ def get_app(app_id: int, db) -> App:
     app_data = {}
     for i, col in enumerate(columns):
         if col in JSON_FIELDS:
+            print(col)
             app_data[col] = json.loads(query[i])
         else:
             app_data[col] = query[i]

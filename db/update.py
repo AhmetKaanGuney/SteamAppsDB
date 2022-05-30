@@ -93,8 +93,15 @@ def main():
     applist_index = update_log["applist_index"]
     remaining_apps = applist[applist_index:]
 
+    # !!!!!!!!!!!!!!!
+    remaining_apps = [
+        {"app_id": 659, "name": "Portal 2 - Pre-order"},
+    ]
+    # !!!!!!!!!!!!!!!
+
     applist_length = len(applist)
     remaining_length = len(remaining_apps)
+
 
     update_log["applist_length"] = applist_length
     update_log["remaining_length"] = remaining_length
@@ -107,7 +114,7 @@ def main():
     print("Fetching apps:")
 
     for i, app_data in enumerate(remaining_apps):
-        print(f"Progress: {i:,} / {remaining_length:,}", end="\r")
+        # print(f"Progress: {i:,} / {remaining_length:,}", end="\r")
 
         tracker["last_index"] = i
         app_id = app_data["app_id"]
@@ -184,6 +191,7 @@ def main():
             tracker["updated_apps"] += 1
         else:
             raise ValueError(f"Unexpected status value {status}, from handle_steam_response")
+
 
 
 def fetchProxy(api_provider: str, app_id: int) -> dict:

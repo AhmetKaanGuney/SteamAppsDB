@@ -185,13 +185,15 @@ class TestUpdateFunctions(unittest.TestCase):
             ("31 Dec, 1960", "1960-12-31"),
             ("31 Jan, 2100", "2100-01-31"),
             ("31 Dec, 2100", "2100-12-31"),
+            ("14 Feb, 2020", "2020-02-14")
         ]
         invalid_date = "8 February 2022"
         self.assertEqual(None, format_date(invalid_date))
         for i in valid_dates:
             self.assertEqual(format_date(i[0]), i[1])
 
-
+        print(format_date("1 Apr, 1999"))
+        print(format_date("29 Mar, 2007"))
 
 # class TestGetAppList():
 #     def setUp(self):

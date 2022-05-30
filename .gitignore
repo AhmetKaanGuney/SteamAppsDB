@@ -9,4 +9,5 @@ db/update_history.log
 db/diagnosis/
 db/db_split/
 db/backup.db.gz
+*.db
 .env

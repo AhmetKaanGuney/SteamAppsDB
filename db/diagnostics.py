@@ -50,6 +50,8 @@ FAILED_REQUESTS_PATH = os.path.join(current_dir, "diagnosis/failed_requests.json
 NON_GAME_APPS_PATH = os.path.join(current_dir, "diagnosis/non_game_apps.json")
 APPS_WITH_DUPLICATION_PATH = os.path.join(DIAGNOSIS_DIR + "/apps_with_duplication.json")
 
+BACKUP_DB_PATH = os.path.join(current_dir, "backup.db")
+
 # Logs
 update_logger = UpdateLogger(UPDATE_LOG_PATH)
 update_log = update_logger.log
@@ -74,8 +76,6 @@ def main():
             merge()
         elif args[1] == "pull":
             pull()
-        elif args[1] == "execute":
-            execute()
         elif args[1] == "delete-duplicates":
             # Create log file if it doesnt exists
             if not os.path.exists(APPS_WITH_DUPLICATION_PATH):
@@ -106,10 +106,13 @@ def main():
         else:
             print(__doc__)
             exit(0)
-    elif len(args) == 3:
+    elif len(args) > 3:
         if args[1] == "get-app":
             app_id = args[2]
             get_app(app_id)
+
+        elif args[1] == "execute":
+            execute(args[2])
 
         elif args[1] == "update":
             updated_list = []
@@ -128,9 +131,12 @@ def main():
 
                 applist = duplication_log["applist"]
 
-            elif args[2] == "missing":
+            elif args[2] == "where":
+                where = args[3]
+                if not where:
+                    print("Not enough arguments.")
                 with Connection(APPS_DB_PATH) as db:
-                    result = db.execute("SELECT app_id, release_date FROM apps WHERE release_date = '' AND coming_soon = 0").fetchall()
+                    result = db.execute(f"SELECT app_id FROM apps WHERE {where}").fetchall()
                     applist = [i[0] for i in result]
             else:
                 print("Try: [update failed-requests], [update duplication]")
@@ -167,8 +173,15 @@ def main():
         exit(0)
 
 
-def execute():
-    pass
+def execute(script):
+    path = APPS_DB_PATH
+    with Connection(path) as db:
+        result = db.execute(script).fetchall()
+
+    print(f"Databse: '{path}'")
+    print(f"Row Count: {len(result)}")
+    for i in result:
+        print(i)
 
 
 def status():
