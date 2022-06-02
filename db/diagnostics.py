@@ -106,7 +106,7 @@ def main():
         else:
             print(__doc__)
             exit(0)
-    elif len(args) > 3:
+    elif len(args) >= 3:
         if args[1] == "get-app":
             app_id = args[2]
             get_app(app_id)

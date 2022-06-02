@@ -431,13 +431,12 @@ def map_steam_data(steam_data: dict) -> dict:
             genres_categs[key].update({obj["description"]: obj["id"]})
 
     # Release Date
-    release_info = steam_data.get("release_date", None)
-    release_date = None
+    release_date = steam_data.get("release_date", None)
     coming_soon = False
 
-    if release_info:
-        date = release_info.get("date", None)
-        coming_soon = release_info.get("coming_soon", False)
+    if release_date:
+        date = release_date.get("date", None)
+        coming_soon = release_date.get("coming_soon", False)
         if date:
             release_date = format_date(date)
 

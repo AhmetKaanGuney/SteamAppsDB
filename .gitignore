@@ -11,3 +11,4 @@ db/db_split/
 db/backup.db.gz
 *.db
 .env
+db/null_dates.txt
